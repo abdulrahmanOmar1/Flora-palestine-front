@@ -1,0 +1,521 @@
+/*
+*
+* Form styles
+* --------------------------------------------------
+*/
+
+//== Forms variables
+//
+
+$input-height: 49px;
+
+$form-wrap-offset: 12px;
+
+$form-textarea-default-height:       92px;
+$form-textarea-default-min-height:   $form-textarea-default-height * 0.8;
+$form-textarea-default-max-height:   $form-textarea-default-height * 1.7;
+
+$form-input-color: $gray;
+$form-input-color-placeholder: $form-input-color;
+
+$form-input-background: $gray-3;
+
+$form-input-border-color: $form-input-background;
+$form-input-border-color-radius: 0;
+
+$form-input-font-size: 14px;
+$input-line-height: 23px;
+$input-font-weight: 400;
+
+$input-padding-vertical: 14px;
+$input-padding-horizontal: 22px;
+
+$error-color: #d9534f;
+$success-color: #5cb85c;
+
+
+.rd-mailform {
+  position: relative;
+  text-align: left;
+
+  .button {
+    margin-right: 0;
+  }
+}
+
+html .rd-mailform-inline{
+  display: flex;
+
+  .form-wrap{
+    flex-grow: 1;
+  }
+
+  .form-button{
+    margin-top: 0;
+    flex: none;
+  }
+}
+
+
+// Form input
+// -------------------------
+
+.form-input {
+  display: block;
+  width: 100%;
+  height: $input-height;
+  padding: $input-padding-vertical $input-padding-horizontal;
+  font-size: $form-input-font-size;
+  font-weight: $input-font-weight;
+  line-height: $input-line-height;
+  color: $form-input-color;
+  background-color: $form-input-background;
+  background-image: none;
+  border: 1px solid $form-input-border-color;
+  border-radius: $form-input-border-color-radius;
+  -webkit-appearance: none;
+
+  &:focus {
+    outline: 0;
+  }
+
+  &:-webkit-autofill ~ label,
+  &:-webkit-autofill ~ .form-validation {
+    color: $black !important;
+  }
+}
+
+.form-search-input {
+  padding-right: 45px;
+}
+
+textarea.form-input {
+  height: $form-textarea-default-height;
+  min-height: $form-textarea-default-min-height;
+  max-height: $form-textarea-default-max-height;
+  resize: vertical;
+}
+
+// Form wrapper
+// -------------------------
+
+.form-wrap {
+  position: relative;
+}
+
+.form-wrap + .form-wrap{
+  margin-top: $form-wrap-offset;
+}
+
+* + .form-button,
+.form-wrap + .button{
+  margin-top: 30px;
+}
+
+
+// Form labels
+// -------------------------
+
+.form-label {
+  position: absolute;
+  top: $input-height / 2.2;
+  left: $input-padding-horizontal;
+
+  font-size: $form-input-font-size;
+  font-weight: $input-font-weight;
+  line-height: $input-line-height;
+  color: $form-input-color-placeholder;
+  pointer-events: none;
+  z-index: 9;
+  transition: .3s;
+  transform: translateY(-50%);
+
+  &.focus {
+    opacity: 0;
+  }
+
+  &.auto-fill {
+    color: $form-input-color;
+  }
+}
+
+.form-label-outside {
+  @include media-breakpoint-up(md) {
+    position: static;
+    &, &.focus, &.auto-fill {
+      opacity: 1;
+      transform: none;
+      color: $form-input-color-placeholder;
+      font-size: $form-input-font-size;
+    }
+
+    & + .form-input + .form-validation{
+      top: 34px;
+    }
+  }
+}
+
+
+// Form validation
+// -------------------------
+
+.form-validation {
+  position: absolute;
+  right: 10px;
+  top: 1px;
+  font-size: 11px;
+  line-height: 11px;
+  color: $error-color;
+  margin-top: 3px;
+  transition: .3s;
+  z-index: 11;
+}
+
+.form-validation-left {
+  .form-validation {
+    right: auto;
+    top: 2px;
+    left: 16px;
+  }
+}
+
+// Form output
+// -------------------------
+
+#form-output-global {
+  position: fixed;
+  bottom: 30px;
+  left: 15px;
+  visibility: hidden;
+  transform: translateX(-500px);
+  transition: .3s all ease;
+  z-index: 9999999;
+
+  &.active {
+    transform: translateX(0);
+    visibility: visible;
+  }
+
+  @include media-breakpoint-up(sm) {
+    left: 30px;
+  }
+}
+
+.form-output {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  font-size: 14px;
+  line-height: 1.5;
+  margin-top: 2px;
+  transition: .3s;
+  opacity: 0;
+  visibility: hidden;
+
+  &.active {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  &.error {
+    color: $error-color;
+  }
+
+  &.success {
+    color: $success-color;
+  }
+}
+
+
+// Radio and Checkbox Custom
+// -------------------------
+
+// Base Styles
+//
+.radio .radio-custom,
+.radio-inline .radio-custom,
+.checkbox .checkbox-custom,
+.checkbox-inline .checkbox-custom {
+  opacity: 0;
+
+  &, &-dummy {
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    margin-left: -30px;
+    margin-top: 3px;
+    outline: none;
+    cursor: pointer;
+    border: 1px solid $gray-2;
+  }
+
+  &-dummy {
+    pointer-events: none;
+    background: transparent;
+
+    &:after {
+      position: absolute;
+      opacity: 0;
+    }
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.radio-custom:checked + .radio-custom-dummy:after,
+.checkbox-custom:checked + .checkbox-custom-dummy:after {
+  opacity: 1;
+}
+
+// Custom Radio Styles
+//
+.radio,
+.radio-inline {
+  .radio-custom-dummy {
+
+    &:after {
+      content: '\e5ca';
+      font-family: 'Material Icons';
+      font-size: 20px;
+      line-height: 10px;
+      position: absolute;
+      top: 0;
+      left: 1px;
+      color: $gray-darker;
+    }
+  }
+}
+
+// Custom Checkbox Styles
+//
+.checkbox,
+.checkbox-inline {
+  padding-left: 26px;
+
+  .checkbox-custom-dummy {
+    pointer-events: none;
+    border-radius: 0;
+    margin-left: 0;
+    left: 0;
+
+    &:after {
+      content: '\e5ca';
+      font-family: 'Material Icons';
+      font-size: 20px;
+      line-height: 10px;
+      position: absolute;
+      top: 0;
+      left: 1px;
+      color: $gray-darker;
+    }
+  }
+
+  label {
+    padding-left: 4px;
+    font-weight: 700;
+    transition: .3s;
+
+    &:hover {
+      color: $primary;
+    }
+  }
+}
+
+.radio-inline {
+  padding-left: 30px;
+}
+
+.checkbox input[type="checkbox"] {
+  margin-left: -26px;
+}
+
+
+.checkbox-inline {
+  input[type="checkbox"] {
+    margin-left: -25px;
+  }
+}
+
+
+// form style custom
+//
+
+.form-between {
+  display: flex;
+  flex-direction: column;
+
+
+  @include media-breakpoint-up(sm) {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  > .form-wrap {
+    width: 100%;
+  }
+
+  > .form-button {flex: none }
+
+  .form-wrap + .form-button,
+  .form-wrap + .form-wrap {
+    margin-top: 10px;
+    
+    @include media-breakpoint-up(sm) {
+      margin-top: 0;
+      margin-left: 10px;
+    }
+  }
+
+  .button {
+    @include media-breakpoint-up(sm) {
+      margin-left: 0;
+    }
+  }
+}
+
+.form-wrap-inline {
+  display: inline-block;
+}
+
+.m-h-78 {
+  max-height: 78px;
+}
+
+.form-search {
+
+  button.icon[type="submit"] {
+    padding: 0 2px;
+    font-size: 18px;
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    border: none;
+    background: transparent;
+    transition: color 300ms;
+
+    &:hover {
+      color: darken($primary, 15%);
+    }
+  }
+}
+
+button[type="submit"] {
+  &:focus {
+    outline: none;
+  }
+}
+
+.form-input {
+  box-shadow: none;
+}
+
+.form-input:focus {
+  outline: none;
+  box-shadow: none;
+  border-color: $gray-8;
+}
+
+.form-request {
+
+  textarea.form-input {
+    height: 140px;
+    min-height: 140px * 0.8;
+    max-height: 140px * 1.7;
+  }
+
+  @include media-breakpoint-up(lg) {
+    textarea.form-input {
+      height: 120px;
+      min-height: 120px * 0.8;
+      max-height: 120px * 1.7;
+    }
+  }
+
+  @include media-breakpoint-up(xl) {
+    max-width: 470px;
+
+    textarea.form-input {
+      height: 194px;
+      min-height: 194px * 0.8;
+      max-height: 194px * 1.7;
+    }
+  }
+}
+
+.form-request-inset {
+  padding: 35px 15px;
+  background: $white;
+
+  @include media-breakpoint-up(sm) {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+
+  @include media-breakpoint-up(lg) {
+    padding: 46px 58px;
+  }
+}
+
+.form-checkout {
+
+  textarea.form-input {
+    height: 102px;
+    min-height: 102px * 0.8;
+    max-height: 102px * 1.7;
+  }
+
+  .checkbox,
+  .checkbox-inline {
+    margin-top: 10px;
+  }
+}
+
+.form-booking {
+
+  textarea.form-input {
+    height: 119px;
+    min-height: 119px * 0.8;
+    max-height: 119px * 1.7;
+  }
+}
+
+.form-coupon {
+
+  width: 100%;
+  max-width: 180px;
+
+  .form-input {
+    padding-top: 8px;
+    padding-bottom: 12px;
+    line-height: 25px;
+  }
+
+  .form-label {
+    top: 22px;
+    will-change: transform;
+  }
+
+  @include media-breakpoint-up(lg) {
+    max-width: 274px;
+  }
+}
+
+.ie-10,
+.ie-11,
+.ie-edge {
+  .form-coupon {
+
+    .form-input {
+      padding-top: 11px;
+      padding-bottom: 9px;
+      min-height: 47px;
+    }
+  }
+
+  .form-label {
+    top: 26px;
+  }
+}

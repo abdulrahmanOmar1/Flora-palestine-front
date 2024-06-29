@@ -1,0 +1,59 @@
+//
+   Created by ragnar on 8/30/2018.
+
+// RD Mailform
+form.form-booking.rd-mailform.text-start
+  .row.row-spacing-10.row-10
+    .col-md-6
+      .form-wrap
+        label.form-label(for="form-login-name-5") Your name
+        input#form-login-name-5.form-input(type="text" name="name" data-constraints='@Required')
+
+    .col-md-6
+      .form-wrap
+        label.form-label(for="form-street-3") Street Address
+        input#form-street-3.form-input(type="text" name="name" data-constraints="@Required")
+
+    .col-md-4
+      .form-wrap
+        label.form-label(for="form-suburb") Suburb
+        input#form-suburb.form-input(type="text" name="name" data-constraints="@Required")
+
+    .col-md-4
+      .form-wrap
+        label.form-label(for="form-phone-2") Telephone Number
+        input#form-phone-2.form-input(type="text" name="phone" data-constraints='@Numeric')
+
+    .col-md-4
+      .form-wrap
+        label.form-label(for="form-email-5") Your Email
+        input#form-email-5.form-input(type="email" name="email" data-constraints="@Email @Required")
+
+    .col-md-6
+      .form-wrap
+        //Select 2
+        select.form-input.select-filter(data-minimum-results-for-search="Infinity", data-constraints="@Required")
+          option(value="1") Type of Service
+          option(value="2") Garden Maintenance
+          option(value="3") Lawn Mowing
+          option(value="4") Outdoor Lighting
+          option(value="5") Ice Removal
+
+    .col-md-6
+      .form-wrap
+        //Select 2
+        select.form-input.select-filter(data-minimum-results-for-search="Infinity", data-constraints="@Required")
+          option(value="1") Type of Property
+          option(value="2") Residential
+          option(value="3") Commercial
+          option(value="4") Industrial
+          option(value="5") Land
+
+    .col-sm-12
+      .form-wrap
+        label.form-label(for="form-message-4") Additional Message
+        textarea#form-message-4.form-input(name="message" data-constraints="@Required")
+
+    .col-sm-12.text-end
+      button(type="submit").button.button-primary Send
+        include ../elements/_arrow-down

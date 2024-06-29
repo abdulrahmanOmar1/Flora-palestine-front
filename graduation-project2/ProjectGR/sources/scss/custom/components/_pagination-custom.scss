@@ -1,0 +1,142 @@
+/*
+*
+* Pagination custom
+* --------------------------------------------------
+*/
+
+//== Pagination variables
+//
+
+$pagination-padding-vertical: 0;
+$pagination-padding-horizontal: 0;
+
+$pagination-font-size: 24px;
+$pagination-lh-size: 20px;
+$pagination-border-w: 0;
+
+$pagination-color:                     $link-color;
+$pagination-bg:                        #fff;
+$pagination-border:                    #ddd;
+
+$pagination-hover-color:               #fff;
+$pagination-hover-bg:                  transparent;
+$pagination-hover-border:              transparent;
+
+$pagination-active-color:              $gray;
+$pagination-active-bg:                 transparent;
+$pagination-active-border:             transparent;
+
+$pagination-disabled-color:            $gray-light;
+$pagination-disabled-bg:               #fff;
+$pagination-disabled-border:           #ddd;
+
+
+.pagination-custom {
+  font-size: 24px;
+  font-family: $font-family-sec;
+  counter-reset: li;
+
+  li:not(:first-child):not(:last-child) {
+    
+    &:after {
+      content: '03';
+      color: $primary;
+      font-size: 14px;
+      letter-spacing: .025em;
+    }
+
+    &:before {
+      display: inline-block;
+      width: 30px;
+      line-height: 1;
+      letter-spacing: .025em;
+      content: counter(li, decimal-leading-zero);
+      counter-increment: li;
+    }
+  }
+
+  li:not(:first-child):not(:last-child):not(.active) {
+    display: none;
+  }
+
+  li {
+    display: inline-block;
+  }
+
+  > li {
+
+    > a,
+    > span {
+    }
+  }
+
+  > li > a,
+  > li > span {
+    transition: .3s;
+    text-align: center;
+    border: none;
+  }
+
+  > li:first-child {
+    margin-right: 6px;
+  }
+
+  > li:last-child {
+    margin-left: 6px;
+  }
+
+  > li:first-child,
+  > li:last-child {
+
+    > a, > span {
+      > span {
+        position: relative;
+        line-height: 35px;
+        max-height: 35px;
+      }
+    }
+  }
+
+  .arrow-left,
+  .arrow-right {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    transition: all 200ms ease-in-out;
+
+    > * {
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    &:after {
+      display: inline-block;
+      vertical-align: middle;
+      content: '';
+      width: 0;
+      height: 2px;
+      background: $gray;
+      transition: inherit;
+    }
+
+    &:hover {
+      &:after {
+        width: 53px;
+      }
+    }
+  }
+
+  .arrow-right {
+    transform: scale(-1, 1);
+  }
+
+  > .disabled {
+
+  }
+
+  > li > a {
+    &:hover {
+
+    }
+  }
+}

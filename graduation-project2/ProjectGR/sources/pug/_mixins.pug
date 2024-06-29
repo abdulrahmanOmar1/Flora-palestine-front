@@ -1,0 +1,144 @@
+//- Image
+	@param {string} name
+mixin img( name, options )
+	-
+		var size = getImageSize( name );
+		if( options && options.retina ) { size[0] = ~~(size[0]/2); size[1] = ~~(size[1]/2); }
+	img( src= procImg( name ), alt='', width= size[0], height= size[1], loading='lazy' )&attributes( attributes )
+
+//- Breadcrumbs
+	@param {Array}  [path] - other navigation path
+	@example +breadcrumbs([ { title:'About Us', link:'about-us.html' }, { title:'Team member' } ])
+mixin breadcrumbs( path )
+	-
+		if ( !path ) {
+			if ( breadcrumbs && breadcrumbs.length ) path = breadcrumbs;
+			else path = [{ title: pageName }];
+		}
+
+	// Breadcrumbs
+	h2.breadcrumbs-custom__title= path[ path.length - 1 ].title
+	if ( path[0].title.toLowerCase() !== 'home' )
+		ul.breadcrumbs-custom__path
+			li: a( href='index.html' ) Home
+			- for ( var i = 0; i < path.length; i++ )
+				if ( i === path.length - 1 )
+					li.active= path[i].title
+				else
+					li: a( href= path[i].link )= path[i].title
+
+//- Breadcrumbs section
+mixin breadcrumbs-section( data )
+	section.breadcrumbs-custom.text-start( style='background-image: url(images/' +( data.img ? data.img : 'bg-image-1') + '.jpg);' )
+		.container
+			+breadcrumbs( data.path )
+
+
+//- Main Navigation
+mixin navigation( menu, type, menuItems )
+	-
+		var
+			menuItems = menuItems ? menuItems : [ 0, menu.length ],
+			begin = menuItems[0],
+			end = menuItems[1];
+	if( !type )
+		ul.rd-navbar-nav&attributes( attributes )
+			- for(var i = begin; i < end; i++) {
+				li.rd-nav-item( class= { active: menu[i].active } )
+					a.rd-nav-link( href= menu[i].link )= menu[i].title
+						include elements/_button-santos
+					if( menu[i].dropdown )
+						+navigation( menu[i].dropdown, 'dropdown' )
+					if( menu[i].megamenu )
+						+navigation( menu[i].megamenu, 'megamenu' )
+			- }
+
+	else if( type === 'dropdown' )
+		ul.rd-menu.rd-navbar-dropdown
+			- for(var i = begin; i < end; i++) {
+				li.rd-dropdown-item( class= { active: menu[i].active } )
+					a.rd-dropdown-link( href= menu[i].link )= menu[i].title
+					if( menu[i].dropdown )
+						+navigation( menu[i].dropdown, 'dropdown' )
+			- }
+
+	else if( type === 'megamenu' )
+		ul.rd-menu.rd-navbar-megamenu
+			- for(var i = begin; i < end; i++) {
+				li.rd-megamenu-item
+					if ( menu[i] instanceof Array )
+						+navigation( menu[i], 'column' )
+					else
+						+navigation( menu[i], 'block' )
+			- }
+
+	else if( type === 'column' )
+		- for(var i = begin; i < end; i++) {
+			+navigation( menu[i], 'block' )
+		- }
+
+	else if( type === 'block' )
+		if (menu.title && menu.link)
+			p.rd-megamenu-header: a( href= menu.link )= menu.title
+		else if (menu.title)
+			p.rd-megamenu-header= menu.title
+		if (menu.list)
+			+navigation( menu.list, 'list' )
+
+	else if( type === 'list' )
+		ul.rd-megamenu-list
+			- for(var i = begin; i < end; i++) {
+				li.rd-megamenu-list-item
+					a.rd-megamenu-list-link( href= menu[i].link )= menu[i].title
+			- }
+
+//- Table
+mixin table(classes, modClasses)
+	.table-custom-responsive(class=modClasses)
+		table.table-custom(class=classes)
+			thead
+				tr
+					th Column 1
+					th Column 2
+					th Column 3
+					th Column 4
+
+			tbody
+				tr
+					td Item #1
+					td Description
+					td Subtotal
+					td $1.00
+				tr
+					td Item #2
+					td Description
+					td Discount
+					td $2.00
+				tr
+					td Item #3
+					td Description
+					td Subtotal
+					td $3.00
+
+				tr
+					td Item #4
+					td Description
+					td Tax
+					td $4.00
+
+			tfoot
+				tr
+					td All Items
+					td Description
+					td Your Total
+					td $10.00
+
+mixin thumbnail-small(obj)
+	a.thumbnail-small(href=obj.link)
+		.thumbnail-small-image
+			img(src='images/layout-panel/' + obj.filename + '.jpg', alt='', width='380', height='280')
+		.thumbnail-small-hover-image
+			img(src='images/layout-panel/' + obj.filename + '.jpg', alt='', width='380', height='280')
+
+		.thumbnail-small-caption
+			p.thumbnail-small-header=obj.title

@@ -1,0 +1,125 @@
+/*
+*
+* Element groups
+* --------------------------------------------------
+*/
+
+html .page {
+  .group-flickr {
+    @include group(4px, 4px);
+  }
+
+  .group-button-blog {
+    @include group(2px, 4px);
+  }
+
+  .group-tabs {
+    @include group(10px, 9px);
+  }
+
+  .group-post-meta {
+    @include group(12px, 12px);
+  }
+
+  .group-xs {
+    @include group(12px, 16px);
+  }
+
+  .group-sm {
+    @include group(18px, 10px);
+  }
+
+  .group-lg {
+    @include group(20px, 10px);
+  }
+
+  .group-xl {
+    @include group(27px, 27px);
+  }
+
+  .group-top {
+    > *, > *:first-child {
+      vertical-align: top;
+    }
+  }
+
+  .group-end {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+  }
+
+  .group-horizontal-center {
+    @include justify-content(center)
+  }
+
+  .group-middle {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .group-bottom {
+    > *, > *:first-child {
+      vertical-align: bottom;
+    }
+  }
+}
+
+.group-between {
+  display: flex;
+  flex-direction: column;
+
+  @include media-breakpoint-up(md) {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+
+  * + .rd-mailform {
+    margin-top: 20px;
+
+    @include media-breakpoint-up(md) {
+      margin-top: 0;
+      margin-left: 10px;
+    }
+  }
+
+  .form-wrap + .form-button {
+    margin-top: 10px;
+
+    @include media-breakpoint-up(sm) {
+      margin-top: 0;
+      margin-left: 10px;
+    }
+  }
+
+  .rd-mailform-inline {
+    flex-direction: column;
+    width: 100%;
+
+    @include media-breakpoint-up(sm) {
+      flex-direction: row;
+    }
+  }
+
+  .button {
+    @include media-breakpoint-up(sm) {
+      margin-left: 0;
+    }
+  }
+}
+
+.group-post-comment {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  @include media-breakpoint-up(xs) {
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: flex-start;
+  }
+}

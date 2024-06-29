@@ -1,0 +1,12 @@
+mixin box-services(obj)
+	.box-services(class= obj.wrapClass)
+
+		.box-services-img
+			+img(obj.postImg)
+
+		.box-services-content
+			.counter-index-item
+				.counter-wrap=obj.itemNamber
+			h6: a(href='#')= obj.title
+			p= obj.content
+			span.icon-arrow.icon-rotate-90.material-icons-keyboard_backspace

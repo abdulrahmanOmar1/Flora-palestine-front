@@ -1,0 +1,95 @@
+/*
+*
+* Icons
+* --------------------------------------------------
+*/
+
+
+// Base styles
+// --------------------------------------------------
+
+.icon {
+  display: inline-block;
+  font-size: 18px;
+  line-height: 1;
+
+  &:before {
+    position: relative;
+    display: inline-block;
+    font-weight: 400;
+    font-style: normal;
+    speak: none;
+    text-transform: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+// Alternate icons
+// --------------------------------------------------
+
+.icon-primary {
+  color: $primary
+}
+
+.icon-primary-dark {
+  color: $primary-dark;
+}
+
+.icon-white {
+  color: $white;
+}
+
+.icon-gray-dark {
+  color: $gray-dark;
+}
+
+// Icon Shapes
+// --------------------------------------------------
+
+.icon-circle{
+  border-radius: 50%;
+}
+
+
+// Icon Sizes
+// --------------------------------------------------
+
+.icon-xxs {
+  font-size: 16px;
+  line-height: 1;
+}
+
+.icon-sm {
+  font-size: 30px;
+  line-height: 1;
+}
+
+.icon-md {
+  font-size: 36px;
+  line-height: 1;
+}
+
+.icon-xmd {
+  font-size: 40px;
+  line-height: 1;
+}
+
+.icon-lg {
+  font-size: 48px;
+  line-height: 1;
+}
+
+.icon-54 {
+  font-size: 54px;
+  line-height: 1;
+}
+
+.icon-xlg {
+  font-size: 60px;
+  line-height: 1;
+}
+
+.fa-xsm {
+  font-size: 24px;
+}

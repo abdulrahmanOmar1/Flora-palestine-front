@@ -1,0 +1,485 @@
+/*
+*
+* Buttons
+* --------------------------------------------------
+*/
+
+
+// Button General Styles
+
+.button {
+  display: inline-block;
+  position: relative;
+  // btn-size($padding-vertical, $padding-horizontal, $font-size, $line-height, $border-radius)
+  @include btn-size(9px, 10px, 14px, 29px, 0);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  border-style: solid;
+  border-width: 1px;
+  text-align: center;
+  text-transform: uppercase;
+  font-family: $font-family-sec;
+  cursor: pointer;
+  vertical-align: middle;
+  user-select: none;
+  transition: 300ms all ease-in-out;
+  letter-spacing: .1em;
+  min-width: 137px;
+  z-index: 1;
+
+  @extend %button-decor;
+
+  &:focus,
+  &:active,
+  &:active:focus {
+    outline: none;
+  }
+
+  .caret {
+    margin-left: 8px;
+  }
+
+  .icon-arrow {
+    font-size: 18px;
+    max-height: 29px;
+  }
+}
+
+.button.icon-arrow {
+  font-size: 1.29em;
+  max-height: 29px;
+}
+
+.icon-arrow {
+  display: inline-block;
+}
+
+.icon-rotate-90 {
+  transform: rotate(-90deg);
+  will-change: transform;
+
+  &.icon-arrow {
+    vertical-align: bottom;
+    margin-left: 6px;
+  }
+}
+
+.icon-rotate-180 {
+  transform: rotate(-180deg);
+  will-change: transform;
+
+  &.icon-arrow {
+    position: relative;
+    top: -2px;
+    padding-right: 4px;
+    vertical-align: middle;
+  }
+}
+
+.arrow-bottom {
+
+  .icon-arrow {
+    position: absolute;
+    bottom: -9px;
+    left: calc(50% - 4px);
+    padding-top: 0;
+  }
+}
+
+
+html {
+  %button-decor {
+    margin-bottom: 10px;
+  }
+}
+
+%button-decor {
+  margin-right: 10px;
+
+  &:before {
+    position: absolute;
+    content: '';
+    top: -1px;
+    right: -1px;
+    bottom: -1px;
+    left: -1px;
+    border: 1px solid $gray-3;
+    transform: translate(9px, 9px);
+    transition: inherit;
+    z-index: -2;
+  }
+
+  &:after {
+    position: absolute;
+    content: '';
+    top: -1px;
+    right: -1px;
+    bottom: -1px;
+    left: -1px;
+    border-width: 1px;
+    border-style: solid;
+    transition: inherit;
+    z-index: -1;
+  }
+
+  &:hover,
+  &:focus,
+  &:active,
+  &:hover {
+
+    &:before {
+      transform: translate(0);
+    }
+  }
+
+  &.button-primary {
+
+    &:after {
+      border-color: $primary;
+      background: $primary;
+    }
+
+    &:hover {
+
+      &:after {
+        border-color: $primary-dark;
+        background: $primary-dark;
+      }
+    }
+  }
+
+  &.button-primary-dark {
+
+    &:after {
+      border-color: $primary-dark;
+      background: $primary-dark;
+    }
+
+    &:hover {
+
+      &:after {
+        border-color: $primary;
+        background: $primary;
+      }
+    }
+  }
+
+  &.button-white {
+
+    &:after {
+      border-color: $white;
+      background: $white;
+    }
+
+    &:hover {
+
+      &:after {
+        border-color: $white;
+        background: transparent;
+      }
+    }
+  }
+
+  &.button-steel-blue {
+    &:after {
+      border-color: #547ABB;
+      background: #547ABB;
+    }
+
+    &:hover,
+    &:focus,
+    &:active,
+    &:hover {
+
+      &:after {
+        background: transparent;
+      }
+    }
+  }
+
+  &.button-cerulean {
+    &:after {
+      border-color: #00bbf2;
+      background: #00bbf2;
+    }
+
+    &:hover,
+    &:focus,
+    &:active,
+    &:hover {
+
+      &:after {
+        background: transparent;
+      }
+    }
+  }
+
+  &.button-mandy {
+    &:after {
+      border-color: #e75854;
+      background: #e75854;
+    }
+
+    &:hover,
+    &:focus,
+    &:active,
+    &:hover {
+
+      &:after {
+        background: transparent;
+      }
+    }
+  }
+
+  &.button-outline {
+
+    &:after {
+      background: transparent;
+    }
+  }
+}
+
+.button-block{
+  display: block;
+  width: 100%;
+}
+
+.button-uppercase { text-transform: uppercase; }
+
+// Appearance style
+// --------------------------------------------------
+
+.button-default {
+  @include btn-variant($gray-darker, transparent, $gray, $white, $gray-darker, $gray-darker);
+}
+
+.button-primary {
+  @include btn-variant($white, transparent, transparent, $white, transparent, transparent);
+}
+
+.button-primary-sec {
+  @include btn-variant($primary, transparent, transparent, $gray-dark, transparent, transparent);
+}
+
+.button-primary-dark {
+  @include btn-variant($white, transparent, transparent, $white, transparent, transparent);
+}
+
+.button-white {
+  @include btn-variant($primary, transparent, transparent, $white, transparent, transparent);
+}
+
+.button-white-sec {
+  @include btn-variant($white, transparent, $white, $primary, $white, $white);
+}
+
+.button-gray {
+  @include btn-variant($white, $gray, $gray, $gray, transparent, $gray);
+}
+
+.button-steel-blue {
+  @include btn-variant($white, transparent, transparent, #547ABB, transparent, transparent);
+}
+
+.button-cerulean {
+  @include btn-variant($white, transparent, transparent, #00bbf2, transparent, transparent);
+}
+
+.button-mandy {
+  @include btn-variant($white, transparent, transparent, #e75854, transparent, transparent);
+}
+
+// Btn with shadow
+.button-shadow{
+  box-shadow: 0 3px 11px 0 rgba(0, 0, 0, 0.15);
+
+  &:hover{
+    box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.15);
+  }
+
+  &:before {
+    display: none;
+  }
+}
+
+
+// Button Sizes
+// --------------------------------------------------
+
+.button-xs {
+  // btn-size($padding-vertical, $padding-horizontal, $font-size, $line-height, $border-radius)
+  @include btn-size(5px, 5px, 14px, 30px, 0);
+
+  .icon-arrow {
+    max-height: 30px;
+  }
+
+  min-width: 114px;
+}
+
+.button-md {
+  // btn-size($padding-vertical, $padding-horizontal, $font-size, $line-height, $border-radius)
+  @include btn-size(13px, 10px, 18px, 29px, 0);
+
+  min-width: 160px;
+
+  .icon-arrow {
+    font-size: 1.33em;
+  }
+}
+
+.button-lg {
+  // btn-size($padding-vertical, $padding-horizontal, $font-size, $line-height, $border-radius)
+  @include btn-size(25px, 10px, 24px, 30px, 0);
+
+  min-width: 185px;
+
+  .icon-arrow {
+    max-height: 30px;
+    font-size: 1.25em;
+  }
+}
+
+
+.button-custom {
+  white-space: normal;
+  text-transform: none;
+  line-height: 26px;
+  letter-spacing: 0;
+  padding-right: 20px;
+  padding-bottom: 21px;
+
+  .text-small {
+    display: block;
+    font-size: 14px;
+    line-height: 1.43em;
+  }
+}
+
+
+// Button Shapes
+// --------------------------------------------------
+
+.button-circle {
+  border-radius: 30px;
+
+  &:after,
+  &:before {
+    border-radius: inherit;
+  }
+}
+
+.button-ellipse {
+  &-md {
+    border-radius: 5px;
+
+    &:after,
+    &:before {
+      border-radius: inherit;
+    }
+  }
+
+  &-lg {
+    border-radius: 10px;
+  }
+}
+
+
+
+// Button Outline
+// --------------------------------------------------
+
+.button-outline {
+
+  &.button-primary {
+    @include btn-variant($primary, transparent, $primary, $white, $primary-dark, $primary-dark);
+  }
+  
+  &:before {
+    display: none;
+  }
+}
+
+.button-no-outline {
+  min-width: auto;
+  padding: 0;
+  border: none;
+  margin-right: 0;
+  font-weight: 700;
+
+  &:after,
+  &:before {
+    display: none;
+  }
+}
+
+// Button Icon styles
+// --------------------------------------------------
+
+.button {
+  
+  &.button-icon {
+    padding-left: 14px;
+    padding-right: 14px;
+
+    min-width: 154px;
+
+    .icon {
+      font-size: 30px;
+      line-height: 1;
+      vertical-align: middle;
+      transition: 0s;
+    }
+
+    .icon-social {
+      font-size: 20px;
+    }
+
+    &-left {
+      .icon {
+        padding-right: 8px;
+      }
+    }
+
+    &-right {
+      .icon {
+        padding-left: 8px;
+      }
+    }
+  }
+}
+
+.button-group-vertical {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  * + .button {
+    margin-top: 6px;
+  }
+}
+
+.group-sm-right {
+
+  @include media-breakpoint-up(md) {
+    align-items: flex-end;
+  }
+}
+
+.desktop {
+
+}
+
+.mac-os {
+
+}
+
+
+
+// Buttons Custom
+.button-custom-1 {
+
+  letter-spacing: 0;
+  text-transform: none;
+  white-space: normal;
+}

@@ -1,0 +1,18 @@
+mixin box-product(obj)
+	//- Box product
+	.box-product(class= obj.boxClass)
+		.box-product-img
+			a(href="product-page.html"): +img(obj.pathImg)
+		if(obj.productName)
+			p: a(href="product-page.html")=obj.productName
+		if(obj.descriptionList)
+			a(href="product-page.html" class='link')=obj.productName2
+			ul
+				each descriptionListItem in obj.descriptionList
+					li=descriptionListItem
+		.group-sm
+			span.box-product-price(class=obj.priceClass)=obj.productPrice
+			if(obj.productPriceSale)
+				span.box-product-price(class=obj.priceClass).sale=obj.productPriceSale
+		a(href="shopping-cart.html").button.button-xs.button-primary Add to cart
+			include ../elements/_arrow-down

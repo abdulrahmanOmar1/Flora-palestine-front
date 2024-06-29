@@ -1,0 +1,64 @@
+include _config
+include _functions
+include _mixins
+include elements/_widget-list
+
+block variables
+
+doctype html
+- main();
+
+html(lang="en" class=htmlClass)
+	head
+		// Site Title
+		block title
+			title=pageName
+
+		meta(name="format-detection" content="telephone=no")
+		meta(name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=0")
+		meta(http-equiv="X-UA-Compatible" content="IE=edge")
+		meta(charset='utf-8')
+
+		link(rel="icon" href="images/favicon.ico" type="image/x-icon")
+
+		// Stylesheets
+		link( rel='stylesheet', type='text/css', href= fonts )
+		link(rel="stylesheet" href="css/bootstrap.css")
+		link( rel='stylesheet', href='css/fonts.css' )
+		link(rel="stylesheet" href="css/style.css")
+
+	body
+		// Page preloader
+		.preloader
+			div
+				.preloader-body
+					.loader
+						span.block-1
+						span.block-2
+						span.block-3
+						span.block-4
+						span.block-5
+						span.block-6
+						span.block-7
+						span.block-8
+						span.block-9
+						span.block-10
+						span.block-11
+						span.block-12
+						span.block-13
+						span.block-14
+						span.block-15
+						span.block-16
+
+		// Page
+		div.text-center.text-md-start.page
+			block page
+
+		// Global Mailform Output
+		#form-output-global.snackbars
+
+		// Javascript
+		script(src="js/core.min.js")
+		script(src="js/script.js")
+
+		block coder

@@ -1,0 +1,99 @@
+extends  ../_skeleton
+
+//- Includes
+include ../elements/_ui-progress-bar-linear
+include ../elements/_ui-progress-bar-circle
+include ../elements/_ui-counter
+
+block variables
+	- var pageName = 'Progress Bars'
+
+block page
+	// Page Header
+	include ../sections/_header-default
+	+breadcrumbs-section({ img: 'breadcrumbs-1-1920x934' })
+
+	// Skill Bars
+	section.section-elements-1.bg-default
+		.container
+			h2 Progress Bars, Skill Bars, Counters
+			p.big.text-width-large These elements are vital to every website’s design, and with them you are able to improve the overall look of your resource and attract more clients.
+	='\n'
+
+	section.section-sm.bg-default
+		.container
+			.row.justify-content-center.justify-content-md-start.row-30.flex-lg-row-reverse.justify-content-lg-between
+				.col-md-12.col-lg-6.text-lg-start
+					h3 Welcome to our website
+					p Welcome to our wonderful world. We sincerely hope that each and every user entering our website will find exactly what he/she is looking for. With advanced features of activating account and new login widgets, you will definitely have a great experience of using our web page. It will tell you lots of interesting things about our company, its products and services, highly professional staff and happy customers.
+
+				.col-xs-10.col-md-8.col-lg-5
+
+					+progress-bar-linear({
+						"title": "Residential projects",
+						"valueTo": "75"
+					})
+
+					+progress-bar-linear({
+						"title": "Commercial objects",
+						"valueTo": "35"
+					})
+
+					+progress-bar-linear({
+						"title": "Parks and gardens",
+						"valueTo": "50"
+					})
+
+	='\n'
+
+	// RD Parallax
+	section.section-sm.bg-default
+		include ../sections/_counter-classic
+	='\n'
+
+	section.section-md.bg-default
+		.section-relative
+			.bg-counter.bg-counter-1.bg-counter-right.bg-image
+			.container
+				.row.row-50
+					.col-lg-6.offset-md-top-18
+						.row.row-30.row-md-50
+							include ../sections/_counter-creative
+
+					.col-lg-6
+						.counter-creative-wrap.context-dark
+							.row.row-30.row-md-50.offset-negative-right-xl-115
+								include ../sections/_counter-modern
+
+	='\n'
+
+	// Section Circle Progress Bars
+	section.section-lg.bg-default.text-center
+		.container
+			.row.justify-content-sm-center.justify-content-md-start
+				.col-xs-11.col-md-7.col-lg-10.col-xl-12
+					.row.row-50
+						.col-xs-6.col-lg-3.col-xl-2
+							+progress-circle({
+								title: 'Leadership',
+								value: 80
+							})
+						.col-xs-6.col-lg-3.col-xl-2
+							+progress-circle({
+								title: 'Management',
+								value: 12
+							})
+						.col-xs-6.col-lg-3.col-xl-2
+							+progress-circle({
+								title: 'Innovation',
+								value: 53
+							})
+						.col-xs-6.col-lg-3.col-xl-2
+							+progress-circle({
+								title: 'Resilience',
+								value: 38
+							})
+	="\n"
+
+	// Page Footer
+	include ../sections/_footer-default

@@ -1,0 +1,23 @@
+extends  ../_skeleton
+
+block variables
+	- var pageName = '404'
+
+block page
+	// Page Header
+	include ../sections/_header-default
+	+breadcrumbs-section({ img: 'breadcrumbs-team-1920x974' })
+
+	section.section-md.bg-default
+		.container
+			h2=pageName
+			h6.offset-top-0 Page not found
+			p.big.text-width-small The requested page couldn't be found - this could be due to a spelling error in the URL or a removed page.
+			a(href="index.html").button.button-primary Back to home page
+				include ../elements/_arrow-down
+
+	// Page Footer
+	include ../sections/_footer-default
+
+
+

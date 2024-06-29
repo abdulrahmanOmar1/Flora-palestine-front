@@ -1,0 +1,35 @@
+.box-product-img img {
+    width: 270px;   
+    height: 264px; 
+    object-fit: cover; 
+}
+.box-product {
+    flex-direction: column;
+    height: 100%; 
+}
+
+.box-product p {
+    flex-grow: 1; 
+    min-height: 60px;
+}
+
+.button {
+    margin-top: auto; 
+}
+
+.pagination a {
+    margin: 0 5px;
+    padding: 5px 10px;
+    border: 1px solid #ddd;
+    text-decoration: none; 
+}
+
+.pagination a.active {
+    background-color: #4CAF50; 
+    color: white; 
+    border-color: #4CAF50; 
+}
+
+.pagination a:hover {
+    background-color: #ddd; 
+}

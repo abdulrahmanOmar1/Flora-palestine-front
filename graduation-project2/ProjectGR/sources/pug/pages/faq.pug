@@ -1,0 +1,89 @@
+extends  ../_skeleton
+
+//- Includes
+include ../elements/_ui-card
+
+block variables
+	- var pageName = 'FAQ'
+
+block page
+	// Page Header
+	include ../sections/_header-default
+	+breadcrumbs-section({ img: 'breadcrumbs-about-1920x1000' })
+
+	section.section-lg.bg-default
+		.container
+			h2=pageName
+
+			.row.row-40.justify-content-center
+				include ../sections/_section-faq
+
+	section.section-md.parallax-container(data-parallax-img='images/parallax-4-1920x1100.jpg')
+		.parallax-content
+			.container
+				h2 Some of your questions
+				.row.row-15.justify-content-center
+					.col-md-6
+						h6.question: a(href="#") Where can I find a list of prices?
+						h6.question: a(href="#") How can I schedule an appointment?
+						h6.question: a(href="#") How can I get a quote?
+						h6.question: a(href="#") How often should I get my lawn mowed?
+						h6.question: a(href="#") Why use Beautiful Lawn mowing?
+
+					.col-md-6
+						h6.question: a(href="#") What sort of properties do you look after?
+						h6.question: a(href="#") Do you offer gardening and weeding services?
+						h6.question: a(href="#") What other services do you provide?
+						h6.question: a(href="#") How much do you charge for your services?
+						h6.question: a(href="#") Do you provide special offers or discounts?
+
+	section.section-md.bg-default
+		.container
+			.row.justify-content-sm-center.card-custom-group-wrap
+				.col-sm-12
+					h3=pageName
+					#accordion1.card-custom-group.text-start(role='tablist', aria-multiselectable='true')
+						+card({
+							show: true,
+							cardClass: 'card-custom-default',
+							parentId: 'accordion1',
+							number: '1',
+							header: 'Where can I find a list of prices?'
+						})
+							p You can find the price list of the services we provide here on our website on the prices page. If the service you desire is not listed, call us or get a free quote by submitting your postcode and desired work via our booking form. You’ll get a free quote and the answers to any other queries you may have about pricing or the services.
+
+
+						+card({
+							cardClass: 'card-custom-default',
+							parentId: 'accordion1',
+							number: '2',
+							header: 'How can I schedule an appointment?'
+						})
+							p Setting up an appointment with us is simple. You can call us, submit an online request, enter our online chat facility, or use our App, which lets you book your whole service in just 4 clicks. If you have an account with us, you can even text us to secure an appointment.
+
+						+card({
+							cardClass: 'card-custom-default',
+							parentId: 'accordion1',
+							number: '3',
+							header: 'How can I get a quote?'
+						})
+							p We usually give final and fixed quotes over the phone. If you require something specific, however, we would prefer to organize a survey appointment for you.
+
+						+card({
+							cardClass: 'card-custom-default',
+							parentId: 'accordion1',
+							number: '4',
+							header: 'How often should I get my lawn mowed?'
+						})
+							p Simply put, as often as possible! The more often a lawn is mowed, the less thatch build-up it will have and the better it will look. For a professional presentation, weekly or fortnightly cuts in summer and 3-4 weekly in winter keeps your lawn in order. This all depends of course, on how much water and fertilizer it is receiving and where you live.
+
+						+card({
+							cardClass: 'card-custom-default',
+							parentId: 'accordion1',
+							number: '5',
+							header: 'Why do you charge more to cut my grass when it is overgrown?'
+						})
+							p We charge more to cut grass that is overgrown because it puts substantially more wear on our equipment and we sometimes have to double cut which takes more time. To avoid this additional cost, we recommend that you get your lawn serviced every 10-14 days. This will prevent overgrowth and keep your turf healthy during the summer months.
+
+	// Page Footer
+	include ../sections/_footer-default

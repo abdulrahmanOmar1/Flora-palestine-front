@@ -1,0 +1,65 @@
+extends  ../_skeleton
+
+//- Includes
+include ../elements/_counter
+
+block variables
+	- var pageName = 'Careers'
+
+block page
+	// Page Header
+	include ../sections/_header-default
+	+breadcrumbs-section({ img: 'breadcrumbs-about-1920x1000' })
+
+	section.section-md.bg-default
+		.container
+			h2 Ready to try out for the team?
+			.row.row-30
+				.col-lg-6
+					h6 We’re looking for above average lawn technicians that love working outdoors.
+					p.big You will be applying fertilizer and weed control to lawns weekly on a 1 man crew making great money. Each truck/crew is treated like your own mini business. It’s hard work, but very rewarding. We pay you based on the number of lawns you mow so it’s very fair and the harder you work the more you make. We will be glad to offer you a workplace with lots of benefits and rewards.
+				.col-lg-6
+					ul.list.list-index.list-big-2.list-gray-dark.text-xlg-nowrap
+						li
+							span.list-index-counter
+							| Have some experience in lawn care, or working outdoors.
+						li
+							span.list-index-counter
+							| Understand the importance of keeping our customers happy.
+						li
+							span.list-index-counter
+							| Have a valid driver’s license and be able to legally work
+						li
+							span.list-index-counter
+							| Be prepared to work long days – Monday through Friday
+						li
+							span.list-index-counter
+							| Be someone who wants and needs money.
+						li
+							span.list-index-counter
+							| Have a working cell phone to bring with you every day.
+
+
+				.col-lg-8
+					h6.fw-bold We reward our awesome staff with bonuses, lunch cards, free breakfasts, and even BBQs on Fridays! We work hard and play hard! So thanks for your time and we wish you the best, whether it’s with us or another company.
+
+	section.section-md.bg-default
+		.container
+			h3 Our Mission & Offer
+			.row.row-30
+				.col-lg-6
+					p Beautiful Lawn gives motivated individuals the opportunity to be their own boss with our low-cost, all-inclusive franchises. By providing all equipment, training, and support we are equipped to deliver the best possible service to our valued customers. Committed to excellence, our company strives to offer a wide range of services at affordable prices through a team of motivated, successful franchisees.
+
+				.col-lg-6
+					ul.list.list-marked.list-gray-dark.text-xlg-nowrap
+						li Earn up to $3,000+ per week
+						li You can work the hours of your choice
+						li We supply all initial equipment, operations manuals, stationery, advertising, and promotions
+						li We supply initial marketing collateral
+						li We provide initial and on-going training, backup and support
+
+					a(href="contacts.html").button.button-primary Contact us
+						include ../elements/_arrow-down
+
+	// Page Footer
+	include ../sections/_footer-default

@@ -1,0 +1,265 @@
+extends  ../_skeleton
+
+//- Includes
+include ../elements/_icon-list
+include ../elements/_box-product
+
+block variables
+	- var pageName = 'Product page'
+
+block page
+	// Page Header
+	include ../sections/_header-default
+	+breadcrumbs-section({ img: 'breadcrumbs-team-1920x974' })
+
+	section.section-xs.bg-default
+		.container
+			h2=pageName
+			.row.row-50.row-lg-90
+				.col-lg-5
+					.slick-vertical
+						// Slick Carousel
+						.slick-slider.carousel-parent(data-arrows="false", data-loop="false", data-dots="false", data-swipe="true", data-items="1" data-child="#child-carousel", data-for="#child-carousel")
+							.item
+								+img('product-13-470x486')
+							.item
+								+img('product-14-470x486')
+							.item
+								+img('product-15-470x486')
+							.item
+								+img('product-16-470x486')
+
+						.slick-slider#child-carousel(data-for=".carousel-parent", data-arrows="true",
+						data-loop="false", data-dots="false", data-swipe="false",
+						data-items="2", data-sm-items="3", data-md-items="4",
+						data-lg-items="4", data-xl-items="4", data-slide-to-scroll="1" data-md-vertical='true')
+							.item
+								.slick-slide-overlay
+									+img('product-mini-13-117x108')
+							.item
+								.slick-slide-overlay
+									+img('product-mini-14-117x108')
+							.item
+								.slick-slide-overlay
+									+img('product-mini-15-117x108')
+							.item
+								.slick-slide-overlay
+									+img('product-mini-16-117x108')
+
+				.col-lg-7.single-product
+					h3 Chapin 61900 4-Gallon Tree/Turf Pro Commercial Backpack Sprayer with Stainless Steel Wand
+					p.big The new Chapin 61900 Tree/Turf Professional and Commercial backpack sprayer - 4 Gallon features a large 4-gallon capacity tank and hands-free operation which gives you the power to handle even the largest spray jobs. An internal 4-position spray valve provides excellent pressure control from 15 psi to 60 psi. A pump handle allows you to spray continuously.  The Chapin 61900 backpack sprayer also features a stainless steel wand and adjustable brass cone nozzle and a fixed fan tip nozzle.
+
+					.product-rating
+						span.icon.fa-star
+						span.icon.fa-star
+						span.icon.fa-star
+						span.icon.fa-star
+						span.icon.fa-star.inactive
+
+						a(href="#").link 2 customer reviews
+
+					.product-item
+						span.stepper-var-1.product-number.group-sm
+							input.form-input(type="number" data-zeros="true" value="1" min="1" max="1000")
+							span.heading-6 Quantity
+
+					.product-price.group-lg
+						span.price.heading-4 $72.47
+						span.price-before-sale.heading-4 $79.80
+
+					a(href="shopping-cart.html").button.button-primary Add to cart
+						include ../elements/_arrow-down
+
+					.product-social.group-sm
+						span.heading-6.text-gray-light Share this:
+						+widget-list([
+							{
+								"icon": "fa fa-xsm fa-facebook",
+								"href": "#"
+							},
+							{
+								"icon": "fa fa-xsm fa-twitter",
+								"href": "#"
+							},
+							{
+								"icon": "fa fa-xsm fa-google-plus",
+								"href": "#"
+							},
+							{
+								"icon": "fa fa-xsm fa-instagram",
+								"href": "#"
+							},
+							{
+								"icon": "fa fa-xsm fa-pinterest-p",
+								"href": "#"
+							},
+							{
+								"icon": "fa fa-xsm fa-feed",
+								"href": "#"
+							},
+							{
+								"icon": "fa fa-xsm fa-envelope",
+								"href": "#"
+							}
+						], '', 'list-inline-2')
+
+				.col-xl-5.col-lg-4
+					h3 Product details
+					ul.list.list-family-base
+						li 4-Gallon translucent tank with 4-inch mouth opening for easy filling
+						li Compatible with common fertilizers, weed killers, and pesticides
+						li 3-Stage Filtration system with in-tank removable/cleanable filter
+						li Cushion grip shut-off with three nozzles for a variety of applications
+						li Padded shoulder straps to accommodate a full backpack for hours
+
+				.col-xl-7.col-lg-8.single-post-wrap
+					.blog-item
+						h3 Reviews
+						.box-comment.text-xs-start
+							.unit.flex-column.flex-xs-row.unit-spacing-md
+								.unit-left
+									.wrap-img.rounded-circle.img-70
+										+img('user-1-70x70').image-circles
+
+								.unit-body
+									.unit.flex-column.flex-md-row.unit-box-comment
+										.unit-left
+											p.text-primary.fw-bold Alicia Hagen
+										.unit-body
+											.post-meta-default.post-meta-inline
+												time(datetime="2018-03-07")
+													span.mdi.mdi-sm.mdi-clock.text-primary
+													| March 7, 9:14
+
+												a(href="#")
+													span.mdi.mdi-sm.mdi-thumb-up-outline
+													span.quantity like
+
+												a(href="#")
+													span.mdi.mdi-sm.mdi-comment-multiple-outline
+													span.quantity reply
+
+									p I love your store! There is the largest selection of products of the exceptional quality and the lowest prices like in no other store. My family appreciated my purchase, I have no words to describe how pleased I am...Thanks a lot to your store, to your team and the delivery in time!!! Go on your great business, stay the best!
+
+							.divider
+
+							.box-comment.border-bottom
+								.unit.flex-column.flex-xs-row.unit-spacing-md
+									.unit-left
+										.wrap-img.rounded-circle.img-70
+											+img('user-3-70x70').image-circles
+
+									.unit-body
+										.unit.flex-column.flex-md-row.unit-box-comment
+											.unit-left
+												p.text-primary.fw-bold John Nesh
+											.unit-body
+												.post-meta-default.post-meta-inline
+													time(datetime="2018-03-07")
+														span.mdi.mdi-sm.mdi-clock.text-primary
+														| March 7, 9:14
+
+													a(href="#")
+														span.mdi.mdi-sm.mdi-thumb-up-outline
+														span.quantity like
+
+													a(href="#")
+														span.mdi.mdi-sm.mdi-comment-multiple-outline
+														span.quantity reply
+
+										p I wanted to say thank you for the amazing product and for the fast processing and delivery. It was impressive, you weren't kidding. I was surprised with such an excellent quality... My family is very happy. I would definitely use this site again and again and recommend it to others.
+
+					.blog-item
+						h3 Leave a comment
+
+						form.rd-mailform.text-start(data-form-output="form-output-global", data-form-type='forms', method='post', action='bat/rd-mailform.php')
+							.row.row-spacing-10.row-10
+								.col-md-12
+									.form-wrap.form-wrap-validation
+										label.form-label(for="forms-message") Message
+										textarea#forms-message.form-input(name="message" data-constraints="@Required")
+
+								.col-md-12
+									.group-post-comment
+										.group-post-meta
+											p.fw-bold Sign in with
+											+widget-list([
+												{
+													"icon": "fa fa-facebook",
+													"href": "#"
+												},
+												{
+													"icon": "fa fa-twitter",
+													"href": "#"
+												},
+												{
+													"icon": "fa fa-google-plus",
+													"href": "#"
+												}
+
+											], 'text-primary', '')
+
+										.button-wrap.text-center
+											button(type="submit").button.button-xs.button-primary Submit
+												include ../elements/_arrow-down
+
+	section.section-md.bg-default
+		.container.container-inset-owl
+			h3 Related products
+			.owl-carousel.owl-modern.owl-products.owl-nav-default(
+				data-items='1',
+				data-sm-items='2',
+				data-md-items="3",
+				data-xl-items="4"
+				data-stage-padding='0',
+				data-loop='true',
+				data-margin='30',
+				data-autoplay='true',
+				data-owl= {
+					dots: true,
+					nav: true
+				}
+			)
+				+box-product({
+					pathImg: 'product-1-270x264',
+					productName: 'Insecticide Duster - Heavy Duty Self Sealing Insecticide Bulb Duster holds approx 1 cup of dust / granules',
+					productPrice: '$27.60'
+				})
+
+				+box-product({
+					pathImg: 'product-2-270x264',
+					productName: 'Espoma PR8 8-Quart Organic Perlite',
+					productPrice: '$9.06'
+				})
+
+				+box-product({
+					pathImg: 'product-3-270x264',
+					productName: 'Magid BE338T Bella Women’s Comfort Flex Coated Garden Glove, Small / Medium',
+					productPrice: '$8.04'
+				})
+
+				+box-product({
+					pathImg: 'product-5-270x264',
+					productName: 'Element ELSP38050 3/8-Inch by 50-Feet Soakerpro Hose, Black',
+					productPrice: '$9.63'
+				})
+
+				+box-product({
+					boxClass: 'box-product-sale',
+					pathImg: 'product-4-270x264',
+					productName: 'Orbit Single-Dial Water Timer',
+					productPrice: '$19.69',
+					productPriceSale: '$23.15'
+				})
+
+				+box-product({
+					pathImg: 'product-6-270x264',
+					productName: 'Hydrofarm HGMC400 Mini Clipper',
+					productPrice: '$7.73'
+				})
+
+
+
+	// Page Footer
+	include ../sections/_footer-default

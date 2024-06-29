@@ -1,0 +1,49 @@
+header.page-header.header-modern
+	// RD Navbar
+	.rd-navbar-wrap
+		nav.rd-navbar(
+			data-layout='rd-navbar-fixed',
+			data-md-device-layout='rd-navbar-fixed',
+			data-lg-device-layout="rd-navbar-static",
+			data-xl-device-layout="rd-navbar-static",
+			data-xxl-device-layout="rd-navbar-static",
+			data-sm-layout='rd-navbar-fixed',
+			data-md-layout='rd-navbar-fullwidth',
+			data-lg-layout='rd-navbar-static',
+			data-xl-layout='rd-navbar-static',
+			data-xxl-layout='rd-navbar-static',
+			data-md-stick-up-offset="60px",
+			data-lg-stick-up-offset="33px",
+			data-stick-up='true',
+			data-sm-stick-up='true',
+			data-md-stick-up='true',
+			data-lg-stick-up='true',
+			data-xl-stick-up='true',
+			data-xxl-stick-up='true'
+		)
+
+			// RD Navbar Panel
+			.rd-navbar-panel
+				// RD Navbar Toggle
+				button.rd-navbar-toggle(data-rd-navbar-toggle='.rd-navbar-nav-wrap')
+					span
+				// RD Navbar Brand
+				.rd-navbar-brand
+					a.brand-name(href='index.html')
+						+img(config.logoGray2).mobile-element
+
+			.container
+				.rd-navbar-inner.rd-navbar-nav-wrap
+					.rd-navbar-nav-wrap-item.rd-navbar-nav-wrap-left
+						//+nav( 0, 4 )
+						+navigation( menu, '', [0, 4] )
+
+					// RD Navbar Brand
+					.rd-navbar-brand
+						a.brand-name(href='index.html')
+							+img(config.logoGray).desktop-element
+							+img('logo-1-43x37').desktop-element.brand-position
+
+					.rd-navbar-nav-wrap-item.rd-navbar-nav-wrap-right
+						+navigation( menu, '', [4, 8] )
+						//+nav( 4, 8 )

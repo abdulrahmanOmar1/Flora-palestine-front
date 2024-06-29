@@ -1,0 +1,26 @@
+/*
+* Fullwidth Layout
+*/
+
+.rd-navbar-fullwidth {
+  display: block;
+
+  // RD Navbar Inner
+  .rd-navbar-inner {
+    display: flex;
+    align-self: center;
+    padding-top: 24px;
+    padding-bottom: 24px;
+  }
+
+  // RD Navbar Nav
+  .rd-navbar-nav {
+
+  }
+
+  // RD Navbar States
+  &.rd-navbar--is-stuck,
+  &.rd-navbar--is-clone{
+
+  }
+}

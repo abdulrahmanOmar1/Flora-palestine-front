@@ -1,0 +1,14 @@
+mixin icon(obj, elemCount)
+  .unit(class= obj.unitClass data-wow-delay= obj.wowDelay)
+
+    .unit-left
+      span(class= obj.classIcon)
+
+    .unit-body
+      .box-icon-content
+        div(class= obj.titleClass)= obj.title
+        if(obj.content)
+          p(class= obj.classText)= obj.content
+
+        else
+          block

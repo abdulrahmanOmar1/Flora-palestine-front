@@ -1,0 +1,39 @@
+//- Mixin: bootstrap card
+//------------------------------------------
+//- parentId - Id of parent block
+//- cardClass - Class for styling
+//- first - bool variable to set open card
+//- arrow - exists by default, false to disable
+//- header - Header text
+
+
+mixin card(obj)
+	- var headingId = id=obj.parentId + 'Heading' + obj.number
+	- var bodyId = id=obj.parentId + 'Collapse' + obj.number
+
+
+	// Bootstrap card
+	.card.card-custom(class=obj.cardClass)
+		.card-custom-heading.card-header(role='tab')
+			p.card-custom-title
+				a(
+					id=headingId,
+					role='button',
+					data-bs-toggle='collapse',
+					data-bs-parent='#' + obj.parentId,
+					href='#' + bodyId,
+					aria-controls= bodyId,
+					aria-expanded= Boolean( obj.show ).toString(),
+					class={ collapsed: !obj.show },
+				)
+					=obj.header
+
+		.card-custom-collapse.collapse(
+			id=bodyId,
+			data-bs-parent='#' + obj.parentId,
+			class={ show: obj.show },
+			role='tabpanel'
+			aria-labelledby=headingId
+		)
+			.card-custom-body
+				block

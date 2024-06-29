@@ -1,0 +1,78 @@
+extends  ../_skeleton
+
+//- Includes
+include ../elements/_box-product
+
+block variables
+	- var pageName = 'Checkout'
+
+block page
+	// Page Header
+	include ../sections/_header-default
+	+breadcrumbs-section({ img: 'breadcrumbs-team-1920x974' })
+
+	section.section-md.bg-default
+		.container
+			h2=pageName
+			h6.heading-checkout
+				span Returning customer?
+				a(href="#").link-arrow Click here to log in
+					include ../elements/_arrow-right
+			h6.heading-checkout
+				span Have a coupon?
+				a(href="#").link-arrow Click here to enter your code
+					include ../elements/_arrow-right
+
+			.row.row-50
+				include ../sections/_section-checkout-form
+
+			h3 Your order
+
+			.row.row-50.row-xxs
+				.col-lg-6
+					.table-custom-responsive
+						table.table-custom.table-checkout
+							tbody
+								tr
+									td Product
+									td Total
+								tr
+									td
+										a(href='#').link Lesco 50Lb Push Spreader
+									td.price.price-dark $25.60
+								tr
+									td Subtotal
+									td.price $25.60
+								tr
+									td Shipping
+									td.shiping: span Please fill in your details to see available shipping methods.
+								tr
+									td Total
+									td.price.price-dark $25.60
+
+				.col-lg-6.text-md-end
+					.payment-box
+						.form-wrap
+							label.radio-inline
+								input(name="input-group-radio", value="checkbox-1", type="radio", checked)
+								| Cheque payment
+						p Please send your cheque to 4578 Marmora St, Chicago D04 89GR.
+					.payment-box
+						label.radio-inline
+							input(name="input-group-radio", value="checkbox-1", type="radio", checked)
+							| PayPal
+						a(href='#').link What is PayPal?
+							include ../elements/_arrow-right
+
+						.group-flickr
+							a(href='#').link.link-img: +img('payment-1-58x36')
+							a(href='#').link.link-img: +img('payment-2-58x36')
+							a(href='#').link.link-img: +img('payment-3-58x36')
+							a(href='#').link.link-img: +img('payment-4-58x36')
+							a(href='#').link.link-img: +img('payment-5-58x36')
+
+					a(href='#').button.button-primary Place order
+						include ../elements/_arrow-down
+
+	// Page Footer
+	include ../sections/_footer-default

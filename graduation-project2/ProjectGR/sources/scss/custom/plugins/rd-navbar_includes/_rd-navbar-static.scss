@@ -1,0 +1,24 @@
+/*
+* Static Layout
+*/
+
+.rd-navbar-static {
+  display: block;
+
+  .rd-navbar-inner{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .rd-navbar-top-panel{
+    text-align: left;
+  }
+
+  .rd-navbar-nav{
+    > li {
+
+    }
+  }
+}
+

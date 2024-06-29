@@ -1,0 +1,157 @@
+/*
+*
+* Breadcrumbs
+* --------------------------------------------------
+*/
+
+//== Breadcrumbs variables
+//
+//##
+
+$bread-color: $white;
+$bread-active-color: $primary;
+
+
+.breadcrumb-wrapper{
+  padding-top: 50px;
+  padding-bottom: 30px;
+}
+
+.breadcrumb-custom{
+  margin-top: 20px;
+  list-style: none;
+
+  > li {
+    display: inline-block;
+    color: $bread-active-color;
+
+    > a{
+      color: $bread-color;
+
+      &:hover{
+        text-decoration: underline;
+      }
+    }
+
+    + li:before {
+      padding: 0 8px 0 5px;
+      font-family: "Material Design Icons";
+      content: "\f238";
+      color: $white;
+    }
+  }
+}
+
+$gradient-1: linear-gradient(135deg, rgba(255,255,255,0) 25%,rgba(5,5,6,1) 100%);
+
+.desktop {
+  .breadcrumbs-custom {
+    background-attachment: fixed;
+  }
+}
+
+.breadcrumbs-custom {
+  position: relative;
+  color: $white;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  background-size: cover;
+  background-position: center 20%;
+
+  @include media-breakpoint-up(sm) {
+    padding-top: 90px;
+    padding-bottom: 90px;
+  }
+
+  li {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    padding-right: 32px;
+
+    &:last-child {
+      padding-right: 0;
+
+      &:after {
+        display: none;
+      }
+    }
+
+    &:after {
+      position: absolute;
+      content: '/';
+      right: 10px;
+      top: 0;
+    }
+  }
+
+  .breadcrumbs-custom__title,
+  li, a {
+    color: inherit;
+  }
+
+  &:before {
+    display:  none;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%) rotate(45deg);
+    content: '';
+    z-index: 0;
+    width: 318px;
+    height: 318px;
+    background: $gradient-1;
+    opacity: .5;
+
+    @include media-breakpoint-up(sm) {
+      top: -40%;
+    }
+    
+    @include media-breakpoint-up(md) {
+      top: -15%;
+    }
+  }
+
+  &.position-custom {
+    background-position-y: 230%;
+  }
+}
+
+.breadcrumbs-custom__title,
+.breadcrumbs-custom__path,
+.breadcrumbs-custom img {
+  position: relative;
+}
+
+.breadcrumbs-custom__path {
+  margin-top: 8px;
+  font-size: 16px;
+
+  li {
+    text-transform: uppercase;
+    letter-spacing: .15em;
+    line-height: 1.5em;
+  }
+  
+  a {
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  @include media-breakpoint-up(sm) {
+    li {
+      line-height: 2em;
+    }
+  }
+  
+  @include media-breakpoint-up(md) {
+    font-size: $font-size-lg;
+  }
+}
+
+@include media-breakpoint-up(lg) {
+  .breadcrumbs-custom {
+    padding-top: 260px;
+    padding-bottom: 110px;
+  }
+}

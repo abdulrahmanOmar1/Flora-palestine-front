@@ -1,0 +1,245 @@
+extends  ../_skeleton
+
+//- Includes
+include ../elements/_blockquote-1
+include ../elements/_blockquote-2
+include ../elements/_icon-list
+
+block variables
+	- var pageName = 'Typography'
+
+block page
+	// Page Header
+	include ../sections/_header-default
+	+breadcrumbs-section({ img: 'breadcrumbs-1-1920x934' })
+
+	section.section-md.section-lg-top-84.bg-default
+		.container
+			.row.justify-content-center
+				.col-xl-8.col-lg-10
+					.section-typography-body.text-start
+						h1 Heading 1
+						p.big Welcome to our wonderful world. We sincerely hope that each and every user entering our website will find exactly what he/she is looking for. With advanced features of activating account and new login widgets, you will definitely have a great experience of using our web page.
+
+						h2 Heading 2
+						p.big Welcome to our wonderful world. We sincerely hope that each and every user entering our website will find exactly what he/she is looking for. With advanced features of activating account and new login widgets, you will definitely have a great experience of using our web page.
+
+						h3 Heading 3
+						p Welcome to our wonderful world. We sincerely hope that each and every user entering our website will find exactly what he/she is looking for. With advanced features of activating account and new login widgets, you will definitely have a great experience of using our web page.
+
+						h4 Heading 4
+						p Welcome to our wonderful world. We sincerely hope that each and every user entering our website will find exactly what he/she is looking for. With advanced features of activating account and new login widgets, you will definitely have a great experience of using our web page.
+
+						h5 Heading 5
+						p Welcome to our wonderful world. We sincerely hope that each and every user entering our website will find exactly what he/she is looking for. With advanced features of activating account and new login widgets, you will definitely have a great experience of using our web page.
+
+						h6 Heading 6
+						p Welcome to our wonderful world. We sincerely hope that each and every user entering our website will find exactly what he/she is looking for. With advanced features of activating account and new login widgets, you will definitely have a great experience of using our web page.
+
+				.col-xl-4
+					.heading-group.d-none.d-xl-inline-block.text-start
+						h1 Heading 1
+						h2 Heading 2
+						h3 Heading 3
+						h4 Heading 4
+						h5 Heading 5
+						h6 Heading 6
+
+	section.section-md.bg-default.text-start
+		.container
+			.row.justify-content-center.justify-content-lg-start.row-90
+				.col-xl-6.col-lg-7
+					h3 Blockquote1
+
+					+blockquote-1(
+					{
+						classWrap: 'quote-modern quote-inset-typography bg-quote-1 box-outline',
+						classContent: 'big',
+						content: 'Welcome to our wonderful world. We sincerely hope that each and every user entering our website will find exactly what he/she is looking for. With advanced features of activating account and new login...',
+						autorName: 'Alicia Hagen',
+						statusAutor: '(housewife)'
+					}
+					)
+
+				.col-xl-6.col-lg-5
+					.box-width-370.block-centered
+						h3 Blockquote2
+
+						+blockquote-2({
+							classUnit: 'flex-column',
+							pathFile: 'team-1-370x265',
+							classImg: 'box-shadow-var-1',
+							classWrap: 'quote-classic',
+							content: 'Welcome to our wonderful world. We sincerely hope that each and every user entering our website will find exactly what he/she is looking for. With advanced features of...',
+							autorName: 'Alicia Hagen',
+							statusAutor: '(housewife)'
+						})
+
+				.col-xl-6.col-lg-8
+					.quote-creative-wrap.bg-quote-3.context-dark
+						h3 Blockquote3
+
+						+blockquote-1(
+						{
+							classWrap: 'quote-creative',
+							content: 'Welcome to our wonderful world. We sincerely hope that each and every user entering our website will find exactly what he/she is looking for. With advanced features of activating account and new login widgets, you will...',
+							autorName: 'Peter Cox',
+							statusAutor: '(lawyer)'
+						}
+						)
+
+	section.section-md.bg-default
+		.container
+			.row.justify-content-center.justify-content-lg-start.row-90
+				.col-lg-8
+
+					h3 HTML text
+					p.
+						Welcome to our wonderful world. #[span.fw-bold This is a bold text] #[a(href="#") Link text] #[a.link-hover(href="#") Link hover text] #[a.link-press(href="#") Press link] #[span.tooltip-custom #[span(data-bs-toggle='tooltip', data-bs-placement='top', title='Default text') Tooltips]] We sincerely hope that each and #[mark every user entering our website] will find exactly what he/she is looking for. With advanced features of activating account and new login widgets, you will definitely have a great experience of using our web page. #[span.text-strike This is a strickethrough text] #[span.text-underline This is an underlined text].
+
+				.col-xl-7.col-lg-8
+					h3 Unordered list
+
+					p We specialize in a variety of services. Our aim is to deliver the top level of customer service based on your requests.
+
+					ul.list.list-marked-none.list-primary.d-inline-block.d-md-block
+						li Consulting
+						li Customer Service
+						li Innovation
+						li Management
+						li Ethics
+
+					p We hope that with our services you will receive the most personalized help in purchasing any kind of products you are looking for.
+
+				.col-xl-5.col-lg-8
+					h3 Unordered list
+
+					p We specialize in a variety of services. Our aim is to deliver the top level of customer service based on your requests.
+
+					ul.list.list-marked.list-gray-dark.d-inline-block.d-md-block
+						li Consulting
+						li Customer Service
+						li Innovation
+						li Management
+						li Ethics
+
+					p We hope that with our services you will receive the most personalized help in purchasing any kind of products you are looking for.
+
+				.col-xl-7.col-lg-8
+					h3 Ordered list
+
+					p We specialize in a variety of services. Our aim is to deliver the top level of customer service based on your requests.
+
+					ul.list.list-index.list-primary.d-inline-block.d-md-block
+						li
+							span.list-index-counter
+							| Consulting
+						li
+							span.list-index-counter
+							| Customer Service
+						li
+							span.list-index-counter
+							| Innovation
+						li
+							span.list-index-counter
+							| Management
+						li
+							span.list-index-counter
+							| Ethics
+
+					p We hope that with our services you will receive the most personalized help in purchasing any kind of products you are looking for.
+
+	section.section-md.bg-default
+		.container
+
+			.row.row-90.text-sm-start
+				.col-sm-12
+					h3 Icon list1
+					.row.row-30.row-md
+						.col-md-4.col-lg-4.col-xl-3.justify-content-sm-center.justify-content-xl-start
+							+icon({
+								unitClass: 'unit-spacing-icon flex-column flex-xs-row flex-md-column flex-xl-row text-xs-start text-md-center text-xl-start',
+								titleClass: 'heading-6 text-primary',
+								classIcon: 'icon-primary icon-sm fl-great-icon-set-alarm49',
+								title: 'Best Services',
+								content: 'Our mission is to attract and retain customers by providing Best in Class solutions and fostering a profitable, disciplined culture of safety, service, and trust.'
+							})
+						.col-md-4.col-lg-4.col-xl-3
+							+icon({
+								unitClass: 'unit-spacing-icon flex-column flex-xs-row flex-md-column flex-xl-row text-xs-start text-md-center text-xl-start',
+								titleClass: 'heading-6 text-primary',
+								classIcon: 'icon-primary icon-sm fl-great-icon-set-credit95',
+								title: 'Reputation',
+								content: 'We have established a strong presence in the industry. Our award-winning services earn a reputation for quality and excellence that few can rival.'
+							})
+						.col-md-4.col-lg-4.col-xl-3
+							+icon({
+								unitClass: 'unit-spacing-icon flex-column flex-xs-row flex-md-column flex-xl-row text-xs-start text-md-center text-xl-start',
+								titleClass: 'heading-6 text-primary',
+								classIcon: 'icon-primary icon-sm fl-great-icon-set-favorites5',
+								title: 'Safety & Security',
+								content: 'Safety for our employees, customers and the community we work with will always remain our primary focus in all the policies, procedures and programs.'
+							})
+
+				.col-xl-6.col-lg-8.col-md-10
+					.box-icon-wrap.context-dark
+
+						h3 Icon list2
+
+						+icon({
+							unitClass: 'box-icon-2 unit-middle unit-spacing-icon-2 flex-column flex-xs-row text-xs-start',
+							titleClass: 'heading-6',
+							classIcon: 'icon-white icon-xlg fl-great-icon-set-alarm49',
+							title: 'Anywhere, Anytime',
+							content: 'Beautiful Lawn Mowing comes to you at your  premises be it a home or business.'
+						})
+
+						+icon({
+							unitClass: 'box-icon-2 unit-middle unit-spacing-icon-2 flex-column flex-xs-row text-xs-start',
+							titleClass: 'heading-6',
+							classIcon: 'icon-white icon-xlg fl-great-icon-set-credit95',
+							title: 'Value For Money',
+							content: 'Our goal is to always provide a value for money service which appeals to people from all walks of life.'
+						})
+
+						+icon({
+							unitClass: 'box-icon-2 unit-middle unit-spacing-icon-2 flex-column flex-xs-row text-xs-start',
+							titleClass: 'heading-6',
+							classIcon: 'icon-white icon-xlg fl-great-icon-set-favorites5',
+							title: 'Excellent Service',
+							content: 'We provide our clients with service of exceptional quality to satisfy their lawn care needs.'
+						})
+
+
+	section.section-md.section-lg-bottom-100.bg-default.text-start
+		.container
+			.row.row-90.justify-content-sm-center.justify-content-md-start
+				.col-lg-5.col-md-8.col-sm-10
+					.box-width-370
+							h3 Image centered
+							+img('typography-3-370x260').img-responsive.center-block
+
+							p Welcome to our wonderful world. We sincerely hope that each and every user entering our website will find exactly what he/she is looking for. With advanced features of activating account and new login widgets, you will definitely have a great experience of using our web page.
+
+				.col-xl-6.col-lg-7.col-sm-10
+					.row.row-90.justify-content-center.justify-content-md-start
+						.col-sm-12
+							h3 Image left
+							.unit.unit-spacing-grid.flex-column.flex-md-row
+								.unit-left
+									+img('typography-3-370x260').img-responsive.center-block.box-width-sm-270
+
+								.unit-body
+									p Welcome to our wonderful world. We sincerely hope that each and every user entering our website will find exactly what he/she is looking for. With advanced features of activating account and new login widgets, you will definitely have a great experience of using our web page.
+
+						.col-sm-12
+							h3.title-align-text Image right
+							.unit.unit-spacing-grid.flex-column.unit-sm-row.flex-md-row.inset-md-inverse-25.unit--inverse
+								.unit-body
+									p Welcome to our wonderful world. We sincerely hope that each and every user entering our website will find exactly what he/she is looking for. With advanced features of activating account and new login widgets, you will definitely have a great experience of using our web page.
+
+								.unit-right
+									+img('typography-3-370x260').img-responsive.center-block.box-width-sm-270
+
+	// Page Footer
+	include ../sections/_footer-default

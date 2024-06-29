@@ -1,0 +1,151 @@
+extends  ../_skeleton
+
+//- Includes
+include ../elements/_blockquote-1
+include ../elements/_blockquote-2
+
+block variables
+	- var pageName = 'Testimonials'
+
+block page
+	// Page Header
+	include ../sections/_header-default
+	+breadcrumbs-section({ img: 'breadcrumbs-team-1920x974' })
+
+	section.section-md.bg-default
+		.container.container-inset-owl
+			h2 Testimonials
+			include ../sections/_section-testimonials-carousel
+
+	section.section-md.bg-gray-3.text-center
+		.container
+			h2 Testimonials
+			.row.row-30.justify-content-center
+				.col-lg-4.col-md-6.col-sm-10
+					+blockquote-2({
+						classUnit: 'flex-column',
+						pathFile: 'team-1-370x265',
+						classImg: 'box-shadow-var-1',
+						classWrap: 'quote-classic',
+						content: 'I love Beautiful Lawn. My yard has never looked so good! I don t have to mess with it at all, except to plant flowers and do my gardening (which I love), this company keeps it looking perfect.',
+						autorName: 'Alicia Hagen',
+						statusAutor: '(housewife)'
+					})
+
+				.col-lg-4.col-md-6.col-sm-10
+					+blockquote-2({
+						classUnit: 'flex-column',
+						pathFile: 'team-2-370x265',
+						classImg: 'box-shadow-var-1',
+						classWrap: 'quote-classic',
+						content: 'Our lawn has never looked better with the Spring aeration and weed and feed services. Next door neighbor walked over and asked who we used because our lawn always looks so good. I was happy to refer them.',
+						autorName: 'Andrew Wagstaff',
+						statusAutor: '(manager)'
+					})
+
+				.col-lg-4.col-md-6.col-sm-10
+					+blockquote-2({
+						classUnit: 'flex-column',
+						pathFile: 'team-3-370x265',
+						classImg: 'box-shadow-var-1',
+						classWrap: 'quote-classic',
+						content: 'We recently moved to our new house. We needed a lawn service and Beautiful Lawn responded quickly and professionally. They do a great job and are very reliable. Additionally, they have excellent customer service.',
+						autorName: 'John Nesh',
+						statusAutor: '(artist)'
+					})
+
+				.col-lg-4.col-md-6.col-sm-10
+					+blockquote-2({
+						classUnit: 'flex-column',
+						pathFile: 'team-13-370x265',
+						classImg: 'box-shadow-var-1',
+						classWrap: 'quote-classic',
+						content: 'When we first moved into this property the landscaping was a mess! Our gardens were very overgrown, and the lawn was a disaster. We hired this company to clean up the place and when they were done my gardens were a show piece!',
+						autorName: 'Peter Cox',
+						statusAutor: '(lawyer)'
+					})
+
+
+				.col-lg-4.col-md-6.col-sm-10
+					+blockquote-2({
+						classUnit: 'flex-column',
+						pathFile: 'team-14-370x265',
+						classImg: 'box-shadow-var-1',
+						classWrap: 'quote-classic',
+						content: 'I love using Beautiful Lawn Company! My neighbor recommended them to me after I had a bad experience with the last company I was using. They always show up on time and on a budget, and property looks great!',
+						autorName: 'April Smith',
+						statusAutor: '(receptionist)'
+					})
+
+				.col-lg-4.col-md-6.col-sm-10
+					+blockquote-2({
+						classUnit: 'flex-column',
+						pathFile: 'team-15-370x265',
+						classImg: 'box-shadow-var-1',
+						classWrap: 'quote-classic',
+						content: 'Our property always looks professionally maintained. It’s such a hassle free service knowing that I can expect the same level of service week in and week out! I have recommended them to all my neighbors, they are the best!',
+						autorName: 'Samantha Jacobs',
+						statusAutor: '(babysitter)'
+					})
+
+	section.section-md.parallax-container(data-parallax-img='images/parallax-5-1920x1100.jpg')
+		.parallax-content
+			.container
+				h2 Testimonials
+				.owl-carousel.owl-creative.owl-nav-default.owl-nav-creative.owl-nav-right(
+					data-items='1',
+					data-md-items="2",
+					data-xl-items="3"
+					data-stage-padding='0',
+					data-loop='true',
+					data-margin='20',
+					data-autoplay='true',
+					data-owl= {
+						dots: true,
+						nav: true
+					}
+				)
+					+blockquote-1({
+						classWrap: 'quote-creative',
+						content: 'When we first moved into this property the landscaping was a mess! Our gardens were very overgrown, and the lawn was a disaster. We hired this company to clean up the place and when they were done my gardens were a show piece!',
+						autorName: 'Peter Cox',
+						statusAutor: '(lawyer)'
+					})
+
+					+blockquote-1({
+						classWrap: 'quote-creative',
+						content: 'I love using Beautiful Lawn Company! My neighbor recommended them to me after I had a bad experience with the last company I was using. They always show up on time and on a budget, and property looks great!',
+						autorName: 'April Smith',
+						statusAutor: '(receptionist)'
+					})
+
+					+blockquote-1({
+						classWrap: 'quote-creative',
+						content: 'Our property always looks professionally maintained. It’s such a hassle free service knowing that I can expect the same level of service week in and week out! I have recommended them to all my neighbors, they are the best!',
+						autorName: 'Samantha Jacobs',
+						statusAutor: '(babysitter)'
+					})
+
+					+blockquote-1({
+						classWrap: 'quote-creative',
+						content: 'I love Beautiful Lawn. My yard has never looked so good! I don t have to mess with it at all, except to plant flowers and do my gardening (which I love), this company keeps it looking perfect.',
+						autorName: 'Alicia Hagen',
+						statusAutor: '(housewife)'
+					})
+
+					+blockquote-1({
+						classWrap: 'quote-creative',
+						content: 'Our lawn has never looked better with the Spring aeration and weed and feed services. Next door neighbor walked over and asked who we used because our lawn always looks so good. I was happy to refer them.',
+						autorName: 'Andrew Wagstaff',
+						statusAutor: '(manager)'
+					})
+
+					+blockquote-1({
+						classWrap: 'quote-creative',
+						content: 'We recently moved to our new house. We needed a lawn service and Beautiful Lawn responded quickly and professionally. They do a great job and are very reliable. Additionally, they have excellent customer service.',
+						autorName: 'John Nesh',
+						statusAutor: '(artist)'
+					})
+
+	// Page Footer
+	include ../sections/_footer-default

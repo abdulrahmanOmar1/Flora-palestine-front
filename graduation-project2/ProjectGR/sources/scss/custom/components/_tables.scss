@@ -1,0 +1,346 @@
+//
+// Table custom
+// --------------------------------------------------
+
+$table-head-padding:            22px 64px;
+$table-cell-padding:            21px 64px;
+$table-condensed-cell-padding:  5px;
+
+$table-bg:                      $white;
+$table-bg-accent:               $gray-3;
+$table-bg-hover:                $primary;
+$table-bg-active:               $table-bg-hover;
+
+$table-border-color:            $gray-4;
+
+.table-custom {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+  font-size: 1.28em;
+  font-weight: 400;
+  letter-spacing: 0;
+  text-align: left;
+  background: $table-bg;
+  border: 1px solid $table-border-color;
+
+  th,
+  td {
+    color: $gray;
+    background: $table-bg;
+  }
+
+  th {
+    padding: 10px 24px;
+    font-weight: 400;
+    text-transform: none;
+
+    @include media-breakpoint-up(sm) {
+      padding-top: 20px;
+      padding-bottom: 20px;
+    }
+
+    @include media-breakpoint-up(md) {
+      padding: 20px 40px;
+    }
+
+    @include media-breakpoint-up(lg) {
+      padding: $table-head-padding;
+    }
+  }
+
+  td {
+    padding: 10px 24px;
+    border-bottom: 1px solid $table-border-color;
+
+    @include media-breakpoint-up(sm) {
+      padding-top: 20px;
+      padding-bottom: 20px;
+    }
+
+    @include media-breakpoint-up(md) {
+      padding: 20px 40px;
+    }
+
+    @include media-breakpoint-up(lg) {
+      padding: $table-cell-padding;
+    }
+  }
+
+  tfoot td {
+    color: $gray-dark;
+    font-weight: 400;
+  }
+}
+
+// Styles
+.table-custom-secondary {
+  th {
+    color: $white;
+    background: $primary;
+  }
+}
+
+.table-custom-primary {
+  th {
+    color: $white;
+    background: $primary;
+  }
+}
+
+.table-custom-gray-3 {
+  thead th {
+    background: $table-bg-accent;
+  }
+
+  td + td {
+    border-left: none;
+  }
+}
+
+.table-custom-bordered {
+  border: 1px solid $table-border-color;
+  td {
+    border: 1px solid $table-border-color;
+  }
+
+  tbody > tr:first-of-type > td {
+    border-top: 0;
+  }
+}
+
+.table-custom-striped {
+  tbody tr:nth-of-type(odd) td {
+    background: transparent;
+  }
+
+  tbody tr:nth-of-type(even) td {
+    background: $table-bg-accent;
+  }
+
+  tbody td {
+    border: 0;
+  }
+}
+
+// Modificators
+.table-round {
+  position: relative;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.table-custom-responsive {
+  overflow-x: auto;
+  min-height: 0.01%;
+
+  @include media-breakpoint-down(md) {
+    width: 100%;
+    margin-bottom: 10px;
+    overflow-y: hidden;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+    border: 1px solid $table-border-color;
+
+    // Tighten up spacing
+    > .table-custom {
+      // Ensure the content doesn't wrap
+      > thead,
+      > tbody,
+      > tfoot {
+        > tr {
+          > th,
+          > td {
+            white-space: nowrap;
+          }
+        }
+      }
+    }
+  }
+}
+
+//table cart
+.table-shopping-cart {
+
+  .link {
+    font-weight: 400;
+    font-family: inherit;
+    @include link(inherit, $primary);
+  }
+
+  th {
+    padding: 21px 14px
+  }
+
+  td {
+    min-width: 0;
+
+    span + span { margin-left: 14px; }
+
+    > * {
+      vertical-align: middle;
+    }
+  }
+
+  thead {
+
+    th {
+
+      &:nth-child(3) {
+        text-align: center;
+      }
+
+      &:first-child {
+        padding-left: 25px;
+
+        @include media-breakpoint-up(xl) {
+          padding-left: 97px;
+        }
+      }
+    }
+  }
+
+  tbody {
+
+    td {
+      padding: 4px 14px 4px;
+
+      &:first-child {
+        width: 67px;
+        padding-left: 19px;
+      }
+
+      &:nth-child(2) {
+        padding-left: 19px;
+        width: 10%;
+        min-width: 85px;
+      }
+
+      &:nth-child(3) {
+        width: 52%;
+        min-width: 250px;
+      }
+
+      &:nth-child(4) {
+        width: 7%;
+      }
+
+      &:nth-child(5) {
+        width: 10%;
+        text-align: center;
+      }
+
+      &:last-of-type {
+        min-width: 120px;
+      }
+    }
+
+    @include media-breakpoint-up(lg) {
+      td {
+        padding-top: 1px;
+        padding-bottom: 0;
+
+        &:last-of-type {
+          min-width: 183px;
+        }
+      }
+    }
+  }
+
+  tfoot {
+    td {
+
+      padding: 21px 14px;
+
+      &:first-child {
+        padding-left: 25px;
+        font-weight: 700;
+
+        @include media-breakpoint-up(xl) {
+          padding-left: 97px;
+        }
+      }
+
+      &:nth-child(3) {
+        span:first-of-type {
+
+          color: $gray-light;
+        }
+      }
+    }
+  }
+}
+
+// table checkout
+.table-checkout {
+  font-size: 14px;
+
+  .shiping {
+    font-weight: 400;
+    line-height: 20px;
+  }
+
+  .price-dark {
+    color: $gray-dark;
+  }
+
+  td {
+    width: 50%;
+  }
+
+  tr {
+
+    &:first-child {
+      font-size: 1.28em;
+      font-weight: 700;
+      color: $gray-dark;
+    }
+
+    &:last-child {
+      color: $gray-dark;
+
+      .price { font-weight: 700; }
+    }
+
+    &:nth-child(odd) {
+      > * {
+        background: rgba($gray-2, 1);
+      }
+    }
+  }
+
+  .link {
+    font-weight: 700;
+    font-family: $font-family-base;
+    @include link($gray-dark, $primary);
+  }
+
+  @include media-breakpoint-up(lg) {
+    td {
+      padding: 15px 25px;
+    }
+
+    tr {
+
+      &:first-child {
+
+        td {
+          padding-top: 12px;
+          padding-bottom: 12px;
+        }
+      }
+    }
+  }
+}
+
+.heading-checkout {
+  font-weight: 700;
+
+  a {
+    margin-left: 10px;
+
+    @include link($primary, $primary-dark);
+  }
+
+  * + & { margin-top: 22px; }
+  & + & { margin-top: 2px; }
+}

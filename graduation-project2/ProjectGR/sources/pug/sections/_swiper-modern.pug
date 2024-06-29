@@ -1,0 +1,40 @@
+section.swiper-custom-container.swiper-modern
+	// Swiper
+	.swiper-container.swiper-slider.swiper-bg.swiper-scale-effect(
+		data-swiper!={
+			autoplay: {
+				delay: 5000
+			},
+			effect: 'fade'
+		}
+	)
+		.swiper-wrapper
+			.swiper-slide(data-slide-bg='images/swiper2-slide1-1920x685.jpg')
+				.swiper-slide-cover(style="background: url(images/swiper2-slide1-1920x685.jpg) center; background-size: cover;")
+			.swiper-slide(data-slide-bg='images/swiper2-slide2-1920x685.jpg')
+				.swiper-slide-cover(style="background: url(images/swiper2-slide2-1920x685.jpg) center; background-size: cover;")
+			.swiper-slide(data-slide-bg='images/swiper2-slide3-1920x685.jpg')
+				.swiper-slide-cover(style="background: url(images/swiper2-slide3-1920x685.jpg) center; background-size: cover;")
+
+	.swiper-bg-content
+		.swiper-slide-caption
+			.swiper-slide-content.text-center
+				.container
+					.row.justify-content-center
+						.col-lg-7.col-xl-8
+							h3 We create a pleasant & cheerful ambience
+							h2: a(href='tel:#') +1 (800) 123 1264
+							.group-xs
+								a(href="#").button.button-md.button-primary Get free quote
+									include ../elements/_arrow-down
+								a(href="services.html").button.button-md.button-primary-dark Our services
+									include ../elements/_arrow-down
+
+	// Swiper Pagination
+	.swiper-pagination
+
+	// Swiper Navigation
+	.swiper-button-prev.arrow-left
+		include ../elements/_arrow-left
+	.swiper-button-next.arrow-right
+		include ../elements/_arrow-left

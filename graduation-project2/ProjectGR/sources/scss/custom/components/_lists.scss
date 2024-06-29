@@ -1,0 +1,359 @@
+/*
+*
+* Lists
+* --------------------------------------------------
+*/
+
+
+ul,
+ol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+
+.list {
+
+  font-family: $font-family-sec;
+  text-align: left;
+
+  > li + li {
+    margin-top: 11px;
+  }
+}
+
+.list-family-base {
+  font-family: $font-family-base;
+}
+
+.list-sec {
+  text-align: left;
+
+  li > span { font-weight: 700; }
+
+  li { line-height: 1.7; }
+}
+
+.list-bold {
+  font-weight: 700;
+
+  > li + li {
+    margin-top: 10px;
+  }
+}
+
+.list-uppercase {
+  text-transform: uppercase;
+}
+
+.list-social {
+  li + li { margin-top: 10px; }
+
+  .icon { min-width: 24px; }
+}
+
+
+// List inline
+//
+
+.list-inline {
+  margin-left: -6px;
+  margin-right: -6px;
+
+  > li {
+    display: inline-block;
+    padding-left: 6px;
+    padding-right: 6px;
+  }
+}
+
+.list-inline-2 {
+  margin-left: -8px;
+  margin-right: -8px;
+
+  > li {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+}
+
+.list-primary {
+  color: $primary;
+
+  .list-index-counter {
+    color: $gray;
+  }
+}
+
+.list-gray-dark {
+  color: $gray-dark;
+
+  .list-index-counter {
+    color: $gray;
+  }
+}
+
+// Description Lists
+//
+
+dl {
+  margin: 0;
+}
+
+
+// List terms
+//
+
+.list-terms {
+  margin-top: 35px;
+  dt + dd { margin-top: 5px; }
+  dd + dt { margin-top: 25px; }
+}
+
+
+// List index
+//
+
+.list-index {
+  counter-reset: li;
+
+  li {
+    padding-left: 30px;
+
+    .list-index-counter {
+      display: inline-block;
+      margin-left: -30px;
+      min-width: 26px;
+      margin-right: 4px;
+
+      &:before {
+        content: counter(li, decimal-leading-zero)"/ ";
+        counter-increment: li;
+      }
+    }
+  }
+}
+
+.list-letters {
+  counter-reset: li;
+
+  li {
+    .list-index-counter {
+      @include header-h2;
+      color: $gray-3;
+      font-weight: 700;
+      margin-right: 10px;
+
+      &:before {
+        content: counter(li, upper-alpha)"/ ";
+        counter-increment: li;
+      }
+    }
+
+    > span {
+      vertical-align: top;
+    }
+
+    span { display: inline-block; }
+  }
+
+  > li + li { margin-top: 30px; }
+}
+
+.list-letters-content {
+
+  width: 80%;
+
+  .p {
+    font-family: $font-family-base;
+  }
+}
+
+// List marked
+//
+
+.list-marked {
+
+  li {
+    padding-left: 7px;
+
+    &:before {
+      margin-left: -10px;
+      content: '-';
+      margin-right: 5px;
+      line-height: 100%;
+      display: inline-block;
+    }
+  }
+}
+
+.list-xs-center {
+  display: inline-block;
+
+
+  @include media-breakpoint-up(md) {
+    display: block;
+  }
+}
+
+// List question and answer
+//
+
+.question,
+p.answer {
+  position: relative;
+  text-align: left;
+  padding-left: 30px;
+
+  &:before {
+    position: absolute;
+    left: 0;
+    color: $gray;
+    font-weight: 700;
+    font-family: $font-family-sec;
+  }
+}
+
+p.answer {
+  &:before {
+    top: -4px;
+    font-size: 1.28em;
+    content: 'A.';
+  }
+}
+
+.question {
+
+  &:before {
+    top: -1px;
+    content: 'Q.';
+  }
+}
+
+.question + .answer { margin-top: 7px; }
+.answer + .question { margin-top: 30px; }
+.question + .question { margin-top: 15px; }
+
+.list-custom {
+  font-family: $font-family-sec;
+
+  > li > {
+    p,
+    a {
+      width: 100%;
+      font-weight: 700;
+      color: $gray-dark;
+    }
+
+    a:hover {
+      color: $primary;
+    }
+  }
+
+  & + & {
+    margin-top: 37px; }
+
+  p + ul { margin-top: 20px; }
+  a + ul { margin-top: 20px; }
+  li + li { margin-top: 7px; }
+}
+
+
+.list-tel {
+
+  > .tel {
+
+    &:after {
+      position: relative;
+      content: ',';
+      top: 2px;
+      font-size: inherit;
+      line-height: inherit;
+    }
+
+    &:last-child {
+      &:after {
+        display: none;
+      }
+    }
+  }
+}
+
+.list-big {
+  font-size: 16px;
+
+
+  &.list-index {
+    li {
+      padding-left: 38px;
+
+      .list-index-counter {
+        min-width: 34px;
+        margin-left: -38px;
+      }
+
+      > * {
+        vertical-align: top;
+      }
+    }
+  }
+
+  li + li { margin-top: 10px; }
+
+  @include media-breakpoint-up(md) {
+    font-size: 18px;
+  }
+}
+
+.list-big-2 {
+  font-size: 16px;
+
+  .list-index-counter {
+    font-size: 14px;
+  }
+
+  li + li { margin-top: 10px; }
+
+  @include media-breakpoint-up(md) {
+    font-size: 18px;
+  }
+}
+
+.list-index-big {
+
+  li {
+    padding-left: 50px;
+
+    .list-index-counter {
+      position: relative;
+      top: 6px;
+      font-size: 24px;
+      line-height: 20px;
+      font-weight: 400;
+      min-width: 46px;
+      margin-left: -50px;
+    }
+  }
+
+  li + li { margin-top: 26px; }
+}
+
+.list-contacts {
+  display: inline-block;
+  font-family: $font-family-sec;
+
+  li + li { margin-top: 7px; }
+  li { max-width: 220px }
+
+  .tel {
+    font-size: 1.28em;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+  
+  @include media-breakpoint-up(sm) {
+    display: block;
+    text-align: left;
+  }
+}

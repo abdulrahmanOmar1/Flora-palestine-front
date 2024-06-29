@@ -1,0 +1,67 @@
+//- box team
+
+mixin box-team(obj)
+
+  .box-team(class= obj.boxClass)
+    .box-team-header
+      p=obj.teamPosition
+      h6: a(href="#")= obj.teamName
+
+    .box-team-img
+      a(href="#"): +img(obj.teamImg)
+
+    .box-team-content
+      p= obj.postContent
+      +widget-list([
+        {
+          "icon": "fa fa-facebook",
+          "href": "#"
+        },
+        {
+          "icon": "fa fa-google-plus",
+          "href": "#"
+        },
+        {
+          "icon": "fa fa-linkedin",
+          "href": "#"
+
+        },
+        {
+          "icon": "fa fa-twitter",
+          "href": "#"
+        }
+      ], 'fa-xs', '')
+
+mixin box-team-horizontal(obj)
+
+  .box-team.unit(class=obj.boxClass)
+    .unit-left
+      .box-team-img.box-shadow-var-2
+        a(href="#"): +img(obj.teamImg)
+
+    .unit-body
+      .box-team-header
+        p=obj.teamPosition
+        h6: a(href="#")= obj.teamName
+
+      .box-team-content
+        p= obj.postContent
+        +widget-list([
+          {
+            "icon": "fa fa-facebook",
+            "href": "#"
+          },
+          {
+            "icon": "fa fa-google-plus",
+            "href": "#"
+          },
+          {
+            "icon": "fa fa-linkedin",
+            "href": "#"
+
+          },
+          {
+            "icon": "fa fa-twitter",
+            "href": "#"
+          }
+        ], 'text-primary fa-xs', '')

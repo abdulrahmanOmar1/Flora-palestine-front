@@ -1,0 +1,30 @@
+extends  ../_skeleton
+
+block variables
+	- var pageName = 'Search results'
+
+block page
+	// Page Header
+	include ../sections/_header-default
+	+breadcrumbs-section({ img: 'breadcrumbs-team-1920x974' })
+
+
+	section.section-lg.bg-default
+		.container
+			h2=pageName
+
+			.row.row-50.justify-content-start
+				.col-xl-8.col-lg-10
+					.group-between
+						form.rd-search.form-search.rd-mailform-inline(action="search-results.html" method="GET")
+							.form-wrap
+								input.form-input.rd-navbar-search-form-input(type="text" name="s" autocomplete='off')
+							.form-button.text-center.text-sm-end
+								button.button.button-primary.rd-search-form-submit(type='submit') Search
+									include ../elements/_arrow-down
+
+				.col-xl-8.col-lg-9.col-md-10.col-sm-12
+					.rd-search-results
+
+	// Page Footer
+	include ../sections/_footer-default

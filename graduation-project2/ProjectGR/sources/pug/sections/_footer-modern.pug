@@ -1,0 +1,83 @@
+footer.page-footer.footer-modern.bg-gray-dark
+  .footer-modern-inset
+    .container
+      .row.row-50.justify-content-center
+        .col-lg-4.wow.fadeInUp(data-wow-delay=".1s")
+          h3 About us
+          p We are here to offer you professional services with your lawn and your overgrown garden. No matter your gardening requirements, rest assured you can call us anytime of the year. Available all week round, we can come to you whenever you need us providing quality gardening services that will have you ready for the oncoming season.
+
+        .col-lg-4.col-md-6.wow.fadeInUp(data-wow-delay=".2s")
+          h3 Contact us
+
+          address.contact-info
+            ul.list-address
+              li
+                a.text-middle.address(href='contacts.html') 227 Marion Street, Columbia, SC 29201
+                p Email:
+                  =' '
+                  a(href='mailto:#').mail mail@demolink.org
+
+              li.list-tel
+                .tel.big
+                  a.text-middle(href='tel:#')
+                    | 1
+                    =' '
+                    span (800)
+                    =' '
+                    | 123 1234
+
+                .tel.big
+                  a.text-middle(href='tel:#')
+                    | 1
+                    =' '
+                    span (800)
+                    =' '
+                    | 123 1235
+
+              li
+                .p Mon - Sat 8.00 - 18.00
+                .p Sunday CLOSED
+
+        .col-lg-4.col-md-6.wow.fadeInUp(data-wow-delay=".3s")
+          h3 Newsletter
+          p Keep up with our latest  news and events.
+          p Subscribe to our newsletter.
+
+          form.rd-mailform.text-start(data-form-output="form-output-global", data-form-type='forms', method='post', action='bat/rd-mailform.php')
+            .form-wrap
+              label.form-label(for="inline-email-1") Enter your email here
+              input#inline-email-1.form-input(type="email" name="email" data-constraints="@Email @Required")
+            .form-button.text-end
+              button(type="submit").button.button-primary-sec.button-no-outline Subscribe
+                include ../elements/_arrow-right
+
+  .footer-panel
+    .container
+      .row.row-10
+        .col-sm-8
+          p=config.brandName
+            =' '
+            | &#169; #[span(class="copyright-year")].
+            =' '
+            a(href="privacy-policy.html") Privacy Policy
+
+        .col-sm-4.text-sm-end
+          +widget-list([
+            {
+              "icon": "fa fa-facebook",
+              "href": "#"
+            },
+            {
+              "icon": "fa fa-google-plus",
+              "href": "#"
+            },
+            {
+              "icon": "fa fa-linkedin",
+              "href": "#"
+
+            },
+            {
+              "icon": "fa fa-twitter",
+              "href": "#"
+            }
+          ], 'text-primary', '')

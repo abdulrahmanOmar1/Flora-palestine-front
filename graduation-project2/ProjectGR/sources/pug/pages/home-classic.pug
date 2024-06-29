@@ -1,0 +1,188 @@
+extends  ../_skeleton
+
+//- Includes
+include ../elements/_icon-list
+include ../elements/_post
+
+block variables
+	- var pageName = 'Home classic'
+
+block title
+	title= pageName
+
+block page
+	// Page Header
+	include ../sections/_header-default
+	include ../sections/_swiper-classic
+
+	section.section-lg.bg-gray-3.section-relative.index-2
+		.container
+			.row.row-50.justify-content-center
+
+				.col-lg-7
+					h3.text-width-small INDUSTRY-LEADING Expertise & Consistent Customer Satisfaction
+					p.offset-top-28 Beautiful lawn is an industry-leading landscaping, lawn care, and snow removal company. We have established a proven system that allows us to provide exceptional grounds care services and customized lawn solutions to both commercial and residential clients. Our business model is built on a culture of care and we are dedicated to complete customer satisfaction. We are focused on delivering quality results that exceed your expectations!
+					.row.row-30.justify-content-center.justify-content-xl-start
+						.col-xl-5.col-md-6.col-sm-10.wow.fadeInUp(data-wow-delay=".1s")
+							+icon({
+								unitClass: 'unit-spacing-icon flex-column flex-md-row',
+								titleClass: 'heading-6 text-primary',
+								classIcon: 'icon-primary icon-sm fl-great-icon-set-alarm49',
+								title: 'Anywhere, Anytime',
+								content: 'Beautiful Lawn Mowing comes to you at your premises be it a home or business.'
+							})
+
+						.col-md-6.col-sm-10.wow.fadeInUp(data-wow-delay=".2s")
+							+icon({
+								unitClass: 'unit-spacing-icon flex-column flex-md-row',
+								titleClass: 'heading-6 text-primary',
+								classIcon: 'icon-primary icon-sm fl-great-icon-set-credit95',
+								title: 'Value For Money',
+								content: 'Our goal is to always provide a value for money service which appeals to people from all walks of life.'
+							})
+
+						.col-xl-5.col-md-6.col-sm-10.wow.fadeInUp(data-wow-delay=".3s")
+							+icon({
+								unitClass: 'unit-spacing-icon flex-column flex-md-row',
+								titleClass: 'heading-6 text-primary',
+								classIcon: 'icon-primary icon-sm fl-great-icon-set-favorites5',
+								title: 'Excellent Service',
+								content: 'We provide our clients with service of exceptional quality to satisfy their lawn care needs.'
+							})
+
+						.col-md-6.col-sm-10.wow.fadeInUp(data-wow-delay=".4s")
+							+icon({
+								unitClass: 'unit-spacing-icon flex-column flex-md-row',
+								titleClass: 'heading-6 text-primary',
+								classIcon: 'icon-primary icon-sm fl-great-icon-set-like77',
+								title: '100% Satisfaction Guaranteed!',
+								content: 'If for any reason you are disappointed with our service, we will quickly re - perform the service to your liking.'
+							})
+
+				.col-lg-5.wow.fadeInUp(data-wow-delay=".1s")
+					.offset-negative-lg-top-154
+						include ../elements/_form-request
+
+	section.section-md.bg-default.section-relative.index-3
+		.container
+			.row.row-50.justify-content-center
+				.col-xl-7.col-lg-6.col-md-10
+					.offset-negative-lg-top-140
+						.box-project.box-project__classic.context-dark
+							.box-project-overlay
+								+img('home-2-670x549')
+
+							.box-project-body
+								h4 Latest project
+								a(href="#").button.button-custom.button-md.button-primary.arrow-bottom
+									| Kinderhook Retreat project
+									span.text-small New York, NY
+									include ../elements/_arrow-down
+
+
+				.col-xl-5.col-lg-6.col-md-10
+					ul.list.list-letters.inset-left-lg-45
+						li.wow.fadeInRight(data-wow-delay=".1s")
+							span.list-index-counter
+							span.list-letters-content
+								span.heading-5 Lawn Care
+								span.p.big We provide specialist care such as mulch mowing, fertilizing, and weed control.
+						li.wow.fadeInRight(data-wow-delay=".2s")
+							span.list-index-counter
+							span.list-letters-content
+								span.heading-5 Garden Maintenance
+								span.p.big When you are in need of expert garden maintenance, we  will handle all outdoor chores.
+						li.wow.fadeInRight(data-wow-delay=".3s")
+							span.list-index-counter
+							span.list-letters-content
+								span.heading-5 Pest, Weed & Fertilization
+								span.p.big Beautiful lawns require proper pest prevention, weed control, and fertilization that we provide!
+
+	section.section-md.bg-default
+		include ../sections/_counter-classic
+	='\n'
+
+	section.section-md.parallax-container.text-center(data-parallax-img='images/parallax-3-1920x1100.jpg')
+		.parallax-content
+			.container.container-inset-owl
+				h3 From the blog
+				.owl-carousel.owl-classic.owl-nav-default(
+					data-items='1',
+					data-md-items="2",
+					data-xl-items="3"
+					data-stage-padding='0',
+					data-loop='true',
+					data-margin='30',
+					data-autoplay='true',
+					data-owl= {
+						dots: true,
+						nav: true
+					}
+				)
+					+post({
+						postClass: 'post-classic',
+						numberDate: '2018-03-31',
+						postDate: 'March 31, 2018',
+						postTitle: 'Do You Love to Make People Smile?',
+						postImg: 'post-classic-1-370x159',
+						postContent: 'If you call the Beautiful Lawn office you will be greeted with a cheerful voice and a person who asks how they can make you smile today.That is our number one goal, and right now we are looking...',
+						arrowCreative: 'icon-rotate-90'
+					})
+
+					+post({
+						postClass: 'post-classic',
+						numberDate: '2018-03-20',
+						postDate: 'March 20, 2018',
+						postTitle: 'How to Mow Your Lawn',
+						postImg: 'post-classic-2-370x159',
+						postContent: 'Mowing the lawn is the one of the most fundamental steps for taking care of the lawn.If you are mowing the lawn yourself, and if you have the standard size of lawn, using a small push behind...',
+						arrowCreative: 'icon-rotate-90'
+					})
+
+					+post({
+						postClass: 'post-classic',
+						numberDate: '2018-03-15',
+						postDate: 'March 15, 2018',
+						postTitle: 'Fertilizing',
+						postImg: 'post-classic-3-370x159',
+						postContent: 'Once the season has started, one of the first steps that should be done towards getting a healthy lawn is to fertilize.The nutrients will act as an alarm clock for the roots, waking the lawn out...',
+						arrowCreative: 'icon-rotate-90'
+					})
+
+					+post({
+						postClass: 'post-classic',
+						numberDate: '2018-03-31',
+						postDate: 'March 31, 2018',
+						postTitle: 'Do You Love to Make People Smile?',
+						postImg: 'post-classic-1-370x159',
+						postContent: 'If you call the Beautiful Lawn office you will be greeted with a cheerful voice and a person who asks how they can make you smile today.That is our number one goal, and right now we are looking...',
+						arrowCreative: 'icon-rotate-90'
+					})
+
+					+post({
+						postClass: 'post-classic',
+						numberDate: '2018-03-20',
+						postDate: 'March 20, 2018',
+						postTitle: 'How to Mow Your Lawn',
+						postImg: 'post-classic-2-370x159',
+						postContent: 'Mowing the lawn is the one of the most fundamental steps for taking care of the lawn.If you are mowing the lawn yourself, and if you have the standard size of lawn, using a small push behind...',
+						arrowCreative: 'icon-rotate-90'
+					})
+
+					+post({
+						postClass: 'post-classic',
+						numberDate: '2018-03-15',
+						postDate: 'March 15, 2018',
+						postTitle: 'Fertilizing',
+						postImg: 'post-classic-3-370x159',
+						postContent: 'Once the season has started, one of the first steps that should be done towards getting a healthy lawn is to fertilize.The nutrients will act as an alarm clock for the roots, waking the lawn out...',
+						arrowCreative: 'icon-rotate-90'
+					})
+
+				a(href="blog.html").button.button-primary-dark Visit our blog
+					include ../elements/_arrow-down
+
+	include ../sections/_partners-carousel
+
+	// Page Footer
+	include ../sections/_footer-default

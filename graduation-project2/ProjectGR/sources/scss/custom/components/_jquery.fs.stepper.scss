@@ -1,0 +1,150 @@
+//
+// Formstone Stepper Plugin
+// --------------------------------------------------
+
+.stepper{
+  position: relative;
+  display: inline-block;
+
+  input[type="number"]{
+    width: 100%;
+    text-align: center;
+    -moz-appearance: textfield;
+    color: $gray-dark;
+  }
+
+  input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+  }
+
+  &-arrow{
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    font-size: 24px;
+    line-height: 1;
+    cursor: pointer;
+    transition: .3s all ease;
+    font-weight: 400;
+
+    &:hover{
+      color: $primary
+    }
+  }
+
+  &.disabled{
+    .stepper-arrow{
+      pointer-events: none;
+      opacity: .5;
+    }
+  }
+}
+
+.stepper-var-1 {
+
+  .stepper{
+    max-width: 93px;
+    color: $gray-darker;
+
+    input[type="number"]{
+      padding: 5px 27px;
+      height: 36px;
+      min-height: 36px;
+      font-size: 18px;
+      line-height: 24px;
+      font-weight: 700;
+      font-family: $font-family-sec;
+      background: $gray-2;
+      border: none;
+    }
+
+    &-arrow{
+      top: 50%;
+      font-size: 24px;
+      line-height: 36px;
+
+      &:hover{
+        color: $primary
+      }
+
+      &:before {
+        content: '\e5cf';
+        font-family: 'Material Icons';
+      }
+
+      &.up{
+        right: 7px;
+
+        text-align: center;
+        transform: rotate(-90deg) translateX(50%);
+      }
+
+      &.down{
+        left: 7px;
+        text-align: center;
+        transform: rotate(90deg) translateX(-50%);
+      }
+    }
+  }
+
+  > * { vertical-align: middle; }
+}
+
+.mac-os {
+  .stepper-var-1 {
+
+    .stepper {
+
+      input[type="number"] {
+        padding-top: 4px;
+        padding-bottom: 6px;
+      }
+    }
+  }
+}
+
+.stepper-var-2 {
+  .stepper{
+    height: 65px;
+    color: #d9d9d9;
+    width: 100%;
+
+    input[type="number"]{
+      padding: 0px 5px;
+      height: 65px;
+      font-size: 17px;
+      min-height: 65px;
+      line-height: 30px;
+      background: $white;
+    }
+
+    &-arrow{
+      left: 50%;
+      transform: translateX(-50%);
+
+      &:hover{
+        color: $primary
+      }
+
+      &.up{
+        top: 0;
+        font-size: 22px;
+        text-align: center;
+
+        &:before{
+          content: '+';
+        }
+      }
+
+      &.down{
+        bottom: 0;
+        font-size: 22px;
+        text-align: center;
+
+        &:before{
+          content: '-';
+        }
+      }
+    }
+  }
+}

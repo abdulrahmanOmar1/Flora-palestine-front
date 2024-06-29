@@ -1,0 +1,37 @@
+/*
+*
+* Counter
+* --------------------------------------------------
+*/
+
+.counter-index {
+  counter-reset: div;
+
+  .counter-index-item {
+
+    div.counter-wrap {
+      &:before {
+        content: counter(div, decimal-leading-zero)". ";
+        counter-increment: div;
+      }
+    }
+  }
+}
+
+.counter-index-sec {
+  counter-reset: div;
+
+  .counter-index-item {
+
+    span.counter-wrap {
+      &:before {
+        content: counter(div, decimal-leading-zero)"/ ";
+        counter-increment: div;
+      }
+    }
+  }
+}
+
+.counter-wrap {
+  font-family: $font-family-sec;
+}

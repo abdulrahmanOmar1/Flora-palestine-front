@@ -1,0 +1,284 @@
+/*
+* Fixed Layout
+*/
+.rd-navbar-fixed {
+  display: block;
+
+  // Reveal nav panel toggle
+  .rd-navbar-toggle {
+    display: inline-block;
+  }
+
+
+  // RD Navbar Brand
+  .rd-navbar-brand {
+    position: relative;
+    margin-left: 6px;
+
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    text-align: left;
+
+    font-size: 22px;
+    line-height: 1;
+
+    img{
+      max-width: 200px;
+      height: auto;
+    }
+  }
+
+
+  // RD Navbar Panel
+  .rd-navbar-panel {
+    display: flex;
+    align-items: center;
+
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+
+    padding: 10px 3px;
+    height: $rd-navbar-fixed-height;
+    color: $rd-navbar-fixed-panel-color;
+    z-index: 999;
+
+    &:before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      box-shadow: $rd-navbar-fixed-shadow;
+      background: $rd-navbar-fixed-panel-background;
+    }
+
+    > * {
+      z-index: 1;
+    }
+  }
+
+  // Nav wrap and Search into nav wrap styles
+  .rd-navbar-nav-wrap {
+    @extend %rd-navbar-transition;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    top: 0;
+    color: $rd-navbar-fixed-nav-color;
+    background: $rd-navbar-fixed-nav-background;
+    transform: translateX(-120%);
+    text-align: left;
+
+    &.active {
+      transform: translateX(0);
+    }
+  }
+
+  .rd-navbar-nav-wrap-left {
+    .rd-navbar-nav {
+      &:after {
+        display: none;
+      }
+    }
+  }
+
+  .rd-navbar-nav-wrap-right {
+
+    margin-top: 4px;
+
+    .rd-navbar-nav {
+      &:before {
+        display: none;
+      }
+    }
+  }
+  
+  // RD Navbar nav
+  .rd-navbar-nav {
+    display: block;
+    font-size: 16px;
+    line-height: 26px;
+    text-align: left;
+
+    &:before, &:after {
+      content: '';
+      display: block;
+      height: 8px;
+    }
+
+    li {
+      > a {
+        display: block;
+        padding: 11px 56px 11px 16px;
+        color: $rd-navbar-fixed-nav-color;
+
+        &:first-letter {
+          text-transform: uppercase;
+        }
+      }
+
+      &:hover,
+      &.active,
+      &.opened{
+        > a{
+          background: $rd-navbar-fixed-nav-active-background;
+          color: $rd-navbar-fixed-nav-active-color;
+        }
+        > .rd-navbar-submenu-toggle {
+          color: $rd-navbar-fixed-nav-active-color;
+        }
+      }
+
+      &.opened {
+        > .rd-navbar-submenu-toggle {
+          &:after {
+            transform : rotate(180deg);
+          }
+        }
+      }
+
+      & + li{
+        margin-top: 4px;
+      }
+    }
+
+    .rd-navbar-submenu-toggle {
+      cursor: pointer;
+      color: $rd-navbar-fixed-nav-color;
+
+      &::after {
+        content: '\f236';
+        position: absolute;
+        top: 22px;
+        right: 0;
+        margin-top: -22px;
+        width: 65px;
+        height: 48px;
+        font: 400 28px "Material Design Icons";
+        line-height: 48px;
+        text-align: center;
+        transition: 0.3s transform ease;
+        z-index: 2;
+      }
+    }
+  }
+
+
+  // RD navbar submenu styles
+  .rd-navbar-megamenu {
+    display: none;
+    margin-top: 20px;
+
+    p {
+      padding-left: 30px;
+    }
+
+    > li + li {
+      margin-top: 10px;
+    }
+
+    .rd-megamenu-list { margin-top: 10px; }
+  }
+
+  .rd-navbar-dropdown {
+    display: none;
+    margin-top: 4px;
+  }
+
+  .rd-navbar-submenu {
+    position: relative;
+    @extend %rd-navbar-transition;
+
+    .rd-navbar-dropdown > li > a {
+      padding-left: 30px;
+    }
+
+    .rd-navbar-megamenu {
+
+      ul > li > a {
+        padding-left: 50px;
+      }
+    }
+
+    .rd-navbar-dropdown li li > a,
+    .rd-navbar-megamenu ul li li > a {
+      padding-left: 48px;
+    }
+
+    &.opened {
+      > .rd-navbar-dropdown,
+      > .rd-navbar-megamenu {
+        display: block;
+      }
+    }
+  }
+
+  // RD Navbar States
+  &.active {
+    .rd-navbar-nav {
+      transform: translateX(0);
+    }
+  }
+
+  &.rd-navbar--is-clone {
+    display: none;
+  }
+
+  .rd-navbar-collapse {
+    right: 4px;
+
+    &-toggle {
+      right: 4px;
+    }
+  }
+
+  .rd-navbar-fixed--visible {
+    display: block;
+  }
+
+  .rd-navbar-fixed--hidden {
+    display: none;
+  }
+
+  .desktop-element { display: none; }
+
+  .right-side { margin-top: 12px;}
+
+  .icon-md {
+    font-size: 24px;
+  }
+
+  .icon-primary-dark {
+    color: $primary;
+  }
+
+  .list-address {
+
+    > li + li {
+      margin-top: 10px;
+    }
+  }
+
+  .contact-info {
+    ul + ul {
+      margin-top: 20px;
+      margin-left: 26px;
+    }
+  }
+
+  .sidebar-list-social,
+  .sidebar-form {
+    margin-top: 30px;
+    padding: 0 16px;
+  }
+}
+
+html.rd-navbar-fixed-linked {
+  .page {
+    padding-top: 69px;
+  }
+}

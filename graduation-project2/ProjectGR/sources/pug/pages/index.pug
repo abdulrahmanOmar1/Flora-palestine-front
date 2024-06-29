@@ -1,0 +1,184 @@
+extends  ../_skeleton
+
+//- Includes
+include ../elements/_icon-list
+
+block variables
+
+block title
+	title Home
+
+block page
+	// Page Header
+	include ../sections/_header-default
+
+	include ../sections/_swiper-classic
+
+	section.section-md.bg-gray-3.section-relative.index-2
+		.container
+			.row.row-50.justify-content-center
+				.col-lg-5.col-md-8
+					h2 Homepage layouts
+					p.big: span.d-inline-block.text-width-370 Choose from our wide range of predefined Homepage layouts and demos to create your Own Amazing Experience.
+					ul.list.list-index.list-big.list-primary.d-inline-block.d-md-block
+						li.wow.fadeInLeft(data-wow-delay=".1s")
+							span.list-index-counter
+							a(href="home-classic.html") Classic
+						li.wow.fadeInLeft(data-wow-delay=".15s")
+							span.list-index-counter
+							a(href="home-modern.html") Modern
+						li.wow.fadeInLeft(data-wow-delay=".2s")
+							span.list-index-counter
+							a(href="home-creative.html") Creative
+						li.wow.fadeInLeft(data-wow-delay=".25s")
+							span.list-index-counter
+							a(href="coming-soon.html") Coming soon
+
+					.button-wrap
+						a(href="#").button.button-primary Get a template
+							include ../elements/_arrow-down
+
+				.col-lg-7.section-relative.wrap-img-pages.wrap-img-pages-2
+					a(href="./", data-wow-delay=".05s").img-position-7.wow.fadeInUp
+						+img('layout-2-470x482').box-shadow-var-3
+					a(href="home-classic.html", data-wow-delay=".15s").img-position-6.wow.fadeInUp
+						+img('layout-3-470x482').box-shadow-var-3
+					a(href="home-modern.html", data-wow-delay=".25s").img-position-5.wow.fadeInUp
+						+img('layout-2-470x482').box-shadow-var-3
+					a(href="home-creative.html", data-wow-delay=".35s").img-position-4.wow.fadeInUp
+						+img('layout-1-470x482').box-shadow-var-3
+
+	section.section-md.bg-accent
+		.container
+			h2.decor-brand What you get with
+			h2.text-primary-dark Beautiful lawn
+
+			.row.row-30
+				.col-lg-4.col-md-12.wow.fadeInUp(data-wow-delay=".15s")
+					+icon({
+						unitClass: 'unit-spacing-lg flex-column flex-xs-row flex-lg-column flex-xl-row text-xs-start text-lg-center text-xl-start',
+						titleClass: 'heading-3',
+						classText: 'big',
+						classIcon: 'icon-white icon-lg fl-great-icon-set-equalizer32',
+						title: 'Advanced UI Kit',
+						content: 'Make the pages of your website look more attractive with our new Advanced UI Kit.'
+					})
+
+				.col-lg-4.col-md-12.wow.fadeInUp(data-wow-delay=".25s")
+					+icon({
+						unitClass: 'unit-spacing-lg flex-column flex-xs-row flex-lg-column flex-xl-row text-xs-start text-lg-center text-xl-start',
+						titleClass: 'heading-3',
+						classText: 'big',
+						classIcon: 'icon-white icon-lg fl-great-icon-set-monitor85',
+						title: 'Bootstrap toolkit',
+						content: 'Intuitive and powerful Bootstrap toolkit offers nearly endless website customization possibilities.'
+					})
+
+				.col-lg-4.col-md-12.wow.fadeInUp(data-wow-delay=".35s")
+					+icon({
+						unitClass: 'unit-spacing-lg flex-column flex-xs-row flex-lg-column flex-xl-row text-xs-start text-lg-center text-xl-start',
+						titleClass: 'heading-3',
+						classText: 'big',
+						classIcon: 'icon-white icon-lg fl-great-icon-set-actualization',
+						title: 'Free Updates',
+						content: 'We are constantly updating our template with new features requested by users.'
+					})
+
+	section.section-xs.section-lg-30.bg-default
+		.container
+			.row.row-50.justify-content-center.justify-content-lg-end.flex-lg-row-reverse
+				.col-xl-4.col-lg-5.col-sm-10
+					.section-lg-70
+						h2.wow.fadeInRight(data-wow-delay=".2s") Extremely responsive & Retina ready
+						p.big.text-width-sm-340.wow.fadeInRight(data-wow-delay=".3s") Beautiful Lawn is fully responsive and Retina ready that allows this template to be opened on any device in any resolution.
+						a.button.button-primary.wow.fadeInRight(href="#" data-wow-delay=".4s") Get a template
+							include ../elements/_arrow-down
+
+				.col-lg-7.col-sm-10.wow.fadeInLeft(data-wow-delay=".1s")
+					.wrap-img.offset-img-01
+						+img('home-1-612x520.png')
+
+	section.section-md.parallax-container(data-parallax-img='images/parallax-1-1920x800.jpg')
+		.parallax-content
+			.container
+				.row.row-30.row-md-50.justify-content-center
+					.col-lg-3.col-md-5.col-xs-6
+						.box-counter.box-counter-modern
+							.counter.counter-plus(data-speed='1000') 30
+							p.box-counter-title HTML pages
+
+					.col-lg-3.col-md-5.col-xs-6
+						.box-counter.box-counter-modern
+							div.offset-negative Free
+							p.box-counter-title Google fonts
+
+					.col-lg-3.col-md-5.col-xs-6
+						.box-counter.box-counter-modern
+							.counter(data-speed='1000') 25
+							p.box-counter-title Images included
+					.col-lg-3.col-md-5.col-xs-6
+						.box-counter.box-counter-modern
+							.counter.counter-plus(data-speed='1000') 30
+							p.box-counter-title PSD files
+
+	section.section-md.bg-default
+		.container
+			.row.row-50.justify-content-center
+				.col-xl-5.col-lg-6.col-md-8
+					h2 eCommerce ready
+					p.big.text-width-smaller We have included all you may need to build an Amazing eCommerce Website from scratch. Create your successful business now!
+					ul.list.list-index.list-big.list-primary.d-inline-block.d-md-block
+						li.wow.fadeInLeft(data-wow-delay=".1s")
+							span.list-index-counter
+							a(href="shop.html") Shop
+						li.wow.fadeInLeft(data-wow-delay=".15s")
+							span.list-index-counter
+							a(href="category.html") Categories
+						li.wow.fadeInLeft(data-wow-delay=".2s")
+							span.list-index-counter
+							a(href="product-page.html") Product page
+						li.wow.fadeInLeft(data-wow-delay=".25s")
+							span.list-index-counter
+							a(href="shopping-cart.html") Cart
+						li.wow.fadeInLeft(data-wow-delay=".3s")
+							span.list-index-counter
+							a(href="checkout.html") Checkout
+						li.wow.fadeInLeft(data-wow-delay=".35s")
+							span.list-index-counter
+							a(href="#") Payment
+
+					.button-wrap
+						a(href="#").button.button-primary Get a template
+							include ../elements/_arrow-down
+
+				.col-xl-7.col-lg-6.col-md-8.section-relative.wrap-img-pages.wrap-img-pages-1
+					a(href="checkout.html" data-wow-delay=".1s").img-position-3.wow.fadeInDown: +img('page-shop-3-470x327').box-shadow-var-1
+					a(href="category.html" data-wow-delay=".2s").img-position-2.wow.fadeInUp: +img('page-shop-2-470x327').box-shadow-var-1
+					a(href="product-page.html" data-wow-delay=".3s").img-position-1.wow.fadeInRight: +img('page-shop-1-470x327').box-shadow-var-1
+
+
+	section.section-xl.parallax-container.text-center(data-parallax-img='images/parallax-2-1920x1056.jpg')
+		.parallax-content
+			.container
+				.row.row-50.justify-content-center
+					.col-sm-12
+						h2 Special offer
+						h6.text-width-smaller.block-centered Save more than $35 on awesome premium images included in demo.
+						a(href="#").button.button-lg.button-primary.button-custom-1 31+ PSDs and Demo Images Included
+							include ../elements/_arrow-down
+
+	section.section-md.bg-home-03.bg-default
+		.container
+			.row.row-30
+				.col-xl-5.col-lg-6.col-md-7
+					h2.wow.fadeInLeft(data-wow-delay='.1s') Dedicated&nbsp;
+						br.visible-lg.visible-md
+						| 24/7 Support
+					p.big.wow.fadeInLeft(data-wow-delay='.2s') Our Support Service is always available 24 hours a day, 7 days a week to help you create your own business solution.
+					a(data-wow-delay='.3s' href="#").button.button-primary.wow.fadeInLeft Get a template
+						include ../elements/_arrow-down
+
+	include ../sections/_partners-carousel
+
+	// Page Footer
+	include ../sections/_footer-default

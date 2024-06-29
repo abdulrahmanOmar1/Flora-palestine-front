@@ -1,0 +1,21 @@
+//- post classic
+
+mixin post(obj)
+
+  .post(class= obj.postClass)
+    .post-header
+      time(datetime=obj.numberDate)=obj.postDate
+      h6: a(href="single-post.html")= obj.postTitle
+
+    .post-img
+      a(href="single-post.html"): +img(obj.postImg)
+
+    .post-content
+      if(obj.arrowModern)
+        p= obj.postContent
+          a(href="single-post.html" class= obj.arrowModern).post-link.icon-arrow.material-icons-keyboard_backspace
+
+      else if (obj.arrowCreative)
+        p= obj.postContent
+        a(href="single-post.html").post-link Read more
+          span.icon-arrow.material-icons-keyboard_backspace(class= obj.arrowCreative)

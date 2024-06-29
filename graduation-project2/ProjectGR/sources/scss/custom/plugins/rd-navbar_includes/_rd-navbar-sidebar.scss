@@ -1,0 +1,371 @@
+/*
+* Sidebar Layout
+*/
+
+.rd-navbar-sidebar {
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 1070;
+
+  &.rd-navbar--is-stuck {
+
+    @include media-breakpoint-down(xxl) {
+      position: fixed;
+      background: rgba($black, .8);
+
+      .rd-navbar-inner {
+        padding-top: 15px;
+        padding-bottom: 15px;
+      }
+
+      .rd-navbar-sidebar-toggle {
+        top: 10px;
+      }
+
+      .rd-navbar-sidebar-inner { padding-top: 70px; }
+    }
+  }
+
+  .rd-navbar-aside-outer {
+
+    @include media-breakpoint-up(lg) {
+      padding-left: 160px;
+      padding-right: 100px;
+    }
+
+    @include media-breakpoint-up( xxl ) {
+      padding-left: 100px;
+    }
+  }
+
+  .rd-navbar-sidebar-toggle{
+    position: fixed;
+    top: 33px;
+    left: 40px;
+    display: none;
+    z-index: 999; // More than .rd-navbar-sidebar-inner
+    @extend %rd-navbar-transition;
+
+    @include media-breakpoint-up(lg) {
+      display: block;
+    }
+
+    @include media-breakpoint-up( xxl ) {
+      display: none;
+    }
+  }
+
+  .rd-navbar-top-panel-inner {
+    min-width: 590px;
+
+    display: flex;
+    @include justify-content(space-between)
+  }
+
+  .rd-navbar-sidebar-toggle {
+    will-change: transform;
+    padding: 0;
+
+    span,
+    span:before,
+    span:after {
+      will-change: transform;
+      background-color: $white;
+    }
+
+    &.active {
+      transform: translateX(270px);
+
+      &:before {
+        transform: translateX(0);
+      }
+
+      span,
+      span:before,
+      span:after {
+        background-color: $primary;
+      }
+    }
+  }
+
+  .rd-navbar-inner {
+
+    @include media-breakpoint-up(lg) {
+      padding: 38px 0;
+    }
+  }
+
+  .mobile-element { display: none; }
+
+  .list-address {
+    > li {
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    > li + li {
+      margin-left: 40px;
+    }
+  }
+
+  @include media-breakpoint-up(xl) {
+    .list-address {
+      > li + li {
+        margin-left: 128px;
+      }
+    }
+  }
+
+  @include media-breakpoint-up( xxl ) {
+    left: 374px;
+  }
+}
+
+.rd-navbar-sidebar .rd-navbar-sidebar-inner {
+
+  position: fixed;
+  display: flex;
+  height: 100vh;
+  flex-direction: column;
+  padding: 40px 30px 40px 70px;
+  transform: translateX(-100%);
+  box-shadow: none;
+  @extend %rd-navbar-transition;
+
+  &::-webkit-scrollbar-thumb {
+    background: lighten($primary, 15%);
+  }
+
+  &::-webkit-scrollbar-track {
+    background: $white;
+  }
+
+  &.active{
+    transform: translateX(0);
+    box-shadow: $rd-navbar-fixed-shadow;
+  }
+
+  @include media-breakpoint-up( xxl ) {
+    transform: translateX(0);
+    transition: none;
+
+    &.affix-bottom {
+      position: absolute;
+      left: -374px;
+    }
+  }
+
+  .rd-navbar-top-panel{
+    order: 1;
+    padding: 0 20px;
+
+    text-align: left;
+  }
+
+  .rd-navbar-brand{
+    margin-bottom: 28px;
+  }
+
+  .sidebar-form {
+    color: $gray;
+    margin-top: 80px;
+  }
+
+  .sidebar-list-social {
+    margin-top: 72px;
+  }
+
+  // RD Navbar nav
+  .rd-navbar-nav {
+
+    > li + li { margin-top: 6px; }
+
+    li > a { font-family: $font-family-sec; }
+
+    > li {
+      text-align: left;
+      transition: .25s;
+
+      > a {
+        position: relative;
+        display: inline-block;
+        color: $rd-navbar-nav-color;
+        font-size: 14px;
+        line-height: 1.36;
+        padding: 7px 0;
+
+        border: none;
+        transition: 300ms ease-in-out;
+
+        svg {
+          display: block;
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+        }
+
+        .shape {
+          stroke-width: 2px;
+          fill: transparent;
+          stroke: transparent;
+          stroke-dasharray: 50 400;
+          stroke-dashoffset: -227;
+          transition: 1s all ease;
+          width: 100%;
+          height: 100%;
+        }
+      }
+
+      &.focus,
+      &.opened,
+      &:hover,
+      &.active {
+
+        > a {
+          padding-left: 28px;
+          padding-right: 28px;
+          color: $rd-navbar-nav-hover-color;
+
+          .shape {
+            stroke-dasharray: 50 0;
+            stroke-width: 2px;
+            stroke-dashoffset: 0;
+            stroke: $gray-3;
+          }
+        }
+      }
+    }
+
+    .rd-navbar-submenu-toggle {
+      display: block;
+      cursor: pointer;
+      color: $primary;
+
+      &::after {
+        content: '\f236';
+        position: absolute;
+        top: 0;
+        left: 230px;
+        height: 33px;
+        width: 65px;
+        font: 400 20px "Material Design Icons";
+        line-height: 33px;
+        text-align: center;
+        transition: 0.3s transform ease;
+        z-index: 2;
+      }
+    }
+  }
+
+
+  // RD navbar submenu styles
+
+  .rd-navbar-dropdown {
+    margin-top: 10px;
+  }
+
+  .rd-navbar-megamenu {
+    display: none;
+  }
+
+  .rd-navbar-dropdown,
+  .rd-navbar-megamenu {
+    opacity: 0;
+    visibility: hidden;
+    padding-left: 28px;
+
+    li + li {
+      margin-top: 7px;
+    }
+
+    li{
+
+      > a{
+        transition: .15s ease-in-out;
+
+        &:before{
+          content: '\f238';
+          font-family: "Material Design Icons";
+          margin-left: -13px;
+          transition: opacity .15s ease-in-out, .15s margin ease-in-out;
+          opacity: 0;
+        }
+      }
+
+      &.focus > a,
+      &.opened > a,
+      > a:hover{
+
+        color: $gray;
+
+        &:before{
+          margin-left: -3px;
+          opacity: 1;
+        }
+      }
+    }
+  }
+
+  .rd-navbar-submenu {
+    position: relative;
+    @extend %rd-navbar-transition;
+
+    .rd-navbar-megamenu {
+
+      .rd-megamenu-header {
+        margin-top: 15px;
+      }
+
+      p + ul {
+        margin-top: 10px;
+      }
+    }
+
+    &.opened {
+      > .rd-navbar-dropdown,
+      > .rd-navbar-megamenu {
+        display: block;
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+  }
+}
+
+.rd-navbar-sidebar-linked body .page {
+
+  @include media-breakpoint-up( xxl ) {
+    padding-left: 374px;
+  }
+}
+
+.ie-10,
+.ie-11 {
+
+  .rd-navbar-sidebar {
+    .rd-navbar-nav {
+      > li {
+
+        &.focus,
+        &.opened,
+        &.active {
+          > a {
+            border-color: $gray-3;
+          }
+        }
+
+        > a {
+
+          &:hover {
+            border-color: $gray-3;
+          }
+        }
+      }
+    }
+  }
+}

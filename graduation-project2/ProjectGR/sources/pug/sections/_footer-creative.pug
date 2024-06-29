@@ -1,0 +1,60 @@
+footer.page-footer.footer-creative.bg-default
+  .section-40
+    .container.container-xlg-left
+      .row.row-30.justify-content-center.justify-content-xxl-end.contact-info
+        .col-sm-6.col-lg-3.wow.fadeInUp(data-wow-delay=".1s")
+          .unit.align-items-center.unit-spacing-icon.flex-column.flex-sm-row
+            .unit-left
+              span.icon.icon-md.icon-primary.fa-phone
+            .unit-body.list-tel
+              .p.tel
+                a(href='tel:#').text-gray 1 (800) 123 1234
+              .p.tel
+                a(href='tel:#').text-gray 1 (800) 123 1235
+
+        .col-sm-6.col-lg-3.wow.fadeInUp(data-wow-delay=".2s")
+          .unit.align-items-center.unit-spacing-icon.flex-column.flex-sm-row
+            .unit-left
+              span.icon.icon-md.icon-primary.fa-home
+            .unit-body
+              a.text-middle.address.text-gray(href='contacts.html') 227 Marion Street,
+                br
+                | Columbia, SC 29201
+
+        .col-sm-6.col-lg-3.wow.fadeInUp(data-wow-delay=".3s")
+          .unit.align-items-center.unit-spacing-icon.flex-column.flex-sm-row
+            .unit-left
+              span.icon.icon-md.icon-primary.fa-clock-o
+            .unit-body
+              .p Mon - Sat 8.00 - 18.00
+              .p Sunday CLOSED
+
+        .col-sm-6.col-lg-3.col-xlg-2.wow.fadeInUp(data-wow-delay=".4s")
+          .unit.align-items-center.unit-spacing-icon.flex-column.flex-sm-row
+            .unit-left
+              span.icon.icon-md.icon-primary.fa-envelope
+            .unit-body
+              a(href='mailto:#') info@demolink.org
+
+  .footer-gmap
+    include ../sections/_section-gmap
+
+  .footer-creative-aside-left
+    .container
+      .footer-partners
+        a.footer-partners-item(href='#'): +img('partners-12-131x54')
+        a.footer-partners-item(href='#'): +img('partners-13-100x72')
+        a.footer-partners-item(href='#'): +img('partners-14-108x61')
+        a.footer-partners-item(href='#'): +img('partners-15-81x61')
+        a.footer-partners-item(href='#'): +img('partners-16-103x44')
+        a.footer-partners-item(href='#'): +img('partners-17-125x60')
+        a.footer-partners-item(href='#'): +img('partners-18-109x58')
+
+      .footer-panel
+        p
+          span.text-gray-dark=config.brandName
+          =' '
+          | &#169; #[span(class="copyright-year")].
+          a(href="privacy-policy.html").text-gray
+            =' '
+            | Privacy Policy

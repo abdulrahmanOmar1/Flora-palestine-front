@@ -1,0 +1,35 @@
+extends  ../_skeleton
+
+block variables
+	- var pageName = 'Maintenance'
+
+block page
+	// Page Header
+	include ../sections/_header-default
+	+breadcrumbs-section({ img: 'breadcrumbs-team-1920x974' })
+
+	section.section-md.bg-default
+		.container
+			h2 The website is in the maintenance mode
+
+			.row.row-40.justify-content-start
+				.col-xl-8.col-lg-10
+					p.big Our website is currently under maintenance. We are preparing our website to give you the best user experience you can possibly have on our website. If you want to be notified when we will be back online, please enter your e-mail in the form below.
+
+				.col-xl-8.col-lg-10
+					.group-between
+						// RD Mailform
+						form.rd-mailform.rd-mailform-inline.text-start(data-form-output="form-output-global", data-form-type='forms', method='post', action='bat/rd-mailform.php')
+							.form-wrap
+								label.form-label.text-gray-dark(for="inline-email") info@demolink.org
+
+								input#inline-email.form-input(type="email" name="email" data-constraints="@Email @Required")
+							.form-button.text-center.text-sm-end
+								button(type="submit").button.button-primary Notify Me
+									include ../elements/_arrow-down
+
+	// Page Footer
+	include ../sections/_footer-default
+
+
+

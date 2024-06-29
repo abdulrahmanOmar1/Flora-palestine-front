@@ -1,0 +1,137 @@
+extends  ../_skeleton
+
+block variables
+	- var pageName = 'Site map'
+
+block page
+	// Page Header
+	include ../sections/_header-default
+	+breadcrumbs-section({ img: 'breadcrumbs-team-1920x974' })
+
+	section.section-lg.bg-default
+		.container
+			.heading-group
+				h2 Site map
+
+			.row.row-40.justify-content-center.text-sm-start
+				.col-lg-3.col-sm-6
+					ul.list-custom
+						li
+							a(href='./') Home
+
+
+					ul.list-custom
+						li
+							a(href='about-us.html') About us
+
+							ul.list-sec.list-marked.d-inline-block.d-sm-block
+								li
+									a(href='faq.html') FAQ
+								li
+									a(href='careers.html') Careers
+								li
+									a(href='team.html') Team
+								li
+									a(href='testimonials.html') Testimonials
+
+					ul.list-custom
+						li
+							a(href='services.html') Services
+
+					ul.list-custom
+						li
+							a(href='booking.html') Booking
+
+
+				.col-lg-3.col-sm-6
+					ul.list-custom
+						li
+							a(href='blog.html') Blog
+							ul.list-sec.list-marked.d-inline-block.d-sm-block
+								li
+									a(href='single-post.html') Single post
+
+					ul.list-custom
+						li
+							a(href='shop.html') Shop
+
+							ul.list-sec.list-marked.d-inline-block.d-sm-block
+								li
+									a(href='category.html') Category
+								li
+									a(href='product-page.html') Product page
+								li
+									a(href='shopping-cart.html') Shopping cart
+								li
+									a(href='checkout.html') Checkout
+
+					ul.list-custom
+						li
+							a(href='contacts.html') Contacts
+
+				.col-lg-3.col-sm-6
+					ul.list-custom
+						li
+							p Layouts
+							ul.list-sec.list-marked.d-inline-block.d-sm-block
+								li
+									a(href='home-classic.html') Home Classic
+								li
+									a(href='home-modern.html') Home Modern
+								li
+									a(href='home-creative.html') Home Creative
+
+					ul.list-custom
+						li
+							p Pages 1
+							ul.list-sec.list-marked.d-inline-block.d-sm-block
+								li
+									a(href='404.html') 404 page
+								li
+									a(href='503.html') 503 page
+								li
+									a(href='coming-soon.html') Coming Soon
+								li
+									a(href='maintenance.html') Maintenance
+								li
+									a(href='search-results.html') Search results
+								li
+									a(href='privacy-policy.html') Privacy policy
+
+				.col-lg-3.col-sm-6
+
+					ul.list-custom
+						li
+							p Gallery
+							ul.list-sec.list-marked.d-inline-block.d-sm-block
+								li
+									a(href='gallery.html') Gallery
+								li
+									a(href='fullwidth-gallery.html') Fullwidth gallery
+								li
+									a(href='gallery-2-column.html') Gallery 2 column
+
+					ul.list-custom
+						li
+							p Elements
+							ul.list-sec.list-marked.d-inline-block.d-sm-block
+								li
+									a(href='buttons.html') Buttons
+								li
+									a(href='forms.html') Forms
+								li
+									a(href='grid.html') Grid
+								li
+									a(href='progress-bars.html') Progress bars
+								li
+									a(href='tables.html') Tables
+								li
+									a(href='tabs-&-accordions.html') Tabs & Accordions
+								li
+									a(href='typography.html') Typography
+
+	// Page Footer
+	include ../sections/_footer-default
+
+
+

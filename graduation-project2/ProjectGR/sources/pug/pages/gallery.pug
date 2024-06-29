@@ -1,0 +1,76 @@
+extends  ../_skeleton
+
+//- Includes
+include ../elements/_box-gallery
+include ../elements/_ui-pagination
+
+block variables
+	- var pageName = 'Gallery'
+
+block page
+	// Page Header
+	include ../sections/_header-default
+	+breadcrumbs-section({ img: 'breadcrumbs-shop-1920x893' })
+
+	section.section-md.bg-default
+		.container
+			h2=pageName
+
+			.row.isotope-wrap
+				// Isotope Filters
+				.col-xl-12
+					.isotope-filters.isotope-filters-horizontal.tabs-custom.tabs-horizontal
+						ul.nav-custom.nav-custom-tabs.group-tabs
+							li.active(data-isotope-filter='*', data-isotope-group='gallery'): a(href='#') All
+									include ../elements/_arrow-down
+							li(data-isotope-filter='Type 1', data-isotope-group='gallery'): a(href='#') Residential
+									include ../elements/_arrow-down
+							li(data-isotope-filter='Type 2', data-isotope-group='gallery'): a(href='#') Commercial
+									include ../elements/_arrow-down
+							li(data-isotope-filter='Type 3', data-isotope-group='gallery'): a(href='#') Before  and after
+									include ../elements/_arrow-down
+
+				// Isotope Content
+				.col-xl-12
+					.isotope.row.column-offset-30(data-isotope-layout='fitRows', data-isotope-group='gallery', data-lightgallery='group')
+						.col-xs-6.col-lg-4.isotope-item(data-filter='Type 1')
+							+gallery({
+								img: 'gallery-grid-1-370x351',
+								imgOriginal: 'gallery-1-1195x800_original'
+							})
+
+						.col-xs-6.col-lg-4.isotope-item(data-filter='Type 2')
+							+gallery({
+								img: 'gallery-grid-2-370x351',
+								imgOriginal: 'gallery-2-1067x800_original'
+							})
+
+						.col-xs-6.col-lg-4.isotope-item(data-filter='Type 3')
+							+gallery({
+								img: 'gallery-grid-3-370x351',
+								imgOriginal: 'gallery-3-1200x800_original'
+							})
+
+						.col-xs-6.col-lg-4.isotope-item(data-filter='Type 1')
+							+gallery({
+								img: 'gallery-grid-4-370x351',
+								imgOriginal: 'gallery-4-1200x793_original'
+							})
+
+						.col-xs-6.col-lg-4.isotope-item(data-filter='Type 2')
+							+gallery({
+								img: 'gallery-grid-5-370x351',
+								imgOriginal: 'gallery-5-1200x797_original'
+							})
+
+						.col-xs-6.col-lg-4.isotope-item(data-filter='Type 3')
+							+gallery({
+								img: 'gallery-grid-6-370x351',
+								imgOriginal: 'gallery-6-1200x800_original'
+							})
+
+			.pagination-wrap.text-md-end
+				+pagination-bootstrap(null, 1, 3)
+
+	// Page Footer
+	include ../sections/_footer-default

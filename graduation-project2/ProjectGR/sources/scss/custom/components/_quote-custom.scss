@@ -1,0 +1,197 @@
+.quote {
+  text-align: left;
+
+  q {
+    display: inline-block;
+
+    &:before,
+    &:after {
+      content: '';
+    }
+  }
+
+  div span,
+  cite {
+    font-family: $font-family-sec;
+    color: $gray-dark;
+    display: block;
+  }
+
+  cite {
+    font-weight: 700;
+  }
+
+  .author {
+    margin-top: 12px;
+  }
+}
+
+.quote-creative-inset {
+  padding-right: 50px;
+
+  @include media-breakpoint-up(md) {
+    padding-right: 100px;
+  }
+}
+
+.quote-creative-wrap {
+  padding: 94px 15px 95px 15px;
+
+  @include media-breakpoint-up(md) {
+    padding-left: 97px;
+    padding-right: 30px;
+  }
+}
+
+.quote-creative-left-inset {
+  padding-left: 40px;
+}
+
+* + .quote-creative-left-inset { margin-top: 20px; }
+.quote-creative-left-inset + .insetleft-lg-100 { margin-top: 45px; }
+
+.quote-default-inset {
+  padding-right: 50px;
+
+  @include media-breakpoint-up(md) {
+    padding-right: 40px;
+  }
+}
+
+.quote-creative {
+  position: relative;
+
+  .quote-wrap {
+    padding-left: 36px;
+    max-width: 400px;
+  }
+
+  path {
+    width: 22px;
+    height: 15px;
+
+  }
+
+  svg {
+    position: absolute;
+    left: 0;
+    top: 4px;
+    fill: $gray-light;
+  }
+
+  * + p { margin-top: 0;}
+
+  &-inverse {
+
+    svg {
+      left: -40px;
+      right: auto;
+      transform: scale(1, 1);
+    }
+  }
+}
+
+.quote-classic {
+
+  .quote-classic-content {
+    margin-left: 36px;
+  }
+
+  path {
+    width: 15px;
+    height: 10px;
+  }
+
+  * + .quote-classic-content { margin-top: -6px; }
+}
+
+.quote-inset-typography {
+
+  @include media-breakpoint-up(sm) {
+    padding-right: 140px;
+  }
+
+  @include media-breakpoint-up(md) {
+    padding-left: 100px;
+    padding-right: 170px;
+  }
+
+  @include media-breakpoint-up(lg) {
+    padding-left: 170px;
+  }
+}
+
+.quote-modern {
+  padding: 40px 15px 36px;
+  background-color: $gray-3;
+
+  &.bg-quote-custom {
+    .quote-wrap {
+      margin-left: 0;
+      margin-right: auto;
+      
+      @include media-breakpoint-up(sm) {
+        max-width: 280px;  
+      }
+      
+      @include media-breakpoint-up(md) {
+        max-width: 365px;
+      }
+    }
+  }
+
+  .author {
+    margin-top: 28px;
+  }
+
+  cite {
+    font-size: 1.28em;
+  }
+
+  path {
+    width: 22px;
+    height: 15px;
+  }
+
+  svg { fill: $gray-light; }
+
+  * + p { margin-top: 12px; }
+
+  @include media-breakpoint-up(sm) {
+
+    .quote-wrap {
+      max-width: 50%;
+      margin-left: 0;
+    }
+  }
+
+  @include media-breakpoint-up(md) {
+    padding-left: 30px;
+    padding-right: 30px;
+
+    &.bg-quote-custom {
+      padding-left: 45px;
+      padding-right: 45px;
+    }
+
+    .quote-wrap {
+      max-width: 60%;
+    }
+  }
+
+  @include media-breakpoint-up(xl) {
+    padding-left: 50px;
+  }
+}
+
+.quote-gray-mark {
+  fill: $gray-light;
+}
+
+.quote-white-mark {
+  fill: $white;
+}
+
+cite {
+  font-style: normal;
+}

@@ -1,0 +1,292 @@
+extends  ../_skeleton
+
+block variables
+	- var pageName = 'Single post'
+
+block page
+	// Page Header
+	include ../sections/_header-default
+	+breadcrumbs-section({ img: 'breadcrumbs-team-1920x974' })
+
+	section.section-md.bg-default
+		.container
+			.row.row-30.justify-content-center.justify-content-lg-end
+				.col-lg-8.col-md-6
+					h2=pageName
+
+			.row.row-50.justify-content-center
+				.col-lg-4.col-md-6.col-sm-8
+					+img('user-4-370x321')
+
+					.post-big-aside
+						.post-autor-wrap
+							.author
+								h6: a(href='team.html') Alicia Hagen
+								span (chef redactor)
+
+							+widget-list([
+								{
+									"icon": "fa fa-facebook",
+									"href": "#"
+								},
+								{
+									"icon": "fa fa-google-plus",
+									"href": "#"
+								},
+								{
+									"icon": "fa fa-linkedin",
+									"href": "#"
+
+								},
+								{
+									"icon": "fa fa-twitter",
+									"href": "#"
+								}
+							], 'text-primary fa-xs', '')
+
+						a(href="blog.html").button.button-primary All posts
+							include ../elements/_arrow-down
+
+				.col-lg-8.post-big
+					.post-meta-default.group-post-meta
+						time(datetime="2018-03-05")
+							span.mdi.mdi-xsm.mdi-clock.text-primary
+							span March 05, 2018
+
+						a(href="#")
+							span.mdi.mdi-xsm.mdi-comment-multiple-outline
+							span.quantity 4 comments
+
+						a(href="#")
+							span.mdi.mdi-xsm.mdi-heart-outline
+							span.quantity 25
+
+						a(href="#")
+							span.mdi.mdi-xsm.mdi-share
+							span.quantity 11
+
+					h3 Do you love to make people smile?
+					p.big If you call the Beautiful Lawns office you will be greeted with a cheerful voice and a person who asks how they can make you smile today. That is our number one goal, and right now we are looking for people who share that passion. Right now we are looking for people who can work in the field as one of our mow crew members, or as we like to call them, our Lawn Ninjas.
+
+					p Even though our Lawn Ninjas are going to be out in the field mowing lawns, customer service, a can- do attitude and the ability to make the customer’s day is still just as important. If this sounds like the perfect fit for you then please go to our site and follow the prompts to fill out an application. If you are more of an indoor worker and can handle multi- tasking, answering phones, customer services, and keeping up with the jokes, then fill out the application for our Customer Loyalty Team.
+
+					p.big We are looking for professional people to come in for interviews as soon as possible. If you take the time then we will take the time. That is a promise. We are excited to talk to future candidates about these two positions. Hopefully, you reading this, are as excited as well. We are hard workers, but our culture is also something that stands out here. We want professional people but we do not operate as machines. We have fun here. We serve breakfast here. We crack jokes here. And we want you to be a part of our team and our core.
+					
+	// Material Parallax
+	section.parallax-container(data-parallax-img='images/parallax-6-1920x1100.jpg')
+		.parallax-content
+			div(style="min-height: 160px; padding-bottom: 39.45%")
+
+	section.section-md.bg-default.single-post-wrap
+		.container
+			.row.row-30.justify-content-end
+				.col-xl-8.col-lg-10
+					.blog-item
+						h3 Conclusion
+						p We understand that the commitment to the program might be a little overwhelming at first, but once you start using the program you will see the benefits! If you are going to invest money into your lawn’s health, you really should go full swing. We cannot guarantee the best looking lawn with a partial program, which in a sense is just throwing dollars down the drain for you and makes us look bad because we cannot give you the best service. I hope this has helped you understand why we do things the way we do around here.
+						ul.group-xs
+							li
+								a(href='#').button.button-steel-blue.button-icon.button-icon-left
+									span.icon.icon-social.fa.fa-facebook
+									span.button-text Facebook
+							li
+								a(href='#').button.button-cerulean.button-icon.button-icon-left
+									span.icon.icon-social.fa.fa-twitter
+									span.button-text Twitter
+							li
+								a(href='#').button.button-mandy.button-icon.button-icon-left
+									span.icon.icon-social.fa.fa-google-plus
+									span.button-text Google
+
+						ul.group-button-blog
+							li: a(href="#").button.button-xs.button-primary Lawnmowing
+								include ../elements/_arrow-down
+							li: a(href="#").button.button-xs.button-primary Fertilizing
+								include ../elements/_arrow-down
+
+					.blog-item.text-start
+						h3 Related posts
+
+						.row.row-10
+							.col-lg-6.col-md-6.col-sm-12
+								.unit.unit-spacing-sm.align-items-center.flex-row
+									.unit-left
+										+img('user-1-70x70').image-circles
+									.unit-body
+										time(datetime="2018-03-31") March 31, 2018
+										p: a(href="#").fw-bold Do you love to make people smile?
+
+							.col-lg-6.col-md-6.col-sm-12
+
+								.unit.unit-spacing-sm.align-items-center.flex-row
+									.unit-left
+										+img('user-3-70x70').image-circles
+									.unit-body
+										time(datetime="2018-03-15") March 15, 2018
+										p: a(href="#").fw-bold Fertilizing
+
+							.col-lg-6.col-md-6.col-sm-12
+								.unit.unit-spacing-sm.align-items-center.flex-row
+									.unit-left
+										+img('user-2-70x70').image-circles
+									.unit-body
+										time(datetime="2018-03-25") March 25, 2018
+										p: a(href="#").fw-bold How to Mow Your Lawn
+
+							.col-lg-6.col-md-6.col-sm-12
+								.unit.unit-spacing-sm.align-items-center.flex-row
+									.unit-left
+										+img('user-2-70x70').image-circles
+									.unit-body
+										time(datetime="2018-03-25") March 25, 2018
+										p: a(href="#").fw-bold Weed Wipeout
+
+					.blog-item
+						h3 Comments
+						.box-comment.text-sm-start
+							.unit.flex-column.flex-sm-row.unit-spacing-md
+								.unit-left
+									.wrap-img.rounded-circle.img-70
+										+img('user-1-70x70').image-circles
+
+								.unit-body
+									.unit.flex-column.flex-md-row.unit-box-comment
+										.unit-left
+											p.text-primary.fw-bold Alicia Hagen
+										.unit-body
+											.post-meta-default.post-meta-inline
+												time(datetime="2018-03-07")
+													span.mdi.mdi-sm.mdi-clock.text-primary
+													| March 7, 9:14
+
+												a(href="#")
+													span.mdi.mdi-sm.mdi-thumb-up-outline
+													span.quantity like
+
+												a(href="#")
+													span.mdi.mdi-sm.mdi-comment-multiple-outline
+													span.quantity reply
+
+									p The topic you describe here is really important. I think it may be useful and interesting to many beginners in this sphere.
+									p Keep up going this way!
+
+							.divider
+
+							.box-comment
+								.unit.flex-column.flex-sm-row.unit-spacing-md
+									.unit-left
+										.wrap-img.rounded-circle.img-70
+											+img('user-3-70x70').image-circles
+
+									.unit-body
+										.unit.flex-column.flex-md-row.unit-box-comment
+											.unit-left
+												p.text-primary.fw-bold John Nesh
+											.unit-body
+												.post-meta-default.post-meta-inline
+													time(datetime="2018-03-07")
+														span.mdi.mdi-sm.mdi-clock.text-primary
+														| March 7, 9:14
+
+													a(href="#")
+														span.mdi.mdi-sm.mdi-thumb-up-outline
+														span.quantity like
+
+													a(href="#")
+														span.mdi.mdi-sm.mdi-comment-multiple-outline
+														span.quantity reply
+
+										p Thank you for your opinion! I'm glad that you found this article interesting, and we will continue this topic in further publications.
+
+							.box-comment
+								.unit.flex-column.flex-sm-row.unit-spacing-md
+									.unit-left
+										.wrap-img.rounded-circle.img-70
+											+img('user-2-70x70').image-circles
+
+									.unit-body
+										.unit.flex-column.flex-md-row.unit-box-comment
+											.unit-left
+												p.text-primary.fw-bold Andrew Wagstaff
+											.unit-body
+												.post-meta-default.post-meta-inline
+													time(datetime="2018-03-07")
+														span.mdi.mdi-sm.mdi-clock.text-primary
+														| March 7, 9:14
+
+													a(href="#")
+														span.mdi.mdi-sm.mdi-thumb-up-outline
+														span.quantity like
+
+													a(href="#")
+														span.mdi.mdi-sm.mdi-comment-multiple-outline
+														span.quantity reply
+
+										p Very useful post! Thanks for sharing! Now I’ll be planning my visit to your company to try my luck in becoming a part of your amazing and friendly team.
+
+						.divider
+
+						.box-comment.text-sm-start
+							.unit.flex-column.flex-sm-row.unit-spacing-md
+								.unit-left
+									.wrap-img.rounded-circle.img-70
+										+img('user-1-70x70').image-circles
+
+								.unit-body
+									.unit.flex-column.flex-md-row.unit-box-comment
+										.unit-left
+											p.text-primary.fw-bold Alicia Hagen
+										.unit-body
+											.post-meta-default.post-meta-inline
+												time(datetime="2018-03-07")
+													span.mdi.mdi-sm.mdi-clock.text-primary
+													| March 7, 9:14
+
+												a(href="#")
+													span.mdi.mdi-sm.mdi-thumb-up-outline
+													span.quantity like
+
+												a(href="#")
+													span.mdi.mdi-sm.mdi-comment-multiple-outline
+													span.quantity reply
+
+									p I would like to add that this post is not just great; it is also very informative to the newcomers of your company. You have gathered a team of friendly and experienced lawn care specialists and don’t stop to extend it as well as train your younger employees to become better experts in what they do. Thank you for everything!
+
+							.divider
+
+					.blog-item
+						h3 Leave a comment
+
+						form.rd-mailform.text-start(data-form-output="form-output-global", data-form-type='forms', method='post', action='bat/rd-mailform.php')
+							.row.row-spacing-10.row-10
+								.col-md-12
+									.form-wrap.form-wrap-validation
+										label.form-label(for="forms-message") Message
+										textarea#forms-message.form-input(name="message" data-constraints="@Required")
+
+								.col-md-12
+									.group-post-comment
+										.group-post-meta
+											p.fw-bold Sign in with
+											+widget-list([
+												{
+													"icon": "fa fa-facebook",
+													"href": "#"
+												},
+												{
+													"icon": "fa fa-twitter",
+													"href": "#"
+												},
+												{
+													"icon": "fa fa-google-plus",
+													"href": "#"
+												}
+
+											], 'text-primary', '')
+
+										.button-wrap.text-center
+											button(type="submit").button.button-xs.button-primary Submit
+												include ../elements/_arrow-down
+
+	// Page Footer
+	include ../sections/_footer-default

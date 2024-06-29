@@ -1,0 +1,60 @@
+extends  ../_skeleton
+
+block variables
+	- var pageName = 'Contacts'
+
+block page
+	// Page Header
+	include ../sections/_header-default
+	+breadcrumbs-section({ img: 'breadcrumbs-about-1920x1000' })
+
+	section
+		include ../sections/_section-gmap
+
+	section.section-md.bg-default
+		.container
+			.row.row-50.justify-content-center
+				.col-lg-6.col-md-10.col-sm-12
+					h3 Addresses
+					.row.row-30.justify-content-center.row-xxs
+						.col-sm-6
+							address.contact-info
+								ul.list-contacts
+									li
+										a.text-middle.address(href='contacts.html') 227 Marion Street, Columbia, SC 29201
+
+									li.list-tel
+										.p.tel
+											a.text-gray.text-middle(href='tel:#') 1 (800) 123 1234
+										.p.tel
+											a.text-gray.text-middle(href='tel:#') 1 (800) 123 1235
+
+									li
+										.p Mon - Sat 8.00 - 18.00
+										.p Sunday CLOSED
+
+						.col-sm-6
+							ul.list-contacts
+								li
+									a.text-middle.address(href='contacts.html') 2130 Fulton Street, San Diego, CA 94117-1080 USA
+
+								li.list-tel
+									.p.tel
+										a.text-gray.text-middle(href='tel:#') 1 (800) 123 1234
+									.p.tel
+										a.text-gray.text-middle(href='tel:#') 1 (800) 123 1235
+
+								li
+									.p Mon - Sat 8.00 - 18.00
+									.p Sunday CLOSED
+
+				.col-lg-6.col-md-10.col-sm-12
+					h3 Get in touch
+					include ../elements/_form-contacts
+
+
+	// Page Footer
+	include ../sections/_footer-default
+
+
+

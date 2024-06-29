@@ -1,0 +1,129 @@
+extends  ../_skeleton
+
+//- Includes
+include ../elements/_box-product
+
+block variables
+	- var pageName = 'Shop'
+
+block page
+	// Page Header
+	include ../sections/_header-default
+	+breadcrumbs-section({ img: 'breadcrumbs-shop-1920x893' })
+
+	section.counter-index
+		.owl-carousel.owl-full-width.owl-info(
+			data-items='1',
+			data-md-items="2",
+			data-lg-items="3",
+			data-xl-items="4",
+			data-stage-padding='0',
+			data-loop='true',
+			data-margin='0',
+			data-owl= {
+				dots: true
+			}
+		)
+			.box-info
+				.box-info-img.bg-image.bg-info-1
+				.box-info-content
+					h4: a(href='#') A big choice of  gardening tools
+
+			.box-info
+				.box-info-img.bg-image.bg-info-2
+				.box-info-content
+					h4: a(href='#') Pawl lawn & garden
+						=' '
+						span.heading-big -35% off
+
+			.box-info
+				.box-info-img.bg-image.bg-info-3
+				.box-info-content
+					h4: a(href='#') Plant a seed and help it grow
+
+			.box-info
+				.box-info-img.bg-image.bg-info-4
+				.box-info-content
+					h4: a(href='#') Grass seeds
+						=' '
+						span.heading-style buying guide
+
+	section.section-xs.bg-default
+		.container
+			.row.row-50
+				.col-lg-3.col-md-4
+					h3 Categories
+
+					ul.list.list-marked.list-bold.d-inline-block.d-md-block
+						li: a(href="#") Outdoor Power Equipment
+						li: a(href="#") Mowers & Tractors
+						li: a(href="#") Lawn & Garden Care
+						li: a(href="#") Handheld Power Tools
+						li: a(href="#") Lawn and Garden Bundles
+						li: a(href="#") Lawn & Garden Accessories
+
+				.col-lg-9.col-md-8
+					h3 Featured products
+
+					.row.row-30
+						.col-lg-4.col-sm-6
+							+box-product({
+								pathImg: 'product-1-270x264',
+								productName: 'Insecticide Duster - Heavy Duty Self Sealing Insecticide Bulb Duster holds approx 1 cup of dust / granules',
+								productPrice: '$27.60'
+							})
+
+						.col-lg-4.col-sm-6
+							+box-product({
+								pathImg: 'product-2-270x264',
+								productName: 'Espoma PR8 8-Quart Organic Perlite',
+								productPrice: '$9.06'
+							})
+
+						.col-lg-4.col-sm-6
+							+box-product({
+								pathImg: 'product-3-270x264',
+								productName: 'Magid BE338T Bella Women’s Comfort Flex Coated Garden Glove, Small / Medium',
+								productPrice: '$8.04'
+							})
+
+						.col-lg-4.col-sm-6
+							+box-product({
+								boxClass: 'box-product-sale',
+								pathImg: 'product-4-270x264',
+								productName: 'Orbit Single-Dial Water Timer',
+								productPrice: '$19.69',
+								productPriceSale: '$23.15'
+							})
+
+						.col-lg-4.col-sm-6
+							+box-product({
+								pathImg: 'product-5-270x264',
+								productName: 'Element ELSP38050 3/8-Inch by 50-Feet Soakerpro Hose, Black',
+								productPrice: '$9.63'
+							})
+
+						.col-lg-4.col-sm-6
+							+box-product({
+								pathImg: 'product-6-270x264',
+								productName: 'Hydrofarm HGMC400 Mini Clipper',
+								productPrice: '$7.73'
+							})
+
+					.row.row-30.offset-top-85
+						.col-xl-8.col-lg-10
+							a.box-sale.bg-accent(href='#')
+								.box-sale-content
+									h2 Save big #[span.heading-small on outdoor gear!]
+									h3.arrow-long Shop early and get up to #[span.fw-bold 60%] off
+										include ../elements/_arrow-right
+
+						.col-xl-4.col-lg-6.col-md-8
+							a.box-advertising.bg-accent-dark(href='#')
+								.box-advertising-content
+									h4 Lawn & garden essentials
+									h6.arrow-long 150 items
+										include ../elements/_arrow-right
+
+	// Page Footer
+	include ../sections/_footer-default

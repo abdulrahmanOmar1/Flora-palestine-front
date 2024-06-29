@@ -1,0 +1,176 @@
+extends  ../_skeleton
+
+//- Includes
+include ../elements/_icon-list
+include ../elements/_box-services
+include ../elements/_blockquote-1
+
+block variables
+	- var pageName = 'Home modern'
+
+block title
+	title= pageName
+
+block page
+	// Page Header
+	include ../sections/_header-modern
+
+	include ../sections/_swiper-modern
+
+	section.bg-accent-dark-custom
+		.section-md-90.bg-default
+			.container.wrap-brand-position
+				.row.row-0.justify-content-center.justify-content-lg-between
+					.col-md-5
+						.section-custom-1.section-md-0
+							include ../elements/_form-request-2
+
+					.col-lg-5.col-md-7.bg-accent-dark
+						.section-custom-2.section-md-0
+							h3 INDUSTRY-LEADING Expertise & Consistent Customer Satisfaction
+							p.offset-top-28.text-white-40 Beautiful lawn is an industry-leading landscaping, lawn care, and snow removal company. We have established a proven system that allows us to provide exceptional grounds care services and customized lawn solutions to both commercial and residential clients. Our business model is built on a culture of care and we are dedicated to complete customer satisfaction.
+							+icon({
+								unitClass: 'box-icon-2 unit-middle unit-spacing-icon-2 flex-column flex-xs-row text-xs-start wow fadeInRight',
+								wowDelay: '.1s',
+								titleClass: 'heading-6',
+								classIcon: 'icon-white icon-xlg fl-great-icon-set-alarm49',
+								title: 'Anywhere, Anytime',
+								content: 'Beautiful Lawn Mowing comes to you at your  premises be it a home or business.'
+							})
+
+							+icon({
+								unitClass: 'box-icon-2 unit-middle unit-spacing-icon-2 flex-column flex-xs-row text-xs-start wow fadeInRight',
+								wowDelay: '.2s',
+								titleClass: 'heading-6',
+								classIcon: 'icon-white icon-xlg fl-great-icon-set-credit95',
+								title: 'Value For Money',
+								content: 'Our goal is to always provide a value for money service which appeals to people from all walks of life.'
+							})
+
+							+icon({
+								unitClass: 'box-icon-2 unit-middle unit-spacing-icon-2 flex-column flex-xs-row text-xs-start wow fadeInRight',
+								wowDelay: '.3s',
+								titleClass: 'heading-6',
+								classIcon: 'icon-white icon-xlg fl-great-icon-set-favorites5',
+								title: 'Excellent Service',
+								content: 'We provide our clients with service of exceptional quality to satisfy their lawn care needs.'
+							})
+
+				+img('decor-brand-2-80x69.png').brand-position.d-none.d-lg-inline-block
+
+	section
+		.owl-carousel.owl-full-width.owl-services(
+			data-items='1',
+			data-md-items="2",
+			data-lg-items="3",
+			data-xl-items="4",
+			data-xxl-items="5",
+			data-stage-padding='0',
+			data-loop='true',
+			data-margin='0',
+			data-owl= {
+				dots: true
+			}
+		)
+			+box-services({
+				wrapClass: 'box-services-modern',
+				itemNamber: '01.',
+				postImg: 'services-1-384x348',
+				title: 'Lawn Care',
+				content: 'From one-offs to a regular weekly, fortnightly, or monthly service, we love lawn care and you won’t find a better service anywhere. We provide specialist lawn care such as mulch mowing, fertilizing, and weed control.'
+			})
+
+			+box-services({
+				wrapClass: 'box-services-modern',
+				itemNamber: '02.',
+				postImg: 'services-2-384x348',
+				title: 'Aeration Service',
+				content: 'Our professional lawn aeration service restores your lawn’s health and vibrancy by allowing air and water to penetrate deep into the soil.Feel free to contact us.'
+			})
+
+			+box-services({
+				wrapClass: 'box-services-modern',
+				itemNamber: '03.',
+				postImg: 'services-3-384x348',
+				title: 'Overseed Lawn Service',
+				content: 'Overseeding is crucial to the health of your lawn and Beautiful lawn’s overseeding service is unmatched in the local area.  The overseeding process thickens the lawn by placing new seed, and ultimately new grass.'
+			})
+
+			+box-services({
+				wrapClass: 'box-services-modern',
+				itemNamber: '04.',
+				postImg: 'services-4-384x348',
+				title: 'Revive – Wetting Agent',
+				content: 'Using this natural organic soil treatment combined with the Weed Wipeout and Fertilization program it will revive your lawn in mid summer when it is heat stressed and the soil temperatures are at their hottest.'
+			})
+
+			+box-services({
+				wrapClass: 'box-services-modern',
+				itemNamber: '05.',
+				postImg: 'services-5-384x348',
+				title: 'Pest Control Service',
+				content: 'Our lawn pest control department is highly trained and licensed to rid your lawn of most pests including whitefly, grubs, and chinch bugs.'
+			})
+
+	section.section-md.bg-default.text-center
+		.container
+			.row.row-50.justify-content-center
+				.col-xl-7.col-lg-8.col-md-10
+					h2
+						| Get up to
+						=' '
+						span.text-primary $40 off
+					h3.offset-top-0 when you refer a friend to Beautiful Lawn!
+					p Each time you refer a friend or neighbor to us (and they sign up for our fertilization program) you and your friend will both receive $40 each. Referrals are the best compliment you can give us!
+					a(href="blog.html").button.button-primary.offset-top-14 Refer A Friend
+						include ../elements/_arrow-down
+
+	section.section-relative.context-dark
+		.bg-counter.bg-counter-3.bg-counter-right.bg-image
+		.container-fluid.container-fluid-inset-0
+			.row.g-0
+				.col-lg-6.text-center
+					.row.g-0.min-height-100
+						.col-xs-6
+							.bg-accent-dark.box-project__modern
+								.box-project-title
+									h6: a(href="#") Kinderhook Retreat project
+									p New York, NY
+
+						.col-xs-6
+							.box-project.box-project__modern.box-project-decor-right.bg-image.bg-project-1
+								.box-project-body
+									a(href="#").button.button-primary View project
+										include ../elements/_arrow-down
+								include ../elements/_arrow-left
+
+						.col-xs-6.order-xxs-last
+							.box-project.box-project__modern.box-project-decor-left.bg-image.bg-project-2
+								.box-project-body
+									a(href="#").button.button-primary View project
+										include ../elements/_arrow-down
+								include ../elements/_arrow-left
+
+						.col-xs-6
+							.bg-accent-dark.box-project__modern
+								.box-project-title
+									h6: a(href="#") Private Residence
+									p Los Angeles, CA
+
+				.col-lg-6
+					.counter-creative-wrap-2.bg-image.bg-counter-4
+						h3 Why us?
+						p.text-width-500 We are trusted, reliable, and committed to our customers, with a reputation for professionalism and excellence. You can have full confidence in the excellence of our services and in our ability to serve you and to prioritize your interests.
+						.row.row-30.row-md-50.row-width-custom
+							include ../sections/_counter-modern
+
+	section.section-md.bg-default.text-center
+		.container.container-inset-owl
+			h2 Testimonials
+			include ../sections/_section-testimonials-carousel
+
+			a(href="testimonials.html").button.button-primary more testimonials
+				include ../elements/_arrow-down
+
+	// Page Footer
+	include ../sections/_footer-modern

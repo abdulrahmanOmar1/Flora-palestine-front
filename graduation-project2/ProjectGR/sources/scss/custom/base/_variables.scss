@@ -1,0 +1,222 @@
+//
+// Variables Custom
+// --------------------------------------------------
+
+
+//== Colors
+//
+//## Gray and brand colors for use across Bootstrap.
+
+$black:                   #000;
+$gray-darker:             #222;
+$gray-dark:               #333;
+$gray:                    #939292;
+$gray-light:              #7e7e7e;
+$gray-lighter:            #ccc;
+
+$primary:                 #72af30;
+$primary-1:               #6f8b6d;
+$primary-dark:            #214910;
+
+$white:                   #fff;
+
+
+$gray-1:                  #e2e2e2;
+$gray-2:                  #f0f0f0;
+$gray-3:                  #f5f5f5;
+$gray-4:                  #f9fbfc;
+$gray-5:                  #4f5d60;
+$gray-6:                  #ccc8c9;
+$gray-7:                  #eee;
+$gray-8:                  #ededed;
+$gray-9:                  #242424;
+
+//== Scaffolding
+//
+//## Settings for some of the most global styles.
+
+//** Background color for `<body>`.
+$body-bg:               #fff;
+//** Global text color on `<body>`.
+$body-color:            $gray;
+
+$theme-colors: ();
+
+//** Global textual link color.
+$link-color:            $primary;
+//** Link hover color set via `darken()` function.
+$link-hover-color:      darken($link-color, 15%);
+//** Link active
+$link-press-color:      $gray-dark;
+//** Link hover decoration.
+$link-hover-decoration: none;
+
+$theme-colors: map-merge(
+		(
+			"primary":    $primary,
+			"secondary":  $secondary,
+			"success":    $success,
+			"info":       $info,
+			"warning":    $warning,
+			"danger":     $danger,
+			"light":      $light,
+			"dark":       $dark
+		),
+		$theme-colors
+);
+
+//== Typography
+//
+//## Font, line-height, and color for body text, headings, and more.
+
+// Import fonts
+
+
+$font-family-sans-serif:  'Lato', Helvetica, Arial, sans-serif;
+$font-family-sans-serif-1:       'Montserrat', Helvetica, Arial, sans-serif;
+//** Default monospace fonts for `<code>`, `<kbd>`, and `<pre>`.
+$font-family-monospace:   Menlo, Monaco, Consolas, "Courier New", monospace;
+
+
+$font-family-base:        $font-family-sans-serif;
+$font-family-sec:         $font-family-sans-serif-1;
+
+
+// Template width (w/o units)
+$template-width:          2050;
+
+// Template width var for resizing
+$template-width-min:      ($template-width+1)*1px;
+$layout-boxed-width:      1920px;
+
+
+// Base FZ & LH (w/o units)
+$base-text-size:          14;
+$base-lh-size:            20.44;
+
+$base-vm-size:            (($base-text-size*100)/$template-width)*1vw;
+
+
+$font-size-body:          $base-text-size * 1px;
+$font-size-lg:         ceil(($font-size-body * 1.25)); // ~18px
+$font-size-sm:         ceil(($font-size-body * 0.85)); // ~12px
+
+$font-weight-base:        400;
+
+//PSD FZ headers /FOR EDIT (w/o units)
+$Size-h1:                 72;
+$Size-h2:                 48;
+$Size-h3:                 24;
+$Size-h4:                 24;
+$Size-h5:                 24;
+$Size-h6:                 18;
+
+//PSD LH headers /FOR EDIT (w/o units)
+$Lh-h1:                   82;
+$Lh-h2:                   58;
+$Lh-h3:                   34;
+$Lh-h4:                   34;
+$Lh-h5:                   34;
+$Lh-h6:                   25;
+
+
+//Calculating FZ headers
+$h1-font-size:            $Size-h1*1px;
+$h2-font-size:            $Size-h2*1px;
+$h3-font-size:            $Size-h3*1px;
+$h4-font-size:            $Size-h4*1px;
+$h5-font-size:            $Size-h5*1px;
+$h6-font-size:            $Size-h6*1px;
+
+
+//** line-height for headers /FOR EDIT
+// $font-lh-h_: floor((PSD l-h / $h1-font-size));
+
+$h1-line-height:              ($Lh-h1 / $Size-h1);
+$h2-line-height:              ($Lh-h2 / $Size-h2);
+$h3-line-height:              ($Lh-h3 / $Size-h3);
+$h4-line-height:              ($Lh-h4 / $Size-h4);
+$h5-line-height:              ($Lh-h5 / $Size-h5);
+$h6-line-height:              ($Lh-h6 / $Size-h6);
+
+//** Unit-less `line-height` for use in components like buttons.
+$line-height-base:        ($base-lh-size / $base-text-size); // l-h/fz-base
+//** Computed "line-height" (`font-size` * `line-height`) for use with `margin`, `padding`, etc.
+$line-height-computed:    floor(($font-size-body * $line-height-base)); // ~20px
+
+//** By default, this inherits from the `<body>`.
+$headings-font-family:    inherit;
+$headings-font-weight:    400;
+$headings-line-height:    1.2;
+$headings-color:          $gray-dark;
+
+// Z-index master list
+//
+// Warning: Avoid customizing these values. They're used for a bird's eye view
+// of components dependent on the z-axis and are designed to all work together.
+
+$zindex-dropdown:       1000;
+$zindex-sticky:         1020;
+$zindex-fixed:          1030;
+$zindex-modal-backdrop: 1040;
+$zindex-modal:          1050;
+$zindex-popover:        1060;
+$zindex-tooltip:        1070;
+// Custom
+$zindex-rd-navbar:      1080;
+$zindex-lg:             1090;
+$zindex-layout-panel:   1100;
+
+// Grid breakpoints
+// Define the minimum dimensions at which your layout will change,
+// adapting to different screen sizes, for use in media queries.
+$grid-breakpoints: (
+	xxs: 0,
+	xs: 480px,
+	sm: 576px,
+	md: 768px,
+	lg: 992px,
+	xl: 1200px,
+	xxl: 1600px
+);
+
+@include _assert-ascending($grid-breakpoints, "$grid-breakpoints");
+@include _assert-starts-at-zero($grid-breakpoints);
+
+// Grid containers
+// Define the maximum width of `.container` for different screen sizes.
+$container-max-widths: (
+	xs: 480px,
+	sm: 490px,
+	md: 750px,
+	lg: 960px,
+	xl: 1200px
+);
+@include _assert-ascending($container-max-widths, "$container-max-widths");
+
+
+// Grid columns
+// Set the number of columns and specify the width of the gutters.
+$grid-columns:             12;
+$grid-gutter-width:        30px;
+$grid-gutter-width-narrow: 20px;
+$grid-gutter-width-wide:   50px;
+
+// Container padding
+$container-padding-x: $grid-gutter-width / 2;
+
+//== Shadows
+$shadow-area-ambient: 0px 0px 1px 0 rgba(0, 0, 0, 0.15);
+$shadow-area-xxs: 1px 1px 1px rgba(0, 0, 0, 0.15);
+$shadow-area-xs: 0 1px 4px 0 rgba(0, 0, 0, 0.15);
+$shadow-area-sm: 0 1px 10px 0 rgba(0, 0, 0, 0.15);
+$shadow-area-md: 0 3px 11px 0 rgba(0, 0, 0, 0.15);
+$shadow-area-lg: 0 5px 23px 0 rgba(0, 0, 0, 0.15);
+$shadow-area-xl: 0 12px 36px 0 rgba(0, 0, 0,.15);
+
+// Tooltip
+$tooltip-bg:                        $primary;
+$tooltip-border-radius:             $border-radius-pill;
+$tooltip-padding-y:                 $spacer / 3;
+$tooltip-padding-x:                 $spacer;
+$tooltip-arrow-color:               $tooltip-bg;

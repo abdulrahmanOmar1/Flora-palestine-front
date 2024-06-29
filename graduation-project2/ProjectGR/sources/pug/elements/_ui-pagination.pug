@@ -1,0 +1,49 @@
+//- Pagination
+//- size - pagination sizing class
+//- active - active index of pagination
+//- index - an array of {link} for indexes
+
+mixin pagination-bootstrap(size, active, indexes)
+	// Bootstrap Pagination
+	nav
+		ul.pagination-custom(class=size)
+			//- Previous
+			if (active === 1)
+				li.disabled
+					span(aria-label="Previous")
+						span.arrow-left(aria-hidden='true')
+							include ../elements/_arrow-left
+			else
+				li
+					a(href="#", aria-label="Previous")
+						span.arrow-left(aria-hidden='true')
+							include ../elements/_arrow-left
+			//- Indexes
+			if (indexes.length)
+				each index, i in indexes
+					if (i === (active - 1))
+						li.active
+							span /
+					else
+						li
+							span /
+			else
+				- for (var i = 1; i <= indexes; i++){
+				if (i === active)
+					li.active
+						span /
+				else
+					li
+						span /
+				-}
+			//- Next
+			if (indexes.length === active || indexes === active)
+				li.disabled
+					span(aria-label="Next")
+						span.arrow-right(aria-hidden='true')
+							include ../elements/_arrow-left
+			else
+				li
+					a(href="#", aria-label="Next")
+						span.arrow-right(aria-hidden='true')
+							include ../elements/_arrow-left

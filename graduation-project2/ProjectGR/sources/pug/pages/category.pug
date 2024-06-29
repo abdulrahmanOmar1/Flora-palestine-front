@@ -1,0 +1,146 @@
+extends  ../_skeleton
+
+//- Includes
+include ../elements/_box-product
+
+block variables
+  - var pageName = 'Category'
+
+block page
+  // Page Header
+  include ../sections/_header-default
+  +breadcrumbs-section({ img: 'breadcrumbs-shop-1920x893' })
+
+  section.section-md.bg-default
+    .container
+      h3 Fertilizer Spreaders
+
+      .row.isotope-wrap
+        // Isotope Filters
+        .col-xl-12
+          .isotope-filters.isotope-filters-horizontal.tabs-custom.tabs-horizontal
+            ul.nav-custom.nav-custom-tabs.group-tabs
+              li(data-isotope-filter='*', data-isotope-group='gallery').active
+                a(href='#') All
+                  include ../elements/_arrow-down
+              li(data-isotope-filter='Type 1', data-isotope-group='gallery')
+                a(href='#') Plastic
+                  include ../elements/_arrow-down
+              li(data-isotope-filter='Type 2', data-isotope-group='gallery')
+                a(href='#') Commercial
+                  include ../elements/_arrow-down
+              li(data-isotope-filter='Type 3', data-isotope-group='gallery')
+                a(href='#') Professional
+                  include ../elements/_arrow-down
+              li(data-isotope-filter='Type 4', data-isotope-group='gallery')
+                a(href='#') Granular
+                  include ../elements/_arrow-down
+
+        // Isotope Content
+        .col-xl-12
+          .isotope.row.column-offset-30(data-isotope-layout='fitRows', data-isotope-group='gallery')
+            .col-lg-4.col-md-6.col-12.isotope-item(data-filter='Type 1')
+              +box-product({
+                pathImg: 'product-7-370x370',
+                productName2: 'Scotts Turf Builder EdgeGuard Mini Broadcast Spreader',
+                productPrice: '$29.97',
+                priceClass: 'big',
+                descriptionList: [
+                  'Features Scotts exclusive EdgeGuard Technology',
+                  'Designed to ensure superior results when used ',
+                  'No assembly required and pre-calibrated',
+                  'Holds up to 5,000 square feet of Scotts lawn products',
+                  'Calibrated and ready to use'
+                ]
+              })
+
+            .col-lg-4.col-md-6.col-12.isotope-item(data-filter='Type 2')
+              +box-product({
+                pathImg: 'product-8-370x370',
+                productName2: 'Chapin 84150A 1.5-Liter Poly Hand Crank Spreader',
+                productPrice: '$12.98',
+                priceClass: 'big',
+                descriptionList: [
+                  '1.5-Liter / 92-Cubic Inch capacity scoop spreader',
+                  'Compatible with fertilizer, seeds and salt / ice-melt',
+                  'Easy-crank design',
+                  'Lightweight and easy to maintain',
+                  'Great for small areas'
+                ]
+              })
+
+            .col-lg-4.col-md-6.col-12.isotope-item(data-filter='Type 3')
+              +box-product({
+                pathImg: 'product-9-370x370',
+                productName2: 'Agri-Fab 85-Pound Push Broadcast Spreader 45 - 0388',
+                productPrice: '$59.98',
+                priceClass: 'big',
+                descriptionList: [
+                  'Push broadcast spreader efficiently cultivates your lawn with wide distribution of fertilizer',
+                  'Provides a spread width of 8-to-10-feet; 85-pound capacity; covers approximately 14,000-square-feet',
+                  'Towed on 2 10-by-1-3/4-inch pneumatic treadcap wheels'
+                ]
+              })
+
+            .col-lg-4.col-md-6.col-12.isotope-item(data-filter='Type 4')
+              +box-product({
+                pathImg: 'product-10-370x370',
+                productName2: 'Master Gardner 50 lbs. Broadcast spreader',
+                productPrice: '$29.97',
+                priceClass: 'big',
+                descriptionList: [
+                  '50-pound capacity broadcast spreader.',
+                  'Micro-adjustable setting to allow precise spreading',
+                  'Strong nylon gearing',
+                  'Includes screen and rain cover for storage bucket',
+                  'Comes with a complete lifetime warranty'
+                ]
+              })
+
+            .col-lg-4.col-md-6.col-12.isotope-item(data-filter='Type 1')
+              +box-product({
+                pathImg: 'product-11-370x370',
+                productName2: 'Lesco 50Lb Push Spreader',
+                productPrice: '$228.95',
+                priceClass: 'big',
+                descriptionList: [
+                  'Hopper Capacity: 50 lbs.',
+                  'Enclosed gearbox protects gear system from the effects of dust and debris',
+                  'Powder-coated steel carbon frame'
+                ]
+              })
+
+            .col-lg-4.col-md-6.col-12.isotope-item(data-filter='Type 2')
+              +box-product({
+                pathImg: 'product-12-370x370',
+                productName2: 'Scotts Easy Hand-Held Broadcast Spreader',
+                productPrice: '$29.97',
+                priceClass: 'big',
+                descriptionList: [
+                  'Fully assembled',
+                  'Rust-proof hopper and agitator',
+                  'Great for small lawns',
+                  'Great for applying seed, ice melt, or other products ',
+                  'Holds up to 1,000 sq ft of Scotts products'
+                ]
+              })
+
+  section.section-md.bg-default
+    .container
+      .row.row-30.justify-content-center
+        .col-xl-6.col-lg-8.col-md-10
+          a.box-sale.bg-accent(href='#')
+            .box-sale-content
+              h2 Save big #[span.heading-small on outdoor gear!]
+              h3.arrow-long Shop early and get up to #[span.fw-bold 60%] off
+                include ../elements/_arrow-right
+
+        .col-xl-6.col-lg-8.col-md-10
+          a.box-sale.bg-accent-dark(href='#')
+            .box-sale-content
+              h2 Gaet up to 70% off
+              h3 Shop now for Home Outdoor Savings
+                include ../elements/_arrow-right
+
+  // Page Footer
+  include ../sections/_footer-default

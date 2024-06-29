@@ -1,0 +1,137 @@
+extends  ../_skeleton
+
+//- Includes
+include ../elements/_box-team
+
+block variables
+	- var pageName = 'Team'
+
+block page
+	// Page Header
+	include ../sections/_header-default
+	+breadcrumbs-section({ img: 'breadcrumbs-team-1920x974' })
+
+	section.section-md.bg-default
+		.container.container-inset-owl
+			h2 Our Head Office Team
+			.owl-carousel.owl-modern.owl-team.owl-nav-default(
+				data-items='1',
+				data-md-items="2",
+				data-xl-items="3"
+				data-stage-padding='0',
+				data-loop='true',
+				data-margin='30',
+				data-autoplay='true',
+				data-owl= {
+					dots: true,
+					nav: true
+				}
+			)
+				+box-team({
+					teamPosition: 'Owner and Founder',
+					teamName: 'Andrew Wagstaff',
+					teamImg: 'team-4-370x265',
+					postContent: 'Our owner & founder, Andrew Wagstaff started the company when he was 12 years old. His passion for incredible customer service and a fair price combined with decades of experience make for an incredible combination. He is a founding committee member of the country lawn care association.'
+				})
+
+				+box-team({
+					teamPosition: 'Lawn Treatments/Office Administration ',
+					teamName: 'Alicia Hagen',
+					teamImg: 'team-5-370x265',
+					postContent: 'Alicia Hagen joined the Beautiful Lawn team in August 2013. She is a lawn fanatic, having being involved in lawn treatments industry since 2005. She is enjoying having that little extra time to do the right treatments to your lawn. She is actively involved in both the treatment and administrative side of the business.'
+				})
+
+				+box-team({
+					teamPosition: 'Operations & Compliance Manager',
+					teamName: 'John Nesh',
+					teamImg: 'team-6-370x265',
+					postContent: 'John has worked in lawn and garden care for over 30 years, including 12 years with the world’s largest garden care products company. He has traveled throughout the UK and USA developing a network of suppliers to bring the latest and best products and practices to your garden. No work is too big or small for him.'
+				})
+
+				+box-team({
+					teamPosition: 'Owner and Founder',
+					teamName: 'Andrew Wagstaff',
+					teamImg: 'team-4-370x265',
+					postContent: 'Our owner & founder, Andrew Wagstaff started the company when he was 12 years old. His passion for incredible customer service and a fair price combined with decades of experience make for an incredible combination. He is a founding committee member of the country lawn care association.'
+				})
+
+				+box-team({
+					teamPosition: 'Lawn Treatments/Office Administration ',
+					teamName: 'Alicia Hagen',
+					teamImg: 'team-5-370x265',
+					postContent: 'Alicia Hagen joined the Beautiful Lawn team in August 2013. She is a lawn fanatic, having being involved in lawn treatments industry since 2005. She is enjoying having that little extra time to do the right treatments to your lawn. She is actively involved in both the treatment and administrative side of the business.'
+				})
+
+				+box-team({
+					teamPosition: 'Operations & Compliance Manager',
+					teamName: 'John Nesh',
+					teamImg: 'team-6-370x265',
+					postContent: 'John has worked in lawn and garden care for over 30 years, including 12 years with the world’s largest garden care products company. He has traveled throughout the UK and USA developing a network of suppliers to bring the latest and best products and practices to your garden. No work is too big or small for him.'
+				})
+
+	section.section-md.bg-gray-3
+		.container
+			.row.row-30.justify-content-center
+				.col-xl-12.col-lg-10
+					h2 Our Head Office Team
+				.col-xl-6.col-lg-10.col-md-6.col-xs-10
+					+box-team-horizontal({
+						boxClass: 'flex-column flex-lg-row',
+						teamPosition: 'Owner and Founder',
+						teamName: 'Andrew Wagstaff',
+						teamImg: 'team-9-270x218',
+						postContent: 'Our owner & founder, Andrew Wagstaff started the company when he was 12 years old. His passion for incredible customer service and a fair price combined with decades of experience make for an incredible combination.'
+					})
+
+				.col-xl-6.col-lg-10.col-md-6.col-xs-10
+					+box-team-horizontal({
+						boxClass: 'flex-column flex-lg-row',
+						teamPosition: 'Operations & Compliance Manager',
+						teamName: 'John Nesh',
+						teamImg: 'team-10-270x218',
+						postContent: 'John has worked in lawn and garden care for over 30 years, including 12 years with the world’s largest garden care products company. He has traveled throughout the UK and USA developing a network of suppliers to bring the latest and best products and practices to your garden. No work is too big or small for him.'
+					})
+
+
+				.col-xl-6.col-lg-10.col-md-6.col-xs-10
+					+box-team-horizontal({
+						boxClass: 'flex-column flex-lg-row',
+						teamPosition: 'Lawn Treatments/Office Admin ',
+						teamName: 'Alicia Hagen',
+						teamImg: 'team-11-270x218',
+						postContent: 'Alicia Hagen has joined the Beautiful Lawn team in August 2013. She is a lawn fanatic, having being involved in lawn treatments industry since 2005. She is enjoying having that little extra time to do the right treatments to your lawn.'
+					})
+
+				.col-xl-6.col-lg-10.col-md-6.col-xs-10
+					+box-team-horizontal({
+						boxClass: 'flex-column flex-lg-row',
+						teamPosition: 'Franchise Manager',
+						teamName: 'Sara Parker',
+						teamImg: 'team-12-270x218',
+						postContent: 'Sara is our local franchise manager who can visit your premises to discuss your lawn mowing needs and to bridge the gap between franchisees and yourself ensuring that the work carried out by our team is of the highest standard. If you are not completely happy with the result, then give us a call and we will get this fixed at no cost to you in a prompt manner.'
+					})
+
+	section.section-md.parallax-container(data-parallax-img='images/parallax-5-1920x1100.jpg')
+		.parallax-content
+			.container
+				h2 Our vision
+				.row.row-50
+					.col-xl-7.col-md-6
+						p.big Beautiful Lawn is an expert team of staff & servicemen headed by Andrew Wagstaff. The vision of the company is to produce growth and expansion through quality business practices, selective pursuit of suitable franchisees and outstanding performance in the field of domestic and commercial ground maintenance.
+						a(href="contacts.html").button.button-primary Contact us
+							include ../elements/_arrow-down
+
+					.col-xl-5.col-md-6
+						ul.list.list-index.list-index-big.list-bold
+							li
+								span.list-index-counter
+								| Business transactions and internal systems are based on sound ethical principles providing a win/win outcome in all situations.
+							li
+								span.list-index-counter
+								| The company’s policy on franchisee recruitment encompasses a determination to select franchisees based on the relevant selection criteria.
+							li
+								span.list-index-counter
+								| Our team shows pride of presentation, a conscientious attitude and a desire to fulfill customer needs in any work they undertake.
+
+	// Page Footer
+	include ../sections/_footer-default

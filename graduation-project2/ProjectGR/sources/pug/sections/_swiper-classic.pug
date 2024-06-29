@@ -1,0 +1,36 @@
+section.swiper-classic.swiper-custom-container.swiper-custom-nav
+	// Swiper
+	.swiper-container.swiper-slider.swiper-bg.swiper-scale-effect(
+		data-swiper!={
+			autoplay: {
+				delay: 4000
+			},
+			effect: 'fade'
+		}
+	)
+		.swiper-wrapper
+			.swiper-slide(data-slide-bg='images/swiper1-slide1-1920x764.jpg')
+				.swiper-slide-cover(style="background: url(images/swiper1-slide1-1920x764.jpg) center; background-size: cover;")
+			.swiper-slide(data-slide-bg='images/swiper1-slide2-1920x764.jpg')
+				.swiper-slide-cover(style="background: url(images/swiper1-slide2-1920x764.jpg) center; background-size: cover;")
+			.swiper-slide(data-slide-bg='images/swiper1-slide3-1920x764.jpg')
+				.swiper-slide-cover(style="background: url(images/swiper1-slide3-1920x764.jpg) center; background-size: cover;")
+
+	.swiper-bg-content
+		.swiper-slide-caption
+			.swiper-slide-content
+				.container
+					.row
+						.col-sm-12
+							h6 We create a pleasant & cheerful ambience
+							h2
+								span.icon.icon-xmd.fl-great-icon-set-mobile226
+								a(href='tel:#') +1 (800) 123 1264
+							.group-xs
+								a(href="#").button.button-md.button-primary Get free quote
+									include ../elements/_arrow-down
+								a(href="services.html").button.button-md.button-primary-dark Our services
+									include ../elements/_arrow-down
+
+	.container.box-nav.box-nav-small.box-nav__classic
+		include ../elements/_swiper-box-nav

@@ -1,0 +1,33 @@
+extends  ../_skeleton
+
+block variables
+  - var pageName = 'Tables'
+
+block page
+  // Page Header
+  include ../sections/_header-default
+  +breadcrumbs-section({ img: 'breadcrumbs-1-1920x934' })
+
+  // Hover Row Table
+  section.section-elements-1.bg-default
+    .container
+      h2=pageName
+      p.big.text-width-medium Tables have always been perfect for displaying facts and numbers. Now you can benefit from using them on your website
+
+  section.section-40.bg-default.text-center
+    .container
+      +table('table-custom-primary')
+  ='\n'
+
+  section.section-40.bg-default.text-center
+    .container
+      +table('table-custom-gray-3')
+  ='\n'
+
+  section.section-md.bg-default.text-center
+    .container
+      +table(['table-custom-primary', 'table-custom-striped'])
+  ='\n'
+
+  // Page Footer
+  include ../sections/_footer-default

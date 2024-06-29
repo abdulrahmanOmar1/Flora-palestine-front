@@ -1,0 +1,111 @@
+header.page-header
+	// RD Navbar
+	.rd-navbar-wrap
+		nav.rd-navbar(
+			data-layout='rd-navbar-fixed',
+			data-md-device-layout='rd-navbar-fixed',
+			data-lg-device-layout="rd-navbar-sidebar",
+			data-xl-device-layout="rd-navbar-sidebar",
+			data-xxl-device-layout="rd-navbar-sidebar",
+			data-sm-layout='rd-navbar-fixed',
+			data-md-layout='rd-navbar-fixed',
+			data-lg-layout='rd-navbar-sidebar',
+			data-xl-layout='rd-navbar-sidebar',
+			data-xxl-layout='rd-navbar-sidebar',
+			data-lg-hover-on="false",
+			data-sm-auto-height='false',
+			data-md-auto-height='false',
+			data-lg-auto-height='false',
+			data-xl-auto-height='false',
+			data-xxl-auto-height='false',
+			data-md-stick-up-offset="60px",
+			data-lg-stick-up-offset="33px",
+			data-stick-up='true',
+			data-sm-stick-up='true',
+			data-md-stick-up='true',
+			data-lg-stick-up='true',
+			data-xl-stick-up='true',
+			data-xxl-stick-up='true'
+		)
+			.rd-navbar-collapse-toggle(data-rd-navbar-toggle='.rd-navbar-collapse')
+				span
+
+			.rd-navbar-aside-outer
+				.rd-navbar-inner
+					.rd-navbar-panel
+
+						// RD Navbar Toggle
+						button.rd-navbar-toggle(data-rd-navbar-toggle='.rd-navbar-nav-wrap')
+							span
+
+						// RD Navbar Brand
+						.rd-navbar-brand.mobile-element
+							a.brand-name(href='index.html')
+								+img(config.logoGray2)
+
+						// RD Navbar Toggle
+						button.rd-navbar-sidebar-toggle(data-rd-navbar-toggle='.rd-navbar-sidebar-inner')
+							span
+
+						.rd-navbar-aside.rd-navbar-collapse
+							address.contact-info
+								ul.list-address
+									li
+										.unit.align-items-center.unit-spacing-icon.flex-row
+											.unit-left
+												span.icon.icon-md.icon-primary.fa-phone
+											.unit-body.list-tel
+												.p.tel
+													a(href='tel:#') 1 (800) 123 1234
+												.p.tel
+													a(href='tel:#') 1 (800) 123 1235
+
+									li
+										.unit.align-items-center.unit-spacing-icon.flex-row
+											.unit-left
+												span.icon.icon-md.icon-primary.fa-home
+											.unit-body
+												a.text-middle.address(href='contacts.html') 227 Marion Street,
+													br
+													| Columbia, SC 29201
+
+									li
+										.unit.align-items-center.unit-spacing-icon.flex-row
+											.unit-left
+												span.icon.icon-md.icon-primary.fa-clock-o
+											.unit-body
+												.p Mon - Sat 8.00 - 18.00
+												.p Sunday CLOSED
+
+			.rd-navbar-sidebar-inner
+				// RD Navbar Brand
+				.rd-navbar-brand.desktop-element
+					a.brand-name(href='index.html')
+						+img(config.logoGray2)
+
+				.rd-navbar-nav-wrap
+					+navigation( menu )
+
+					.sidebar-form
+						include ../sections/_form-newsletter
+
+					.sidebar-list-social
+						+widget-list([
+							{
+								"icon": "fa fa-facebook",
+								"href": "#"
+							},
+							{
+								"icon": "fa fa-google-plus",
+								"href": "#"
+							},
+							{
+								"icon": "fa fa-linkedin",
+								"href": "#"
+
+							},
+							{
+								"icon": "fa fa-twitter",
+								"href": "#"
+							}
+						], 'text-primary', '')

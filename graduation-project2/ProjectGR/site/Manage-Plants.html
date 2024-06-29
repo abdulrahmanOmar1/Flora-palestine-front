@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>Manage-Plants</title>
+    <link rel="stylesheet" href="css/Manage-Plants.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="account.html">Account</a></li>
+            </ul>
+        </nav>
+        <div class="header-content">
+            <img src="images/logologin.png" alt="Logo" class="logo">
+            <h1>Welcome Back, Admin</h1>
+        </div>
+    </header>
+    <div class="container">
+        <button id="addPlantBtn" class="btn blue">Add Plant</button>
+        <input type="text" id="searchInput" placeholder="Search for plant names...">
+        <select id="familyFilter">
+            <option value="all">All Families</option>
+        </select>
+        <table>
+            <thead>
+                <tr>
+                    <th>Serial No.</th>
+                    <th>Plant Name</th>
+                    <th>Scientific Name</th>
+                    <th>Family</th>
+                    <th>Image</th>
+                    <th>Description</th>
+                    <th>Usage</th>
+                    <th>Delete</th>
+                    <th>Update</th>
+                </tr>
+            </thead>
+            <tbody id="plantTableBody">
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Add Plant Modal -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <h2>Add New Plant</h2>
+            <input type="text" id="newPlantName" placeholder="Enter plant name">
+            <input type="text" id="newScientificName" placeholder="Enter scientific name">
+            <select id="newFamily">
+                <!-- Families will be dynamically filled from the backend -->
+            </select>
+            <input type="file" id="newPlantImage">
+            <textarea id="newPlantDescription" placeholder="Enter description"></textarea>
+            <textarea id="newPlantUsage" placeholder="Enter usage"></textarea>
+            <button class="btn blue" onclick="addPlant()">Save Changes</button>
+            <button class="btn" onclick="closeModal()">Close</button>
+        </div>
+    </div>
+
+    <!-- Update Plant Modal -->
+    <div id="update-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeUpdateModal()">&times;</span>
+            <h2>Update Plant</h2>
+            <input type="text" id="updatePlantName" placeholder="Enter plant name">
+            <input type="text" id="updateScientificName" placeholder="Enter scientific name">
+            <select id="updateFamily">
+                <!-- Families will be dynamically filled from the backend -->
+            </select>
+            <input type="file" id="updatePlantImage">
+            <textarea id="updatePlantDescription" placeholder="Enter description"></textarea>
+            <textarea id="updatePlantUsage" placeholder="Enter usage"></textarea>
+            <button class="btn green" onclick="saveChanges()">Save Changes</button>
+            <button class="btn" onclick="closeUpdateModal()">Close</button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="js/Manage-Plants.js"></script>
+</body>
+</html>

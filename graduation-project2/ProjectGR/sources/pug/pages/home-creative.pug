@@ -1,0 +1,228 @@
+extends  ../_skeleton
+
+//- Includes
+include ../elements/_icon-list
+include ../elements/_post
+
+block variables
+	- var pageName = 'Home creative'
+
+block title
+	title= pageName
+
+block page
+	// Page Header
+	include ../sections/_header-sidebar
+
+	section.section-lg.section-lg-top-120.parallax-container.form-creative(data-parallax-img='images/bg-home3-1546x1099.jpg')
+		.parallax-content
+			.container.container-xlg-left.container-xlg-inset-0
+				.row.row-50.justify-content-center.justify-content-xxl-start.align-items-md-end.flex-md-row-reverse
+					.col-xl-5.col-md-6
+						h4 We create a pleasant & cheerful ambience
+						h2
+							span.icon.icon-xmd.fl-great-icon-set-mobile226
+							a(href='tel:#') +1 (800) 123 1264
+						a(href="#").button.button-md.button-primary.offset-bottom-0 Get free quote
+							include ../elements/_arrow-down
+
+					.col-lg-6.col-md-6
+						include ../elements/_form-request
+
+	section.section-md.bg-default
+		.container.container-xlg-left
+			h2 Welcome!
+			h6.fw-bold.offset-top-2 INDUSTRY-LEADING Expertise
+			.row.row-50.justify-content-center
+				.col-xl-7.col-lg-6
+					p.big Beautiful lawn is an industry-leading landscaping, lawn care, and snow removal company. We have established a proven system that allows us to provide exceptional grounds care services and customized lawn solutions to both commercial and residential clients.
+					.row.row-30.justify-content-center.justify-content-xl-start
+						.col-xl-5.col-md-6.col-sm-10.wow.fadeInUp(data-wow-delay=".1s")
+							+icon({
+								unitClass: 'unit-spacing-icon flex-column flex-md-row flex-lg-column flex-xl-row text-lg-center text-xl-start',
+								titleClass: 'heading-6',
+								classIcon: 'icon-gray-dark icon-sm fl-great-icon-set-alarm49',
+								title: 'Anywhere, Anytime',
+								content: 'Beautiful Lawn Mowing comes to you at your premises be it a home or business.'
+							})
+
+						.col-md-6.col-sm-10.wow.fadeInUp(data-wow-delay=".2s")
+							+icon({
+								unitClass: 'unit-spacing-icon flex-column flex-md-row flex-lg-column flex-xl-row text-lg-center text-xl-start',
+								titleClass: 'heading-6',
+								classIcon: 'icon-gray-dark icon-sm fl-great-icon-set-credit95',
+								title: 'Value For Money',
+								content: 'Our goal is to always provide a value for money service which appeals to people from all walks of life.'
+							})
+
+						.col-xl-5.col-md-6.col-sm-10.wow.fadeInUp(data-wow-delay=".3s")
+							+icon({
+								unitClass: 'unit-spacing-icon flex-column flex-md-row flex-lg-column flex-xl-row text-lg-center text-xl-start',
+								titleClass: 'heading-6',
+								classIcon: 'icon-gray-dark icon-sm fl-great-icon-set-favorites5',
+								title: 'Excellent Service',
+								content: 'We provide our clients with service of exceptional quality to satisfy their lawn care needs.'
+							})
+
+
+						.col-md-6.col-sm-10.wow.fadeInUp(data-wow-delay=".4s")
+							+icon({
+								unitClass: 'unit-spacing-icon flex-column flex-md-row flex-lg-column flex-xl-row text-lg-center text-xl-start',
+								titleClass: 'heading-6',
+								classIcon: 'icon-gray-dark icon-sm fl-great-icon-set-like77',
+								title: '100% Satisfaction Guaranteed!',
+								content: 'If for any reason you are disappointed with our service, we will quickly re - perform the service to your liking.'
+							})
+
+				.col-xl-5.col-lg-6
+					.row.row-30.row-md-50.offset-negative-right-xl-115
+						include ../sections/_counter-creative
+
+	section.text-center
+		.container-fluid.container-fluid-inset-0
+			.row.row-0.justify-content-center.g-0
+				.col-lg-6
+					.box-project.box-project__creative.bg-image.bg-project-3
+						.box-project-body
+							h4 Latest project
+							a(href="#").button.button-custom.button-md.button-primary.arrow-bottom
+								| Kinderhook Retreat project
+								span.text-small New York, NY
+								include ../elements/_arrow-down
+
+
+				.col-lg-6.bg-accent
+					.section-xlg.inset-horizontal-15
+						h2 Get up to $40 off
+						h3.offset-top-0 when you refer a friend to Beautiful Lawn!
+						p.block-centered.text-width-small.offset-top-25 Each time you refer a friend or neighbor to us (and they sign up for our fertilization program you and your friend will both receive $40 each. Referrals are the best compliment you can give us!
+						a(href="#").button.button-white Refer A Friend
+							include ../elements/_arrow-down
+
+	section.section-md.bg-default
+		.container-fluid.container-xlg-inset-right-56
+			h2 From the blog
+			.owl-carousel.owl-creative.owl-nav-default.owl-nav-creative(
+				data-items='1',
+				data-md-items="2",
+				data-xl-items="3"
+				data-stage-padding='0',
+				data-loop='true',
+				data-margin='20',
+				data-autoplay='true',
+				data-owl= {
+					dots: true,
+					nav: true
+				}
+			)
+				+post({
+					postClass: 'post-creative box-outline',
+					numberDate: '2018-03-31',
+					postDate: 'March 31, 2018',
+					postTitle: 'Do You Love to Make People Smile?',
+					postImg: 'post-creative-1-470x270',
+					postContent: 'If you call the Beautiful Lawn office you will be  greeted with a cheerful voice and a person who asks how they can make you smile today. That is our number one goal, and right now  we...',
+					arrowModern: 'icon-rotate-180'
+				})
+
+				+post({
+					postClass: 'post-creative box-outline',
+					numberDate: '2018-03-31',
+					postDate: 'March 31, 2018',
+					postTitle: 'How to Mow Your Lawn',
+					postImg: 'post-creative-2-470x270',
+					postContent: 'Mowing the lawn is the one of the most fundamental steps for taking care of the lawn.If you are mowing the lawn yourself, and if you have the standard size of lawn, using a small  push behind...',
+					arrowModern: 'icon-rotate-180'
+				})
+
+				+post({
+					postClass: 'post-creative box-outline',
+					numberDate: '2018-03-31',
+					postDate: 'March 31, 2018',
+					postTitle: 'Fertilizing',
+					postImg: 'post-creative-3-470x270',
+					postContent: 'Once the season has started, one of the first steps that should be done towards getting a healthy lawn is to fertilize.The nutrients will act as an alarm clock for the roots, waking the lawn out...',
+					arrowModern: 'icon-rotate-180'
+				})
+
+				+post({
+					postClass: 'post-creative box-outline',
+					numberDate: '2018-03-31',
+					postDate: 'March 31, 2018',
+					postTitle: 'Do You Love to Make People Smile?',
+					postImg: 'post-creative-1-470x270',
+					postContent: 'If you call the Beautiful Lawn office you will be  greeted with a cheerful voice and a person who asks how they can make you smile today. That is our number one goal, and right now  we...',
+					arrowModern: 'icon-rotate-180'
+				})
+
+				+post({
+					postClass: 'post-creative box-outline',
+					numberDate: '2018-03-31',
+					postDate: 'March 31, 2018',
+					postTitle: 'How to Mow Your Lawn',
+					postImg: 'post-creative-2-470x270',
+					postContent: 'Mowing the lawn is the one of the most fundamental steps for taking care of the lawn.If you are mowing the lawn yourself, and if you have the standard size of lawn, using a small  push behind...',
+					arrowModern: 'icon-rotate-180'
+				})
+
+				+post({
+					postClass: 'post-creative box-outline',
+					numberDate: '2018-03-31',
+					postDate: 'March 31, 2018',
+					postTitle: 'Fertilizing',
+					postImg: 'post-creative-3-470x270',
+					postContent: 'Once the season has started, one of the first steps that should be done towards getting a healthy lawn is to fertilize.The nutrients will act as an alarm clock for the roots, waking the lawn out...',
+					arrowModern: 'icon-rotate-180'
+				})
+
+	section.counter-index
+		.container-fluid.container-fluid-inset-0
+			.row.row-0.g-0
+				.col-lg-4
+					.row.row-0.g-0
+						.col-lg-12.col-md-6
+							.bg-image.bg-services-1.box-services-height
+
+						.col-lg-12.col-md-6
+							.box-services.box-services-creative.box-services-decor-top.box-services-height.bg-accent
+								.box-services-content
+									.counter-index-item
+										.counter-wrap
+									h6: a(href='#') Aeration Service
+									p Our professional lawn aeration service restores your lawn's health and vibrancy by allowing air and water to penetrate deep into the soil.
+									p Feel free to contact us.
+
+								include ../elements/_arrow-left
+
+				.col-lg-4
+					.row.row-0.g-0
+						.col-lg-12.col-md-6.order-1.order-md-0
+							.box-services.box-services-creative.box-services-decor-bottom.box-services-height.bg-accent
+								.box-services-content
+									.counter-index-item
+										.counter-wrap
+									h6: a(href='#') Revive – Wetting Agent
+									p Using this natural organic soil treatment combined with the Weed Wipeout and Fertilization program it will revive your lawn in mid summer when it is heat stressed and the soil temperatures are at their hottest.
+
+								include ../elements/_arrow-left
+
+						.col-lg-12.col-md-6
+							.bg-image.bg-services-2.box-services-height
+
+				.col-lg-4
+					.row.row-0.g-0
+						.col-lg-12.col-md-6
+							.bg-image.bg-services-3.box-services-height
+
+						.col-lg-12.col-md-6
+							.box-services.box-services-creative.box-services-decor-top.box-services-height.bg-accent
+								.box-services-content
+									.counter-index-item
+										.counter-wrap
+									h6: a(href='#') Pest Control Service
+									p Our lawn pest control department is highly trained and licensed to rid your lawn of most pests including whitefly, grubs, and chinch bugs.
+
+								include ../elements/_arrow-left
+
+	// Page Footer
+	include ../sections/_footer-creative

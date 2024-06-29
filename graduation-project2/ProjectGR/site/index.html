@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html class="wide wow-animation" lang="en">
+  <head>
+    <!-- Site Title-->
+    <title>Home-Flora Palestine</title>
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <link rel="icon" href="images/palestine.png" type="image/x-icon">
+    <!-- Stylesheets-->
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Montserrat:400,700%7CLato:400,400i,700">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/fonts.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/shop.css">
+    <link href="img/favicon.ico" rel="icon">
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500;600;700&family=Open+Sans:wght@400;500&display=swap" rel="stylesheet">  
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Libraries Stylesheet -->
+    <link href="lib/animate/animate.min.css" rel="stylesheet">
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Template Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+    <style>
+      #searchResults {
+        max-height: 200px; /* Maximum height of the dropdown */
+        overflow-y: auto; /* Scroll if the content exceeds max-height */
+        border: 1px solid #ccc; /* Add border */
+        z-index: 1000; /* Make sure it appears above other elements */
+      }
+      .pagination {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+      }
+      .page-item {
+        margin: 0 5px;
+      }
+      .page-item a {
+        padding: 8px 16px;
+        border: 1px solid #ccc;
+        color: #007bff;
+        text-decoration: none;
+        border-radius: 5px;
+      }
+      .page-item.active a {
+        background-color: #007bff;
+        color: white;
+        border-color: #007bff;
+      }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <!-- Page preloader-->
+    <div class="preloader">
+      <div>
+        <div class="preloader-body">
+          <div class="loader"><span class="block-1"></span><span class="block-2"></span><span class="block-3"></span><span class="block-4"></span><span class="block-5"></span><span class="block-6"></span><span class="block-7"></span><span class="block-8"></span><span class="block-9"></span><span class="block-10"></span><span class="block-11"></span><span class="block-12"></span><span class="block-13"></span><span class="block-14"></span><span class="block-15"></span><span class="block-16"></span></div>
+        </div>
+      </div>
+    </div>
+    <!-- Page-->
+    <div class="text-center text-md-start page">
+      <!-- Page Header-->
+
+      <header class="page-header header-classic">
+        <!-- RD Navbar-->
+        <div class="rd-navbar-wrap">
+          <nav class="rd-navbar" data-layout="rd-navbar-fixed" data-md-device-layout="rd-navbar-fixed" data-lg-device-layout="rd-navbar-fullwidth" data-xl-device-layout="rd-navbar-fullwidth" data-xxl-device-layout="rd-navbar-fullwidth" data-sm-layout="rd-navbar-fixed" data-md-layout="rd-navbar-fixed" data-lg-layout="rd-navbar-fullwidth" data-xl-layout="rd-navbar-fullwidth" data-xxl-layout="rd-navbar-fullwidth" data-md-stick-up-offset="73px" data-lg-stick-up-offset="93px" data-stick-up="true" data-sm-stick-up="true" data-md-stick-up="true" data-lg-stick-up="true" data-xl-stick-up="true" data-xxl-stick-up="true">
+            <div class="rd-navbar-collapse-toggle" data-rd-navbar-toggle=".rd-navbar-collapse"><span></span></div>
+           
+            <div class="rd-navbar-inner">
+              <!-- RD Navbar Panel-->
+              <div class="rd-navbar-aside-wrap">
+                <div class="logo" >
+                  <a href="index.html" style="font-family: 'Cambria', 'Cochin', 'Georgia', 'Times', 'Times New Roman', serif; color: white; text-decoration: none;">
+                    <h3 style="color: white;">Flora Palestine</h3>
+                </a>
+                </div>
+                <div class="rd-navbar-nav-wrap">
+                  <ul class="rd-navbar-nav">
+                    <li class="rd-nav-item active"><a class="rd-nav-link" href="index.html">Home</a></li>
+                    <li class="rd-nav-item"><a class="rd-nav-link" href="#">About us</a>
+                      <ul class="rd-menu rd-navbar-dropdown">
+                        <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="about-us.html">About us</a></li>
+                        <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="careers.html">Careers</a></li>
+                        <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="faq.html">FAQ</a></li>
+                        <li class="rd-dropdown-item active"><a class="rd-dropdown-link" href="Our vision.html">Our vision</a></li>
+                      </ul>
+                    </li>
+                    <li class="rd-nav-item"><a class="rd-nav-link" href="services.html">Services</a></li>
+                    <li class="rd-nav-item"><a class="rd-nav-link" href="booking.html">Booking</a></li>
+                    <li class="rd-nav-item"><a class="rd-nav-link" href="#">scientific articles</a>
+                      <ul class="rd-menu rd-navbar-dropdown">
+                        <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="blog.html">scientific articles</a></li>
+                        <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="single-post.html">Single scientific articles</a></li>
+                      </ul>
+                    </li>
+                    <li class="rd-nav-item"><a class="rd-nav-link" href="#">Shop</a>
+                      <ul class="rd-menu rd-navbar-dropdown">
+                        <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="http://localhost:9090/">Shop</a></li>
+                      </ul>
+                    </li>
+                    <li class="rd-nav-item"><a class="rd-nav-link" href="contacts.html">Contacts</a></li>
+                    <li class="rd-nav-item">
+                      <svg class="button-santos" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges">
+                        <rect class="shape" width="100%" height="100%" x="0" y="0"></rect>
+                      </svg>
+                    </li>
+                  </ul>
+                </div>
+                <ul class="list-inline desktop-element">
+                  <li><a class="fa fa-user text-white" href="http://127.0.0.1:9090/login" style="font-size: 24px;"></a></li>
+
+                </ul>
+              </div>
+            </div>
+          </nav>
+        </div>
+      </header>
+
+      <section class="swiper-classic swiper-custom-container swiper-custom-nav">
+        <!-- Swiper-->
+        <div class="swiper-container swiper-slider swiper-bg swiper-scale-effect" data-swiper='{"autoplay":{"delay":4000},"effect":"fade"}'>
+          <div class="swiper-wrapper">
+            <div class="swiper-slide" data-slide-bg="images/swiper1-slide1-1920x764.jpg">
+              <div class="swiper-slide-cover" style="background: url(images/swiper1-slide1-1920x764.jpg) center; background-size: cover;"></div>
+            </div>
+            <div class="swiper-slide" data-slide-bg="images/swiper1-slide2-1920x764.jpg">
+              <div class="swiper-slide-cover" style="background: url(images/swiper1-slide2-1920x764.jpg) center; background-size: cover;"></div>
+            </div>
+            <div class="swiper-slide" data-slide-bg="images/swiper1-slide3-1920x764.jpg">
+              <div class="swiper-slide-cover" style="background: url(images/swiper1-slide3-1920x764.jpg) center; background-size: cover;"></div>
+            </div>
+          </div>
+        </div>
+        <div class="swiper-bg-content">
+          <div class="swiper-slide-caption">
+            <div class="swiper-slide-content">
+              <div class="container">
+                <div class="row">
+                  <div class="col-sm-12">
+                    <h4>Discover the beauty of Palestinian nature</h4>
+                    <ul>
+                      <li>
+                        <div class="input-group" style="padding-top: 10px; position: relative;">
+                          <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" id="searchInput" autocomplete="off" />
+                          <button type="button" class="btn btn-outline-primary" data-mdb-ripple-init>search</button>
+                          <div class="dropdown-menu" id="searchResults" style="position: absolute; top: 100%; left: 0; right: 0;"></div>
+                        </div>
+                      </li>
+                    </ul>
+                    <div class="group-xs"><a class="button button-md button-primary" href="#plants">Discover plants<span class="icon-arrow icon-rotate-90 material-icons-keyboard_backspace"></span></a><a class="button button-md button-primary-dark" href="">Our services<span class="icon-arrow icon-rotate-90 material-icons-keyboard_backspace"></span></a></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="container box-nav box-nav-small box-nav__classic">
+          <!-- Swiper Navigation-->
+          <div class="swiper-button-prev">
+            <span class="icon-arrow material-icons-keyboard_backspace"></span>
+          </div>
+          <div class="wrap-counter">
+            <!-- Swiper Pagination-->
+            <div class="swiper-pagination"></div>
+            <div class="divider-counter">/</div>
+            <div class="total-counter">03</div>
+          </div>
+          <!-- Swiper Navigation-->
+          <div class="swiper-button-next">
+            <span class="icon-arrow material-icons-keyboard_backspace"></span>
+          </div>
+        </div>
+      </section>
+      <section class="section-xs bg-default">
+        <div class="container">
+          <div class="row row-50">
+            <div class="col-lg-3 col-md-4">
+              <h3>Families</h3>
+              <ul class="list list-marked list-bold d-inline-block d-md-block">
+                <!-- سيتم تحديث العائلات ديناميكيا هنا -->
+              </ul>
+            </div>
+            <div class="col-lg-9 col-md-8">
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <h3 id="plants" class="mb-0">The latest plants</h3>
+                <button class="btn btn-outline-primary" id="toggleSearchButton">Search</button>
+              </div>
+              <div class="input-group mb-3 d-none" id="searchContainer">
+                <input type="text" class="form-control" placeholder="Search plants..." id="searchInputSmall" aria-label="Search plants">
+                <div class="input-group-append">
+                  <button class="btn btn-outline-secondary" type="button" id="searchButtonSmall">Search</button>
+                </div>
+                <div class="dropdown-menu" id="searchResultsSmall" style="position: absolute; top: 100%; left: 0; right: 0;"></div>
+              </div>
+              <div class="row row-30 plants-container">
+                <!-- سيتم تحديث النباتات ديناميكيا هنا -->
+              </div>
+              <div class="pagination">
+                <!-- سيتم تحديث التصفح ديناميكيا هنا -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>      
+      <section class="section-md parallax-container" data-parallax-img="images/parallax-1-1920x800.jpg">
+        <div class="parallax-content">
+          <div class="container">
+            <div class="row row-30 row-md-50 justify-content-center">
+              <div class="col-lg-3 col-md-5 col-xs-6">
+                <div class="box-counter box-counter-modern">
+                  <div class="counter counter-plus" data-speed="1000">300</div>
+                  <p class="box-counter-title" style="padding: 10px;">number of orders</p>
+                </div>
+              </div>
+              <div class="col-lg-3 col-md-5 col-xs-6">
+                <div class="box-counter box-counter-modern" >
+                  <div class="counter counter-plus"data-speed="1000">500+</div>
+                  <p class="box-counter-title">The most visited plants</p>
+                </div>
+              </div>
+              <div class="col-lg-3 col-md-5 col-xs-6">
+                <div class="box-counter box-counter-modern">
+                  <div class="counter" data-speed="1000">25</div>
+                  <p class="box-counter-title"style="padding: 10px;">Images included</p>
+                </div>
+              </div>
+              <div class="col-lg-3 col-md-5 col-xs-6">
+                <div class="box-counter box-counter-modern">
+                  <div class="counter counter-plus" data-speed="1000">400</div>
+                  <p class="box-counter-title">number different plants</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="section-md bg-accent">
+        <div class="container">
+          <h2 class="text-primary-dark">Palestinian plants are an integral part of our biodiversity protecting them from theft and Judaization means preserving our Palestinian identity</h2>
+        </div>
+      </section>
+      <!-- Footer Start -->
+      <div class="container-fluid bg-dark text-light footer mt-5 py-5 wow fadeIn" data-wow-delay="0.1s">
+        <div class="container py-5">
+            <div class="row g-5">
+                <div class="col-lg-3 col-md-6">
+                    <h4 class="text-white mb-4">Our Office</h4>
+                    <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>palestine</p>
+                    <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+9725900000</p>
+                    <p class="mb-2"><i class="fa fa-envelope me-3"></i>FloraPalestine@example.com</p>
+                    <div class="d-flex pt-2">
+                        <a class="btn btn-square btn-outline-light rounded-circle me-2" href=""><i class="fab fa-twitter"></i></a>
+                        <a class="btn btn-square btn-outline-light rounded-circle me-2" href=""><i class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-square btn-outline-light rounded-circle me-2" href=""><i class="fab fa-youtube"></i></a>
+                        <a class="btn btn-square btn-outline-light rounded-circle me-2" href=""><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h4 class="text-white mb-4">Services</h4>
+                    <a class="btn btn-link" href="">Landscaping</a>
+                    <a class="btn btn-link" href="">Pruning plants</a>
+                    <a class="btn btn-link" href="">plants</a>
+                    <a class="btn btn-link" href="">Pruning plants</a>
+                    <a class="btn btn-link" href="">Pruning plants</a>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h4 class="text-white mb-4">Quick Links</h4>
+                    <a class="btn btn-link" href="">About Us</a>
+                    <a class="btn btn-link" href="">Contact Us</a>
+                    <a class="btn btn-link" href="">Our Services</a>
+                    <a class="btn btn-link" href="">Terms & Condition</a>
+                    <a class="btn btn-link" href="">Support</a>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                  <h4 class="text-white mb-4">Newsletter</h4>
+                  <form class="newsletter-form">
+                      <div class="position-relative w-100">
+                          <input class="form-control bg-light border-light w-100 py-3 ps-4 pe-5" type="text" placeholder="Your email">
+                          <button type="submit" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">SignUp</button>
+                      </div>
+                  </form>
+              </div>
+            </div>
+        </div>
+      </div>
+      <!-- Footer End -->
+      <!-- Copyright Start -->
+      <div class="container-fluid copyright py-4">
+          <div class="container">
+              <div class="row">
+                  <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                      &copy; <a class="border-bottom" href="#">FloraPalestine</a>, All Right Reserved 2024.
+                  </div>
+              </div>
+          </div>
+      </div>
+      <!-- Copyright End -->
+    <!-- Global Mailform Output-->
+    <div class="snackbars" id="form-output-global"></div>
+    <!-- Javascript-->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="js/core.min.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/index.js"></script>
+    </div>
+  </body>
+</html>

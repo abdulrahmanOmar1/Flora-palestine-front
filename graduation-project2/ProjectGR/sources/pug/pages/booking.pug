@@ -1,0 +1,23 @@
+extends  ../_skeleton
+
+//- Includes
+include ../elements/_box-team
+
+block variables
+	- var pageName = 'Booking'
+
+block page
+	// Page Header
+	include ../sections/_header-default
+	+breadcrumbs-section({ img: 'breadcrumbs-team-1920x974' })
+
+	section.section-md.bg-default
+		.container
+			h2=pageName
+			.row.row-50
+				.col-xl-9
+					include ../elements/_form-booking
+
+
+	// Page Footer
+	include ../sections/_footer-default

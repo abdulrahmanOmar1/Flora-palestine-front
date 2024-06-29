@@ -1,0 +1,117 @@
+/*
+*
+* Flex Grid system
+* --------------------------------------------------
+*/
+
+
+
+// Base Grid Styles
+// --------------------------------------------------
+.container {
+  &.container-fluid-inset-0 {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+.container-fluid {
+  &.container-fluid-inset-0 {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+.container-inset-owl {
+  @include media-breakpoint-between(lg, xxl) {
+    padding-left: 90px;
+    padding-right: 90px;
+  }
+}
+
+.container-fluid-owl {
+  padding-left: 15px;
+  padding-right: 15px;
+
+  @include media-breakpoint-up(lg) {
+    padding-left: 75px;
+    padding-right: 75px;
+  }
+}
+
+
+
+@include media-breakpoint-up( xxl ) {
+  .container-xlg-left {
+    margin-left: 0;
+  }
+
+  .container-xlg-inset-0 {
+    padding-right: 0;
+    padding-left: 0;
+    max-width: 1170px;
+  }
+
+  .container-xlg-inset-right-56 {
+    padding-right: 56px;
+  }
+}
+
+.row.row-spacing-10 {
+  margin-left: -5px;
+  margin-right: -5px;
+  [class*='col'] {
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+}
+
+.offset-negative-right-xl-115 {
+  @include media-breakpoint-up( xxl ) {
+    margin-right: -115px;
+  }
+}
+
+@include media-breakpoint-up( xxl ) {
+  .row > .col-xlg-2 {
+    -webkit-flex-basis: 16.66667%;
+    -ms-flex-preferred-size: 16.66667%;
+    flex-basis: 16.66667%;
+    max-width: 16.66667%;
+  }
+}
+
+// grid 18 columns
+// --------------------------------------------------
+// Create IE 9 and below degradation styles
+html.lt-ie-10 * + .row,
+* + .row {
+  margin-top: 30px;
+}
+
+html.lt-ie-10 * + .row-custom,
+* + .row-custom {
+  //margin-top: $range-ws-2;
+}
+
+html.lt-ie-10 * + .row-xxs,
+* + .row-xxs {
+  margin-top: 10px;
+}
+
+html.lt-ie-10 * + .row-xs,
+* + .row-xs {
+  margin-top: 20px;
+}
+
+html.lt-ie-10 * + [class*='cell-'],
+* + [class*='cell-'],
+html.lt-ie-10 * + .row-sm,
+* + .row-sm {
+  margin-top: 20px;
+}
+
+html.lt-ie-10 * + .row-xl,
+* + .row-xl {
+  //margin-top: $range-ws-lg;
+}

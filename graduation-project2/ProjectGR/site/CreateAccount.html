@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/CreateAccount.css">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Montserrat:400,700%7CLato:400,400i,700">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/fonts.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="images/palestine.png" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Montserrat:400,700%7CLato:400,400i,700">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/fonts.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/shop.css">
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500;600;700&family=Open+Sans:wght@400;500&display=swap" rel="stylesheet">  
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/animate/animate.min.css" rel="stylesheet">
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <title>CreateAccount-Flora Palestine</title>
+</head>
+<body>
+    <section class="h-100 gradient-form" style="background-color: #eee;">
+        <div class="container py-5 h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-xl-10">
+                    <div class="card rounded-3 text-black">
+                        <div class="row g-0">
+                            <div class="col-lg-6">
+                                <div class="card-body p-md-5 mx-md-4">
+                                    <div class="text-center">
+                                        <img src="images/logologin.png" style="width: 185px;" alt="logo">
+                                        <h4 class="mt-1 mb-5 pb-1">Registration Flora Palestine</h4>
+                                    </div>
+                                    <div id="message" class="alert alert-warning" style="display: none;"></div> <!-- عنصر لعرض الرسائل -->
+
+                                    <form>
+                                        <div class="form-outline mb-4">
+                                            <input type="text" id="usernameInput" class="form-control" placeholder="Enter Your User Name"/>
+                                        </div>
+                                        <div class="form-outline mb-4">
+                                           
+                                          <input type="password" id="passwordInput" class="form-control" placeholder="Enter Your Password"/>
+                                        
+                                        </div>
+                                        <div class="form-outline mb-4">
+                                            <input type="password" id="confirmPasswordInput" class="form-control" placeholder="Confirm Password"/>
+                                        </div>
+                                        <div class="form-outline mb-4">
+                                            <input type="email" id="emailInput" class="form-control" placeholder="Enter your Email"/>
+                                        </div>
+                                        <div class="form-outline mb-4">
+                                            <input type="text" id="phoneInput" class="form-control" placeholder="Enter your Phone"/>
+                                        </div>
+                                        <div class="form-outline mb-4">
+                                            <input type="number" id="ageInput" class="form-control" placeholder="Enter your Age"/>
+                                        </div>
+                                        <div class="form-outline mb-4">
+                                            <input type="text" id="genderInput" class="form-control" placeholder="Enter your Gender"/>
+                                        </div>
+                                        <div class="form-outline mb-4">
+                                            <label for="birthdateInput">Enter your birthdate</label>
+                                            <input type="date" id="birthdateInput" class="form-control"/>
+                                        </div>
+                                        <div class="form-outline mb-4">
+                                            <label for="profilePictureInput">Upload your profile picture</label>
+                                            <input type="file" id="profilePictureInput" class="form-control" accept="image/*"/>
+                                        </div>
+                                        <div class="pt-1 mb-4">
+                                            <button class="btn btn-success btn-lg btn-block" type="button">Registration</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 d-flex align-items-center gradient-custom-2">
+                                <div class="text-white px-3 py-4 p-md-5 mx-md-4"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+      <!-- Footer Start -->
+      <div class="container-fluid bg-dark text-light footer mt-5 py-5 wow fadeIn" data-wow-delay="0.1s">
+        <div class="container py-5">
+            <div class="row g-5">
+                <div class="col-lg-3 col-md-6">
+                    <h4 class="text-white mb-4">Our Office</h4>
+                    <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>palestine</p>
+                    <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+9725900000</p>
+                    <p class="mb-2"><i class="fa fa-envelope me-3"></i>FloraPalestine@example.com</p>
+                    <div class="d-flex pt-2">
+                        <a class="btn btn-square btn-outline-light rounded-circle me-2" href=""><i class="fab fa-twitter"></i></a>
+                        <a class="btn btn-square btn-outline-light rounded-circle me-2" href=""><i class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-square btn-outline-light rounded-circle me-2" href=""><i class="fab fa-youtube"></i></a>
+                        <a class="btn btn-square btn-outline-light rounded-circle me-2" href=""><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h4 class="text-white mb-4">Services</h4>
+                    <a class="btn btn-link" href="">Landscaping</a>
+                    <a class="btn btn-link" href="">Pruning plants</a>
+                    <a class="btn btn-link" href="">plants</a>
+                    <a class="btn btn-link" href="">Pruning plants</a>
+                    <a class="btn btn-link" href="">Pruning plants</a>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h4 class="text-white mb-4">Quick Links</h4>
+                    <a class="btn btn-link" href="">About Us</a>
+                    <a class="btn btn-link" href="">Contact Us</a>
+                    <a class="btn btn-link" href="">Our Services</a>
+                    <a class="btn btn-link" href="">Terms & Condition</a>
+                    <a class="btn btn-link" href="">Support</a>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                  <h4 class="text-white mb-4">Newsletter</h4>
+                  <form class="newsletter-form">
+                      <div class="position-relative w-100">
+                          <input class="form-control bg-light border-light w-100 py-3 ps-4 pe-5" type="text" placeholder="Your email">
+                          <button type="submit" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">SignUp</button>
+                      </div>
+                  </form>
+              </div>
+              
+            </div>
+        </div>
+      </div>
+      <!-- Footer End -->
+
+      <!-- Copyright Start -->
+      <div class="container-fluid copyright py-4">
+          <div class="container">
+              <div class="row">
+                  <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                      &copy; <a class="border-bottom" href="#">FloraPalestine</a>, All Right Reserved 2024.
+                  </div>
+              </div>
+          </div>
+      </div>
+      <!-- Copyright End -->
+
+    <!-- Global Mailform Output-->
+    <div class="snackbars" id="form-output-global"></div>
+    <!-- Javascript-->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="js/core.min.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/index.js"></script>
+
+    
+    <script src="js/CreateAccount.js"></script>
+</body>
+</html>

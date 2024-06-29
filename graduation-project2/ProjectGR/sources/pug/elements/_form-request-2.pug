@@ -1,0 +1,32 @@
+//
+   Created by ragnar on 8/30/2018.
+
+.form-request
+  h4.offset-negative-md-top-9 Request an estimate
+  // RD Mailform
+  form.rd-mailform.text-start(data-form-output="form-output-global", data-form-type='forms', method='post', action='bat/rd-mailform.php')
+
+    .form-wrap
+      label.form-label(for="form-login-name-4") Your name
+      input#form-login-name-4.form-input(type="text" name="name" data-constraints='@Required')
+
+    .form-wrap
+      label.form-label(for="form-email-3") Your email
+      input#form-email-3.form-input(type="email" name="email" data-constraints="@Email @Required")
+
+    .form-wrap
+      //Select 2
+      select.form-input.select-filter(data-minimum-results-for-search="Infinity", data-constraints="@Required")
+        option(value="1") Landscape maintenance
+        option(value="2") Garden Maintenance
+        option(value="3") Lawn Mowing
+        option(value="4") Outdoor Lighting
+        option(value="5") Ice Removal
+
+    .form-wrap
+      label.form-label(for="form-message-3") Message
+      textarea#form-message-3.form-input(name="message" data-constraints="@Required")
+
+    .form-wrap.text-end
+      button(type="submit").button.button-primary Request a quote
+        include ../elements/_arrow-down

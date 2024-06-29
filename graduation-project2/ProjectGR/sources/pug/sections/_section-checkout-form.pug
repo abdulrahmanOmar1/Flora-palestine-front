@@ -1,0 +1,122 @@
+.col-xl-6
+	h3 Billing details
+
+	// RD Mailform
+	form.rd-mailform.form-checkout(data-form-output="form-output-global", data-form-type='contact', method='post', action='bat/rd-mailform.php')
+		.row.row-10.row-spacing-10
+			.col-sm-6
+				.form-wrap
+					label.form-label(for="contact-first-name-3") First name
+					input#contact-first-name-3.form-input(type="text" name="name" data-constraints='@Required')
+
+			.col-sm-6
+				.form-wrap
+					label.form-label(for="contact-last-name-3") Last name
+					input#contact-last-name-3.form-input(type="text" name="name" data-constraints='@Required')
+
+			.col-sm-12
+				.form-wrap
+					label.form-label(for="company-name") Company name
+					input#company-name.form-input(type="text" name="name" data-constraints='@Required')
+
+			.col-sm-6
+				.form-wrap
+					label.form-label(for="contact-email-3") Email address
+					input#contact-email-3.form-input(type="text" name="name" data-constraints='@Email')
+
+			.col-sm-6
+				.form-wrap
+					label.form-label(for="form-phone") Phone
+					input#form-phone.form-input(type="text" name="phone" data-constraints='@Numeric @Required')
+
+			.col-xl-12.col-sm-6
+				.form-wrap
+					label.form-label(for="form-country") Country
+					input#form-country.form-input(type="text" name="name" data-constraints='@Required')
+
+			.col-xl-12.col-sm-6
+				.form-wrap
+					label.form-label(for="form-street") Street address
+					input#form-street.form-input(type="text" name="name" data-constraints="@Required")
+
+			.col-xl-12.col-sm-6
+				.form-wrap
+					label.form-label(for="form-address") Apartment, suite, unit etc. #[span.hidden.d-md-inline-block (optional)]
+					input#form-address.form-input(type="text" name="name" data-constraints="@Required")
+
+			.col-xl-12.col-sm-6
+				.form-wrap
+					label.form-label(for="form-town") Town / City
+					input#form-town.form-input(type="text" name="name" data-constraints="@Required")
+
+			.col-sm-6
+				.form-wrap
+					label.form-label(for="form-country-2") Country
+					input#form-country-2.form-input(type="text" name="name" data-constraints='@Required')
+
+			.col-sm-6
+				.form-wrap
+					label.form-label(for="form-postcode") Postcode
+					input#form-postcode.form-input(type="text" name="name" data-constraints='@Required')
+			.col-sm-12
+				.form-wrap
+					.checkbox
+						label
+							input(name="input-group-radio", value="checkbox-1", type="checkbox")
+							| Create an account
+
+.col-xl-6
+	h3 Ship to a different address
+
+	// RD Mailform
+	form.rd-mailform.form-checkout(data-form-output="form-output-global", data-form-type='contact', method='post', action='bat/rd-mailform.php')
+		.row.row-10.row-spacing-10
+			.col-sm-6
+				.form-wrap
+					label.form-label(for="contact-first-name-2") First name
+					input#contact-first-name-2.form-input(type="text" name="name" data-constraints='@Required')
+
+			.col-sm-6
+				.form-wrap
+					label.form-label(for="contact-last-name-2") Last name
+					input#contact-last-name-2.form-input(type="text" name="name" data-constraints='@Required')
+
+			.col-sm-12
+				.form-wrap
+					label.form-label(for="company-name-2") Company name
+					input#company-name-2.form-input(type="text" name="name" data-constraints='@Required')
+
+			.col-xl-12.col-sm-6
+				.form-wrap
+					label.form-label(for="form-country-3") Country
+					input#form-country-3.form-input(type="text" name="name" data-constraints='@Required')
+
+			.col-xl-12.col-sm-6
+				.form-wrap
+					label.form-label(for="form-street-2") Street address
+					input#form-street-2.form-input(type="text" name="name" data-constraints="@Required")
+
+			.col-xl-12.col-sm-6
+				.form-wrap
+					label.form-label(for="form-address-2") Apartment, suite, unit etc. #[span.hidden.d-md-inline-block (optional)]
+					input#form-address-2.form-input(type="text" name="name" data-constraints="@Required")
+
+			.col-xl-12.col-sm-6
+				.form-wrap
+					label.form-label(for="form-town-2") Town / City
+					input#form-town-2.form-input(type="text" name="name" data-constraints="@Required")
+
+			.col-sm-6
+				.form-wrap
+					label.form-label(for="form-country-4") Country
+					input#form-country-4.form-input(type="text" name="name" data-constraints='@Required')
+
+			.col-sm-6
+				.form-wrap
+					label.form-label(for="form-postcode-2") Postcode
+					input#form-postcode-2.form-input(type="text" name="name" data-constraints='@Required')
+
+			.col-sm-12
+				.form-wrap
+					label.form-label(for="contact-message-2") Order notes
+					textarea#contact-message-2.form-input(name="message" data-constraints="@Required")

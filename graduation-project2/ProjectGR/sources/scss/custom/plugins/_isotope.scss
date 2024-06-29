@@ -1,0 +1,256 @@
+/*
+*
+* Isotope
+* --------------------------------------------------
+*/
+
+
+// Isotope animations
+
+@keyframes sprite-animation {
+  from {
+    background-position: 0 0; }
+}
+
+[data-isotope-layout] {
+  display: block;
+  transition: .4s all ease;
+  min-height: 160px;
+  z-index: 0;
+
+  .row {
+    margin-bottom: -30px;
+
+    > [class*="col-"] {
+      margin-top: 30px;
+    }
+  }
+
+  .row-narrow {
+    margin-bottom: -$grid-gutter-width;
+
+    > [class*="col-"] {
+      margin-top: $grid-gutter-width;
+    }
+  }
+
+  .row-condensed {
+    margin-bottom: 0;
+
+    > [class*="col-"] {
+      margin-top: 0;
+    }
+  }
+
+  [class*="col-"] {
+    display: block;
+    will-change: transform;
+    backface-visibility: hidden;
+    transition: .1s opacity ease-in;
+
+    @include media-breakpoint-down(xs) {
+      max-width: 100%;
+    }
+  }
+}
+
+
+// Offset for 1800
+
+.isotope-xl {
+  @include media-breakpoint-down(xs) {
+    .row > [class*="col-"] .row {
+      margin-bottom: -30px;
+
+      > [class*="col-"] {
+        margin-top: 35px;
+      }
+    }
+  }
+  @include media-breakpoint-up(xxl) {
+    .row > [class*="col-"] .row {
+      margin-bottom: -30px;
+
+      > [class*="col-"] {
+        margin-top: 66px;
+      }
+    }
+  }
+}
+
+
+// Isotope filter base styles
+
+.isotope-filters {
+  position: relative;
+  display: inline-block;
+
+  &-list {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin: 10px 0;
+    z-index: 10;
+    float: left;
+    min-width: 130px;
+    font-size: 16px;
+    text-align: left;
+    background-color: $white;
+    border-radius: 5px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
+    overflow: hidden;
+
+    > li {
+      display: block;
+
+      > a {
+        display: block;
+        position: relative;
+        clear: both;
+        color: $gray-darker;
+        white-space: nowrap;
+        line-height: 1.3;
+        padding: 7px 12px;
+
+        &.active, &:hover {
+          background-color:$gray-lighter;
+        }
+      }
+    }
+
+    &.active {
+      display: block;
+    }
+  }
+
+  &-toggle {
+    &.active:focus {
+      outline: none;
+    }
+  }
+
+  &-title {
+    display: none;
+  }
+
+  @include media-breakpoint-up(sm) {
+    &-list {
+      right: auto;
+      left: 0;
+    }
+  }
+}
+
+
+// Isotope filter horizontal styles
+
+.isotope-filters-horizontal,
+.isotope-filters-vertical {
+  &:not(.isotope-filter-collapse-lg) {
+    @include media-breakpoint-up(lg) {
+      .isotope-filters-list {
+        position: static;
+        display: inline-block;
+        float: none;
+        padding: 0;
+        background-color: transparent;
+        border-radius: 0;
+        box-shadow: none;
+        margin-bottom: 0;
+        border-bottom: 1px solid $gray-lighter;
+        overflow: visible;
+
+        > li {
+          display: inline-block;
+
+          > a {
+            display: inline-block;
+            text-transform: uppercase;
+            padding: 0 5px 13px;
+            color: $gray-dark;
+            transition: 0.3s all ease-in;
+
+            &:after {
+              content: '';
+              position: absolute;
+              bottom: -1px;
+              left: 50%;
+              width: 0;
+              height: 1px;
+              background: $primary;
+              transition: .4s;
+            }
+
+            &.active, &:hover {
+              color: $gray-darker;
+              background-color: transparent;
+            }
+
+            &.active:after {
+              left: 0;
+              width: 100%;
+            }
+          }
+
+          + li {
+            margin-left: 23px;
+          }
+        }
+      }
+
+      .isotope-filters-toggle {
+        display: none;
+      }
+    }
+  }
+}
+
+
+// Isotope filter vertical styles
+
+.isotope-filters.isotope-filters-vertical {
+  @include media-breakpoint-up(xl) {
+    .isotope-filters-list {
+      margin-bottom: 0;
+      padding: 0;
+      border-bottom: none;
+      border-left: 1px solid $gray-lighter;
+
+      > li {
+        display: block;
+        margin-top: 0;
+        text-align: left;
+
+        > a {
+          padding: 0 25px;
+
+          &:after {
+            bottom: 50%;
+            left: -1px;
+            width: 1px;
+            height: 0;
+            background: $primary;
+          }
+
+          &.active {
+            &:after {
+              bottom: 0;
+              width: 1px;
+              height: 100%;
+              left: -1px;
+            }
+          }
+        }
+
+        & + li {
+          margin-left: 0;
+          margin-top: 24px;
+        }
+      }
+    }
+    .isotope-filters-title {
+      display: block;
+    }
+  }
+}

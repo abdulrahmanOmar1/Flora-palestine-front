@@ -1,0 +1,162 @@
+extends  ../_skeleton
+
+//- Includes
+include ../elements/_icon-list
+include ../elements/_blockquote-2
+
+block variables
+	- var pageName = 'About us'
+
+block page
+	// Page Header
+	include ../sections/_header-default
+	+breadcrumbs-section({ img: 'breadcrumbs-about-1920x1000' })
+
+	section.section-md.bg-default
+		.container
+			h2 Dedicated, Fast & Reliable.
+			.row.row-50.row-sm
+				.col-xl-7.col-lg-6
+					p.big.text-width-580 Our team is hardworking and dedicated to ensuring your yard in Brisbane, the Gold Coast and the Sunshine Coast, looks the very best.
+					p.text-width-650 When individuals and businesses in Brisbane, the Gold Coast and the Sunshine Coast need a mowing and garden maintenance service, they call on the company they can trust. Here at Beautiful lawn we’re sure to provide an excellent result every time. This is why we have such an impressive client list throughout all areas of Brisbane, the Gold Coast and the Sunshine Coast.
+
+					article.post-video.post-video-var-1
+						.post-video__body
+							figure.post-video__image
+								+img('about-1-570x331')
+
+							a.post-video__control(data-lightgallery='item', href='https://www.youtube.com/watch?v=pNj4BDp4QYE')
+
+				.col-xl-5.col-lg-6
+					.row.row-30
+						.col-lg-12.justify-content-sm-center.justify-content-xl-start
+							+icon({
+								unitClass: 'unit-spacing-icon flex-column flex-xs-row text-xs-start',
+								titleClass: 'heading-3',
+								classIcon: 'icon-gray-dark icon-xmd fl-great-icon-set-ice78',
+								title: 'What to expect',
+								content: 'When you call on Beautiful lawn’s Mowing Service, you can expect to receive the very best in workmanship and expert knowledge.You can rely on us to always show up on time, as we know how frustrating it is waiting around all day for a tradesman.'
+							})
+						.col-lg-12
+							+icon({
+								unitClass: 'unit-spacing-icon flex-column flex-xs-row text-xs-start',
+								titleClass: 'heading-3',
+								classIcon: 'icon-gray-dark icon-xmd fl-great-icon-set-user156',
+								title: 'Our team',
+								content: 'The team at Beautiful lawn is made up of skilled Head Office staff, as well as our qualified servicemen, the best in the field.Each team member is fully trained and is dedicated to the Beautiful lawn’s mowing service’s ethical business system.'
+							})
+						.col-lg-12
+							+icon({
+								unitClass: 'unit-spacing-icon flex-column flex-xs-row text-xs-start',
+								titleClass: 'heading-3',
+								classIcon: 'icon-gray-dark icon-xmd fl-great-icon-set-crosshair15',
+								title: 'Our aim'
+							})
+
+								ul.list.list-marked.list-family-base
+									li Provide a high standard of presentation and quality of service
+									li Be Reliable and responsive to customer needs
+									li Provide affordable and competitive service rates
+									li Exceed customer expectations in workmanship and conduct
+
+						.col-lg-12
+							.inset-left-sm-50
+								a(href="team.html").button.button-primary Meet our team
+									include ../elements/_arrow-down
+
+	section.section-md.bg-gray-3.bg-about-1.text-center
+		.container
+			h2 Testimonials
+			.owl-carousel.owl-classic.owl-nav-default(
+				data-items='1',
+				data-md-items="2",
+				data-lg-items="3"
+				data-stage-padding='0',
+				data-loop='false',
+				data-margin='30',
+				data-owl= {
+					dots: true
+				}
+			)
+				+blockquote-2({
+					classUnit: 'flex-column',
+					pathFile: 'team-1-370x265',
+					classImg: 'box-shadow-var-1',
+					classWrap: 'quote-classic',
+					content: 'I love Beautiful Lawn. My yard has never looked so good! I don t have to mess with it at all, except to plant flowers and do my gardening (which I love), this company keeps it looking perfect. I am glad to recommend their team of lawn care experts.',
+					autorName: 'Alicia Hagen',
+					statusAutor: '(housewife)'
+				})
+
+				+blockquote-2({
+					classUnit: 'flex-column',
+					pathFile: 'team-2-370x265',
+					classImg: 'box-shadow-var-1',
+					classWrap: 'quote-classic',
+					content: 'Our lawn has never looked better with the Spring aeration and weed and feed services. Next door neighbor walked over and asked who we used because our lawn always looks so good. I was happy to refer them.',
+					autorName: 'Andrew Wagstaff',
+					statusAutor: '(manager)'
+				})
+
+				+blockquote-2({
+					classUnit: 'flex-column',
+					pathFile: 'team-3-370x265',
+					classImg: 'box-shadow-var-1',
+					classWrap: 'quote-classic',
+					content: 'We recently moved to our new house. We needed a lawn service and Beautiful Lawn responded quickly and professionally. They do a great job and are very reliable. Additionally, they have excellent customer service.',
+					autorName: 'John Nesh',
+					statusAutor: '(artist)'
+				})
+
+			a(href="testimonials.html").button.button-primary More testimonials
+				include ../elements/_arrow-down
+
+	section.section-md.parallax-container(data-parallax-img='images/parallax-4-1920x1100.jpg')
+		.parallax-content
+			.container
+				h2 Careers
+				.row.row-50
+					.col-xl-7.col-lg-6
+						p.big.text-width-large You will be applying fertilizer and weed control to lawns weekly on a 1 man crew making great money. Each truck/crew is treated like your own mini business. It’s hard work, but very rewarding. We pay you based on the number of lawns you mow so it’s very fair and the harder you work the more you make.
+						p.fw-bold.text-width-large We reward our awesome staff with bonuses, lunch cards, free breakfasts, and even BBQs on Fridays! We work hard and play hard! So thanks for your time and we wish you the best, whether it’s with us or another company.
+
+						a(href="team.html").button.button-primary.d-none.d-lg-inline-block Join our team
+							include ../elements/_arrow-down
+
+					.col-xl-5.col-lg-6.text-start
+						p.big.fw-bold.text-xlg-nowrap To be considered for the lawn technician position, you must:
+						ul.list.list-index.list-bold
+							li
+								span.list-index-counter
+								| Have some experience in lawn care, or working outdoors.
+							li
+								span.list-index-counter
+								| Understand the importance of keeping our customers happy.
+							li
+								span.list-index-counter
+								| Have a valid driver’s license and be able to legally work
+							li
+								span.list-index-counter
+								| Be prepared to work long days – Monday through Friday
+							li
+								span.list-index-counter
+								| Be someone who wants and needs money.
+							li
+								span.list-index-counter
+								| Have a working cell phone to bring with you every day.
+
+				a(href="team.html").button.button-primary.d-lg-none Join our team
+					include ../elements/_arrow-down
+
+	section.section-sm.bg-default
+		.container
+			h2 FAQ
+
+			.row.row-30.justify-content-center
+				include ../sections/_section-faq
+
+				.col-sm-12
+					a(href="faq.html").button.button-primary More faq
+
+	// Page Footer
+	include ../sections/_footer-default

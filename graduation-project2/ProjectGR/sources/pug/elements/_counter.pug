@@ -1,0 +1,11 @@
+mixin counter(obj)
+	.unit(class= obj.classCounter)
+		.unit-left
+			.counter-index-item
+				.counter-wrap
+					span.arrow-counter
+						include _button-arrow
+
+		.unit-body
+			h5= obj.title
+			p= obj.content

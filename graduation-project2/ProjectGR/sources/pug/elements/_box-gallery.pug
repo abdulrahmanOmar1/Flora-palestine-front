@@ -1,0 +1,4 @@
+mixin gallery(obj)
+  a.thumb.thumb--effect-layla(href='images/' + obj.imgOriginal + '.jpg' data-lightgallery='item' class=obj.modClass ? obj.modClass: '')
+    +img(obj.img)
+    .thumb__overlay

@@ -1,0 +1,85 @@
+extends  ../_skeleton
+
+block variables
+  - var pageName = 'Buttons'
+
+block page
+  // Page Header
+  include ../sections/_header-default
+  +breadcrumbs-section({ img: 'breadcrumbs-1-1920x934' })
+  ='\n'
+
+  section.section-elements-1.bg-default
+    .container
+      h2=pageName
+      p.big.text-width-430 Easily insert buttons and call-to-actions in any page, use amazing custom options to spice up your pages.
+  ='\n'
+
+  section.section-md.bg-default
+    .container
+      .row
+        .col-sm-12
+          h3 Button sizes
+          p 4 different sizes: super, large, default & small
+
+          .group-xs.group-bottom
+            a(href="#").button.button-lg.button-primary Super
+              include ../elements/_arrow-down
+            a(href="#").button.button-md.button-primary Large
+              include ../elements/_arrow-down
+            a(href="#").button.button-primary Default
+              include ../elements/_arrow-down
+            a(href="#").button.button-xs.button-primary Small
+              include ../elements/_arrow-down
+
+      .row
+        .col-sm-12
+          h3 Button shapes
+          p 3 different sizes: default, round & circle
+
+          .group-xs
+            a(href="#").button.button-primary Default
+              include ../elements/_arrow-down
+            a(href="#").button.button-ellipse-md.button-primary Round
+              include ../elements/_arrow-down
+            a(href="#").button.button-circle.button-primary Circle
+              include ../elements/_arrow-down
+
+      .row
+        .col-sm-12
+          h3 Buttons with icons
+          p Buttons are fully integrated with 900+ icons
+
+          .group-xs
+
+            a(href="#").button.button-primary.button-icon.button-icon-left
+              span.icon.fl-great-icon-set-mobile226
+              | Icon left
+
+            a(href="#").button.button-primary.button-icon.button-icon-right Icon right
+              span.icon.fl-great-icon-set-mobile226
+
+            a(href="#").button.button-primary.button-outline.button-icon.button-icon-left
+              span.icon.fl-great-icon-set-mobile226
+              | Icon left
+
+            a(href="#").button.button-primary.button-outline.button-icon.button-icon-right Icon right
+              span.icon.fl-great-icon-set-mobile226
+
+      .row
+        .col-sm-12
+          h3 Buttons with shadow
+          p Enhance your buttons with a shadow effect
+
+          .group-xs
+            a(href="#").button.button-primary.button-shadow
+              | Shadow
+              include ../elements/_arrow-down
+            a(href="#").button.button-primary.button-outline.button-shadow
+              | Shadow
+              include ../elements/_arrow-down
+
+  ='\n'
+
+  // Page Footer
+  include ../sections/_footer-default

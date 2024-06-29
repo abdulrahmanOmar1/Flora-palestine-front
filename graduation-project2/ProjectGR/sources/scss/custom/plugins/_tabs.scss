@@ -1,0 +1,368 @@
+/*
+*
+* Tabs
+* --------------------------------------------------
+*/
+
+
+//== Tabs variables
+//
+//##
+
+// Base
+$tabs-color: $white;
+$tabs-background: $primary;
+$tabs-active-background: $gray;
+$tabs-font: 400 12px/21px $font-family-sec;
+$tabs-padding: 4px 8px;
+
+// Horizontal tabs
+$tabs-horizontal-active-color: $primary;
+$tabs-horizontal-active-background: transparent;
+$tabs-horizontal-background: transparent;
+
+// Vertical tabs
+$tabs-vertical-active-color: $primary;
+$tabs-vertical-active-background: transparent;
+$tabs-vertical-background: transparent;
+
+
+// Base styles
+//--------------------------------------
+
+.tab-content > .tab-pane {
+  display: block;
+  visibility: hidden;
+  height: 0;
+  overflow: hidden;
+}
+
+.tab-content > .active {
+  visibility: visible;
+  height: auto;
+  overflow: visible;
+}
+
+
+.tabs-custom {
+  .nav-custom {
+    &> li, &> li > a {
+      position: relative;
+    }
+
+    @include media-breakpoint-down(xs) {
+      &> li {
+        width: 100%;
+      }
+    }
+  }
+
+  .nav-custom-tabs {
+    font-size: 0;
+    line-height: 0;
+  }
+}
+
+.tabs-custom {
+  .nav-custom-tabs {
+    li a {
+      position: relative;
+      padding: $tabs-padding;
+      min-width: auto;
+      font: $tabs-font;
+      color: $tabs-color;
+      background: $tabs-background;
+      border: 1px solid $primary;
+      text-align: center;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      vertical-align: middle;
+      transition: .3s all ease-in-out;
+      z-index: 1;
+      
+      &:after {
+        border-color: $primary;
+        background: $primary;
+      }
+    }
+
+    li a:hover,
+    li a.active {
+      color: $tabs-horizontal-active-color;
+      background: $tabs-horizontal-active-background;
+      border-color: $tabs-horizontal-active-color;
+
+      &:after {
+        background: $white;
+      }
+
+      &:before {
+        transform: translate(0);
+      }
+    }
+  }
+}
+
+.tab-content {
+  padding-top: 20px;
+
+  @include media-breakpoint-up(md) {
+    padding-top: 25px;
+  }
+}
+
+.tabs-custom.tabs-vertical .nav-custom-tabs li a,
+.tabs-custom.tabs-horizontal .nav-custom-tabs li a {
+  @extend %button-decor;
+}
+
+html {
+  .tabs-custom.tabs-vertical .nav-custom-tabs li a,
+  .tabs-custom.tabs-horizontal .nav-custom-tabs li a {
+
+    @include media-breakpoint-down(md) {
+      margin: 0;
+    }
+  }
+}
+
+// Horizontal tabs
+//--------------------------------------
+
+.tabs-custom {
+  &.tabs-horizontal {
+
+    @include media-breakpoint-down(md) {
+      .nav-custom-tabs {
+
+        li a {
+
+          &::before {
+            display: none;
+          }
+        }
+      }
+    }
+
+    @include media-breakpoint-up(md) {
+
+      .nav-custom-tabs {
+        display: flex;
+        justify-content: flex-start;
+        position: relative;
+
+        li { width: auto; }
+
+        li a {
+          display: block;
+          padding: 5px 5px 5px 10px;
+          background: $tabs-horizontal-background;
+        }
+
+        li a:hover,
+        li a.active {
+          color: $tabs-horizontal-active-color;
+          background: $tabs-horizontal-active-background;
+          border-color: $tabs-horizontal-active-color;
+          
+          &:after {
+            background: $white;
+          }
+          
+          &:before {
+            transform: translate(0);
+          }
+        }
+      }
+    }
+
+    @include media-breakpoint-up(lg) {
+
+      .nav-custom-tabs {
+        li a {
+          font-size: 14px;
+          line-height: 29px;
+          padding: 9px 10px 9px 30px;
+          min-width: 137px;
+        }
+      }
+    }
+  }
+}
+
+
+// Vertical tabs
+//--------------------------------------
+
+.tabs-custom {
+  &.tabs-vertical {
+    @include media-breakpoint-up(md) {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      align-items: stretch;
+
+      .nav-custom-tabs {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        align-items: stretch;
+        flex-shrink: 0;
+        justify-content: flex-start;
+        max-width: 50%;
+
+        text-align: right;
+        border-right: none;
+
+        li a {
+          display: block;
+          padding: 9px 25px 9px 25px;
+          border: 1px solid $primary;
+          background: transparent;
+
+          @include media-breakpoint-up(md) {
+            text-align: left;
+          }
+        }
+
+        li a:hover,
+        li a.active {
+          color: $tabs-vertical-active-color;
+          background: $tabs-vertical-active-background;
+          border-color: $tabs-vertical-active-color;
+
+          &:after {
+            background: $white;
+          }
+
+          &:before {
+            transform: translate(0);
+          }
+        }
+      }
+
+      .tab-content {
+        flex-grow: 1;
+      }
+
+      .tab-content {
+        padding: 0 0 0 30px;
+      }
+    }
+
+    .nav-custom-tabs {
+      min-width: 100%;
+
+      @include media-breakpoint-up(md) {
+        min-width: 130px;
+      }
+      
+      @include media-breakpoint-up(lg) {
+        min-width: 150px;
+      }
+
+      @include media-breakpoint-up(xl) {
+        min-width: 178px;
+      }
+    }
+    
+  }
+}
+
+.page {
+  .tabs-custom-wrap + .row {
+    margin-top: 0;
+  }
+}
+
+.tabs-services {
+  
+  .nav-custom-tabs {
+    
+    li a {
+      text-transform: none;
+      letter-spacing: 0;
+      padding-right: 35px;
+    }
+
+    .icon-arrow {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      font-size: 18px;
+      transform: translateY(-50%) rotate(-90deg);
+
+    }
+  }
+
+  &.tabs-vertical {
+    .nav-custom-tabs {
+      min-width: 100%;
+
+      @include media-breakpoint-up(md) {
+        min-width: 260px;
+      }
+
+      @include media-breakpoint-up(lg) {
+        min-width: 260px;
+      }
+
+      @include media-breakpoint-up(xl) {
+        min-width: 280px;
+      }
+    }
+  }
+
+  .tel {
+    display: inline-block;
+    margin-left: 4px;
+
+    span {
+      color: $gray;
+      transition: inherit;
+    }
+
+    &:hover {
+
+      span {
+        color: $primary;
+      }
+    }
+  }
+
+  h2 {
+    @include media-breakpoint-up(md) {
+      font-size: 32px;
+    }
+
+    @include media-breakpoint-up(lg) {
+      font-size: 48px;
+    }
+  }
+
+  p + .list-big { margin-top: 30px; }
+  h3 + p.big { margin-top: 28px; }
+  h3 + .list { margin-top: 8px; }
+  * + h3 { margin-top: 28px; }
+  h6 + h3 { margin-top: 0; }
+  h2 + h3 { margin-top: 22px; }
+  .row + h6.text-gray { margin-top: 30px; }
+  p.big + h6.fw-bold { margin-top: 30px; }
+  h6.counter-index-item + p { margin-top: 10px; }
+  h6.fw-bold + .list { margin-top: 30px; }
+
+
+  .row + h6,
+  .row + .row { margin-top: 70px; }
+
+  @include media-breakpoint-down(md) {
+    .unit {
+      @include display-inline-flex();
+    }
+  }
+
+  @include media-breakpoint-up(lg) {
+    .row + h6,
+    .row + .row { margin-top: 90px; }
+  }
+}

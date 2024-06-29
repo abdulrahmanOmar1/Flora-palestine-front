@@ -1,0 +1,68 @@
+extends  ../_skeleton
+
+//- Includes
+include ../elements/_box-product
+
+block variables
+	- var pageName = 'Shopping cart'
+
+block page
+	// Page Header
+	include ../sections/_header-default
+	+breadcrumbs-section({ img: 'breadcrumbs-team-1920x974' })
+
+	section.section-xs.bg-default
+		.container
+			h2=pageName
+
+			.row.row-20
+				.col-sm-12
+					.table-custom-responsive
+						table.table-custom.table-custom-primary.table-custom-striped.table-shopping-cart
+							thead
+								tr
+									th(colspan=3) Product
+									th Price
+									th Quantity
+									th Total
+							tbody
+								tr
+									td: a(href='#').icon.icon-md.material-icons-close
+									td: +img('product-cart-1-79x66')
+									td: a(href='product-page.html').link Espoma PR8 8-Quart Organic Perlite
+									td $9.06
+									td 1
+									td $9.06
+								tr
+									td: a(href='#').icon.icon-md.material-icons-close
+									td: +img('product-cart-2-79x66')
+									td: a(href='product-page.html').link Women's Comfort Flex Coated Garden Glove
+									td $8.04
+									td 1
+									td $8.04
+							tfoot
+								tr
+									td(colspan=2) All Items
+									td Description
+									td(colspan=2)
+										span Your Total:
+										=' '
+										span 2
+									td $17.10
+				.col-md-7.text-md-start
+					.group-sm.group-top
+						.form-wrap.form-coupon
+							label.form-label.form-label-primary(for='coupon-code') Coupon code
+							input#coupon-code.form-input(type='text')
+						a(href='#').button.button-primary Apply coupon
+							include ../elements/_arrow-down
+
+				.col-md-5.offset-xs-top-10
+					.button-group-vertical.group-sm-right
+						a(href='#').button.button-primary Update cart
+							include ../elements/_arrow-down
+						a(href='checkout.html').button.button-primary-dark Proceed to checkout
+							include ../elements/_arrow-down
+
+	// Page Footer
+	include ../sections/_footer-default

@@ -1,0 +1,93 @@
+extends  ../_skeleton
+
+block variables
+	- var pageName = 'Forms'
+
+block page
+	// Page Header
+	include ../sections/_header-default
+	+breadcrumbs-section({ img: 'breadcrumbs-1-1920x934' })
+	='\n'
+
+	section.section-elements-1.bg-default
+		.container
+			h2=pageName
+			p.big.text-width-medium With forms you can get almost any kind of information from your visitors, who will definitely appreciate this attractive element.
+	='\n'
+
+	section.section-md.bg-default
+		.container
+			.row.row-30.justify-content-center.row-xxs
+				.col-xl-6.col-lg-7
+					h3 Login form
+					.group-xs
+						a(href='#').button.button-steel-blue.button-icon.button-icon-left
+							span.icon.icon-social.fa.fa-facebook
+							| Facebook
+
+						a(href='#').button.button-cerulean.button-icon.button-icon-left
+							span.icon.icon-social.fa.fa-twitter
+							| Twitter
+
+						a(href='#').button.button-mandy.button-icon.button-icon-left
+							span.icon.icon-social.fa.fa-google-plus
+							| Google+
+
+
+					.p.heading-3.mt-3 or
+
+					// RD Mailform
+					form.rd-mailform.text-start(data-form-output="form-output-global", data-form-type='forms', method='post', action='bat/rd-mailform.php')
+						.row.row-spacing-10.row-10
+							.col-md-6
+								.form-wrap
+									label.form-label(for="form-login-name") Your name
+									input#form-login-name.form-input(type="text" name="name" data-constraints='@Required')
+
+							.col-md-6
+								.form-wrap
+									label.form-label(for="form-login-password") Password
+									input#form-login-password.form-input(type="password" name="password" data-constraints="@Required")
+
+							.col-sm-12.text-end
+								button(type="submit").button.button-primary Enter
+									include ../elements/_arrow-down
+
+				.col-xl-6.col-lg-5
+					h3 Get in touch
+					include ../elements/_form-contacts
+	='\n'
+
+	section.section-xs.bg-default
+		.container
+			.row.row-50.justify-content-center
+				.col-md-6
+
+					include ../elements/_form-request
+
+				.col-md-6
+
+					include ../elements/_form-request-2
+
+					.row.row-10.row-spacing-10
+						.col-xl-6
+							include ../sections/_form-newsletter
+
+	='\n'
+
+	section.section-sm.bg-default
+		.container
+			.row.row-30
+				.col-xl-9
+					h4 Booking form
+					include ../elements/_form-booking
+
+	='\n'
+
+	section.section-lg.bg-default
+		.container
+			.row.row-30
+				include ../sections/_section-checkout-form
+
+	// Page Footer
+	include ../sections/_footer-default

@@ -1,0 +1,171 @@
+/* تحديد أنماط الجسم والصفحة */
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+}
+
+/* أنماط الرأس العامة */
+header {
+    background-color: #333;
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* تصميم النافبار */
+nav {
+    width: 100%;
+    height: 100px; /* ارتفاع ثابت للنافبار */
+    background-color: #222; /* خلفية داكنة للنافبار */
+    display: flex;
+    justify-content: center; /* توسيط العناصر داخل النافبار */
+    align-items: center; /* محاذاة العناصر في الوسط عمودياً */
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    padding: 0;
+    margin: 0;
+}
+
+nav ul li {
+    margin: 0 15px; /* المسافة بين العناصر */
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    padding: 10px 15px;
+    display: block; /* يجعل الرابط يأخذ مساحة النص المحيط به */
+}
+
+nav ul li a:hover {
+    background-color: #555;
+    border-radius: 5px;
+}
+
+/* تصميم المحتوى داخل الرأس */
+.header-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.logo {
+    height: 300px; /* تعديل ارتفاع اللوجو */
+}
+
+/* تصميم الحاوية الرئيسية */
+.container {
+    width: 80%;
+    margin: 50px auto;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* تصميم الجدول */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table, th, td {
+    border: 1px solid #ccc;
+}
+input[type="text"] {
+    width: 70%; /* أو يمكن تحديد العرض بالبكسل مثل 300px حسب التصميم */
+    padding: 12px 20px; /* الحشو الداخلي لزيادة الارتفاع */
+    margin: 8px 0; /* هوامش لفصله عن العناصر الأخرى */
+    display: inline-block; /* يضمن الانتقال للسطر الجديد ويسمح بالتحكم في العرض */
+    border: 1px solid #ccc; /* حدود العنصر */
+    border-radius: 4px; /* الحواف المستديرة للعنصر */
+    box-sizing: border-box; /* يضمن أن الحشو والحدود لا تزيد من العرض */
+    font-size: 16px; /* زيادة حجم الخط لتحسين القراءة */
+}
+
+/* تصميم اختياري لتحسين التفاعل */
+input[type="text"]:focus {
+    border-color: #4CAF50; /* تغيير لون الحد عند التركيز */
+    outline: none; /* إزالة الخطوط الخارجية الافتراضية */
+}
+
+th, td {
+    text-align: center;
+    padding: 10px;
+}
+
+th {
+    background-color: #333;
+    color: white;
+}
+
+/* تصميم الأزرار */
+.btn {
+    padding: 10px 20px;
+    cursor: pointer;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    margin-right: 10px;
+}
+
+.blue {
+    background-color: #007BFF;
+    color: white;
+}
+
+.green {
+    background-color: #28A745;
+    color: white;
+}
+
+.red {
+    background-color: #DC3545;
+    color: white;
+}
+
+/* تصميم النافذة النموذجية */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 50%;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.close-btn {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}

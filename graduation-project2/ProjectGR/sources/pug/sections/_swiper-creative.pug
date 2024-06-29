@@ -1,0 +1,42 @@
+section.swiper-custom-container.swiper-custom-nav.swiper-creative
+	// Swiper
+	.swiper-container.swiper-slider.swiper-bg(
+		data-swiper!={
+			loop: false,
+			autoplay: {
+				enabled: false
+			},
+			effect: 'fade'
+		}
+	)
+		.swiper-wrapper.text-center
+			.swiper-slide(data-slide-bg='images/swiper1-slide2-1920x764.jpg')
+			.swiper-slide(data-slide-bg='images/swiper1-slide1-1920x764.jpg')
+			.swiper-slide(data-slide-bg='images/swiper1-slide3-1920x764.jpg')
+
+	.swiper-bg-content
+		.swiper-slide-caption
+			.swiper-slide-content.text-center.text-xl-start
+				.container-fluid-inset
+					.row-custom.justify-content-lg-end
+						.col-xl-18
+							.box-right
+								h1(data-caption-animate='fadeInUp' data-caption-delay='100') Professional Gardening & Landscaping Services
+								h5.text-regular(data-caption-animate='fadeInUp' data-caption-delay='250') Landscape gardens to suit your lifestyle.
+								a(href="single-project.html").button.button-white.button-white View project
+
+	.box-nav.box-nav-small
+
+		// Swiper Navigation
+		.swiper-button-prev.arrow-left
+			include ../elements/_button-arrow
+
+		.wrap-counter
+			// Swiper Pagination
+			.swiper-pagination
+			.divider-counter /
+			.total-counter 03
+
+		// Swiper Navigation
+		.swiper-button-next.arrow-right
+			include ../elements/_button-arrow

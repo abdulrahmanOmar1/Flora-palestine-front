@@ -1,0 +1,66 @@
+footer.page-footer.footer-default.bg-gray-3
+  .section-md
+    .container
+      .row.row-50.justify-content-center
+        .col-lg-3.col-md-6.col-sm-12.wow.fadeInUp(data-wow-delay=".1s")
+          h3 Residential services
+
+          ul.list.list-marked-none.d-inline-block.d-md-block
+            li: a(href="#") Landscape/Hardscape
+            li: a(href="#") Landscape
+            li: a(href="#") Hardscape
+            li: a(href="#") Property Maintenance
+            li: a(href="#") Power Washing
+            li: a(href="#") Aquatic Management
+
+        .col-lg-3.col-md-6.col-sm-12.wow.fadeInUp(data-wow-delay=".2s")
+          h3 Commercial services
+
+          ul.list.list-marked-none.d-inline-block.d-md-block
+            li: a(href="#") Lawn & Bed Maintenance
+            li: a(href="#") Lawn Maintenance
+            li: a(href="#") Bed Maintenance
+            li: a(href="#") Turf Maintenance
+            li: a(href="#") Pruning
+            li: a(href="#") Spring Clean-Up
+
+        .col-lg-3.col-md-6.col-sm-12.wow.fadeInUp(data-wow-delay=".3s")
+          h3 Contacts
+
+          address.contact-info
+            ul.list-address
+              li
+                a.text-middle.address(href='contacts.html') 227 Marion Street,
+                  br
+                  | Columbia, SC 29201
+
+              li.list-tel
+                .p.tel.big
+                  a.text-gray.text-middle(href='tel:#') 1 (800) 123 1234
+                .p.tel.big
+                  a.text-gray.text-middle(href='tel:#') 1 (800) 123 1235
+
+              li
+                .p Mon - Sat 8.00 - 18.00
+                .p Sunday CLOSED
+
+        .col-lg-3.col-md-6.col-sm-10.wow.fadeInUp(data-wow-delay=".4s")
+          h3 Newsletter
+
+          form.rd-mailform.text-start(data-form-output="form-output-global", data-form-type='forms', method='post', action='bat/rd-mailform.php')
+            .form-wrap
+              label.form-label(for="inline-email-1") Enter your email here
+              input#inline-email-1.form-input(type="email" name="email" data-constraints="@Email @Required")
+            .form-button.text-end
+              button(type="submit").button.button-primary-sec.button-no-outline Subscribe
+                include ../elements/_arrow-right
+
+  .footer-panel
+    .container
+      p
+        span.text-gray-dark=config.brandName
+        =' '
+        | &#169; #[span(class="copyright-year")].
+        a(href="privacy-policy.html").text-gray
+          =' '
+          | Privacy Policy

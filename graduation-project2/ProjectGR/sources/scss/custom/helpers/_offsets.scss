@@ -1,0 +1,546 @@
+/*
+*
+* Offsets
+* --------------------------------------------------
+*/
+
+// Element offset
+* + p {
+	margin-top: 15px;
+}
+
+p + p {
+	margin-top: 20px;
+}
+
+p.big + p {
+	margin-top: 28px;
+}
+
+
+// Headings
+h1 + h2 {
+	margin-top: 14px;
+}
+
+h2 + h3 {
+	margin-top: 11px;
+}
+
+h3 + h4 {
+	margin-top: 11px;
+}
+
+h4 + h5 {
+	margin-top: 11px;
+}
+
+h5 + h6 {
+	margin-top: 11px;
+}
+
+h2 + h6 {
+	margin-top: 6px;
+}
+
+// Headings + Paragraph
+h1 + p {
+	margin-top: 18px;
+}
+
+h2 + p {
+	margin-top: 18px;
+}
+
+h3 + p {
+	margin-top: 7px;
+}
+
+h4 + p {
+	margin-top: 18px;
+}
+
+h5 + p {
+	margin-top: 2px;
+}
+
+h6 + p {
+	margin-top: 4px;
+}
+
+
+h6 + p.big {
+	margin-top: 26px;
+}
+
+
+// Paragraph + Headings
+p + h2 {
+	margin-top: 40px;
+}
+
+p + h3 {
+	margin-top: 45px;
+}
+
+p + h4 {
+	margin-top: 45px;
+}
+
+p + h5 {
+	margin-top: 40px;
+}
+
+p + h6 {
+	margin-top: 45px;
+}
+
+// Tags + Tags
+img + p {
+	margin-top: 12px;
+}
+
+h2 + img {
+	margin-top: 45px;
+}
+
+h3 + img {
+	margin-top: 30px;
+}
+
+h3 + address {
+	margin-top: 30px;
+}
+
+ul + ul {
+	margin-top: 24px;
+}
+
+h2 + h2 {
+	margin-top: 10px;
+}
+
+h5 + h5 {
+	margin-top: 12px;
+}
+
+// Tags + Classes
+
+h2 + .big.text-bold {
+	margin-top: 16px;
+}
+
+h2 + .isotope-wrap {
+	margin-top: 30px;
+}
+
+h3 + .quote {
+	margin-top: 30px;
+}
+
+h3 + .unit {
+	margin-top: 30px;
+}
+
+h3 + .list {
+	margin-top: 30px;
+}
+
+h3 + .tabs-custom {
+	margin-top: 30px;
+}
+
+h3 + .card-custom-group {
+	margin-top: 30px;
+}
+
+h3 + .group-lg {
+	margin-top: 10px;
+}
+
+h3 + .row-md {
+	margin-top: 30px;
+}
+
+h3 + .rd-mailform {
+	margin-top: 10px;
+}
+
+h3 + .list-marked {
+	margin-top: 28px;
+}
+
+h3 + .isotope-wrap {
+	margin-top: 30px;
+}
+
+h5 + .list-sec {
+	margin-top: 4px;
+}
+
+h5 + .rd-mailform {
+	margin-top: 20px;
+}
+
+h5 + .list-social {
+	margin-top: 20px;
+}
+
+h6 + .button {
+	margin-top: 14px;
+}
+
+p + .list {
+	margin-top: 12px;
+}
+
+p + .list-marked {
+	margin-top: 10px;
+}
+
+p + .offset-top-14 {
+	margin-top: 14px;
+}
+
+p + .offset-top-22 {
+	margin-top: 22px;
+}
+
+p + .link-wrap {
+	margin-top: 40px;
+}
+
+p + .group-button-blog {
+	margin-top: 10px;
+}
+
+p + .group-lg {
+	margin-top: 25px;
+}
+
+p + .rd-mailform {
+	margin-top: 16px;
+}
+
+p + .offset-none {
+	margin-top: 0;
+}
+
+p + .wrap-img {
+	margin-top: 20px;
+}
+
+p + .group-xs {
+	margin-top: 17px;
+}
+
+h3 + .group-xs {
+	margin-top: 10px;
+}
+
+p + .group-sm {
+	margin-top: 12px;
+}
+
+p.big + .button {
+	margin-top: 25px;
+}
+
+p.big + .button-wrap {
+	margin-top: 20px;
+}
+
+p.big + .list {
+	margin-top: 32px;
+}
+
+p.big + .offset-top-16 {
+	margin-top: 16px;
+}
+
+p.big + .group-xs {
+	margin-top: 30px;
+}
+
+.p + .row {
+	margin-top: 20px;
+}
+
+// Classes
+* + .rd-mailform {
+	margin-top: 30px;
+}
+
+* + .owl-carousel {
+	margin-top: 33px;
+}
+
+* + .button {
+	margin-top: 20px;
+}
+
+* + .button-wrap {
+	margin-top: 20px;
+}
+
+* + .box-icon-2 {
+	margin-top: 30px;
+}
+
+* + .box-call-us {
+	margin-top: 90px;
+}
+
+* + .contacts-gmap {
+	margin-top: 25px;
+}
+
+* + .pagination-wrap {
+	margin-top: 30px;
+}
+
+* + .offset-top-0 {
+	margin-top: 0px;
+}
+
+* + .offset-top-2 {
+	margin-top: 2px;
+}
+
+* + .offset-top-25 {
+	margin-top: 25px;
+}
+
+* + .offset-top-28 {
+	margin-top: 28px;
+}
+
+* + .offset-top-30 {
+	margin-top: 30px;
+}
+
+
+// Classes + Tags
+.row + h3 {
+	margin-top: 30px;
+}
+
+.post-meta-default + h3 {
+	margin-top: 8px;
+}
+
+.list-sec + h5 {
+	margin-top: 40px;
+}
+
+.list + p {
+	margin-top: 10px;
+}
+
+.list-marked + p {
+	margin-top: 20px;
+}
+
+.heading-6 + p {
+	margin-top: 12px;
+}
+
+.bg-image + p {
+	margin-top: 25px;
+}
+
+.wrap-logo + * {
+	margin-top: 25px;
+}
+
+
+// Classes + Classes
+.container + .container {
+	margin-top: 60px;
+}
+
+.container + .container-fluid {
+	margin-top: 30px;
+}
+
+.row + .offset-top-85 {
+	margin-top: 85px;
+}
+
+.row + .section-xxlg {
+	margin-top: 50px;
+}
+
+.container + .offset-top-90 {
+	margin-top: 90px;
+}
+
+.group-lg + .heading-4 {
+	margin-top: 18px;
+}
+
+.group-xs + .group-xs {
+	margin-top: 30px;
+}
+
+.heading-3 + .rd-mailform {
+	margin-top: 10px;
+}
+
+.quote-creative + .quote-creative {
+	margin-top: 50px;
+}
+
+.box-contacts + .box-contacts {
+	margin-top: 45px;
+}
+
+.post-img + .post-classic-body {
+	margin-top: 14px;
+}
+
+.post-classic-sec + .post-classic-sec {
+	margin-top: 30px;
+}
+
+.post-classic-sec + .pagination-wrap {
+	margin-top: 22px;
+}
+
+.group-xs + .group-button-blog {
+	margin-top: 8px;
+}
+
+.owl-classic + .button {
+	margin-top: 40px;
+}
+
+// Media offsets
+
+@include media-breakpoint-up(md) {
+	h1 + p {
+		margin-top: 22px;
+	}
+	h2 + p {
+		margin-top: 22px;
+	}
+	h4 + p {
+		margin-top: 26px;
+	}
+
+
+	// Tags + Classes
+	p.big + .button {
+		margin-top: 35px;
+	}
+
+	// Classes
+	* + .button {
+		margin-top: 30px;
+	}
+	* + .button-white {
+		margin-top: 38px;
+	}
+	* + .button-wrap {
+		margin-top: 30px;
+	}
+}
+
+
+html {
+	// Range spacing
+
+	.row-90 {
+		@include grid-offset(90px);
+	}
+
+	.row-60 {
+		@include grid-offset(60px);
+	}
+
+	.row-50 {
+		@include grid-offset(50px);
+
+		@include media-breakpoint-up(lg) {
+			> .offset-md-top-18 {
+				margin-top: 38px;
+			}
+		}
+	}
+
+	.row-40 {
+		@include grid-offset(40px);
+	}
+
+	.row-45 {
+		@include grid-offset(45px);
+	}
+
+	.row-30 {
+		@include grid-offset(30px);
+	}
+
+	.row-20 {
+		@include grid-offset(20px);
+	}
+
+	.row-15 {
+		@include grid-offset(15px);
+	}
+
+	.row-10 {
+		@include grid-offset(10px);
+	}
+
+	.row-0 {
+		@include grid-offset(0px);
+	}
+
+	@include media-breakpoint-up(md) {
+		.row-md-50 {
+			@include grid-offset(50px);
+		}
+	}
+
+	@include media-breakpoint-up(lg) {
+		.row-lg-30 {
+			@include grid-offset(30px);
+		}
+
+		.row-lg-90 {
+			@include grid-offset(90px);
+		}
+	}
+
+	@include media-breakpoint-up(xl) {
+		.row-xl-15 {
+			@include grid-offset(15px);
+		}
+
+		.row-xl-50 {
+			@include grid-offset(50px);
+		}
+	}
+}
+
+.section-typography-body {
+	p + h2 {
+		margin-top: 90px;
+	}
+
+	p + h3 {
+		margin-top: 90px;
+	}
+
+	p + h4 {
+		margin-top: 90px;
+	}
+
+	p + h5 {
+		margin-top: 90px;
+	}
+
+	p + h6 {
+		margin-top: 90px;
+	}
+}

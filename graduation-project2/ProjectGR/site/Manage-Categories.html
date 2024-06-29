@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>إدارة الفئات</title>
+    <link rel="stylesheet" href="css/Manage-Categories.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="account.html">Account</a></li>
+            </ul>
+        </nav>
+        <div class="header-content">
+            <img src="images/logologin.png" alt="Logo" class="logo">
+            <h1>Welcome Back, Admin</h1>
+        </div>
+    </header>
+    <div class="container">
+        <button id="addFamilyBtn" class="btn blue">Add Family</button>
+        <input type="text" id="searchInput" placeholder="Search family by name" style="margin-left: 20px;">
+        <table>
+            <thead>
+                <tr>
+                    <th>SN</th>
+                    <th>Family Name</th>
+                    <th>Delete</th>
+                    <th>Update</th>
+                </tr>
+            </thead>
+            <tbody id="familyTableBody">
+                <!-- Rows will be dynamically filled from the backend -->
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Add Family Modal -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <h2>Add New Family</h2>
+            <input type="text" id="newFamilyName" placeholder="Enter new family name">
+            <button class="btn blue" onclick="addFamily()">Save Changes</button>
+            <button class="btn" onclick="closeModal()">Close</button>
+        </div>
+    </div>
+
+    <!-- Update Family Modal -->
+    <div id="update-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeUpdateModal()">&times;</span>
+            <h2>Update Family</h2>
+            <input type="text" id="update-input" placeholder="Enter new family name">
+            <button class="btn green" onclick="saveChanges()">Save Changes</button>
+            <button class="btn" onclick="closeUpdateModal()">Close</button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="js/Manage-Categories.js"></script>
+</body>
+</html>

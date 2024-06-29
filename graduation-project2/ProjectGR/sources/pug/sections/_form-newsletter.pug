@@ -1,0 +1,11 @@
+h6.fw-bold Newsletter
+p Keep up with our latest  news and events. Subscribe to our newsletter.
+
+// RD Mailform
+form.rd-mailform.text-start(data-form-output="form-output-global", data-form-type='forms', method='post', action='bat/rd-mailform.php')
+	.form-wrap
+		label.form-label(for="form-email-4") Enter your email here
+		input#form-email-4.form-input(type="email" name="email" data-constraints="@Email @Required")
+	.form-wrap.text-end
+		button(type="submit").button.button-primary-sec.button-no-outline Subscribe
+			include ../elements/_arrow-right

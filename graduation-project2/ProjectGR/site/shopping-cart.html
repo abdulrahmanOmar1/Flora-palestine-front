@@ -39,6 +39,9 @@
     <link href="css/style.css" rel="stylesheet">
   </head>
   <body>
+
+  
+      
     <!-- Page preloader-->
     <div class="preloader">
       <div>
@@ -221,47 +224,131 @@
           <h2>Shopping cart</h2>
           <div class="row row-20">
             <div class="col-sm-12">
-              <div class="table-custom-responsive">
-                <table class="table-custom table-custom-primary table-custom-striped table-shopping-cart">
-                  <thead>
-                    <tr>
-                      <th colspan="3">Product</th>
-                      <th>Price</th>
-                      <th>Quantity</th>
-                      <th>Total</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td><a class="icon icon-md material-icons-close" href="#"></a></td>
-                      <td><img src="images/product-cart-1-79x66.jpg" alt="" width="79" height="66" loading="lazy"/>
-                      </td>
-                      <td><a class="link" href="product-page.html">Espoma PR8 8-Quart Organic Perlite</a></td>
-                      <td>$9.06</td>
-                      <td>1</td>
-                      <td>$9.06</td>
-                    </tr>
-                    <tr>
-                      <td><a class="icon icon-md material-icons-close" href="#"></a></td>
-                      <td><img src="images/product-cart-2-79x66.jpg" alt="" width="79" height="66" loading="lazy"/>
-                      </td>
-                      <td><a class="link" href="product-page.html">Women's Comfort Flex Coated Garden Glove</a></td>
-                      <td>$8.04</td>
-                      <td>1</td>
-                      <td>$8.04</td>
-                    </tr>
-                  </tbody>
-                  <tfoot>
-                    <tr>
-                      <td colspan="2">All Items</td>
-                      <td>Description</td>
-                      <td colspan="2"><span>Your Total:</span> <span>2</span>
-                      </td>
-                      <td>$17.10</td>
-                    </tr>
-                  </tfoot>
+              <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">Products</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Total</th>
+                        <th scope="col">Handle</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">
+                                <div class="d-flex align-items-center">
+                                    <img src="images/product-1-270x264 (3).jpg" class="img-fluid me-5 rounded-circle" style="width: 80px; height: 80px;" alt="">
+                                </div>
+                            </th>
+                            <td>
+                                <p class="mb-0 mt-4">Product 1</p>
+                            </td>
+                            <td>
+                                <p class="mb-0 mt-4">2.99 ₪</p>
+                            </td>
+                            <td>
+                                <div class="input-group quantity mt-4" style="width: 100px;">
+                                    <div class="input-group-btn">
+                                        <button class="btn btn-sm btn-minus rounded-circle bg-light border" >
+                                        <i class="fa fa-minus"></i>
+                                        </button>
+                                    </div>
+                                    <input type="text" class="form-control form-control-sm text-center border-0" value="1">
+                                    <div class="input-group-btn">
+                                        <button class="btn btn-sm btn-plus rounded-circle bg-light border">
+                                            <i class="fa fa-plus"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <p class="mb-0 mt-4">2.99 ₪</p>
+                            </td>
+                            <td>
+                                <button class="btn btn-md rounded-circle bg-light border mt-4" >
+                                    <i class="fa fa-times text-danger"></i>
+                                </button>
+                            </td>
+                        
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <div class="d-flex align-items-center">
+                                    <img src="images/product-1-270x264.jpg" class="img-fluid me-5 rounded-circle" style="width: 80px; height: 80px;" alt="" alt="">
+                                </div>
+                            </th>
+                            <td>
+                                <p class="mb-0 mt-4">Product 2</p>
+                            </td>
+                            <td>
+                                <p class="mb-0 mt-4">2.99 ₪</p>
+                            </td>
+                            <td>
+                                <div class="input-group quantity mt-4" style="width: 100px;">
+                                    <div class="input-group-btn">
+                                        <button class="btn btn-sm btn-minus rounded-circle bg-light border" >
+                                        <i class="fa fa-minus"></i>
+                                        </button>
+                                    </div>
+                                    <input type="text" class="form-control form-control-sm text-center border-0" value="1">
+                                    <div class="input-group-btn">
+                                        <button class="btn btn-sm btn-plus rounded-circle bg-light border">
+                                            <i class="fa fa-plus"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <p class="mb-0 mt-4">2.99 ₪</p>
+                            </td>
+                            <td>
+                                <button class="btn btn-md rounded-circle bg-light border mt-4" >
+                                    <i class="fa fa-times text-danger"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <div class="d-flex align-items-center">
+                                    <img src="images/product-1-270x264.jpg" class="img-fluid me-5 rounded-circle" style="width: 80px; height: 80px;" alt="" alt="">
+                                </div>
+                            </th>
+                            <td>
+                                <p class="mb-0 mt-4">Product 3</p>
+                            </td>
+                            <td>
+                                <p class="mb-0 mt-4">2.99 ₪</p>
+                            </td>
+                            <td>
+                                <div class="input-group quantity mt-4" style="width: 100px;">
+                                    <div class="input-group-btn">
+                                        <button class="btn btn-sm btn-minus rounded-circle bg-light border" >
+                                        <i class="fa fa-minus"></i>
+                                        </button>
+                                    </div>
+                                    <input type="text" class="form-control form-control-sm text-center border-0" value="1">
+                                    <div class="input-group-btn">
+                                        <button class="btn btn-sm btn-plus rounded-circle bg-light border">
+                                            <i class="fa fa-plus"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <p class="mb-0 mt-4">2.99 ₪</p>
+                            </td>
+                            <td>
+                                <button class="btn btn-md rounded-circle bg-light border mt-4" >
+                                    <i class="fa fa-times text-danger"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
                 </table>
-              </div>
+            </div>
             </div>
             <div class="col-md-7 text-md-start">
               <div class="group-sm group-top">
@@ -272,7 +359,8 @@
               </div>
             </div>
             <div class="col-md-5 offset-xs-top-10">
-              <div class="button-group-vertical group-sm-right"><a class="button button-primary" href="#">Update cart<span class="icon-arrow icon-rotate-90 material-icons-keyboard_backspace"></span></a><a class="button button-primary-dark" href="checkout.html">Proceed to checkout<span class="icon-arrow icon-rotate-90 material-icons-keyboard_backspace"></span></a></div>
+              <!-- <a class="button button-primary" href="#">Update cart<span class="icon-arrow icon-rotate-90 material-icons-keyboard_backspace"></span></a> -->
+              <div class="button-group-vertical group-sm-right"><a class="button button-primary-dark" href="checkout.html">Proceed to checkout<span class="icon-arrow icon-rotate-90 material-icons-keyboard_backspace"></span></a></div>
             </div>
           </div>
         </div>

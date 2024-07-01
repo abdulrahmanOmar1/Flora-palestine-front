@@ -219,8 +219,6 @@
       <section class="section-md bg-default">
         <div class="container">
           <h2>Checkout</h2>
-          <h6 class="heading-checkout"><span>Returning customer?</span><a class="link-arrow" href="Login.html">Click here to log in<span class="icon-arrow icon-rotate-180 material-icons-keyboard_backspace"></span></a></h6>
-          <h6 class="heading-checkout"><span>Have a coupon?</span><a class="link-arrow" href="#">Click here to enter your code<span class="icon-arrow icon-rotate-180 material-icons-keyboard_backspace"></span></a></h6>
           <div class="row row-50">
             <div class="col-xl-6">
               <h3>Billing details</h3>
@@ -229,28 +227,13 @@
                 <div class="row row-10 row-spacing-10">
                   <div class="col-sm-6">
                     <div class="form-wrap">
-                      <label class="form-label" for="contact-first-name-3">First name</label>
+                      <label class="form-label" for="contact-first-name-3">Name</label>
                       <input class="form-input" id="contact-first-name-3" type="text" name="name" data-constraints="@Required">
                     </div>
                   </div>
-                  <div class="col-sm-6">
-                    <div class="form-wrap">
-                      <label class="form-label" for="contact-last-name-3">Last name</label>
-                      <input class="form-input" id="contact-last-name-3" type="text" name="name" data-constraints="@Required">
-                    </div>
-                  </div>
-                  <div class="col-sm-12">
-                    <div class="form-wrap">
-                      <label class="form-label" for="company-name">Company name</label>
-                      <input class="form-input" id="company-name" type="text" name="name" data-constraints="@Required">
-                    </div>
-                  </div>
-                  <div class="col-sm-6">
-                    <div class="form-wrap">
-                      <label class="form-label" for="contact-email-3">Email address</label>
-                      <input class="form-input" id="contact-email-3" type="text" name="name" data-constraints="@Email">
-                    </div>
-                  </div>
+                
+                 
+          
                   <div class="col-sm-6">
                     <div class="form-wrap">
                       <label class="form-label" for="form-phone">Phone</label>
@@ -263,43 +246,27 @@
                       <input class="form-input" id="form-country" type="text" name="name" data-constraints="@Required">
                     </div>
                   </div>
-                  <div class="col-xl-12 col-sm-6">
-                    <div class="form-wrap">
-                      <label class="form-label" for="form-street">Street address</label>
-                      <input class="form-input" id="form-street" type="text" name="name" data-constraints="@Required">
-                    </div>
-                  </div>
-                  <div class="col-xl-12 col-sm-6">
-                    <div class="form-wrap">
-                      <label class="form-label" for="form-address">Apartment, suite, unit etc. <span class="hidden d-md-inline-block">(optional)</span></label>
-                      <input class="form-input" id="form-address" type="text" name="name" data-constraints="@Required">
-                    </div>
-                  </div>
+
                   <div class="col-xl-12 col-sm-6">
                     <div class="form-wrap">
                       <label class="form-label" for="form-town">Town / City</label>
                       <input class="form-input" id="form-town" type="text" name="name" data-constraints="@Required">
                     </div>
                   </div>
-                  <div class="col-sm-6">
+
+                  <div class="col-xl-12 col-sm-6">
                     <div class="form-wrap">
-                      <label class="form-label" for="form-country-2">Country</label>
-                      <input class="form-input" id="form-country-2" type="text" name="name" data-constraints="@Required">
+                      <label class="form-label" for="form-street">Street address</label>
+                      <input class="form-input" id="form-street" type="text" name="name" data-constraints="@Required">
                     </div>
                   </div>
-                  <div class="col-sm-6">
-                    <div class="form-wrap">
-                      <label class="form-label" for="form-postcode">Postcode</label>
-                      <input class="form-input" id="form-postcode" type="text" name="name" data-constraints="@Required">
-                    </div>
-                  </div>
+                 
+                  
+                  
+                 
                   <div class="col-sm-12">
                     <div class="form-wrap">
-                      <div class="checkbox">
-                        <label>
-                          <input name="input-group-radio" value="checkbox-1" type="checkbox">Create an account
-                        </label>
-                      </div>
+                      
                     </div>
                   </div>
                 </div>
@@ -319,11 +286,11 @@
                     </tr>
                     <tr>
                       <td><a class="link" href="#">Lesco 50Lb Push Spreader</a></td>
-                      <td class="price price-dark">$25.60</td>
+                      <td class="price price-dark">₪25.60</td>
                     </tr>
                     <tr>
                       <td>Subtotal</td>
-                      <td class="price">$25.60</td>
+                      <td class="price">₪25.60</td>
                     </tr>
                     <tr>
                       <td>Shipping</td>
@@ -331,28 +298,31 @@
                     </tr>
                     <tr>
                       <td>Total</td>
-                      <td class="price price-dark">$25.60</td>
+                      <td class="price price-dark">₪25.60</td>
                     </tr>
                   </tbody>
                 </table>
+                
               </div>
+<p></p>
+<div class="radio">
+  <label>
+    <input name="input-group-radio" value="Visa Card" type="radio">Visa Card 
+  </label>
+</div>
+<p></p>
+<div class="radio">
+  <label>
+    <input name="input-group-radio" value="Master Card" type="radio">Master Card
+  </label>
+</div>
+
+
             </div>
-            <div class="col-lg-6 text-md-end">
-              <div class="payment-box">
-                <div class="form-wrap">
-                  <label class="radio-inline">
-                    <input name="input-group-radio" value="checkbox-1" type="radio" checked>Cheque payment
-                  </label>
-                </div>
-                <p>Please send your cheque to 4578 Marmora St, Chicago D04 89GR.</p>
-              </div>
-              <div class="payment-box">
-                <label class="radio-inline">
-                  <input name="input-group-radio" value="checkbox-1" type="radio" checked>PayPal
-                </label><a class="link" href="#">What is PayPal?<span class="icon-arrow icon-rotate-180 material-icons-keyboard_backspace"></span></a>
-                <div class="group-flickr"><a class="link link-img" href="#"><img src="images/payment-1-58x36.jpg" alt="" width="58" height="36" loading="lazy"/></a><a class="link link-img" href="#"><img src="images/payment-2-58x36.jpg" alt="" width="58" height="36" loading="lazy"/></a><a class="link link-img" href="#"><img src="images/payment-3-58x36.jpg" alt="" width="58" height="36" loading="lazy"/></a><a class="link link-img" href="#"><img src="images/payment-4-58x36.jpg" alt="" width="58" height="36" loading="lazy"/></a><a class="link link-img" href="#"><img src="images/payment-5-58x36.jpg" alt="" width="58" height="36" loading="lazy"/></a></div>
-              </div><a class="button button-primary" href="#">Place order<span class="icon-arrow icon-rotate-90 material-icons-keyboard_backspace"></span></a>
-            </div>
+
+            
+          </div><a class="button button-primary" href="#">Place order<span class="icon-arrow icon-rotate-90 material-icons-keyboard_backspace"></span></a>
+
           </div>
         </div>
       </section>

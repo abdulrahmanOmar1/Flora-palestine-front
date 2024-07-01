@@ -184,3 +184,4 @@ document.addEventListener('DOMContentLoaded', function() {
     fetchCategories();
     updateCartDisplay(); // Initial cart update
 });
+

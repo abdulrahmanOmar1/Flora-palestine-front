@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", function() {
         var query = searchInput.value.trim();
         if (query.length > 0) {
             // Send search query to backend
-            axios.get(`http://localhost:9090/plants/search?name=${query}&page=0&size=9`)
+            axios.get(`http://localhost:9090/api/plants/search?name=${query}&page=0&size=9`)
             .then(function(response) {
                 // Handle successful response
                 console.log(response.data);
@@ -62,7 +62,7 @@ document.addEventListener("DOMContentLoaded", function() {
         var query = searchInput.value.trim();
         if (query.length > 0) {
             // Send search query to backend
-            axios.get(`http://localhost:9090/plants/search?name=${query}&${page}&${size}`)
+            axios.get(`http://localhost:9090/api/plants/search?name=${query}&${page}&${size}`)
             .then(function(response) {
                 // Handle successful response
                 console.log(response.data);
@@ -108,7 +108,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     function fetchPlants(page = 0, size = 9) {
-        axios.get(`http://localhost:9090/plants/all?page=${page}&size=${size}`)
+        axios.get(`http://localhost:9090/api/plants/all?page=${page}&size=${size}`)
         .then(function(response) {
             // Handle successful response
             console.log(response.data);
@@ -124,7 +124,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     function fetchPlantsByFamily(family, page = 0, size = 9) {
         console.log(`Fetching plants for family: ${family}`);
-        axios.get(`http://localhost:9090/plants/by-family?family=${family}&page=${page}&${size}`)
+        axios.get(`http://localhost:9090/api/plants/by-family?family=${family}&page=${page}&${size}`)
         .then(function(response) {
             // Handle successful response
             console.log('Plants fetched by family:', response.data);
@@ -141,7 +141,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     function fetchCategories() {
-        axios.get('http://localhost:9090/plants/families')
+        axios.get('http://localhost:9090/api/plants/families')
         .then(function(response) {
             // Handle successful response
             console.log('Categories fetched:', response.data);

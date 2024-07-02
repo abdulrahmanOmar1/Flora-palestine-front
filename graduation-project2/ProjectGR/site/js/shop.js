@@ -1,9 +1,8 @@
-document.addEventListener('DOMContentLoaded', function() {
-    const apiUrl = 'http://localhost:9090/api'; // Update this to your API endpoint
+document.addEventListener('DOMContentLoaded', function () {
+    const apiUrl = 'http://localhost:9090/api';
     const searchInput = document.querySelector('#search-input');
     let currentCategoryId = '';
 
-    // Set session ID if not exists
     function initializeSession() {
         let sessionId = getCookie('sessionId');
         if (!sessionId) {
@@ -12,19 +11,19 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Generate a unique session ID
     function generateSessionId() {
         return 'session-' + Math.random().toString(36).substr(2, 16);
     }
 
-    // Update the display of items in the cart
     function updateCartDisplay() {
         let cart = JSON.parse(localStorage.getItem('shoppingCart')) || [];
         const itemCount = cart.reduce((total, item) => total + item.quantity, 0);
-        document.getElementById('cart-item-count').innerText = itemCount; // Ensure this ID matches your HTML
+        const cartItemCountElement = document.getElementById('cart-item-count');
+        if (cartItemCountElement) {
+            cartItemCountElement.innerText = itemCount;
+        }
     }
 
-    // Add an item to the cart
     function addToCart(product) {
         let cart = JSON.parse(localStorage.getItem('shoppingCart')) || [];
         let found = cart.find(p => p.id === product.id);
@@ -37,9 +36,9 @@ document.addEventListener('DOMContentLoaded', function() {
         localStorage.setItem('shoppingCart', JSON.stringify(cart));
         alert('Product added to cart successfully!');
         updateCartDisplay();
+        window.location.href = 'shopping-cart.html';
     }
 
-    // Set cookie
     function setCookie(name, value, days) {
         var expires = "";
         if (days) {
@@ -50,7 +49,6 @@ document.addEventListener('DOMContentLoaded', function() {
         document.cookie = name + "=" + (value || "") + expires + "; path=/";
     }
 
-    // Get cookie
     function getCookie(name) {
         var nameEQ = name + "=";
         var ca = document.cookie.split(';');
@@ -62,13 +60,11 @@ document.addEventListener('DOMContentLoaded', function() {
         return null;
     }
 
-    // Handle errors
     function handleError(error) {
         console.error('An error occurred:', error);
         alert('Failed to fetch products. Please try again later.');
     }
 
-    // Fetch products from the backend using Fetch API
     function fetchProducts(categoryId = '', keywords = '') {
         let url;
         if (categoryId) {
@@ -94,7 +90,6 @@ document.addEventListener('DOMContentLoaded', function() {
             .catch(handleError);
     }
 
-    // Fetch categories from the backend
     function fetchCategories() {
         const url = `${apiUrl}/categories`;
         fetch(url)
@@ -109,8 +104,6 @@ document.addEventListener('DOMContentLoaded', function() {
             })
             .catch(handleError);
     }
-
-    // Display products in the HTML
     function displayProducts(products) {
         const container = document.getElementById('product-container');
         container.innerHTML = ''; // Clear previous products
@@ -121,7 +114,7 @@ document.addEventListener('DOMContentLoaded', function() {
         products.forEach(product => {
             const productHtml = `
                 <div class="col-md-6 col-lg-4 col-xl-3">
-                    <div class="rounded position-relative fruite-item">
+                    <div class="rounded position-relative fruite-item" onclick='navigateToProductPage(${product.id})'>
                         <div class="fruite-img">
                             <img src="${product.imageUrl}" class="img-fluid w-100 rounded-top" alt="${product.name}">
                         </div>
@@ -130,7 +123,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             <p>${product.description}</p>
                             <div class="d-flex justify-content-between flex-lg-wrap">
                                 <p class="text-dark fs-5 fw-bold mb-0">₪${product.price}</p>
-                                <button onclick='addToCart(${JSON.stringify(product)})' class="btn border border-secondary rounded-pill px-3 text-primary">
+                                <button onclick='event.stopPropagation(); addToCart(${JSON.stringify(product)})' class="btn border border-secondary rounded-pill px-3 text-primary">
                                     <i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart
                                 </button>
                             </div>
@@ -140,8 +133,8 @@ document.addEventListener('DOMContentLoaded', function() {
             container.innerHTML += productHtml;
         });
     }
+    
 
-    // Display categories in the HTML
     function displayCategories(categories) {
         const container = document.getElementById('category-list');
         container.innerHTML = ''; // Clear previous categories
@@ -162,13 +155,11 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Change category function to handle category selection
     window.changeCategory = (categoryId) => {
         currentCategoryId = categoryId;
         fetchProducts(categoryId, searchInput.value.trim());
     };
 
-    // Handle search with debounce
     let searchDebounceTimer;
     searchInput.addEventListener('keyup', () => {
         clearTimeout(searchDebounceTimer);
@@ -178,10 +169,13 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 300); // Delay in milliseconds
     });
 
-    // Initialize session and fetch initial products and categories
+    window.navigateToProductPage = (productId) => {
+        console.log(`Navigating to product page with ID: ${productId}`);
+        window.location.href = `product-page.html?id=${productId}`;
+    };
+
     initializeSession();
     fetchProducts();
     fetchCategories();
     updateCartDisplay(); // Initial cart update
 });
-

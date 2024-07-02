@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function fetchAllPlants() {
-    axios.get('http://localhost:9090/plants/allWithoutPagination')
+    axios.get('http://localhost:9090/api/plants/allWithoutPagination')
         .then(response => {
             const plants = response.data; // Get plants from the response without pagination
             console.log(plants); // Check if plants are fetched correctly
@@ -26,7 +26,7 @@ function fetchAllPlants() {
 }
 
 function fetchFamilies() {
-    axios.get('http://localhost:9090/families')
+    axios.get('http://localhost:9090/api/families')
         .then(response => {
             const families = response.data;
             console.log(families); // Check if families are fetched correctly
@@ -77,7 +77,7 @@ function populateFamilyDropdowns(families) {
 
 function deletePlant(id, button) {
     if (confirm('Are you sure you want to delete this plant?')) {
-        axios.delete(`http://localhost:9090/plants/delete/${id}`)
+        axios.delete(`http://localhost:9090/api/plants/delete/${id}`)
             .then(response => {
                 const row = button.parentNode.parentNode;
                 row.parentNode.removeChild(row);
@@ -129,7 +129,7 @@ function addPlant() {
     formData.append('plant', JSON.stringify(plantData));
     formData.append('file', file);
 
-    axios.post("http://localhost:9090/plants/add", formData, {
+    axios.post("http://localhost:9090/api/plants/add", formData, {
         headers: {
             'Content-Type': 'multipart/form-data'
         }
@@ -155,7 +155,7 @@ function saveChanges() {
         formData.append('imageUrl', document.getElementById('updatePlantImage').files[0]);
     }
 
-    axios.put(`http://localhost:9090/plants/update/${activeId}`, formData, {
+    axios.put(`http://localhost:9090/api/plants/update/${activeId}`, formData, {
         headers: {
             'Content-Type': 'multipart/form-data'
         }

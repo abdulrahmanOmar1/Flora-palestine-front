@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function fetchFamilies() {
-    axios.get('http://localhost:9090/families')
+    axios.get('http://localhost:9090/api/families')
         .then(response => {
             const families = response.data;
             console.log(families); 
@@ -38,7 +38,7 @@ function populateFamiliesTable(families) {
 
 function deleteFamily(name, button) {
     if (confirm('Are you sure you want to delete this family?')) {
-        axios.delete(`http://localhost:9090/families/${name}`)
+        axios.delete(`http://localhost:9090/api/families/${name}`)
             .then(response => {
                 const row = button.parentNode.parentNode;
                 row.parentNode.removeChild(row); 
@@ -74,7 +74,7 @@ function addFamily() {
 
     console.log('Sending familyDto to server:', familyDto); 
 
-    axios.post('http://localhost:9090/families', familyDto)
+    axios.post('http://localhost:9090/api/families', familyDto)
         .then(response => {
             console.log('Add response:', response.data); 
             fetchFamilies(); 
@@ -100,7 +100,7 @@ function saveChanges() {
 
     console.log('Updating family:', activeName, 'to new family:', newName); 
 
-    axios.put(`http://localhost:9090/families/${activeName}`, familyDto)
+    axios.put(`http://localhost:9090/api/families/${activeName}`, familyDto)
         .then(response => {
             console.log('Update response:', response.data); 
             fetchFamilies(); 

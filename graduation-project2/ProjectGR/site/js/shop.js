@@ -2,18 +2,9 @@ document.addEventListener('DOMContentLoaded', function () {
     const apiUrl = 'http://localhost:9090/api';
     const searchInput = document.querySelector('#search-input');
     let currentCategoryId = '';
+    const userId = 1;
+    
 
-    function initializeSession() {
-        let sessionId = getCookie('sessionId');
-        if (!sessionId) {
-            sessionId = generateSessionId();
-            setCookie('sessionId', sessionId, 7); // Session ID valid for 7 days
-        }
-    }
-
-    function generateSessionId() {
-        return 'session-' + Math.random().toString(36).substr(2, 16);
-    }
 
     function updateCartDisplay() {
         let cart = JSON.parse(localStorage.getItem('shoppingCart')) || [];
@@ -37,27 +28,6 @@ document.addEventListener('DOMContentLoaded', function () {
         alert('Product added to cart successfully!');
         updateCartDisplay();
         window.location.href = 'shopping-cart.html';
-    }
-
-    function setCookie(name, value, days) {
-        var expires = "";
-        if (days) {
-            var date = new Date();
-            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-            expires = "; expires=" + date.toUTCString();
-        }
-        document.cookie = name + "=" + (value || "") + expires + "; path=/";
-    }
-
-    function getCookie(name) {
-        var nameEQ = name + "=";
-        var ca = document.cookie.split(';');
-        for (var i = 0; i < ca.length; i++) {
-            var c = ca[i];
-            while (c.charAt(0) == ' ') c = c.substring(1, c.length);
-            if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
-        }
-        return null;
     }
 
     function handleError(error) {
@@ -85,6 +55,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 return response.json();
             })
             .then(data => {
+                console.log(data);
                 displayProducts(data);
             })
             .catch(handleError);
@@ -104,36 +75,30 @@ document.addEventListener('DOMContentLoaded', function () {
             })
             .catch(handleError);
     }
+
     function displayProducts(products) {
         const container = document.getElementById('product-container');
         container.innerHTML = ''; // Clear previous products
-        if (products.length === 0) {
-            container.innerHTML = '<p>No products available in this category.</p>';
-            return;
-        }
+
         products.forEach(product => {
             const productHtml = `
-                <div class="col-md-6 col-lg-4 col-xl-3">
-                    <div class="rounded position-relative fruite-item" onclick='navigateToProductPage(${product.id})'>
-                        <div class="fruite-img">
-                            <img src="${product.imageUrl}" class="img-fluid w-100 rounded-top" alt="${product.name}">
-                        </div>
-                        <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                            <h4>${product.name}</h4>
-                            <p>${product.description}</p>
-                            <div class="d-flex justify-content-between flex-lg-wrap">
-                                <p class="text-dark fs-5 fw-bold mb-0">₪${product.price}</p>
-                                <button onclick='event.stopPropagation(); addToCart(${JSON.stringify(product)})' class="btn border border-secondary rounded-pill px-3 text-primary">
-                                    <i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart
-                                </button>
+                <div class="col-sm-6 col-md-4 col-lg-3">
+                    <article class="product">
+                        <div class="product-body">
+                            <div class="product-figure"><img src="${product.imageUrl}" alt="" width="270" height="264"/></div>
+                            <h5 class="product-title"><a href="product-page.html?id=${product.id}">${product.name}</a></h5>
+                            <div class="product-price-wrap">
+                                <div class="product-price">₪${product.price}</div>
+                            </div>
+                            <div class="product-button-wrap">
+                                <button class="button button-primary" onclick="addToCart(${product.id}, 1)">Add to cart</button>
                             </div>
                         </div>
-                    </div>
+                    </article>
                 </div>`;
             container.innerHTML += productHtml;
         });
     }
-    
 
     function displayCategories(categories) {
         const container = document.getElementById('category-list');
@@ -174,8 +139,28 @@ document.addEventListener('DOMContentLoaded', function () {
         window.location.href = `product-page.html?id=${productId}`;
     };
 
-    initializeSession();
+    window.addToCart = function(productId, quantity) {
+        axios.post(`http://localhost:9090/api/carts/${userId}/items`, null, {
+            params: {
+                productId: productId,
+                quantity: quantity
+            }
+        })
+        .then(response => {
+            alert('Product added to cart successfully!');
+            window.location.href = 'shopping-cart.html';
+        })
+        .catch(error => {
+            console.error('Error adding product to cart:', error);
+            alert('The product is out of stock .');
+        });
+    }
+
+    fetchProducts();
+
+
     fetchProducts();
     fetchCategories();
-    updateCartDisplay(); // Initial cart update
+    updateCartDisplay(); 
+
 });

@@ -30,9 +30,6 @@ function displayPlantDetails(plant) {
     document.getElementById('plantName').textContent = plant.normalName;
     document.getElementById('plantDescription').textContent = plant.description;
     document.getElementById('plantScientificName').textContent = `Scientific Name: ${plant.scientificName}`;
-    document.getElementById('plantFamily').textContent = `Family: ${plant.family}`;
-    document.getElementById('plantUsage').textContent = `Usage: ${plant.plantUsage}`;
-    document.getElementById('plantImage').src = plant.imageUrl;
 }
 
 document.addEventListener('DOMContentLoaded', function() {

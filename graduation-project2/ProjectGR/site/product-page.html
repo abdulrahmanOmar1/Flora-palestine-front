@@ -27,11 +27,12 @@
     <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
     <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">
     <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <!-- Customized Bootstrap Stylesheet -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="js/product-page.js"></script>
 </head>
 <body>
     <!-- Page preloader-->
@@ -108,13 +109,13 @@
                                             <rect class="shape" width="100%" height="100%" x="0" y="0"></rect>
                                         </svg></a>
                                     </li>
-                                    <li class="rd-nav-item"><a class="rd-nav-link" href="#">Blog
+                                    <li class="rd-nav-item"><a class="rd-nav-link" href="#">scientific articles
                                         <svg class="button-santos" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges">
                                             <rect class="shape" width="100%" height="100%" x="0" y="0"></rect>
                                         </svg></a>
                                         <ul class="rd-menu rd-navbar-dropdown">
-                                            <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="blog.html">Blog</a></li>
-                                            <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="single-post.html">Single post</a></li>
+                                            <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="blog.html">scientific articles</a></li>
+                                            <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="single-post.html">Single scientific articles</a></li>
                                         </ul>
                                     </li>
                                     <li class="rd-nav-item"><a class="rd-nav-link" href="#">Shop
@@ -174,7 +175,7 @@
                                                 <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="grid.html">Grid</a></li>
                                                 <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="progress-bars.html">Progress bars</a></li>
                                                 <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="tables.html">Tables</a></li>
-                                                <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="tabs-&-accordions.html">Tabs &amp; accordions</a></li>
+                                                <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="tabs-&-accordions.html">Tabs & accordions</a></li>
                                                 <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="typography.html">Typography</a></li>
                                             </ul>
                                         </li>
@@ -222,15 +223,16 @@
                         </div>
                         <div class="product-item">
                             <span class="stepper-var-1 product-number group-sm">
-                                <input class="form-input" type="number" data-zeros="true" value="1" min="1" max="1000">
+                                <input class="form-input" type="number" data-zeros="true" value="1" min="1" max="" readonly>
                                 <span class="heading-6">Quantity</span>
                             </span>
                         </div>
+                        
                         <div class="product-price group-lg">
                             <span class="price heading-4" id="product-price">₪0.00</span>
                             <span class="price-before-sale heading-4">$79.80</span>
                         </div>
-                        <a class="button button-primary" href="shopping-cart.html">Add to cart
+                        <a class="button button-primary" href="#">Add to cart
                             <span class="icon-arrow icon-rotate-90 material-icons-keyboard_backspace"></span>
                         </a>
                         <div class="product-social group-sm">
@@ -246,12 +248,6 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="col-xl-5 col-lg-4">
-                        <h3>Product details</h3>
-                        <ul class="list list-family-base" id="product-details">
-                            <!-- Product details will be inserted here -->
-                        </ul>
-                    </div>
                 </div>
             </div>
         </section>
@@ -261,6 +257,7 @@
     <!-- Javascript-->
     <script src="js/core.min.js"></script>
     <script src="js/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="js/product-page.js"></script>
 </body>
 </html>

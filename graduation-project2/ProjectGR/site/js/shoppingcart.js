@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const userId = 1; // يجب تعيين هذا إلى معرف المستخدم الحقيقي
+    const userId = 1;
 
     function fetchCart() {
         axios.get(`http://localhost:9090/api/carts/${userId}`)
@@ -13,13 +13,16 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function displayCart(cart) {
-        const container = document.querySelector('tbody');
+        const container = document.querySelector('#cart-items');
         container.innerHTML = ''; // Clear previous cart items
+        let totalPrice = 0;
         if (cart.items.length === 0) {
             container.innerHTML = '<tr><td colspan="6">Your cart is empty.</td></tr>';
+            document.getElementById('total-price').textContent = '0 ₪';
             return;
         }
         cart.items.forEach(item => {
+            totalPrice += item.productPrice * item.quantity;
             const itemHtml = `
                 <tr>
                     <th scope="row">
@@ -36,13 +39,13 @@ document.addEventListener('DOMContentLoaded', function () {
                     <td>
                         <div class="input-group quantity mt-4" style="width: 100px;">
                             <div class="input-group-btn">
-                                <button class="btn btn-sm btn-minus rounded-circle bg-light border" onclick="updateQuantity(${item.productId}, ${item.quantity - 1})">
+                                <button class="btn btn-sm btn-minus rounded-circle bg-light border" onclick="updateQuantity(${item.productId}, ${item.quantity - 1}, ${item.productQuantity})">
                                     <i class="fa fa-minus"></i>
                                 </button>
                             </div>
-                            <input type="text" class="form-control form-control-sm text-center border-0" value="${item.quantity}">
+                            <input type="text" class="form-control form-control-sm text-center border-0" value="${item.quantity}" disabled>
                             <div class="input-group-btn">
-                                <button class="btn btn-sm btn-plus rounded-circle bg-light border" onclick="updateQuantity(${item.productId}, ${item.quantity + 1})">
+                                <button class="btn btn-sm btn-plus rounded-circle bg-light border" onclick="updateQuantity(${item.productId}, ${item.quantity + 1}, ${item.productQuantity})">
                                     <i class="fa fa-plus"></i>
                                 </button>
                             </div>
@@ -59,13 +62,20 @@ document.addEventListener('DOMContentLoaded', function () {
                 </tr>`;
             container.innerHTML += itemHtml;
         });
+        document.getElementById('total-price').textContent = `${totalPrice} ₪`;
     }
 
-    function updateQuantity(productId, quantity) {
+    window.updateQuantity = function(productId, quantity, availableQuantity) {
         if (quantity <= 0) {
             removeFromCart(productId);
             return;
         }
+
+        if (quantity > availableQuantity) {
+            alert(`Sorry, only ${availableQuantity} units of this product are available.`);
+            return;
+        }
+
         axios.put(`http://localhost:9090/api/carts/${userId}/update`, null, {
             params: {
                 productId: productId,
@@ -81,7 +91,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    function removeFromCart(productId) {
+    window.removeFromCart = function(productId) {
         axios.delete(`http://localhost:9090/api/carts/${userId}/remove/${productId}`)
         .then(response => {
             fetchCart();

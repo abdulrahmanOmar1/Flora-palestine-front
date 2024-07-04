@@ -1,4 +1,41 @@
 document.addEventListener("DOMContentLoaded", function() {
+    // التحقق من وجود ملف تعريف الارتباط 'userId'
+    if (Cookies.get('userId')) {
+        // إنشاء الجلسة (session)
+        sessionStorage.setItem('isLoggedIn', true);
+        sessionStorage.setItem('userId', Cookies.get('userId'));
+        sessionStorage.setItem('userEmail', Cookies.get('userEmail'));
+
+        // طباعة معلومات المستخدم
+        console.log("User ID:", sessionStorage.getItem('userId'));
+        console.log("User Email:", sessionStorage.getItem('userEmail'));
+
+        // عرض القائمة المنسدلة للمستخدم
+        const userMenu = document.querySelector('.user-menu');
+        userMenu.style.display = 'inline-block';
+        
+        // إخفاء رابط تسجيل الدخول
+        const loginLink = document.querySelector('.login-link');
+        loginLink.style.display = 'none';
+
+        const logoutButton = document.getElementById('logoutButton');
+        logoutButton.addEventListener('click', function() {
+            sessionStorage.clear();
+            Cookies.remove('userId');
+            Cookies.remove('userEmail');
+            window.location.replace('login.html'); // إعادة التوجيه إلى صفحة تسجيل الدخول
+        });
+    } else {
+        console.log("No user information found in cookies.");
+        // إخفاء القائمة المنسدلة للمستخدم
+        const userMenu = document.querySelector('.user-menu');
+        userMenu.style.display = 'none';
+        
+        // عرض رابط تسجيل الدخول
+        const loginLink = document.querySelector('.login-link');
+        loginLink.style.display = 'inline-block';
+    }
+
     // Initialize Swiper
     var swiper = new Swiper('.swiper-container', {
         autoplay: {
@@ -6,7 +43,7 @@ document.addEventListener("DOMContentLoaded", function() {
             disableOnInteraction: false,
         },
         effect: 'fade',
-        fadeEffect: {
+        fadeEffect: { 
             crossFade: true
         },
         navigation: {
@@ -54,7 +91,7 @@ document.addEventListener("DOMContentLoaded", function() {
             });
         } else {
             searchResults.innerHTML = ''; // Clear search results if query is empty
-            searchResults.style.display = 'none';
+            searchResults.style.display = 'none'; 
         }
     });
 
@@ -97,7 +134,7 @@ document.addEventListener("DOMContentLoaded", function() {
             var plantElement = `
                 <div class="col-lg-4 col-sm-6">
                   <div class="box-product">
-                    <div class="box-product-img"><a href="plantpage.html?id=${plant.id}"><img src="${plant.imageUrl}" width="270" height="264" loading="lazy"/></a></div>
+                    <div class="box-product-img"><a href="plantpage.html?id=${plant.id}"><img src="${plant.imageUrls[0]}" width="270" height="264" loading="lazy"/></a></div>
                     <p><a href="plantpage.html?id=${plant.id}">${plant.normalName}</a></p>
                     <a class="button button-xs button-primary" href="plantpage.html?id=${plant.id}">Show details</a>
                   </div>

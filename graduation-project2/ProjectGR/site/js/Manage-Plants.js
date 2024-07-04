@@ -46,7 +46,7 @@ function populatePlantsTable(plants) {
             <td id="plant-${plant.id}">${plant.normalName}</td>
             <td>${plant.scientificName}</td>
             <td>${plant.family}</td>
-            <td><img src="${plant.imageUrl}" alt="${plant.normalName}" width="50" height="50"></td>
+            <td><img src="${plant.imageUrls[0]}" alt="${plant.normalName}" width="70" height="70"></td>
             <td>${plant.description}</td>
             <td>${plant.plantUsage}</td>
             <td><button class="btn red" onclick="deletePlant(${plant.id}, this)">Delete</button></td>
@@ -109,14 +109,17 @@ function closeUpdateModal() {
 }
 
 function addPlant() {
-    const formData = new FormData();
-    
     const scientificName = document.getElementById('newScientificName').value;
     const normalName = document.getElementById('newPlantName').value;
     const family = document.getElementById('newFamily').value;
     const description = document.getElementById('newPlantDescription').value;
     const plantUsage = document.getElementById('newPlantUsage').value;
-    const file = document.getElementById('newPlantImage').files[0];
+    const imageFiles = document.getElementById('newPlantImages').files;
+
+    if (!normalName || !scientificName || !family || !description || !plantUsage || imageFiles.length === 0) {
+        alert('Please fill in all fields and select at least one image.');
+        return;
+    }
 
     const plantData = {
         scientificName,
@@ -126,20 +129,33 @@ function addPlant() {
         plantUsage
     };
 
-    formData.append('plant', JSON.stringify(plantData));
-    formData.append('file', file);
+    axios.post("http://localhost:9090/api/plants/add", plantData)
+        .then(response => {
+            const scientificName = response.data.scientificName;
+            console.log(response.data);
+            uploadImages(scientificName, imageFiles);
+            fetchAllPlants();
+            closeModal();
+        })
+        .catch(error => console.error('Error adding plant:', error));
+}
 
-    axios.post("http://localhost:9090/api/plants/add", formData, {
+function uploadImages(scientificName, imageFiles) {
+    const formData = new FormData();
+    for (let i = 0; i < imageFiles.length; i++) {
+        formData.append('images', imageFiles[i]);
+    }
+
+    axios.post(`http://localhost:9090/api/plant-image/${scientificName}`, formData, {
         headers: {
             'Content-Type': 'multipart/form-data'
         }
     })
     .then(response => {
-        console.log('Plant added successfully:', response.data);
+        console.log('Images uploaded successfully:', response.data);
         fetchAllPlants();
-        closeModal();
     })
-    .catch(error => console.error('Error adding plant:', error));
+    .catch(error => console.error('Error uploading images:', error));
 }
 
 function saveChanges() {

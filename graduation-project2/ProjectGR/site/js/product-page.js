@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
     const apiUrl = 'http://localhost:9090/api/products';
     const cartApiUrl = 'http://localhost:9090/api/carts';
-    const userId = 1; // ثابت لمعرف المستخدم
+    const userId = 1; 
     const productId = getProductIdFromUrl();
     console.log(`Fetched Product ID: ${productId}`);
     fetchProductDetails(productId);
@@ -37,9 +37,9 @@ document.addEventListener('DOMContentLoaded', function () {
         document.getElementById('product-image').src = product.imageUrl;
 
         const quantityInput = document.querySelector('.form-input');
-        quantityInput.max = product.quantity;
         quantityInput.min = 1;
         quantityInput.value = 1;
+        quantityInput.max = product.quantity; 
 
         quantityInput.addEventListener('input', function() {
             let value = parseInt(quantityInput.value);
@@ -49,15 +49,16 @@ document.addEventListener('DOMContentLoaded', function () {
 
         document.querySelector('.button-primary').addEventListener('click', function() {
             const quantity = parseInt(quantityInput.value);
-            if (quantity > product.quantity) {
-                alert(`Sorry, only ${product.quantity} units of this product are available.`);
-            } else {
-                addToCart(product.id, quantity);
-            }
+            addToCart(product.id, quantity, product.quantity);
         });
     }
 
-    function addToCart(productId, quantity) {
+    function addToCart(productId, quantity, availableQuantity) {
+        if (quantity > availableQuantity) {
+            alert(`Sorry, only ${availableQuantity} units of this product are available.`);
+            return;
+        }
+
         axios.post(`${cartApiUrl}/${userId}/items`, null, {
             params: {
                 productId: productId,
@@ -69,7 +70,11 @@ document.addEventListener('DOMContentLoaded', function () {
         })
         .catch(error => {
             console.error('Error adding product to cart:', error.response ? error.response.data : error.message);
-            alert('Failed to add product to cart. Please try again later.');
+            if (error.response && error.response.status === 500) {
+                alert('Sorry, this product is out of stock.');
+            } else {
+                alert('Failed to add product to cart. Please try again later.');
+            }
         });
     }
 

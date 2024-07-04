@@ -1,31 +1,38 @@
 document.addEventListener('DOMContentLoaded', function() {
     const registrationButton = document.querySelector('button[type="button"]');
-    const userNameInput = document.getElementById('usernameInput');
+    const firstNameInput = document.getElementById('firstNameInput');
+    const lastNameInput = document.getElementById('lastNameInput');
+    const addressInput = document.getElementById('addressInput');
     const passwordInput = document.getElementById('passwordInput');
     const confirmPasswordInput = document.getElementById('confirmPasswordInput');
     const emailInput = document.getElementById('emailInput');
     const phoneInput = document.getElementById('phoneInput');
-    const ageInput = document.getElementById('ageInput');
-    const genderInput = document.getElementById('genderInput');
     const birthdateInput = document.getElementById('birthdateInput');
-    const profilePictureInput = document.getElementById('profilePictureInput');
     const messageDiv = document.getElementById('message');
 
     registrationButton.addEventListener('click', function(event) {
         event.preventDefault();
-        messageDiv.style.display = 'none'; // Hide message initially
+
+        const genderInput = document.querySelector('input[name="gender"]:checked'); // Move inside the event listener
+
+        if (!genderInput) {
+            showMessage('Please select your gender.');
+            return;
+        }
+
+        console.log("Gender =", genderInput.value);
+        console.log("Email =", emailInput.value);
+        messageDiv.style.display = 'none';
 
         const validations = [
-            { check: userNameInput.value.trim() && passwordInput.value && confirmPasswordInput.value && emailInput.value &&
-                      phoneInput.value && ageInput.value && genderInput.value && birthdateInput.value && profilePictureInput.files.length,
-              message: 'Please fill out all required fields and upload a profile picture.' },
+            { check: passwordInput.value && confirmPasswordInput.value && firstNameInput.value && lastNameInput.value && emailInput.value && addressInput.value &&
+                      phoneInput.value && genderInput.value && birthdateInput.value,
+              message: 'Please fill out all required fields.' },
             { check: validateEmail(emailInput.value), message: 'Please enter a valid email address.' },
             { check: passwordInput.value === confirmPasswordInput.value, message: 'Passwords do not match.' },
             { check: validatePassword(passwordInput.value), message: 'Password must contain at least one uppercase letter, one symbol like @#.$ and be at least 8 characters long.' },
             { check: validatePhone(phoneInput.value), message: 'Invalid phone number.' },
-            { check: validateAge(ageInput.value), message: 'Age must be a two-digit number.' },
             { check: validateBirthdate(birthdateInput.value), message: 'Birthdate must be before 2024.' },
-            { check: validateProfilePicture(profilePictureInput.files[0]), message: 'Only image files are allowed.' }
         ];
 
         for (let validation of validations) {
@@ -35,36 +42,20 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
 
-        // Prepare the data to be sent
-        const formData = new FormData();
-        formData.append('username', userNameInput.value);
-        formData.append('password', passwordInput.value);
-        formData.append('email', emailInput.value);
-        formData.append('phone', phoneInput.value);
-        formData.append('age', ageInput.value);
-        formData.append('gender', genderInput.value);
-        formData.append('birthdate', birthdateInput.value);
-        formData.append('profilePicture', profilePictureInput.files[0]);
-
-        // Fetch API call to register the user
-        fetch('/api/register', {
-            method: 'POST',
-            body: formData
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                // Show success message
-                alert('Registration successful! Your account has been created.');
-                // Redirect to the homepage
-                window.location.href = 'index.html';
-            } else {
-                showMessage(data.message || 'An error occurred during registration.');
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            showMessage('An error occurred. Please try again later.');
+        axios.post('http://localhost:9090/api/index/registration', {
+            email: emailInput.value,
+            password: passwordInput.value,
+            firstName: firstNameInput.value,
+            lastName: lastNameInput.value,
+            address: addressInput.value,
+            phone: phoneInput.value,
+            role : 'ADMIN',
+            dob: birthdateInput.value,
+            gender: genderInput.value,
+        }).then(response => {
+            window.location.href = 'http://http://127.0.0.1:5500/Flora-palestine-front/graduation-project2/ProjectGR/site/Login.html';
+        }).catch(error => {
+            console.log("Error:", error);
         });
     });
 

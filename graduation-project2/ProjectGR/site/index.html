@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/fonts.css">
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/shop.css">
+    <link rel="stylesheet" href="css/shop.css"> 
     <link href="img/favicon.ico" rel="icon">
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -58,8 +58,41 @@
         color: white;
         border-color: #007bff;
       }
+      .user-menu {
+        position: relative;
+        display: none; /* إخفاء القائمة افتراضيًا */
+      }
+      .user-menu-button {
+        background-color: #ff6600; /* اللون البرتقالي */
+        color: white;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+      }
+      .user-menu-content {
+        display: none;
+        position: absolute;
+        background-color: white;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+        right: 0;
+      }
+      .user-menu-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+      }
+      .user-menu-content a:hover {
+        background-color: #f1f1f1;
+      }
+      .user-menu:hover .user-menu-content {
+        display: block;
+      }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
   </head>
   <body>
     <!-- Page preloader-->
@@ -73,13 +106,11 @@
     <!-- Page-->
     <div class="text-center text-md-start page">
       <!-- Page Header-->
-
       <header class="page-header header-classic">
         <!-- RD Navbar-->
         <div class="rd-navbar-wrap">
           <nav class="rd-navbar" data-layout="rd-navbar-fixed" data-md-device-layout="rd-navbar-fixed" data-lg-device-layout="rd-navbar-fullwidth" data-xl-device-layout="rd-navbar-fullwidth" data-xxl-device-layout="rd-navbar-fullwidth" data-sm-layout="rd-navbar-fixed" data-md-layout="rd-navbar-fixed" data-lg-layout="rd-navbar-fullwidth" data-xl-layout="rd-navbar-fullwidth" data-xxl-layout="rd-navbar-fullwidth" data-md-stick-up-offset="73px" data-lg-stick-up-offset="93px" data-stick-up="true" data-sm-stick-up="true" data-md-stick-up="true" data-lg-stick-up="true" data-xl-stick-up="true" data-xxl-stick-up="true">
             <div class="rd-navbar-collapse-toggle" data-rd-navbar-toggle=".rd-navbar-collapse"><span></span></div>
-           
             <div class="rd-navbar-inner">
               <!-- RD Navbar Panel-->
               <div class="rd-navbar-aside-wrap">
@@ -121,8 +152,14 @@
                   </ul>
                 </div>
                 <ul class="list-inline desktop-element">
-                  <li><a class="fa fa-user text-white" href="http://127.0.0.1:9090/login" style="font-size: 24px;"></a></li>
-
+                  <li class="login-link"><a class="fa fa-user text-white" href="Login.html" style="font-size: 24px;"></a></li>
+                  <li class="user-menu">
+                    <button class="user-menu-button">HA</button>
+                    <div class="user-menu-content">
+                      <a href="#">Settings</a>
+                      <a href="#" id="logoutButton">Log out</a>
+                    </div>
+                  </li>
                 </ul>
               </div>
             </div>
@@ -184,38 +221,7 @@
             <span class="icon-arrow material-icons-keyboard_backspace"></span>
           </div>
         </div>
-      </section>
-      <section class="section-xs bg-default">
-        <div class="container">
-          <div class="row row-50">
-            <div class="col-lg-3 col-md-4">
-              <h3>Families</h3>
-              <ul class="list list-marked list-bold d-inline-block d-md-block">
-                <!-- سيتم تحديث العائلات ديناميكيا هنا -->
-              </ul>
-            </div>
-            <div class="col-lg-9 col-md-8">
-              <div class="d-flex justify-content-between align-items-center mb-3">
-                <h3 id="plants" class="mb-0">The latest plants</h3>
-                <button class="btn btn-outline-primary" id="toggleSearchButton">Search</button>
-              </div>
-              <div class="input-group mb-3 d-none" id="searchContainer">
-                <input type="text" class="form-control" placeholder="Search plants..." id="searchInputSmall" aria-label="Search plants">
-                <div class="input-group-append">
-                  <button class="btn btn-outline-secondary" type="button" id="searchButtonSmall">Search</button>
-                </div>
-                <div class="dropdown-menu" id="searchResultsSmall" style="position: absolute; top: 100%; left: 0; right: 0;"></div>
-              </div>
-              <div class="row row-30 plants-container">
-                <!-- سيتم تحديث النباتات ديناميكيا هنا -->
-              </div>
-              <div class="pagination">
-                <!-- سيتم تحديث التصفح ديناميكيا هنا -->
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>      
+      </section>    
       <section class="section-md parallax-container" data-parallax-img="images/parallax-1-1920x800.jpg">
         <div class="parallax-content">
           <div class="container">
@@ -244,6 +250,38 @@
                   <p class="box-counter-title">number different plants</p>
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section-xs bg-default">
+        <div class="container">
+          <div class="row row-50">
+            <div class="col-lg-3 col-md-4">
+              <h3>Families</h3>
+              <ul class="list list-marked list-bold d-inline-block d-md-block">
+                <!-- سيتم تحديث العائلات ديناميكيا هنا -->
+              </ul>
+            </div>
+            <div class="col-lg-9 col-md-8">
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <h3 id="plants" class="mb-0">The latest plants</h3>
+                <button class="btn btn-outline-primary" id="toggleSearchButton">Search</button>
+              </div>
+              <div class="input-group mb-3 d-none" id="searchContainer">
+                <input type="text" class="form-control" placeholder="Search plants..." id="searchInputSmall" aria-label="Search plants">
+                <div class="input-group-append">
+                  <button class="btn btn-outline-secondary" type="button" id="searchButtonSmall">Search</button>
+                </div>
+                <div class="dropdown-menu" id="searchResultsSmall" style="position: absolute; top: 100%; left: 0; right: 0;"></div>
+              </div>
+              <div class="row row-30 plants-container">
+                <!-- سيتم تحديث النباتات ديناميكيا هنا -->
+              </div>
+              <div class="pagination">
+                <!-- سيتم تحديث التصفح ديناميكيا هنا -->
+              </div> 
             </div>
           </div>
         </div>

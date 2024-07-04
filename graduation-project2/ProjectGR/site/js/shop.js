@@ -1,10 +1,13 @@
 document.addEventListener('DOMContentLoaded', function () {
     const apiUrl = 'http://localhost:9090/api';
     const searchInput = document.querySelector('#search-input');
+    const sortSelect = document.querySelector('#sort-select');
+    const favoriteBtn = document.getElementById('favorite-btn');
     let currentCategoryId = '';
     const userId = 1;
-    
-
+    let likedProductIds = [];
+    let currentPage = 0;
+    const itemsPerPage = 9;
 
     function updateCartDisplay() {
         let cart = JSON.parse(localStorage.getItem('shoppingCart')) || [];
@@ -35,28 +38,19 @@ document.addEventListener('DOMContentLoaded', function () {
         alert('Failed to fetch products. Please try again later.');
     }
 
-    function fetchProducts(categoryId = '', keywords = '') {
+    function fetchProducts(categoryId = '', keywords = '', sort = 'asc', page = 0) {
         let url;
         if (categoryId) {
-            url = `${apiUrl}/categories/category/${categoryId}/products`;
+            url = `${apiUrl}/products/categories/${categoryId}/search?search=${encodeURIComponent(keywords)}&order=${sort}&page=${page}&size=${itemsPerPage}`;
         } else {
-            url = `${apiUrl}/products`;
-        }
-
-        if (keywords) {
-            url += `?search=${encodeURIComponent(keywords)}`;
+            url = `${apiUrl}/products/search?search=${encodeURIComponent(keywords)}&order=${sort}&page=${page}&size=${itemsPerPage}`;
         }
 
         fetch(url)
-            .then(response => {
-                if (response.status === 204) {
-                    return [];
-                }
-                return response.json();
-            })
+            .then(response => response.json())
             .then(data => {
-                console.log(data);
-                displayProducts(data);
+                displayProducts(data.content);
+                updatePagination(data.totalPages, data.number);
             })
             .catch(handleError);
     }
@@ -76,62 +70,127 @@ document.addEventListener('DOMContentLoaded', function () {
             .catch(handleError);
     }
 
+    function fetchLikedProducts() {
+        const url = `${apiUrl}/likes/user/${userId}/products`;
+        fetch(url)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Failed to fetch liked products');
+                }
+                return response.json();
+            })
+            .then(data => {
+                likedProductIds = data.map(product => product.id);
+                fetchProducts(currentCategoryId, searchInput.value.trim(), sortSelect.value, currentPage);
+            })
+            .catch(handleError);
+    }
+
     function displayProducts(products) {
         const container = document.getElementById('product-container');
-        container.innerHTML = ''; // Clear previous products
+        container.innerHTML = ''; 
 
         products.forEach(product => {
+            const isOutOfStock = product.quantity == 0;
+            const isLiked = likedProductIds.includes(product.id) ? 'liked' : '';
             const productHtml = `
-                <div class="col-sm-6 col-md-4 col-lg-3">
+                <div class="col mb-4 ${isOutOfStock ? 'out-of-stock' : ''}" data-product-id="${product.id}">
                     <article class="product">
                         <div class="product-body">
-                            <div class="product-figure"><img src="${product.imageUrl}" alt="" width="270" height="264"/></div>
-                            <h5 class="product-title"><a href="product-page.html?id=${product.id}">${product.name}</a></h5>
+                        <a href="product-page.html?id=${product.id}"><img src="${product.imageUrl}" class="img-fluid w-100 rounded-top" alt="${product.name}"></a>
+                        <h5 class="product-title"><a href="product-page.html?id=${product.id}" ${isOutOfStock ? 'class="disabled-link"' : ''}>${product.name}</a></h5>
                             <div class="product-price-wrap">
                                 <div class="product-price">₪${product.price}</div>
                             </div>
                             <div class="product-button-wrap">
-                                <button class="button button-primary" onclick="addToCart(${product.id}, 1)">Add to cart</button>
+                                <button class="button button-primary ${isOutOfStock ? 'disabled' : ''}" ${isOutOfStock ? 'disabled' : ''} onclick="addToCart(${product.id}, 1)">
+                                    ${isOutOfStock ? 'Product is out of stock' : 'Add to cart'}
+                                </button>
+                                <button class="button button-like ${isLiked}" onclick="toggleLike(${product.id}, this)">
+                                    <i class="fa fa-heart"></i>
+                                </button>
                             </div>
                         </div>
                     </article>
                 </div>`;
             container.innerHTML += productHtml;
         });
+
+        const disabledLinks = document.querySelectorAll('.disabled-link');
+        disabledLinks.forEach(link => {
+            link.addEventListener('click', event => {
+                event.preventDefault();
+            });
+        });
+        
     }
 
     function displayCategories(categories) {
         const container = document.getElementById('category-list');
-        container.innerHTML = ''; // Clear previous categories
+        container.innerHTML = ''; 
         container.innerHTML += `
-            <li class="nav-item">
-                <a class="nav-link active" data-bs-toggle="pill" href="#" onclick="changeCategory('')">
-                    <span>All Products</span>
-                </a>
-            </li>`;
+            <a class="list-group-item list-group-item-action active" onclick="changeCategory('')">All Products</a>`;
         categories.forEach(category => {
             const categoryHtml = `
-                <li class="nav-item">
-                    <a class="nav-link" data-bs-toggle="pill" href="#" onclick="changeCategory('${category.id}')">
-                        <span>${category.name}</span>
-                    </a>
-                </li>`;
+                <a class="list-group-item list-group-item-action" onclick="changeCategory('${category.id}')">${category.name}</a>`;
             container.innerHTML += categoryHtml;
         });
     }
 
     window.changeCategory = (categoryId) => {
         currentCategoryId = categoryId;
-        fetchProducts(categoryId, searchInput.value.trim());
+        currentPage = 0;
+        fetchProducts(categoryId, searchInput.value.trim(), sortSelect.value, currentPage);
     };
 
+    window.showFavoriteProducts = () => {
+        const url = `${apiUrl}/likes/user/${userId}/products`;
+        fetch(url)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Failed to fetch favorite products');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log(data);
+                displayProducts(data);
+            })
+            .catch(handleError);
+    };
+
+    function updatePagination(totalPages, currentPage) {
+        const paginationContainer = document.getElementById('pagination-container');
+        paginationContainer.innerHTML = '';
+
+        for (let i = 0; i < totalPages; i++) {
+            const pageItem = document.createElement('button');
+            pageItem.classList.add('btn', 'btn-primary', 'mx-1');
+            if (i === currentPage) {
+                pageItem.classList.add('active');
+            }
+            pageItem.textContent = i + 1;
+            pageItem.addEventListener('click', () => {
+                currentPage = i;
+                fetchProducts(currentCategoryId, searchInput.value.trim(), sortSelect.value, currentPage);
+            });
+            paginationContainer.appendChild(pageItem);
+        }
+    }
+
     let searchDebounceTimer;
-    searchInput.addEventListener('keyup', () => {
+    searchInput.addEventListener('input', () => {
         clearTimeout(searchDebounceTimer);
         searchDebounceTimer = setTimeout(() => {
             const keywords = searchInput.value.trim();
-            fetchProducts(currentCategoryId, keywords);
-        }, 300); // Delay in milliseconds
+            currentPage = 0;
+            fetchProducts(currentCategoryId, keywords, sortSelect.value, currentPage);
+        }, 300); 
+    });
+
+    sortSelect.addEventListener('change', () => {
+        currentPage = 0;
+        fetchProducts(currentCategoryId, searchInput.value.trim(), sortSelect.value, currentPage);
     });
 
     window.navigateToProductPage = (productId) => {
@@ -140,7 +199,7 @@ document.addEventListener('DOMContentLoaded', function () {
     };
 
     window.addToCart = function(productId, quantity) {
-        axios.post(`http://localhost:9090/api/carts/${userId}/items`, null, {
+        axios.post(`${apiUrl}/carts/${userId}/items`, null, {
             params: {
                 productId: productId,
                 quantity: quantity
@@ -152,15 +211,39 @@ document.addEventListener('DOMContentLoaded', function () {
         })
         .catch(error => {
             console.error('Error adding product to cart:', error);
-            alert('The product is out of stock .');
+            alert('The product is out of stock.');
         });
     }
 
-    fetchProducts();
+    window.toggleLike = function(productId, button) {
+        const isLiked = button.classList.contains('liked');
+        const url = isLiked 
+            ? `${apiUrl}/likes/remove?userId=${userId}&productId=${productId}`
+            : `${apiUrl}/likes/add`;
 
+        const data = {
+            userId: userId,
+            productId: productId
+        };
 
-    fetchProducts();
+        const request = isLiked ? axios.delete(url, { data }) : axios.post(url, data);
+
+        request.then(response => {
+            button.classList.toggle('liked');
+            if (isLiked) {
+                likedProductIds = likedProductIds.filter(id => id !== productId);
+            } else {
+                likedProductIds.push(productId);
+            }
+            console.log(isLiked ? 'Like removed' : 'Like added');
+        })
+        .catch(error => {
+            console.error('Error toggling like:', error);
+            alert('Failed to toggle like.');
+        });
+    }
+
+    fetchLikedProducts(); 
     fetchCategories();
-    updateCartDisplay(); 
-
+    updateCartDisplay();
 });

@@ -87,7 +87,7 @@ document.addEventListener('DOMContentLoaded', function () {
         })
         .catch(error => {
             console.error('Error updating cart item quantity:', error);
-            alert('Failed to update cart item quantity.');
+            alert('The product is out of stock ');
         });
     }
 

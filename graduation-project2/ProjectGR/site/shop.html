@@ -1,40 +1,31 @@
 <!DOCTYPE html>
 <html class="wide wow-animation" lang="en">
-
 <head>
-    <!-- Site Title-->
     <title>Shop</title>
     <meta name="format-detection" content="telephone=no">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
     <link rel="icon" href="images/favicon.ico" type="image/x-icon">
-    <!-- Stylesheets-->
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Montserrat:400,700|Lato:400,400i,700">
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/fonts.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/shop.css">
     <link href="img/favicon.ico" rel="icon">
-    <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500;600;700&family=Open+Sans:wght@400;500&display=swap" rel="stylesheet">
-    <!-- Icon Font Stylesheet -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
-    <!-- Libraries Stylesheet -->
     <link href="lib/animate/animate.min.css" rel="stylesheet">
     <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
     <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">
-    <!-- Customized Bootstrap Stylesheet -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
-    <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
 </head>
 
 <body>
-    <!-- Page preloader-->
     <div class="preloader">
         <div>
             <div class="preloader-body">
@@ -59,16 +50,12 @@
             </div>
         </div>
     </div>
-    <!-- Page-->
     <div class="text-center text-md-start page">
-        <!-- Page Header-->
         <header class="page-header header-classic">
-            <!-- RD Navbar-->
             <div class="rd-navbar-wrap">
                 <nav class="rd-navbar" data-layout="rd-navbar-fixed" data-md-device-layout="rd-navbar-fixed" data-lg-device-layout="rd-navbar-fullwidth" data-xl-device-layout="rd-navbar-fullwidth" data-xxl-device-layout="rd-navbar-fullwidth" data-sm-layout="rd-navbar-fixed" data-md-layout="rd-navbar-fixed" data-lg-layout="rd-navbar-fullwidth" data-xl-layout="rd-navbar-fullwidth" data-xxl-layout="rd-navbar-fullwidth" data-md-stick-up-offset="73px" data-lg-stick-up-offset="93px" data-stick-up="true" data-sm-stick-up="true" data-md-stick-up="true" data-lg-stick-up="true" data-xl-stick-up="true" data-xxl-stick-up="true">
                     <div class="rd-navbar-collapse-toggle" data-rd-navbar-toggle=".rd-navbar-collapse"><span></span></div>
                     <div class="rd-navbar-inner">
-                        <!-- RD Navbar Panel-->
                         <div class="rd-navbar-aside-wrap">
                             <div class="rd-navbar-nav-wrap">
                                 <ul class="rd-navbar-nav">
@@ -187,7 +174,6 @@
         </header>
         <section class="breadcrumbs-custom text-start" style="background-image: url(images/breadcrumbs-team-1920x974.jpg);">
             <div class="container">
-                <!-- Breadcrumbs-->
                 <h2 class="breadcrumbs-custom__title">Shop</h2>
                 <ul class="breadcrumbs-custom__path">
                     <li><a href="index.html">Home</a></li>
@@ -226,46 +212,34 @@
         <div class="container-fluid fruite py-5">
             <div class="container py-1">
                 <h1 class="mb-4">Shop</h1>
-                <div class="row g-4">
-                    <div class="col-lg-12">
-                        <div class="row g-4">
-                            <div class="col-xl-3">
-                                <div class="input-group w-100 mx-auto d-flex">
-                                    <input type="search" class="form-control p-3" placeholder="keywords" aria-describedby="search-icon-1" id="search-input">
-                                    <span id="search-icon-1" class="input-group-text p-3"><i class="fa fa-search"></i></span>
+                <div class="row">
+                    <div class="col-lg-3">
+                        <div class="list-group mb-4" id="category-list">
+                            <a class="list-group-item list-group-item-action active" onclick="changeCategory('')">All Products</a>
+                        </div>
+                    </div>
+                    <div class="col-lg-9">
+                        <div class="row g-4 mb-4">
+                            <div class="col-12">
+                                <div class="input-group">
+                                    <input type="search" class="form-control" placeholder="Keywords" aria-describedby="search-icon-1" id="search-input">
+                                    <button class="btn btn-primary" id="search-icon-1"><i class="fa fa-search"></i></button>
                                 </div>
                             </div>
-                            <div class="col-6"></div>
-                            <div class="col-xl-3"></div>
-                        </div>
-                        <div class="tab-class text-center">
-                            <div class="row g-4">
-                                <div class="col-lg-4 text-start">
-                                    <h2>Our Products</h2>
-                                </div>
-                                <div class="col-lg-8 text-end">
-                                    <ul class="nav nav-pills d-inline-flex text-center mb-5" id="category-list">
-                                        <li class="nav-item">
-                                            <a class="nav-link active" data-bs-toggle="pill" href="#" onclick="changeCategory('')">
-                                                <span>All Products</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                    <section class="section section-sm bg-default">
-                                        <div class="container">
-                                            <div class="row row-30 row-lg-50" id="product-container">
-
-                                            </div>
-                                        </div>
-                                    </section>
-                                <div class="tab-content">
-                                    <div id="tab-1" class="tab-pane fade show p-0 active">
-                                        <div class="row g-4" id="product-container"></div>
-                                    </div>
-                                </div>
+                            <div class="col-6">
+                                <select id="sort-select" class="form-select">
+                                    <option value="asc">Price: Low to High</option>
+                                    <option value="desc">Price: High to Low</option>
+                                </select>
+                            </div>
+                            <div class="col-6 text-end">
+                                <button class="btn btn-danger" id="favorite-btn" onclick="showFavoriteProducts()">
+                                    <i class="fa fa-heart"></i> My Favorite
+                                </button>
                             </div>
                         </div>
+                        
+                        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4" id="product-container"></div>
                         <div class="col-12">
                             <div class="pagination d-flex justify-content-center mt-5" id="pagination-container"></div>
                         </div>
@@ -273,7 +247,6 @@
                 </div>
             </div>
         </div>
-        <!-- Footer Start -->
         <div class="container-fluid bg-dark text-light footer mt-5 py-5 wow fadeIn" data-wow-delay="0.1s">
             <div class="container py-5">
                 <div class="row g-5">
@@ -316,8 +289,6 @@
             </div>
         </div>
     </div>
-    <!-- Footer End -->
-    <!-- Copyright Start -->
     <div class="container-fluid copyright py-4">
         <div class="container">
             <div class="row">
@@ -327,8 +298,6 @@
             </div>
         </div>
     </div>
-    <!-- Copyright End -->
-    <!-- Global Mailform Output-->
     <div class="snackbars" id="form-output-global"></div>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
@@ -343,11 +312,9 @@
     <script src="lib/lightbox/js/lightbox.min.js"></script>
     <script src="lib/owlcarousel/owl.carousel.min.js"></script>
     <script src="js/core.min.js"></script>
-    <!-- counterUp Library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/waypoints/lib/jquery.waypoints.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery.counterup@2.1.0/jquery.counterup.min.js"></script>
-
     <script src="js/main.js"></script>
     <script src="js/script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>

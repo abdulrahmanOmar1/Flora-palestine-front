@@ -43,6 +43,20 @@
 
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
+
+    <style>
+      .slick-slide-overlay {
+          margin-top: 20px; /* Adds space above the image */
+          text-align: center; /* Centers the image if smaller than the container */
+      }
+      .slick-slide-overlay img {
+          width: 100%; /* Sets the image width to 100% of its container */
+          height: auto; /* Maintains the aspect ratio */
+          max-width: 117px; /* Maximum width to match your desired size */
+          max-height: 108px; /* Maximum height to match your desired size */
+          display: inline-block; /* Ensures the img element is treated as inline-block for center alignment */
+      }
+  </style>
   </head>
   <body>
     <!-- Page preloader-->
@@ -162,15 +176,14 @@
       </section>
       <section class="section-xs bg-default">
         <div class="container">
-          <h2>Plant page</h2>
           <div class="row row-50 row-lg-90">
             <div class="col-lg-5">
               <div class="slick-vertical">
                 <!-- Slick Carousel-->
                 <div class="slick-slider carousel-parent" data-arrows="false" data-loop="false" data-dots="false" data-swipe="true" data-items="1" data-child="#child-carousel" data-for="#child-carousel">
-                  <div class="item"><img src="images/service-1.jpg" alt="" width="470" height="486" loading="lazy"/>
+                  <div class="item">
+                    <img src="images/service-1.jpg" alt="" width="470" height="486" loading="lazy"/>
                   </div>
-             
                 </div>
                 <div class="slick-slider" id="child-carousel" data-for=".carousel-parent" data-arrows="true" data-loop="false" data-dots="false" data-swipe="false" data-items="2" data-sm-items="3" data-md-items="4" data-lg-items="4" data-xl-items="4" data-slide-to-scroll="1" data-md-vertical="true">
                   <div class="item">
@@ -200,26 +213,10 @@
                 <li id="plantFamily">Family: </li>
                 <li id="plantUsage">Usage: </li>
               </ul>
-              <img id="plantImage" src="" alt="Plant Image" width="470" height="486" loading="lazy"/>
             </div>
           </div>
         </div>
       </section>
-
-      <style>
-        .slick-slide-overlay {
-            margin-top: 20px; /* Adds space above the image */
-            text-align: center; /* Centers the image if smaller than the container */
-        }
-        .slick-slide-overlay img {
-            width: 100%; /* Sets the image width to 100% of its container */
-            height: auto; /* Maintains the aspect ratio */
-            max-width: 117px; /* Maximum width to match your desired size */
-            max-height: 108px; /* Maximum height to match your desired size */
-            display: inline-block; /* Ensures the img element is treated as inline-block for center alignment */
-        }
-    </style>
-
       <section class="section-md bg-default">
         <div class="container container-inset-owl">
           <h3>Related Plants</h3>

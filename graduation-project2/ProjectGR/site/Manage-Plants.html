@@ -51,13 +51,13 @@
             <input type="text" id="newPlantName" placeholder="Enter plant name">
             <input type="text" id="newScientificName" placeholder="Enter scientific name">
             <select id="newFamily">
-                <!-- Families will be dynamically filled from the backend -->
+                <!-- Families will be dynamically filled from the backend --> 
             </select>
-            <input type="file" id="newPlantImage">
+            <input type="file" id="newPlantImages" multiple>
             <textarea id="newPlantDescription" placeholder="Enter description"></textarea>
             <textarea id="newPlantUsage" placeholder="Enter usage"></textarea>
             <button class="btn blue" onclick="addPlant()">Save Changes</button>
-            <button class="btn" onclick="closeModal()">Close</button>
+            <button class="btn" onclick="closeModal()">Close</button> 
         </div>
     </div>
 
@@ -71,7 +71,7 @@
             <select id="updateFamily">
                 <!-- Families will be dynamically filled from the backend -->
             </select>
-            <input type="file" id="updatePlantImage">
+            <input type="file" id="updatePlantImages" multiple>
             <textarea id="updatePlantDescription" placeholder="Enter description"></textarea>
             <textarea id="updatePlantUsage" placeholder="Enter usage"></textarea>
             <button class="btn green" onclick="saveChanges()">Save Changes</button>

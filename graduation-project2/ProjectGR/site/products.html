@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Product Page - Admin HTML Template</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700" />
+    <link rel="stylesheet" href="css/fontawesome.min.css" />
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/templatemo-style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+
+<body id="reportsPage">
+    <nav class="navbar navbar-expand-xl">
+        <!-- Navbar code -->
+    </nav>
+    <div class="container mt-5">
+        <div class="row tm-content-row">
+            <div class="col-sm-12 col-md-12 col-lg-8 col-xl-8 tm-block-col">
+                <div class="tm-bg-primary-dark tm-block tm-block-products">
+                    <div class="tm-product-table-container">
+                        <table class="table table-hover tm-table-small tm-product-table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">&nbsp;</th>
+                                    <th scope="col">PRODUCT NAME</th>
+                                    <th scope="col">DESCRIPTION</th>
+                                    <th scope="col">PRICE</th>
+                                    <th scope="col">IMAGE</th>
+                                    <th scope="col">CATEGORY</th>
+                                    <th scope="col">&nbsp;</th>
+                                </tr>
+                            </thead>
+                            <tbody id="productsTableBody">
+                                <!-- Product rows will be dynamically added here -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <a href="add-product.html" class="btn btn-primary btn-block text-uppercase mb-3">Add new product</a>
+                    <button class="btn btn-primary btn-block text-uppercase" id="deleteSelectedButton">Delete selected products</button>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-12 col-lg-4 col-xl-4 tm-block-col">
+                <div class="tm-bg-primary-dark tm-block tm-block-product-categories">
+                    <h2 class="tm-block-title">Product Categories</h2>
+                    <div class="tm-product-table-container">
+                        <table class="table tm-table-small tm-product-table">
+                            <tbody id="categoriesTableBody">
+                                <!-- Category rows will be dynamically added here -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <a href="add-category.html" class="btn btn-primary btn-block text-uppercase">Add new category</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="tm-footer row tm-mt-small">
+        <!-- Footer code -->
+    </footer>
+
+    <!-- Modal for Editing Product -->
+    <div class="modal fade" id="editProductModal" tabindex="-1" role="dialog" aria-labelledby="editProductModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editProductModalLabel">Edit Product</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="editProductForm">
+                        <input type="hidden" id="editProductId" name="editProductId" value="">
+                        <div class="form-group">
+                            <label for="editProductName">Product Name</label>
+                            <input type="text" class="form-control" id="editProductName" name="editProductName" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="editProductDescription">Description</label>
+                            <textarea class="form-control" id="editProductDescription" name="editProductDescription" rows="3"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="editProductPrice">Price</label>
+                            <input type="text" class="form-control" id="editProductPrice" name="editProductPrice">
+                        </div>
+                        <div class="form-group">
+                            <label for="editProductImageUrl">Image URL</label>
+                            <input type="file" id="editProductImages" multiple>
+                        </div>
+                        <div class="form-group">
+                            <label for="editProductCategoryId">Category ID</label>
+                            <input type="text" class="form-control" id="editProductCategoryId" name="editProductCategoryId" readonly>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/tooplate-scripts.js"></script>
+    <script src="js/products.js"></script>
+</body>
+
+</html>

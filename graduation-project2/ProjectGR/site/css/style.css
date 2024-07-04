@@ -17623,6 +17623,26 @@ h6,
     color: var(--light);
     background: #072A19;
 }
+/* تعتيم المنتجات التي نفذت */
+.out-of-stock {
+    opacity: 0.5;
+}
+
+.button.disabled {
+    background-color: #d3d3d3;
+    cursor: not-allowed;
+}
+
+.button.disabled:hover {
+    background-color: #d3d3d3;
+}
+
+.disabled-link {
+    pointer-events: none;
+    cursor: default;
+    text-decoration: none;
+    color: grey; /* تغيير لون النص ليدل على أنه غير متاح */
+}
 
 .copyright a {
     color: #FFFFFF;
@@ -17630,4 +17650,18 @@ h6,
 
 .copyright a:hover {
     color: var(--primary);
+}
+.button-like {
+	background: none;
+	border: none;
+	color: #ccc;
+	cursor: pointer;
+}
+
+.button-like.liked {
+	color: red;
+}
+
+.button-like i {
+	font-size: 24px;
 }

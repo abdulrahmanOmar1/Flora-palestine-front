@@ -22,7 +22,8 @@ document.addEventListener('DOMContentLoaded', function () {
             return;
         }
         cart.items.forEach(item => {
-            totalPrice += item.productPrice * item.quantity;
+            const itemPrice = item.productPriceAfterDis || item.productPrice;
+            totalPrice += itemPrice * item.quantity;
             const itemHtml = `
                 <tr>
                     <th scope="row">
@@ -34,7 +35,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         <p class="mb-0 mt-4">${item.productName}</p>
                     </td>
                     <td>
-                        <p class="mb-0 mt-4">${item.productPrice} ₪</p>
+                        <p class="mb-0 mt-4">${itemPrice} ₪</p>
                     </td>
                     <td>
                         <div class="input-group quantity mt-4" style="width: 100px;">
@@ -52,7 +53,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         </div>
                     </td>
                     <td>
-                        <p class="mb-0 mt-4">${item.productPrice * item.quantity} ₪</p>
+                        <p class="mb-0 mt-4">${itemPrice * item.quantity} ₪</p>
                     </td>
                     <td>
                         <button class="btn btn-md rounded-circle bg-light border mt-4" onclick="removeFromCart(${item.productId})">

@@ -136,8 +136,15 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
     
-    
-    
+    function showDiscountedProducts() {
+        const url = `${apiUrl}/products/discounted`;
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                displayProducts(data);
+            })
+            .catch(handleError);
+    }
 
     function displayCategories(categories) {
         const container = document.getElementById('category-list');
@@ -261,4 +268,3 @@ document.addEventListener('DOMContentLoaded', function () {
     fetchCategories();
     updateCartDisplay();
 });
-

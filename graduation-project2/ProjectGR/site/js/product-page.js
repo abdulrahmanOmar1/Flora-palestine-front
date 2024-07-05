@@ -33,7 +33,18 @@ document.addEventListener('DOMContentLoaded', function () {
         console.log('Product Details:', product);
         document.getElementById('product-name').textContent = product.name;
         document.getElementById('product-description').textContent = product.description;
-        document.getElementById('product-price').textContent = `₪${product.price}`;
+        
+        const originalPrice = product.price;
+        const discountedPrice = product.priceAfterDis;
+
+        let priceHtml;
+        if (discountedPrice < originalPrice) {
+            priceHtml = `<span class="price heading-4">₪${discountedPrice.toFixed(2)}</span> <span class="price-before-sale heading-4">₪${originalPrice.toFixed(2)}</span>`;
+        } else {
+            priceHtml = `<span class="price heading-4">₪${originalPrice.toFixed(2)}</span>`;
+        }
+        document.getElementById('product-price').innerHTML = priceHtml;
+
         document.getElementById('product-image').src = product.imageUrl;
 
         const quantityInput = document.querySelector('.form-input');

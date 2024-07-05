@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", function() {
         sessionStorage.setItem('isLoggedIn', true);
         sessionStorage.setItem('userId', Cookies.get('userId'));
         sessionStorage.setItem('userEmail', Cookies.get('userEmail'));
+        sessionStorage.setItem('role', Cookies.get('role'));
 
         // طباعة معلومات المستخدم
         console.log("User ID:", sessionStorage.getItem('userId'));
@@ -13,16 +14,44 @@ document.addEventListener("DOMContentLoaded", function() {
         // عرض القائمة المنسدلة للمستخدم
         const userMenu = document.querySelector('.user-menu');
         userMenu.style.display = 'inline-block';
-        
+
         // إخفاء رابط تسجيل الدخول
         const loginLink = document.querySelector('.login-link');
         loginLink.style.display = 'none';
+
+        const userMenuButton = document.querySelector('.user-menu-button');
+        const userId = sessionStorage.getItem('userId');
+        const userRole = sessionStorage.getItem('role');
+
+        axios.get(`http://localhost:9090/api/users/${userId}`)
+            .then(response => {
+                const user = response.data;
+                const firstName = user.firstName;
+                const lastName = user.lastName;
+                userMenuButton.textContent = `${firstName.charAt(0)}${lastName.charAt(0)}`;
+            })
+            .catch(error => {
+                console.log("Error:", error);
+            });
+
+        // Check the role and add "Admin" link if role is "ADMIN"
+        if (userRole === 'ADMIN') {
+            const adminLink = document.createElement('a');
+            adminLink.href = 'dashbord.html';
+            adminLink.textContent = 'Admin';
+            adminLink.style.color = 'red';
+            adminLink.style.fontWeight = 'bold';
+        
+            const userMenuContent = document.querySelector('.user-menu-content');
+            userMenuContent.insertBefore(adminLink, userMenuContent.firstChild);
+        }
 
         const logoutButton = document.getElementById('logoutButton');
         logoutButton.addEventListener('click', function() {
             sessionStorage.clear();
             Cookies.remove('userId');
             Cookies.remove('userEmail');
+            Cookies.remove('role');
             window.location.replace('login.html'); // إعادة التوجيه إلى صفحة تسجيل الدخول
         });
     } else {
@@ -30,7 +59,7 @@ document.addEventListener("DOMContentLoaded", function() {
         // إخفاء القائمة المنسدلة للمستخدم
         const userMenu = document.querySelector('.user-menu');
         userMenu.style.display = 'none';
-        
+
         // عرض رابط تسجيل الدخول
         const loginLink = document.querySelector('.login-link');
         loginLink.style.display = 'inline-block';
@@ -43,7 +72,7 @@ document.addEventListener("DOMContentLoaded", function() {
             disableOnInteraction: false,
         },
         effect: 'fade',
-        fadeEffect: { 
+        fadeEffect: {
             crossFade: true
         },
         navigation: {
@@ -76,22 +105,22 @@ document.addEventListener("DOMContentLoaded", function() {
         if (query.length > 0) {
             // Send search query to backend
             axios.get(`http://localhost:9090/api/plants/search?name=${query}&page=0&size=9`)
-            .then(function(response) {
-                // Handle successful response
-                console.log(response.data);
-                // Update search results
-                paginationContainer.innerHTML = '';
-                updateSearchResults(response.data.content);
-                updatePlantsUI(response.data.content, 0);
-                updatePagination(response.data.totalPages, 0, searchPlants, query);
-            })
-            .catch(function(error) {
-                // Handle error
-                console.error(error);
-            });
+                .then(function(response) {
+                    // Handle successful response
+                    console.log(response.data);
+                    // Update search results
+                    paginationContainer.innerHTML = '';
+                    updateSearchResults(response.data.content);
+                    updatePlantsUI(response.data.content, 0);
+                    updatePagination(response.data.totalPages, 0, searchPlants, query);
+                })
+                .catch(function(error) {
+                    // Handle error
+                    console.error(error);
+                });
         } else {
             searchResults.innerHTML = ''; // Clear search results if query is empty
-            searchResults.style.display = 'none'; 
+            searchResults.style.display = 'none';
         }
     });
 
@@ -100,18 +129,18 @@ document.addEventListener("DOMContentLoaded", function() {
         if (query.length > 0) {
             // Send search query to backend
             axios.get(`http://localhost:9090/api/plants/search?name=${query}&${page}&${size}`)
-            .then(function(response) {
-                // Handle successful response
-                console.log(response.data);
-                // Update UI with search results
-                updatePlantsUI(response.data.content, page);
-                
-                updatePagination(response.data.totalPages, page, searchPlants);
-            })
-            .catch(function(error) {
-                // Handle error
-                console.error(error);
-            });
+                .then(function(response) {
+                    // Handle successful response
+                    console.log(response.data);
+                    // Update UI with search results
+                    updatePlantsUI(response.data.content, page);
+
+                    updatePagination(response.data.totalPages, page, searchPlants);
+                })
+                .catch(function(error) {
+                    // Handle error
+                    console.error(error);
+                });
         }
     });
 
@@ -146,49 +175,49 @@ document.addEventListener("DOMContentLoaded", function() {
 
     function fetchPlants(page = 0, size = 9) {
         axios.get(`http://localhost:9090/api/plants/all?page=${page}&size=${size}`)
-        .then(function(response) {
-            // Handle successful response
-            console.log(response.data);
-            // Update UI with plants data
-            updatePlantsUI(response.data.content, page);
-            updatePagination(response.data.totalPages, page, fetchPlants);
-        })
-        .catch(function(error) {
-            // Handle error
-            console.error(error);
-        });
+            .then(function(response) {
+                // Handle successful response
+                console.log(response.data);
+                // Update UI with plants data
+                updatePlantsUI(response.data.content, page);
+                updatePagination(response.data.totalPages, page, fetchPlants);
+            })
+            .catch(function(error) {
+                // Handle error
+                console.error(error);
+            });
     }
 
     function fetchPlantsByFamily(family, page = 0, size = 9) {
         console.log(`Fetching plants for family: ${family}`);
         axios.get(`http://localhost:9090/api/plants/by-family?family=${family}&page=${page}&${size}`)
-        .then(function(response) {
-            // Handle successful response
-            console.log('Plants fetched by family:', response.data);
-            // Update UI with plants data
-            updatePlantsUI(response.data.content, page);
-            updatePagination(response.data.totalPages, page, function(newPage){
-                fetchPlantsByFamily(family, newPage);
+            .then(function(response) {
+                // Handle successful response
+                console.log('Plants fetched by family:', response.data);
+                // Update UI with plants data
+                updatePlantsUI(response.data.content, page);
+                updatePagination(response.data.totalPages, page, function(newPage) {
+                    fetchPlantsByFamily(family, newPage);
+                });
+            })
+            .catch(function(error) {
+                // Handle error
+                console.error('Error fetching plants by family:', error);
             });
-        })
-        .catch(function(error) {
-            // Handle error
-            console.error('Error fetching plants by family:', error);
-        });
     }
 
     function fetchCategories() {
         axios.get('http://localhost:9090/api/plants/families')
-        .then(function(response) {
-            // Handle successful response
-            console.log('Categories fetched:', response.data);
-            // Update UI with categories data
-            updateCategoriesUI(response.data);
-        })
-        .catch(function(error) {
-            // Handle error
-            console.error('Error fetching categories:', error);
-        });
+            .then(function(response) {
+                // Handle successful response
+                console.log('Categories fetched:', response.data);
+                // Update UI with categories data
+                updateCategoriesUI(response.data);
+            })
+            .catch(function(error) {
+                // Handle error
+                console.error('Error fetching categories:', error);
+            });
     }
 
     function updateCategoriesUI(categories) {
@@ -262,16 +291,21 @@ document.addEventListener("DOMContentLoaded", function() {
 
         if (email) {
             axios.post('https://your-backend-api.com/newsletter', { email: email })
-            .then(function(response) {
-                alert('Thank you for subscribing!');
-                emailInput.value = ''; // Clear the input field
-            })
-            .catch(function(error) {
-                console.error(error);
-                alert('There was an error subscribing. Please try again later.');
-            });
+                .then(function(response) {
+                    alert('Thank you for subscribing!');
+                    emailInput.value = ''; // Clear the input field
+                })
+                .catch(function(error) {
+                    console.error(error);
+                    alert('There was an error subscribing. Please try again later.');
+                });
         } else {
             alert('Please enter a valid email address.');
         }
+    });
+
+    const myAccountButton = document.getElementById('myAccountButton');
+    myAccountButton.addEventListener('click', function() {
+        window.location.href = "user-account.html";
     });
 });

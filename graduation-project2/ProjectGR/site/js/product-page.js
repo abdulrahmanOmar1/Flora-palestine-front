@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
     const apiUrl = 'http://localhost:9090/api/products';
     const cartApiUrl = 'http://localhost:9090/api/carts';
-    const userId = 1; 
+    const userId = Cookies.get('userId'); 
     const productId = getProductIdFromUrl();
     console.log(`Fetched Product ID: ${productId}`);
     fetchProductDetails(productId);
@@ -65,6 +65,10 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function addToCart(productId, quantity, availableQuantity) {
+        if (!userId) {
+            alert('You must be logged in to add items to the cart.');
+            return;
+        }
         if (quantity > availableQuantity) {
             alert(`Sorry, only ${availableQuantity} units of this product are available.`);
             return;

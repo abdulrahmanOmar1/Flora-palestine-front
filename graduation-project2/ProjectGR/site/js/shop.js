@@ -4,33 +4,60 @@ document.addEventListener('DOMContentLoaded', function () {
     const sortSelect = document.querySelector('#sort-select');
     const favoriteBtn = document.getElementById('favorite-btn');
     let currentCategoryId = '';
-    const userId = 1;
+
+    const userId = Cookies.get('userId');
     let likedProductIds = [];
     let currentPage = 0;
     const itemsPerPage = 9;
 
+    if (!userId) {
+        const cartIconContainer = document.querySelector('.cart-icon-container');
+        if (cartIconContainer) {
+            cartIconContainer.style.display = 'none';
+        }
+    }
+
+    fetchCategories();
+    fetchProducts();
+
     function updateCartDisplay() {
-        let cart = JSON.parse(localStorage.getItem('shoppingCart')) || [];
-        const itemCount = cart.reduce((total, item) => total + item.quantity, 0);
-        const cartItemCountElement = document.getElementById('cart-item-count');
-        if (cartItemCountElement) {
-            cartItemCountElement.innerText = itemCount;
+        if (userId) {
+            axios.get(`${apiUrl}/carts/${userId}`)
+                .then(response => {
+                    let cart = response.data.items || [];
+                    const itemCount = cart.length;
+                    const cartItemCountElement = document.getElementById('cart-item-count');
+                    if (cartItemCountElement) {
+                        cartItemCountElement.innerText = itemCount;
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching cart:', error);
+                });
         }
     }
 
     function addToCart(product) {
-        let cart = JSON.parse(localStorage.getItem('shoppingCart')) || [];
-        let found = cart.find(p => p.id === product.id);
-        if (found) {
-            found.quantity += 1;
-        } else {
-            product.quantity = 1;
-            cart.push(product);
+        if (!userId) {
+            alert('You must be logged in to add items to the cart.');
+            return;
         }
-        localStorage.setItem('shoppingCart', JSON.stringify(cart));
-        alert('Product added to cart successfully!');
-        updateCartDisplay();
-        window.location.href = 'shopping-cart.html';
+
+        axios.post(`${apiUrl}/carts/${userId}/items`, null, {
+            params: {
+                productId: product.id,
+                quantity: 1
+            }
+        })
+        .then(response => {
+            alert('Product added to cart successfully!');
+            updateCartDisplay();
+            window.location.href = 'shopping-cart.html';
+        })
+        .catch(error => {
+            console.error('Error adding product to cart:', error);
+            alert('The product is out of stock.');
+        });
     }
 
     function handleError(error) {
@@ -71,6 +98,10 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function fetchLikedProducts() {
+        if (!userId) {
+            return;
+        }
+
         const url = `${apiUrl}/likes/user/${userId}/products`;
         fetch(url)
             .then(response => {
@@ -116,7 +147,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                 <a href="product-page.html?id=${product.id}" class="${isOutOfStock ? 'disabled-link' : ''}">${product.name}</a>
                             </h5>
                             ${priceHtml}
-                            <button class="button button-primary ${isOutOfStock ? 'disabled' : ''}" ${isOutOfStock ? 'disabled' : ''} onclick="addToCart(${product.id}, 1)">
+                            <button class="button button-primary ${isOutOfStock ? 'disabled' : ''}" ${isOutOfStock ? 'disabled' : ''} onclick="addToCart(${product.id})">
                                 ${isOutOfStock ? 'Product is out of stock' : 'Add to cart'}
                             </button>
                             <button class="button button-like ${isLiked}" onclick="toggleLike(${product.id}, this)">
@@ -165,6 +196,11 @@ document.addEventListener('DOMContentLoaded', function () {
     };
 
     window.showFavoriteProducts = () => {
+        if (!userId) {
+            alert('You must be logged in to view favorite products.');
+            return;
+        }
+
         const url = `${apiUrl}/likes/user/${userId}/products`;
         fetch(url)
             .then(response => {
@@ -219,15 +255,21 @@ document.addEventListener('DOMContentLoaded', function () {
         window.location.href = `product-page.html?id=${productId}`;
     };
 
-    window.addToCart = function(productId, quantity) {
+    window.addToCart = function(productId) {
+        if (!userId) {
+            alert('You must be logged in to add items to the cart.');
+            return;
+        }
+
         axios.post(`${apiUrl}/carts/${userId}/items`, null, {
             params: {
                 productId: productId,
-                quantity: quantity
+                quantity: 1
             }
         })
         .then(response => {
             alert('Product added to cart successfully!');
+            updateCartDisplay();
             window.location.href = 'shopping-cart.html';
         })
         .catch(error => {
@@ -237,6 +279,11 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     window.toggleLike = function(productId, button) {
+        if (!userId) {
+            alert('You must be logged in to like products.');
+            return;
+        }
+
         const isLiked = button.classList.contains('liked');
         const url = isLiked 
             ? `${apiUrl}/likes/remove?userId=${userId}&productId=${productId}`

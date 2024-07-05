@@ -23,6 +23,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // Save user ID and email in cookies
             Cookies.set('userId', response.data.id, { expires: 7 });
             Cookies.set('userEmail', response.data.email, { expires: 7 });
+            Cookies.set('role', response.data.role, { expires: 7 });
             
             // Redirect to index.html or another page
             window.location.replace('index.html');

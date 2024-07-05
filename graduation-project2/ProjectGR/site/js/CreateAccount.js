@@ -43,17 +43,16 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         axios.post('http://localhost:9090/api/index/registration', {
-            email: emailInput.value,
+            email: emailInput.value, 
             password: passwordInput.value,
             firstName: firstNameInput.value,
             lastName: lastNameInput.value,
             address: addressInput.value,
             phone: phoneInput.value,
-            role : 'ADMIN',
             dob: birthdateInput.value,
             gender: genderInput.value,
         }).then(response => {
-            window.location.href = 'http://http://127.0.0.1:5500/Flora-palestine-front/graduation-project2/ProjectGR/site/Login.html';
+            window.location.replace('Login.html');
         }).catch(error => {
             console.log("Error:", error);
         });

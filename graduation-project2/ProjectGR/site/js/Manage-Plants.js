@@ -1,4 +1,15 @@
 document.addEventListener('DOMContentLoaded', function() {
+
+    const userId = Cookies.get('userId');
+    const userEmail = Cookies.get('userEmail');
+    const userRole = Cookies.get('role');
+
+    if (!userId || !userEmail || !userRole) {
+        alert('You must be logged in to access this page.');
+        window.location.href = 'login.html'; // Redirect to login page
+        return;
+    }
+
     fetchAllPlants();
     fetchFamilies();
 
@@ -49,6 +60,8 @@ function populatePlantsTable(plants) {
             <td><img src="${plant.imageUrls[0]}" alt="${plant.normalName}" width="70" height="70"></td>
             <td>${plant.description}</td>
             <td>${plant.plantUsage}</td>
+            <td>${plant.city}</td>
+            <td>${plant.color}</td>
             <td><button class="btn red" onclick="deletePlant(${plant.id}, this)">Delete</button></td>
             <td><button class="btn green update-btn" data-id="${plant.id}" onclick="openUpdateModal(${plant.id})">Update</button></td>
         `;
@@ -81,6 +94,7 @@ function deletePlant(id, button) {
             .then(response => {
                 const row = button.parentNode.parentNode;
                 row.parentNode.removeChild(row);
+                fetchAllPlants(); // Refresh the plant list
             })
             .catch(error => console.error('Error deleting plant:', error));
     }
@@ -93,9 +107,9 @@ function openUpdateModal(id) {
     document.getElementById('updateFamily').value = plant.querySelector('td:nth-child(4)').textContent;
     document.getElementById('updatePlantDescription').value = plant.querySelector('td:nth-child(6)').textContent;
     document.getElementById('updatePlantUsage').value = plant.querySelector('td:nth-child(7)').textContent;
+    document.getElementById('updateCity').value = plant.querySelector('td:nth-child(8)').textContent;
+    document.getElementById('updateColor').value = plant.querySelector('td:nth-child(9)').textContent;
     
-    document.getElementById('updatePlantImage').value = '';
-
     document.getElementById('update-modal').style.display = 'block';
     document.getElementById('update-modal').setAttribute('data-active-id', id);
 }
@@ -114,10 +128,12 @@ function addPlant() {
     const family = document.getElementById('newFamily').value;
     const description = document.getElementById('newPlantDescription').value;
     const plantUsage = document.getElementById('newPlantUsage').value;
+    const city = document.getElementById('city').value;
+    const color = document.getElementById('color').value;
     const imageFiles = document.getElementById('newPlantImages').files;
 
-    if (!normalName || !scientificName || !family || !description || !plantUsage || imageFiles.length === 0) {
-        alert('Please fill in all fields and select at least one image.');
+    if (!normalName || !scientificName || imageFiles.length === 0 || !family) {
+        alert('Please fill in all required fields (Plant Name, Scientific Name, Family, and select at least one image).');
         return;
     }
 
@@ -126,7 +142,9 @@ function addPlant() {
         normalName,
         family,
         description,
-        plantUsage
+        plantUsage,
+        city,
+        color
     };
 
     axios.post("http://localhost:9090/api/plants/add", plantData)
@@ -134,7 +152,6 @@ function addPlant() {
             const scientificName = response.data.scientificName;
             console.log(response.data);
             uploadImages(scientificName, imageFiles);
-            fetchAllPlants();
             closeModal();
         })
         .catch(error => console.error('Error adding plant:', error));
@@ -153,7 +170,7 @@ function uploadImages(scientificName, imageFiles) {
     })
     .then(response => {
         console.log('Images uploaded successfully:', response.data);
-        fetchAllPlants();
+        fetchAllPlants(); // Refresh the plant list
     })
     .catch(error => console.error('Error uploading images:', error));
 }
@@ -167,9 +184,8 @@ function saveChanges() {
     formData.append('family', document.getElementById('updateFamily').value);
     formData.append('description', document.getElementById('updatePlantDescription').value);
     formData.append('plantUsage', document.getElementById('updatePlantUsage').value);
-    if (document.getElementById('updatePlantImage').files.length > 0) {
-        formData.append('imageUrl', document.getElementById('updatePlantImage').files[0]);
-    }
+    formData.append('city', document.getElementById('updateCity').value);
+    formData.append('color', document.getElementById('updateColor').value);
 
     axios.put(`http://localhost:9090/api/plants/update/${activeId}`, formData, {
         headers: {
@@ -178,7 +194,7 @@ function saveChanges() {
     })
     .then(response => {
         console.log('Plant updated successfully:', response.data);
-        fetchAllPlants();
+        fetchAllPlants(); // Refresh the plant list
         closeUpdateModal();
     })
     .catch(error => console.error('Error updating plant:', error));
@@ -203,3 +219,17 @@ function filterPlants() {
         }
     });
 }
+
+// Initialize Select2 for the family filter and color select
+$(document).ready(function() {
+    $('#familyFilter').select2({
+        placeholder: 'Select a family',
+        allowClear: false // Disable the clear button
+    });
+    $('#color').select2({
+        placeholder: 'Select a color',
+        allowClear: false // Disable the clear button
+    });
+    $('#newFamily').select2();
+    $('#updateFamily').select2();
+});

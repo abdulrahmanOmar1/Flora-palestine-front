@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Manage-Plants</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css">
     <link rel="stylesheet" href="css/Manage-Plants.css">
 </head>
 <body>
@@ -19,12 +21,14 @@
         </div>
     </header>
     <div class="container">
-        <button id="addPlantBtn" class="btn blue">Add Plant</button>
-        <input type="text" id="searchInput" placeholder="Search for plant names...">
-        <select id="familyFilter">
-            <option value="all">All Families</option>
-        </select>
-        <table>
+        <div class="actions">
+            <button id="addPlantBtn" class="btn blue">Add Plant</button>
+            <input type="text" id="searchInput" placeholder="Search for plant names..." class="search-bar">
+            <select id="familyFilter" class="filter-select">
+                <option value="all">All Families</option>
+            </select>
+        </div>
+        <table class="plant-table">
             <thead>
                 <tr>
                     <th>Serial No.</th>
@@ -34,11 +38,14 @@
                     <th>Image</th>
                     <th>Description</th>
                     <th>Usage</th>
+                    <th>City</th>
+                    <th>Color</th>
                     <th>Delete</th>
                     <th>Update</th>
                 </tr>
             </thead>
             <tbody id="plantTableBody">
+                <!-- Plants will be dynamically inserted here -->
             </tbody>
         </table>
     </div>
@@ -48,16 +55,56 @@
         <div class="modal-content">
             <span class="close-btn" onclick="closeModal()">&times;</span>
             <h2>Add New Plant</h2>
-            <input type="text" id="newPlantName" placeholder="Enter plant name">
-            <input type="text" id="newScientificName" placeholder="Enter scientific name">
-            <select id="newFamily">
-                <!-- Families will be dynamically filled from the backend --> 
-            </select>
-            <input type="file" id="newPlantImages" multiple>
-            <textarea id="newPlantDescription" placeholder="Enter description"></textarea>
-            <textarea id="newPlantUsage" placeholder="Enter usage"></textarea>
-            <button class="btn blue" onclick="addPlant()">Save Changes</button>
-            <button class="btn" onclick="closeModal()">Close</button> 
+            <div class="modal-form">
+                <div class="form-group">
+                    <label for="newPlantName">Plant Name</label>
+                    <input type="text" id="newPlantName" placeholder="Enter plant name" class="modal-input" required>
+                </div>
+                <div class="form-group">
+                    <label for="newScientificName">Scientific Name</label>
+                    <input type="text" id="newScientificName" placeholder="Enter scientific name" class="modal-input" required>
+                </div>
+                <div class="form-group">
+                    <label for="newFamily">Family</label>
+                    <select id="newFamily" class="modal-select">
+                        <!-- Families will be dynamically filled from the backend -->
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="newPlantImages">Images</label>
+                    <input type="file" id="newPlantImages" multiple class="modal-input" required>
+                </div>
+                <div class="form-group">
+                    <label for="newPlantDescription">Description</label>
+                    <textarea id="newPlantDescription" placeholder="Enter description" class="modal-textarea"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="newPlantUsage">Usage</label>
+                    <textarea id="newPlantUsage" placeholder="Enter usage" class="modal-textarea"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="city">City</label>
+                    <input type="text" id="city" placeholder="Enter city" class="modal-input">
+                </div>
+                <div class="form-group">
+                    <label for="color">Color</label>
+                    <select id="color" class="modal-select">
+                        <option value="other">Other</option>
+                        <option value="white">White</option>
+                        <option value="green">Green</option>
+                        <option value="blue">Blue</option>
+                        <option value="pink">Pink</option>
+                        <option value="purple">Purple</option>
+                        <option value="yellow">Yellow</option>
+                        <option value="orange">Orange</option>
+                        <option value="red">Red</option>
+                    </select>
+                </div>
+                <div class="form-actions">
+                    <button class="btn blue" onclick="addPlant()">Save Changes</button>
+                    <button class="btn" onclick="closeModal()">Close</button>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -66,20 +113,59 @@
         <div class="modal-content">
             <span class="close-btn" onclick="closeUpdateModal()">&times;</span>
             <h2>Update Plant</h2>
-            <input type="text" id="updatePlantName" placeholder="Enter plant name">
-            <input type="text" id="updateScientificName" placeholder="Enter scientific name">
-            <select id="updateFamily">
-                <!-- Families will be dynamically filled from the backend -->
-            </select>
-            <input type="file" id="updatePlantImages" multiple>
-            <textarea id="updatePlantDescription" placeholder="Enter description"></textarea>
-            <textarea id="updatePlantUsage" placeholder="Enter usage"></textarea>
-            <button class="btn green" onclick="saveChanges()">Save Changes</button>
-            <button class="btn" onclick="closeUpdateModal()">Close</button>
+            <div class="modal-form">
+                <div class="form-group">
+                    <label for="updatePlantName">Plant Name</label>
+                    <input type="text" id="updatePlantName" placeholder="Enter plant name" class="modal-input">
+                </div>
+                <div class="form-group">
+                    <label for="updateScientificName">Scientific Name</label>
+                    <input type="text" id="updateScientificName" placeholder="Enter scientific name" class="modal-input">
+                </div>
+                <div class="form-group">
+                    <label for="updateFamily">Family</label>
+                    <select id="updateFamily" class="modal-select">
+                        <!-- Families will be dynamically filled from the backend -->
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="updatePlantDescription">Description</label>
+                    <textarea id="updatePlantDescription" placeholder="Enter description" class="modal-textarea"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="updatePlantUsage">Usage</label>
+                    <textarea id="updatePlantUsage" placeholder="Enter usage" class="modal-textarea"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="updateCity">City</label>
+                    <input type="text" id="updateCity" placeholder="Enter city" class="modal-input">
+                </div>
+                <div class="form-group">
+                    <label for="updateColor">Color</label>
+                    <select id="updateColor" class="modal-select">
+                        <option value="other">Other</option>
+                        <option value="white">White</option>
+                        <option value="green">Green</option>
+                        <option value="blue">Blue</option>
+                        <option value="pink">Pink</option>
+                        <option value="purple">Purple</option>
+                        <option value="yellow">Yellow</option>
+                        <option value="orange">Orange</option>
+                        <option value="red">Red</option>
+                    </select>
+                </div>
+                <div class="form-actions">
+                    <button class="btn green" onclick="saveChanges()">Save Changes</button>
+                    <button class="btn" onclick="closeUpdateModal()">Close</button>
+                </div>
+            </div>
         </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
     <script src="js/Manage-Plants.js"></script>
 </body>
 </html>

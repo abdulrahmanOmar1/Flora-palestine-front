@@ -1,129 +1,102 @@
-body, html {
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f9;
     margin: 0;
     padding: 0;
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
 }
 
 header {
     background-color: #333;
     color: white;
-    padding: 10px 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    padding: 1rem 0;
+    text-align: center;
 }
 
-nav {
-    width: 100%;
-    height: 100px; 
-    background-color: #222; 
-    display: flex;
-    justify-content: center;
-    align-items: center; 
-}
-
-nav ul {
-    list-style: none;
-    display: flex;
+header nav ul {
+    list-style-type: none;
     padding: 0;
-    margin: 0;
 }
 
-nav ul li {
-    margin: 0 15px; 
+header nav ul li {
+    display: inline;
+    margin: 0 15px;
 }
 
-nav ul li a {
+header nav ul li a {
     color: white;
     text-decoration: none;
-    font-size: 16px;
-    padding: 10px 15px;
-    display: block;
-}
-
-nav ul li a:hover {
-    background-color: #555;
-    border-radius: 5px;
 }
 
 .header-content {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 20px;
 }
 
-.logo {
-    height: 300px; 
+.header-content .logo {
+    width: 50px;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+.header-content h1 {
+    margin: 0;
 }
 
 .container {
-    width: 80%;
-    margin: 50px auto;
-    background-color: #fff;
+    margin: 20px auto;
     padding: 20px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 1200px;
+    border-radius: 8px;
 }
 
-table {
+.actions {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.search-bar,
+.filter-select {
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.plant-table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
 }
 
-table, th, td {
-    border: 1px solid #ccc;
-}
-
-input[type="text"], input[type="number"], textarea, input[type="file"] {
-    width: 90%; 
-    padding: 15px 20px; 
-    margin: 10px 0; 
-    display: block; 
-    border: 1px solid #ccc; 
-    border-radius: 4px; 
-    box-sizing: border-box; 
-    font-size: 18px; 
-}
-
-input[type="text"]:focus, input[type="number"]:focus, textarea:focus {
-    border-color: #4CAF50; 
-    outline: none; 
-}
-
-th, td {
-    text-align: center;
+.plant-table th, .plant-table td {
+    border: 1px solid #ddd;
     padding: 10px;
+    text-align: left;
 }
 
-th {
-    background-color: #333;
-    color: white;
+.plant-table th {
+    background-color: #f4f4f9;
 }
 
 .btn {
-    padding: 12px 24px;
-    cursor: pointer;
-    text-transform: uppercase;
+    padding: 10px 15px;
     border: none;
-    border-radius: 5px;
-    font-size: 18px; 
-    margin-right: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
 }
 
-.blue {
-    background-color: #007BFF;
+.btn.blue {
+    background-color: #007bff;
     color: white;
 }
 
-.green {
-    background-color: #28A745;
-    color: white;
-}
-
-.red {
-    background-color: #DC3545;
+.btn.green {
+    background-color: #28a745;
     color: white;
 }
 
@@ -136,16 +109,18 @@ th {
     width: 100%;
     height: 100%;
     overflow: auto;
-    background-color: rgba(0,0,0,0.4);
+    background-color: rgba(0, 0, 0, 0.4);
+    padding-top: 60px;
 }
 
 .modal-content {
     background-color: #fefefe;
-    margin: 5% auto; 
-    padding: 40px; 
+    margin: 5% auto;
+    padding: 20px;
     border: 1px solid #888;
-    width: 60%; 
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    width: 80%;
+    max-width: 600px;
+    border-radius: 8px;
 }
 
 .close-btn {
@@ -160,4 +135,38 @@ th {
     color: black;
     text-decoration: none;
     cursor: pointer;
+}
+
+.modal-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.modal-input,
+.modal-select,
+.modal-textarea {
+    width: calc(100% - 22px);
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.modal-textarea {
+    resize: vertical;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: space-between;
 }

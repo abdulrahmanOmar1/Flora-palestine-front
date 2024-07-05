@@ -1,10 +1,18 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const userId = 1;
+    
+    // Check if js-cookie is loaded
+    if (typeof Cookies === 'undefined') {
+        alert('js-cookie library is not loaded.');
+        return;
+    }
+
+    const userId = Cookies.get('userId');
 
     function fetchCart() {
         axios.get(`http://localhost:9090/api/carts/${userId}`)
             .then(response => {
                 displayCart(response.data);
+                console.log(response.data);
             })
             .catch(error => {
                 console.error('Error fetching cart:', error);

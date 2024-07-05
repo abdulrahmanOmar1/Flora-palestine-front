@@ -36,8 +36,9 @@ function addProduct() {
     const description = document.getElementById('description').value;
     const price = document.getElementById('price').value;
     const categoryId = document.getElementById('category').value;
+    const quantity = document.getElementById('quantity').value;
+    const saleDiscount = document.getElementById('saleDiscount').value || 0; // الخصم الافتراضي هو 0
 
-    // Use a constant adminId value for now
     const adminId = 1;
 
     const productData = {
@@ -45,7 +46,9 @@ function addProduct() {
         description: description,
         price: price,
         categoryId: categoryId,
-        adminId: adminId
+        adminId: adminId,
+        quantity: quantity,
+        saleDiscount: saleDiscount
     };
 
     axios.post('http://localhost:9090/api/products/new', productData)
@@ -66,6 +69,7 @@ function addProduct() {
             console.error('There was an error adding the product!', error);
         });
 }
+
 
 function uploadImage(productName, imageFile) {
     const formData = new FormData();

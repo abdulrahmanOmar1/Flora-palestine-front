@@ -65,7 +65,7 @@ function uploadAvatar() {
     formData.append('images', $('#fileInput')[0].files[0]);
 
     // Replace 'admin@example.com' with the actual admin email or retrieve it dynamically if necessary
-    const adminEmail = 'ahmad@gmail.com';
+    const adminEmail = 'aboodoma27@gmail.com';
 
     axios.post(`http://localhost:9090/api/user-images/${adminEmail}`, formData, {
         headers: {

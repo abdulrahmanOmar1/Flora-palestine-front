@@ -88,42 +88,56 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function displayProducts(products) {
         const container = document.getElementById('product-container');
-        container.innerHTML = ''; 
-
+        container.innerHTML = '';
+    
         products.forEach(product => {
             const isOutOfStock = product.quantity == 0;
             const isLiked = likedProductIds.includes(product.id) ? 'liked' : '';
+    
+            const originalPrice = product.price;
+            const discount = product.saleDiscount || 0; // تأكد من أن الخصم ليس undefined
+            const discountedPrice = originalPrice - (originalPrice * (discount / 100));
+    
+            let priceHtml;
+            if (discount > 0) {
+                priceHtml = `<div class="product-card-price">₪${discountedPrice.toFixed(2)} <span class="original-price">₪${originalPrice.toFixed(2)}</span></div>`;
+            } else {
+                priceHtml = `<div class="product-card-price">₪${originalPrice.toFixed(2)}</div>`;
+            }
+    
             const productHtml = `
-                <div class="col mb-4 ${isOutOfStock ? 'out-of-stock' : ''}" data-product-id="${product.id}">
-                    <article class="product">
-                        <div class="product-body">
-                        <a href="product-page.html?id=${product.id}"><img src="${product.imageUrl}" class="img-fluid w-100 rounded-top" alt="${product.name}"></a>
-                        <h5 class="product-title"><a href="product-page.html?id=${product.id}" ${isOutOfStock ? 'class="disabled-link"' : ''}>${product.name}</a></h5>
-                            <div class="product-price-wrap">
-                                <div class="product-price">₪${product.price}</div>
-                            </div>
-                            <div class="product-button-wrap">
-                                <button class="button button-primary ${isOutOfStock ? 'disabled' : ''}" ${isOutOfStock ? 'disabled' : ''} onclick="addToCart(${product.id}, 1)">
-                                    ${isOutOfStock ? 'Product is out of stock' : 'Add to cart'}
-                                </button>
-                                <button class="button button-like ${isLiked}" onclick="toggleLike(${product.id}, this)">
-                                    <i class="fa fa-heart"></i>
-                                </button>
-                            </div>
+                <div class="col-md-4 mb-4 ${isOutOfStock ? 'out-of-stock' : ''}" data-product-id="${product.id}">
+                    <div class="product-card">
+                        <a href="product-page.html?id=${product.id}" class="${isOutOfStock ? 'disabled-link' : ''}">
+                            <img src="${product.imageUrl}" alt="${product.name}">
+                        </a>
+                        <div class="product-card-body">
+                            <h5 class="product-card-title">
+                                <a href="product-page.html?id=${product.id}" class="${isOutOfStock ? 'disabled-link' : ''}">${product.name}</a>
+                            </h5>
+                            ${priceHtml}
+                            <button class="button button-primary ${isOutOfStock ? 'disabled' : ''}" ${isOutOfStock ? 'disabled' : ''} onclick="addToCart(${product.id}, 1)">
+                                ${isOutOfStock ? 'Product is out of stock' : 'Add to cart'}
+                            </button>
+                            <button class="button button-like ${isLiked}" onclick="toggleLike(${product.id}, this)">
+                                <i class="fa fa-heart"></i>
+                            </button>
                         </div>
-                    </article>
+                    </div>
                 </div>`;
             container.innerHTML += productHtml;
         });
-
+    
         const disabledLinks = document.querySelectorAll('.disabled-link');
         disabledLinks.forEach(link => {
             link.addEventListener('click', event => {
                 event.preventDefault();
             });
         });
-        
     }
+    
+    
+    
 
     function displayCategories(categories) {
         const container = document.getElementById('category-list');
@@ -247,3 +261,4 @@ document.addEventListener('DOMContentLoaded', function () {
     fetchCategories();
     updateCartDisplay();
 });
+

@@ -40,6 +40,8 @@ $(function () {
             price: $('#editProductPrice').val(),
             imageUrl: $('#editProductImageUrl').val(),
             categoryId: $('#editProductCategoryId').val(),
+            quantity: $('#editProductQuantity').val(),
+            saleDiscount: $('#editSaleDiscount').val(), // Add this line
             adminId: 1 // Assuming adminId is a constant locally
         };
     
@@ -65,12 +67,17 @@ $(function () {
                     .then(function () {
                         console.log('Images uploaded successfully');
                         $('#editProductModal').modal('hide');
-                        fetchProducts(); // Refresh the products table after image upload
+                        alert('Product updated successfully!'); // Add alert for successful update
+                        location.reload(); // Refresh the page after clicking OK
                     })
                     .catch(function (error) {
                         console.log(error);
                         alert('Error uploading images. Please try again.');
                     });
+                } else {
+                    $('#editProductModal').modal('hide');
+                    alert('Product updated successfully!'); // Add alert for successful update
+                    location.reload(); // Refresh the page after clicking OK
                 }
             })
             .catch(function (error) {
@@ -96,12 +103,20 @@ function populateProductsTable(products) {
     tableBody.innerHTML = ''; // Clear existing data
 
     products.forEach(product => {
+        const discount = product.saleDiscount || 0;
+        const discountedPrice = product.price - (product.price * (discount / 100));
+
+        const priceHtml = discount > 0
+            ? `<td>₪${discountedPrice.toFixed(2)} <span class="original-price">₪${product.price.toFixed(2)}</span></td>`
+            : `<td>₪${product.price.toFixed(2)}</td>`;
+
         const row = `
             <tr>
                 <th scope="row"><input type="checkbox" class="productCheckbox" data-id="${product.id}" /></th>
                 <td class="tm-product-name">${product.name}</td>
                 <td>${product.description}</td>
-                <td>${product.price}</td>
+                ${priceHtml}
+                <td>${product.quantity}</td>
                 <td><img src="${product.imageUrl}" class="tm-product-img" alt="${product.name}" width="90" height="90" loading="lazy"></td>
                 <td>${product.categoryId}</td>
                 <td>
@@ -112,8 +127,7 @@ function populateProductsTable(products) {
                         <i class="far fa-trash-alt tm-product-delete-icon"></i>
                     </a>
                 </td>
-            </tr>
-        `;
+            </tr>`;
         tableBody.innerHTML += row;
     });
 }
@@ -175,7 +189,7 @@ function deleteSelectedProducts() {
         selectedProductIds.push(checkbox.dataset.id);
     });
 
-    axios.post('http://localhost:9090/api/products/delete', { ids: selectedProductIds })
+    axios.delete('http://localhost:9090/api/products/delete', { data: selectedProductIds })
         .then(function (response) {
             fetchProducts(); // Refresh the products table
         })
@@ -197,6 +211,8 @@ function openEditProductPopup(productId) {
             $('#editProductPrice').val(product.price);
             $('#editProductImageUrl').val(product.imageUrl);
             $('#editProductCategoryId').val(product.categoryId);
+            $('#editProductQuantity').val(product.quantity);
+            $('#editSaleDiscount').val(product.saleDiscount || 0); // Add this line
 
             // Show the modal
             $('#editProductModal').modal('show');

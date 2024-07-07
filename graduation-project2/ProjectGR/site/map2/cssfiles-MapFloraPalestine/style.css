@@ -1,0 +1,206 @@
+/*
+Theme Name: Flora
+Theme URI: http://flora.org.il
+Author: Barak Danin
+Author URI: http://uniqui.co.il
+Description: The Flora of Israel site is based on the work of Prof. Emeritus Avinoam Danin
+Version: 1.5
+*/
+
+
+body.progress * {
+	cursor: progress !important;
+}
+
+/* Better hiding for .jcf-hidden checkboxes, throwing them off to the right had problems as well */
+.jcf-hidden {
+	right: auto !important;
+	clip: rect(1px, 1px, 1px, 1px);
+	position: absolute;
+}
+
+/* Scrolling for families and genuses */
+
+#open-close-genuses .scrollable-area,
+#open-close-families .scrollable-area  {
+	max-height: 300px;
+	min-height: 50px;
+	overflow:hidden;
+}
+
+/* AJAX indicator to appear after the term when loading */
+#terms-ajax-loader {
+	height: 16px;
+	width: 16px;
+	background: url( 'images/ajax-loader.gif' ) 0 0 no-repeat;
+    background-size: 16px 16px;
+	display: inline-block;
+	vertical-align: middle;
+}
+
+/* For the indicator to look good in all cases, it needs to appear on the second line in the color selectors, so we force the text to take up the first line */
+.checks-holder label strong {
+	min-width: 24px;
+	display: inline-block;
+}
+
+/* sidebar search-form fields moved into taxonomy form */
+#plant-taxonomies .search-form {
+	margin-top: 16px;
+}
+
+/* let's show the indicator on the search form if it was clicked. */
+#plant-taxonomies .search-form input[type=submit].searching {
+	background: url( 'images/terms-ajax-loader.gif' ) 2px 2px no-repeat;
+}
+
+/* Without this, modal content width affects the container */
+.modal-holder {
+	display: none;
+}
+
+/* autocomplete in taxonomy sidebar */
+.ui-autocomplete {
+	max-height: 300px;
+	overflow-y: auto;
+	/* prevent horizontal scrollbar */
+	overflow-x: hidden;
+	
+	font-size: 16px;
+	line-height: 16px;
+	
+	z-index: 9999 !important;
+	
+}
+
+/* copied from all.css .open-close.active */
+.ui-autocomplete {
+	background: #faf1e4;
+	background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZhZjFlNCIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNmZGZiZjciIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+	background: -moz-linear-gradient(left,  #faf1e4 0%, #fdfbf7 100%);
+	background: -webkit-gradient(linear, left top, right top, color-stop(0%,#faf1e4), color-stop(100%,#fdfbf7));
+	background: -webkit-linear-gradient(left,  #faf1e4 0%,#fdfbf7 100%);
+	background: -o-linear-gradient(left,  #faf1e4 0%,#fdfbf7 100%);
+	background: -ms-linear-gradient(left,  #faf1e4 0%,#fdfbf7 100%);
+	background: linear-gradient(to right,  #faf1e4 0%,#fdfbf7 100%);
+}
+
+/* the autocomplete menu is outside of the sidebar, so some styles need to be repeated */
+.ui-autocomplete a {
+	color: #333;
+	cursor: pointer;
+}
+.ui-autocomplete a .term-count {
+	color: #9A938E;
+}
+.ui-autocomplete a.ui-state-hover {
+	background: #efe6d7
+}
+
+
+
+#fancybox-content .vscrollbar {
+	display: block !important;
+	z-index: 50 !important;
+}
+
+
+/* Stolen from twenty fourteen, relevant for pagination */
+.screen-reader-text {
+	clip: rect(1px, 1px, 1px, 1px);
+	position: absolute;
+}
+
+.screen-reader-text:focus {
+	background-color: #f1f1f1;
+	border-radius: 3px;
+	box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.6);
+	clip: auto;
+	color: #21759b;
+	display: block;
+	font-size: 14px;
+	font-weight: bold;
+	height: auto;
+	line-height: normal;
+	padding: 15px 23px 14px;
+	position: absolute;
+	left: 5px;
+	top: 5px;
+	text-decoration: none;
+	text-transform: none;
+	width: auto;
+	z-index: 100000; /* Above WP toolbar */
+}
+
+
+
+/*******************  Narkis  ******************************/
+.news-4-box .news{
+    border-bottom: dashed 1px #d6d6d6;
+}
+.more p { margin: 0; }
+.forum-box ul{
+	list-style: none;
+    padding-right: 0;
+}
+.forum-box ul .bbp-forum-title{
+  color: #ad978e;
+}
+.forum-box ul li{
+	border-bottom: dashed 1px #d6d6d6;
+}
+.forum-box ul .bbp-forum-title:after{
+	    content: "\A";
+  		white-space: pre;
+}
+.forum-box ul li .topic-author,.forum-box ul li div {
+	font-size: 14px;
+}
+
+
+.library-box .elementor-post-author{
+	    padding-right: 20px;
+}
+.library-box .elementor-post-author:before{
+	content: '';
+    position: absolute;
+    background: url(https://magdir.org.il/wp-content/uploads/2020/03/sprite.png) no-repeat -583px -25px;
+    width: 19px;
+    height: 20px;
+    right:  420px;
+}
+
+.four-in-row .type-flora_presentation .elementor-post__title{
+ 	line-height: initial;	
+	padding-right: 30px;
+}
+.four-in-row .type-flora_presentation .elementor-post__title a{
+	    position: relative;
+}
+
+.four-in-row .type-flora_presentation .elementor-post__title a:before{
+	content: '';
+    position: absolute;
+	background: url(https://magdir.org.il/wp-content/uploads/2020/03/sprite.png) no-repeat -381px -41px;
+    width: 28px;
+    height: 20px;
+	right: -32px;
+	top: 5px;
+}
+#buttonMagdir {
+	position: relative;
+}
+#buttonMagdir:before {
+	    right: 140px !important;
+}
+
+/* markup for mobile */
+@media screen and (max-width:768px) {
+	.four-in-row .type-flora_presentation .elementor-post__text{
+		margin-bottom: 12px;
+	}
+	.four-in-row .type-flora_presentation .elementor-post__title a{
+	   padding-top: 5px;
+
+	}
+}

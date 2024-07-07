@@ -29,7 +29,7 @@
                                     <th scope="col">PRODUCT NAME</th>
                                     <th scope="col">DESCRIPTION</th>
                                     <th scope="col">PRICE</th>
-                                    <th scope="col">QUANTITY</th> <!-- Add this line -->
+                                    <th scope="col">QUANTITY</th>
                                     <th scope="col">IMAGE</th>
                                     <th scope="col">CATEGORY</th>
                                     <th scope="col">&nbsp;</th>
@@ -42,6 +42,7 @@
                     </div>
                     <a href="add-product.html" class="btn btn-primary btn-block text-uppercase mb-3">Add new product</a>
                     <button class="btn btn-primary btn-block text-uppercase" id="deleteSelectedButton">Delete selected products</button>
+                    <a href="deleted-products.html" class="btn btn-secondary btn-block text-uppercase mt-3">View Deleted Products</a> <!-- Add this line -->
                 </div>
             </div>
             <div class="col-sm-12 col-md-12 col-lg-4 col-xl-4 tm-block-col">
@@ -90,7 +91,7 @@
                         </div>
                         <div class="form-group">
                             <label for="editProductQuantity">Quantity</label>
-                            <input type="text" class="form-control" id="editProductQuantity" name="editProductQuantity"> <!-- Add this line -->
+                            <input type="text" class="form-control" id="editProductQuantity" name="editProductQuantity">
                         </div>
                         <div class="form-group">
                             <label for="editProductImageUrl">Image URL</label>
@@ -111,7 +112,6 @@
             </div>
         </div>
     </div>
-
 
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>

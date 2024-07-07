@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Deleted Products - Admin HTML Template</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700" />
+    <link rel="stylesheet" href="css/fontawesome.min.css" />
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/templatemo-style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+
+<body id="deletedProductsPage">
+    <nav class="navbar navbar-expand-xl">
+        <!-- Navbar code -->
+    </nav>
+    <div class="container mt-5">
+        <div class="row tm-content-row">
+            <div class="col-12 tm-block-col">
+                <div class="tm-bg-primary-dark tm-block tm-block-products">
+                    <div class="tm-product-table-container">
+                        <table class="table table-hover tm-table-small tm-product-table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">PRODUCT NAME</th>
+                                    <th scope="col">DESCRIPTION</th>
+                                    <th scope="col">PRICE</th>
+                                    <th scope="col">QUANTITY</th>
+                                    <th scope="col">IMAGE</th>
+                                    <th scope="col">CATEGORY</th>
+                                    <th scope="col">SALE DISCOUNT</th>
+                                    <th scope="col">PRICE AFTER DISCOUNT</th>
+                                    <th scope="col">ACTIONS</th> <!-- New column for actions -->
+                                </tr>
+                            </thead>
+                            <tbody id="deletedProductsTableBody">
+                                <!-- Deleted Product rows will be dynamically added here -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <a href="products.html" class="btn btn-primary btn-block text-uppercase mb-3">Back to Products</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="tm-footer row tm-mt-small">
+        <!-- Footer code -->
+    </footer>
+
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/tooplate-scripts.js"></script>
+    <script src="js/deleted-products.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,2041 @@
+
+/* Moving bottom paddings from containers to margins of titles which is more correct for all the cases with no titles. */
+.holder-section, .list-view .item-section {
+	padding-bottom: 0px;
+}
+
+/* .holder-sections will now be inline-block, so to get rid of the trailing whitespace, line-height is set to 0 */
+.items {
+	line-height: 0;
+	padding-left: 0;
+}
+
+/* But fixed in the infinite scroll loading message */
+#infscr-loading {
+	line-height: 1;
+}
+
+/* Turning the blocks into inline blocks, fixes issues with compare button after margin shifting to headers */
+.holder-section {
+	display: inline-block;
+	overflow: visible;
+	padding-bottom: 0;
+	width: 100%;
+}
+
+/* Holders with single items need to appear side by side */
+.holder-section-single-item {
+	width: 48%;
+}
+
+.holder-section-single-item-odd + .holder-section-single-item-even {
+	margin-right: 5%;
+}
+
+/* Special case for the second holder when it's the sibling of a single holder, copied fron all.css .holder-section:first-child h2 */
+.holder-section-single-item:first-child + .holder-section-single-item h2 {
+	border-top: 0;
+	margin: 0 -9px 0 0;
+	padding: 0 9px 14px 0;
+}
+
+/* Last item should create a new line */
+.holder-section-single-last {
+	display: block;
+}
+
+/* Unless they are even */
+.holder-section-single-item-odd + .holder-section-single-last {
+	display: inline-block;
+}
+
+.holder-section h2 {
+	margin-top: 20px;
+}
+.list-view .item-section h3 {
+	margin-top: 24px;
+}
+
+/* Limiting the color to the term count, not all spans */
+.row span {
+	color: inherit;
+}
+.row span.term-count {
+	color: #9a938e;
+}
+
+.selected-box .term-count {
+	display: none;
+}
+
+
+/* Mobile */
+#main-content {
+	position: relative;
+}
+
+/* For desktop mode, this should be hidden */
+.mobile-content-holder {
+	display: none;
+}
+
+/* Overriding the hidden property when displayed as a dialog */
+#fancybox-content .js-slide-hidden {
+	position: static !important;
+}
+.msearch {
+    display:none;
+}
+
+
+
+/* The structure that is used in the dialog in mobile was added to the non-mobile version, these make it invisible */
+.open-close .mobile-modal {
+	width: auto;
+}
+
+.open-close .mobile-modal .modal-content {
+	background: none;
+	overflow: inherit;
+	padding: 0;
+}
+
+.open-close .mobile-modal .modal-title {
+	display: none;
+}
+
+.open-close .mobile-modal .buttons {
+	display: none;
+}
+.modal .selected-area .cols .col {
+    float:none;
+    width:210px;
+}
+.modal .selected-area .cols .col.col2, .modal .selected-area .cols .col.col4 {
+    margin-top:32px;
+}
+.modal .selected-area .cols .col label, .modal .selected-area .cols .col .chk-area, .modal .selected-area .cols .col h3 {
+    cursor:pointer;
+}
+.modal .selected-area .cols .colgroup {
+    float:right;
+}
+.modal #place-coord {
+    display:none;
+}
+
+/*---- plant page ----*/
+.page-title h1 {
+    width:100%;
+}
+.page-title h1 .heb {
+    display: inline-block;
+    float: right;
+    margin-top: 5px;
+}
+.page-title h1 .lat {
+    float:left;
+    display:inline-block;
+    direction:ltr;
+    margin: 0;
+    padding: 2px 0 5px;
+    letter-spacing: -1px;
+    font: 38px/40px 'Titillium Web', Arial, Helvetica, sans-serif;
+}
+
+.lat {
+    direction:ltr;
+}
+
+.view-switcher li {
+    float:right;
+}
+.info-block.map-block {
+    position:relative;
+}
+.info-block.map-block .map .region-cover, .info-block.map-block .map img.sq-cover {
+    position: absolute;
+    top: 62px;
+    right: -1px;
+    width: 223px;
+    height: 579px;
+}
+.info-block.map-block .map .region-cover.nodata {
+    font:20px/22px 'elegantiregularwebfont',Arial,Helvetica,sans-serif;
+    padding-top:46px;
+    opacity:0.6;
+    background: #ffffff;
+    text-align: center;
+}
+
+.info-block.map-block li:hover {
+    background-color:#EEFCF6;
+}
+.info-block.map-block li:hover a {
+    text-decoration: underline;
+}
+
+.region-cover1 img, img.region-cover1 {
+    opacity:0.2;
+}
+.region-cover2 img, img.region-cover2 {
+    opacity:0.35;
+}
+.region-cover3 img, img.region-cover3 {
+    opacity:0.8;
+}
+.region-cover4 img, img.region-cover4 {
+    opacity:1;
+}
+.info-block dl dd {
+    text-align:right;
+}
+.dir-ltr {
+    direction:ltr;
+    display:inline-block;
+}
+.dir-rtl {
+    direction:rtl;
+    display:inline-block;
+}
+.timeline-block .position {
+    position: relative;
+    left: 25px;
+    float: right;
+    padding: 9px 0 9px;
+
+}
+.timeline-block .position:before {
+    background-position: -608px -69px;
+    height:35px;
+    top:-26px;
+    }
+
+.info-block .identification img {
+    width:222px;
+}
+.region-labels {
+    float:right;
+}
+.steps .step5:before{
+    background:#fbf3e8 url('../images/sprite.png') no-repeat -803px 0;
+    width: 26px;
+}
+.steps .step5 {
+    background: #fbf3e8;
+    padding: 14px 16px 15px 56px;
+}
+
+.switcher-box .handler .left-shadow, .switcher-box .handler .right-shadow {
+    cursor:pointer;
+}
+#block-group-4 {
+    background: none;
+}
+#plant-taxonomies .search-form {
+    display:none;
+}
+.map-container {
+    position:relative;
+}
+#map-canvas, #map-hider {
+    width:1087px;
+    height:486px;
+}
+#map-hider {
+    z-index: 50;
+    background: #fff;
+    opacity: 0.7;
+    font-size: 40px;
+    font-family: elegantimediumwebfont, arial, sans-serif;
+    position: absolute;
+    top: -70px;
+    left: -18px;
+    text-align: center;
+    padding: 223px 15px 0px 15px;
+    margin-top: -20px;
+}
+.gallery-box .slideset .slide img {
+    height:385px;
+}
+.modal .cols {
+    padding: 20px 0;
+}
+.modal .buttons dl dt { /* איזורים נבחרים */
+    width:121px;
+}
+.row label {
+    padding: 6px 25px 6px 0;
+}
+
+#footer .volunteers iframe {
+    border: 3px solid #fff !important;
+}
+
+#footer .col-left .box-content {
+    margin-bottom:12px;
+}
+#footer .col-left .about-avinoam {
+    margin-bottom:60px;
+}
+#footer .more {
+    font-size:15px;
+    color:#ffffff;
+}
+#footer .more:hover {
+    text-decoration: underline;
+}
+#footer .more:before {
+    background-position:-471px -134px;
+}
+.wp-caption-text {
+    font-size:13px;
+}
+#footer a {
+    color:#ffffff;
+}
+#footer .photo {
+    float:right;
+}
+#footer .about-person img {
+    float:none;
+}
+#footer .about-avinoam p.more-container {
+    left: -24px;
+    position: relative;
+    text-align: left;
+}
+#footer .col-left .box-content p.wp-caption-text {
+    text-align:right;
+    padding-top:0;
+}
+#footer .add-links {
+    font-weight:normal;
+    padding-left:0;
+}
+#footer .plant-of-hour img {
+    max-width:320px;
+}
+#footer .plant-of-hour dd, #footer .plant-of-hour dt {
+    font-size:13px;
+}
+.aside .block-content img {
+    margin:0;
+    width:252px;
+    height:auto;
+}
+.aside .block-content .photo {
+    margin-bottom:14px;
+}
+.photo-credit {
+    font-size:13px;
+    color:#666;
+}
+#footer .photo-credit {
+    color: #ffffff;
+}
+
+#footer .plant-of-hour .location {
+    margin-top:16px;
+}
+.single-flora_plant .info-block.description a {
+    /*text-decoration: underline;*/
+}
+.post-type-archive-flora_plant #footer {
+    display:none;
+}
+.view-switcher  {
+    display:none;
+}
+.welcome { /* message for first timers */
+    display:none;
+    padding:30px 20px;
+    margin-bottom:40px;
+    margin-top:34px;
+    background: #f5f1ed;
+    background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJod…EiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+    background: -moz-linear-gradient(top, #f5f1ed 0%, #e4dcd0 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f5f1ed), color-stop(100%,#e4dcd0));
+    background: -webkit-linear-gradient(top, #f5f1ed 0%,#e4dcd0 100%);
+    background: -o-linear-gradient(top, #f5f1ed 0%,#e4dcd0 100%);
+    background: -ms-linear-gradient(top, #f5f1ed 0%,#e4dcd0 100%);
+    background: linear-gradient(to bottom, #f5f1ed 0%,#e4dcd0 100%);
+}
+.welcome header {
+    background:#ca8528;
+    margin:-30px -20px 26px -20px;
+    padding:24px 20px 18px 0;
+}
+
+.welcome h2 {
+    font-family:elegantimediumwebfont;
+    font-size:40px;
+    color:#ffffff;
+    font-weight: normal;
+    margin:0;
+    padding:0;
+}
+.welcome a {
+    text-decoration: underline;
+}
+
+.welcome a#welcome-close {
+    padding: 0 30px;
+    background: #9d6241;
+    border-radius: 4px;
+    font-size: 18px;
+    color: #fff;
+    border: 0;
+    height: 28px;
+    display:inline-block;
+    margin-top:20px;
+    margin-bottom:16px;
+    text-decoration: none;
+}
+.welcome a#welcome-close:hover {
+    background: #923e06;
+    text-decoration: none;
+}
+a#welcome-oops {
+    display:none;
+    text-decoration: underline;
+    font-size:13px;
+    color:#999999;
+    margin-bottom:16px;
+    margin-right:14px;
+}
+
+.modal .map { /* location lightbox - magdir */
+    position:relative;
+}
+.modal .map .region-cover {
+    position: absolute;
+    width: 238px;
+    height:618px;
+    top: -1px;
+    left: -3px;
+    display:none;
+    opacity:1;
+}
+
+.ajax-loading {
+    padding-right:32px;
+    background:url(../images/ajax-loader.gif) no-repeat top right;
+    background-size: 28px 28px;
+
+}
+#footer .plant-of-hour h3 {
+    margin-bottom:16px;
+}
+#footer .plant-of-hour p.more-container {
+    margin-top:16px;
+}
+
+.page-title h1 a {
+    color:#af4c0a;
+    text-decoration: none;
+}
+.page-title h1 a:hover {
+    text-decoration: underline;
+    color:#007d4e;
+}
+header.page-title {
+    margin-bottom:30px;
+}
+.fancybox-title-outside#fancybox-title {
+    background:#fff;
+    color:#444;
+    font-size:15px;
+    font-family:'alef regular', 'alef',arial, helvetica,sans-serif;
+    padding-top: 4px;
+    padding-bottom: 7px;
+    text-align: center;
+}
+#fancybox-wrap {
+    overflow-x:hidden;
+}
+#fancybox-content {
+    border:3px solid #ffffff;
+}
+#fancybox-right-ico {
+    right:inherit;
+    left:0;
+    background:url('../images/sprite.png') no-repeat -654px 0;
+    height:58px;
+    width:27px;
+    display:none;
+}
+#fancybox-left-ico {
+    left:inherit;
+    right:0;
+    background:url('../images/sprite.png') no-repeat -620px 0;
+    height:58px;
+    width:27px;
+    display:none;
+}
+#fancybox-right:hover span {
+    left:0;
+    right:inherit;
+}
+#fancybox-left:hover span {
+    right:0;
+    left:inherit;
+}
+
+#fancybox-wrap:hover #fancybox-right span, #fancybox-wrap:hover #fancybox-left span {
+    display:inline;
+}
+
+#fancybox-right {
+    left:0;
+    right:inherit;
+}
+#fancybox-left {
+    right:0;
+    left:inherit;
+}
+.widget.responder .block2 {
+    display:none;
+}
+.widget.responder .invalid {
+    display:none;
+}
+.widget.responder.error .invalid {
+    display:block;
+    color:#ee0000;
+}
+.widget.responder.error input[type="email"], .widget.responder.error .input-holder {
+    background-color: #ffeeee;
+}
+.widget.responder .intro {
+    margin-bottom:10px;
+}
+.widget.responder .email-form .input-holder {
+    margin-bottom:2px;
+}
+.widget.responder.loading .email-form {
+    opacity:0.4;
+}
+.search-form .search {
+    color:#333;
+}
+.contact .wpcf7 input[type='submit'] {
+    color: #fff;
+    background: #9d6241;
+    border-radius: 4px;
+    border: 0;
+    padding: 5px 20px;
+    float: left;
+    font-size: 18px;
+    margin-left:-22px;
+}
+.contact .wpcf7 input[type='submit']:hover {
+    background:#923e06;
+}
+.contact .wpcf7 form, .contact .wpcf7 input[type="email"], .contact .wpcf7 input[type="text"], .contact .wpcf7 textarea {
+    width:421px;
+}
+.contact .wpcf7 input[type="email"], .contact .wpcf7 input[type="text"], .contact .wpcf7 textarea {
+    border: 1px solid #c2c2c2;
+    font-size:16px;
+    color:#333;
+    min-height:40px;
+    padding-right:10px;
+    padding-left:10px;
+}
+.contact h2.details {
+    margin-top:25px;
+}
+.contact div.wpcf7 img.ajax-loader {
+    float: left;
+    top: 10px;
+    position: relative;
+}
+.wpcf7-response-output {
+    clear:both;
+}
+.contact h2.details {
+    clear:both;
+}
+.contact .wpcf7-response-output {
+    position:relative;
+    top:-60px;
+}
+.search-form .row {
+    overflow:visible;
+}
+.tt-dropdown-menu {
+    top:30px !important;
+    right: -7px !important;
+    background:#ffffff;
+    border:1px solid #bbb;
+    max-height:280px;
+    overflow-y:auto;
+    cursor:pointer;
+}
+.tt-suggestion {
+    padding: 1px 10px;
+}
+.tt-suggestion p {
+    padding:12px 0;
+    margin:0;
+}
+.tt-dropdown-menu {
+    background: #fff;
+    border: 1px solid #ddd;
+    width: 244px;
+    line-height: 0.6em;
+    color:#333;
+    font-size:19px;
+}
+.tt-suggestion.tt-cursor {
+    background-color:#f6e4d4;
+}
+.search.tt-hint {
+    color:#fff;
+
+}
+.search-form {
+    position: relative;
+}
+.search-load {
+    display:none;
+    position: absolute;
+    left: 246px;
+}
+.search-form.loading .search-load {
+    display:block;
+    z-index:30;
+}
+.search-form.loading input {
+    color:#aaaaaa !important;;
+    background:#f9f9f9 !important;
+}
+
+.tt-dropdown-menu .tt-suggestion.tt-is-under-cursor {
+    background-color: #EBD9C7;
+    cursor:pointer;
+}
+.feedback {
+    position: fixed;
+    -webkit-transform: rotate(-90deg);
+    -moz-transform: rotate(-90deg);
+    -o-transform: rotate(-90deg);
+    -ms-transform: rotate(-90deg);
+    transform: rotate(-90deg);
+    right: -60px;
+    margin: 0;
+    background: #007d4e;
+    font-size: 14px;
+    font-weight: bold;
+    /*display:block;*/
+    z-index:500;
+    display: none;
+}
+/*.single-flora_plant .feedback, .post-type-archive-flora_plant .feedback {
+    display:block;
+}*/
+.feedback a {
+    color:#ffffff;
+    display:block;
+    padding:4px 12px;
+}
+.feedback a:hover {
+    text-decoration: none;
+}
+.feedback:hover {
+    background: #00b371;
+}
+.selected-box label span {
+    background-color: #f2ebe0;
+    padding: 3px;
+}
+.slide .row .popup-holder { /*hide all help popups */
+    display:none;
+}
+article a {
+    text-decoration: underline;
+}
+.tt-dropdown-menu .notfound {
+    font-style:italic;
+    color:#c3c3c3;
+    padding:10px 16px 4px 16px;
+}
+#fancybox-content .mobile-modal .modal-tabs .holder {
+    overflow-x:hidden;
+}
+#fancybox-loading div {
+/*    position: absolute;
+    top:50%;
+    left:50%;
+    background: url('../images/ajax-loader.gif') center center no-repeat;*/
+}
+.timeline .area.desktop {
+    display:block;
+}
+.timeline .area.mobile {
+    display:none;
+}
+#bbpress-forums #bbp-your-profile fieldset.submit button {
+    background: #9d6241;
+    border-radius: 4px;
+    border: 0;
+    padding:4px 21px;
+    font-family: alef, arial, helvetica, sans-serif;
+    cursor:pointer;
+    margin-bottom: 6px;
+    color:#fff;
+    font-size:18px;
+}
+#bbpress-forums #bbp-your-profile fieldset.submit button:hover {
+    background:#923e06;
+}
+#bbpress-forums #bbp-user-wrapper h2, #bbpress-forums #bbp-user-wrapper h2.entry-title {
+    color:#af4c0a;
+font:    30px/30px 'elegantiregularwebfont', Arial, Helvetica, sans-serif;
+}
+#bbpress-forums fieldset.bbp-form {
+    margin-bottom:30px;
+}
+.topic #bbpress-forums {
+    position: relative;
+}
+.bbp-topic-permalink {
+    font-size:20px;
+    text-decoration: none;
+}
+#favorite-toggle {
+    display:none;
+}
+.bbp-reply-form h2 {
+    color:#af4c0a;
+    font:    30px/30px 'elegantiregularwebfont', Arial, Helvetica, sans-serif;
+    margin-bottom: 7px;
+}
+.special-notice{
+    padding:20px;position:relative;background:#18a765;color:#fff;margin-bottom:4px
+}
+.special-notice-int {
+    width:1226px;margin:0 auto;position:relative;
+}
+.special-notice-int p {
+    margin:0;padding:0;
+}
+@media only screen and (max-width: 767px) {
+    .special-notice-int {
+        width:100%;
+    }
+    .info-block.map-block .map .region-cover, .info-block.map-block .map img.sq-cover {
+        position: absolute;
+        top: -1px;
+        left: 50%;
+        width: 154px;
+        height:inherit;
+        margin-left:-76px;
+        display:block;
+    }
+    .info-block.map-block:hover .map img.region-cover {
+        display:block;
+    }
+    .info-block.map-block .map {
+        position:relative;
+    }
+    .gallery-box .slideset img {
+        height:400px;
+    }
+    .steps .step5{
+        margin: 0 130px 10px 0;
+        padding: 7px 46px 0 26px;
+        background: #faf0e4;
+    }
+    .steps .step5:after{
+        background: url('../images/sprite-1x.png') no-repeat -92px -114px;
+        width: 37px;
+        height: 51px;
+        top: -5px;
+    }
+    .steps .step5:before{background: url('../images/sprite-1x.png') no-repeat -222px -50px;}
+    .steps .step5:after{background: url('../images/sprite-2x.png') no-repeat -92px -114px / 250px 250px;}
+    .steps .step5:before{background: url('../images/sprite-2x.png') no-repeat -222px -50px / 250px 250px;}
+    .timeline ul li {
+        float: right;
+    }
+    .timeline .area.desktop {
+        display:none;
+    }
+    .timeline .area.mobile {
+        display:block;
+    }
+    .timeline strong:before {
+        background:none;
+    }
+    .magdir-inner {
+        width:80%;
+        padding:5%;
+        margin-left:-47%;
+        top:5%;
+    }
+    .magdir-img {
+        width: 30%;
+        margin-left: 8%;
+    }
+    .magdir-promo p {
+        padding-right:0;
+    }
+    .magdir-promo .btn a {
+        padding: 8px 10px;
+    }
+    .magdir-promo h2 {
+        font-size:24px;
+    }
+    .magdir-promo .close-btn {
+        display:none;
+    }
+    .magdir-promo .promo-buttons {
+        text-align:center;
+    }
+    .magdir-promo .promo-buttons span {
+        width:80%;
+        margin-right:0;
+        margin-left:0;
+    }
+    .magdir-promo .lnk.later.mobile {
+        display:inline-block;
+    }
+    .magdir-promo .lnk.later.desktop {
+        display:none;
+    }
+
+
+}
+
+@media only screen and (max-width: 1350px) {
+/*    .single-flora_plant .feedback, .post-type-archive-flora_plant .feedback {
+        display:none;
+    }*/
+    .feedback {
+        display:none;
+    }
+}
+
+.image-page h3 {
+    font-family:elegantiregularwebfont,arial,sans-serif;
+    font-weight:normal;
+    font-size:40px;
+    color:#af4c0a;
+}
+.image-page h3 a {
+    color:#af4c0a;
+}
+.image-page h3 a:hover {
+    color:#007d4e;
+    text-decoration: none;
+}
+.wp-caption-text {
+    font-size:13px;
+}
+.video-post p.wp-caption-text {
+    margin-left: 10px;
+    padding:5px 10px;
+}
+.video-post .cols .col {
+    width:48%;
+    float:right;
+}
+.video-post .cols .col1 {
+    padding-left:10px;
+}
+.video-post .cols .col2 {
+    padding-right:10px;
+}
+.video-post .cols:after {
+    display:block;
+    content:'';
+    clear:both;
+
+}
+.video-post .cols .col img {
+    max-width:100%;
+}
+.video-post .wp-caption-text {
+    background:#faf1e4;
+    font-size:16px;
+}
+.video-post {
+    max-width:810px;
+}
+.wp-caption {
+    display:inline-block;
+
+}
+.wp-caption:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+
+}
+.video-post a {
+    text-decoration: underline;
+}
+.video-post h3 {
+    color: #af4c0a;
+    font-family:elegantimediumwebfont,arial,helvetica,sans-serif;
+    font-weight:normal;
+    font-size:23px;
+    clear:both;
+    margin-bottom:12px;
+}
+.video-post h3 a {
+    text-decoration:none;
+    color: #af4c0a;
+    clear:both;
+}
+.video-post h3 a:hover {
+    text-decoration: underline;
+    color:#007d4e;
+}
+.video-post h2 {
+    font-size:29px;
+}
+.video-post h2 a {
+    text-decoration: none;
+    color:#652b05;
+}
+.video-post h2 a:hover {
+    text-decoration: underline;
+    color:#007d4e;
+    clear:both;
+}
+.head-title {
+    clear:both;
+}
+.refs-section .head-title {
+    clear:none;
+}
+.last-update {
+    margin-bottom:20px;
+    font-size:16px;
+    color:#aaa;
+}
+.bookpart .links, .videopart .links {
+    margin-top:-26px;
+    float:right;
+}
+.bookpart .links li {
+    padding-top:12px;
+    padding-bottom:12px;
+    float:none;
+}
+.bookpart .links.last:after {
+    clear:both;
+    content:' ';
+    display:block;
+    visibility: hidden;
+}
+.editlink {
+
+}
+.editlink a {
+    background:#007d4e;
+    color:#fff;
+    padding:0 15px;
+    margin-left:30px;
+}
+.editlink a:hover {
+    background:#009d6e;
+    text-decoration: none;
+}
+.info-block ul span.family-lat {
+    display:inline-block;
+    direction:ltr;
+    color:#007d4e
+}
+.family-lat:hover {
+    text-decoration: underline;
+}
+.callout {
+    margin-bottom:30px;
+}
+.bookpart .promo.promo2 img, .videopart .promo.promo2 img {
+    max-height:301px;
+}
+.bookpart .book-area .column, .videopart .book-area .column {
+    float:right;
+    width:50%;
+    max-width:470px;
+}
+.bookpart.level0 .content-holder, .videopart.level0 .content-holder {
+    margin-right:0;
+}
+.bookpart.level0 .head-title h2 a, .videopart.level0 .head-title h2 a {
+    color: #af4c0a;
+}
+.bookpart.level0 .head-title h2 a:hover, .videopart.level0 .head-title h2 a:hover {
+    text-decoration: none;
+    color: #007d4e;
+}
+.bookpart.level0 .book-section, .videopart.level0 .book-section {
+    padding-bottom:50px;
+}
+.info-block p {
+    margin-bottom:18px;
+    line-height: 1.6em;
+}
+
+.info-block {
+    margin-bottom:18px;
+}
+ol.boo {
+    margin-top:40px;
+    margin-bottom:120px;
+}
+ol.boo .column {
+    float: right;
+    width:40%;
+}
+ol.boo li {
+    margin-bottom:20px;
+    font-family: elegantiregularwebfont;
+    font-size: 26px;
+    margin-left:30px;
+}
+ol.boo li:before {
+    margin-right:-25px;
+}
+ol.boo li a {
+    color: #af4c0a;
+}
+ol.boo li a:hover {
+    color: #007d4e;
+    text-decoration: none;
+    background: #eaddd2;
+    margin-right:-5px;
+    padding-right:5px;
+    padding-left:5px;
+}
+
+.bookpart #content .editlink {
+    margin-top: -20px;
+}
+.book-area {
+padding-top: 40px;
+}
+
+.promo .text-block h2 a,.top-block h2 a, .top-block h3 a {
+    color: #652b05;
+}
+.promo .text-block h2 a,.top-block h2 a {
+    font-size:29px;
+
+}
+.promo .text-block h2 a:hover, .promo .text-block:hover h2 a, .top-block h2 a:hover, .top-block h3 a:hover,  .top-block .content.book-small:hover h3 a {
+    color:#007d4e;
+    text-decoration: none;
+}
+.top-block h3 a:hover {
+    background: #eaddd2;
+}
+.promo .text-block a, .content.book-small .content-body a {
+    color:#333;
+    text-decoration: none;
+}
+.promo .text-block a:hover, .content.book-small .content-body a:hover {
+    color:#333;
+    text-decoration: none;
+}
+.promo3 .text-block a.more {
+    color:#007d4e;
+}
+.promo3 .text-block a.more:hover {
+    color:#00ce88;
+}
+.promo .image-holder,  .promo .image-holder img{
+    max-height:357px;
+    max-width:586px;
+}
+
+.content.book-small img {
+    max-width: 150px;
+    margin-bottom: 10px;
+}
+.top-block {
+    padding-right:20px;
+    padding-bottom:15px;
+}
+.top-block .content {
+    width:90%;
+    padding-right:12px;
+    padding-top:5px;
+    margin-bottom:20px;
+}
+.top-block h2.books-title {
+padding-right:12px;
+}
+.top-block h2.books-title:before {
+    width:31px;
+}
+.top-block .content:hover {
+    background:#eaddd2;
+    cursor:pointer;
+}
+.top-block .content-body {
+    padding-left:10px;
+}
+.promo.promo3.content-id-2228282 img {
+    border:1px solid #f9f1e9;
+    margin-left:1px;
+}
+.promo.promo3 .text-block:hover {
+    background-color:#eaddd2;
+    cursor:pointer;
+}
+.pub-date {
+    font-size:0.8em;
+}
+.top-block p.pub-date {
+    margin-top:-12px;
+}
+.top-block h3 {
+    margin-bottom:8px;
+}
+
+.top-block .links li a {
+    display: inline-block;
+}
+.promo {
+    font-size:20px;
+}
+
+.books {
+    padding: 43px 0;
+}
+.books .box {
+    padding-right:24px;
+    width:45.8%;
+    margin-left:2.5%;
+    padding-top:8px;
+    padding-bottom:4px;
+}
+.books .box.even {
+    margin-left:0;
+}
+.books .box:hover {
+    cursor:pointer;
+    background: #f9f1e9;
+}
+.books .box img {
+    max-width:250px;
+    max-height:250px;
+    float:none;
+    margin-left:0;
+}
+.books .box .image-box {
+    margin-left:20px;
+    float:right;
+    width:250px;
+}
+.bookpart .book-area ol .column li {
+    margin-bottom:10px;
+}
+.attachment-book-2228282,   .attachment-book-2228910,
+.box.post-2228282 img,      .box.post-2228910 img {
+    border:1px solid #f9f1e9;
+}
+.top-block .more {
+    margin-top:25px;
+}
+.book-section ol li a:hover {
+    text-decoration: none;
+    background:#eaddd2;
+}
+.top-block .col {
+    width: 40%;
+}
+.top-block .col.col2 {
+    width:30%;
+}
+.top-block .col.col3 {
+    width:30%;
+}
+.top-block .col.col3 .col-title {
+    right:31px;
+}
+.top-block .col.col1 a.more {
+    margin-right: 12px;
+}
+.top-block .col .col-title {
+    position:relative;
+    right:22px;
+}
+.top-block .col a.more {
+    margin:20px 0 30px 0 ;
+    float:none;
+    background:none;
+    font-size:18px;
+}
+.top-block .col a.more:hover {
+    text-decoration: none;
+    background: #eaddd2;
+}
+.top-block .links {
+    padding-left:10%;
+}
+.top-block .more:hover {
+    background-color:#eaddd2;
+    color:#007d4e;
+}
+.books .promo img {
+    margin-top:0;
+}
+.books h2 {
+    margin-bottom:8px;
+}
+h2.lat, h3.lat, h1.lat {
+    font-family: 'Titillium Web', Arial, Helvetica, sans-serif;
+    text-align:right;
+    font-weight: normal;
+}
+.page-title h1.lat {
+    text-align:left;
+    font-weight: normal;
+    font-size:38px;
+}
+
+.books a {
+    font-size:inherit;
+}
+.books h2 a {
+    color:#652b05;
+    text-decoration: none;
+}
+.books .promo .text-block h2 {
+    margin-bottom:8px;
+}
+.books .promo .text-block:hover {
+    background-color:#eaddd2;
+    cursor:pointer;
+}
+
+.books .box:hover h2 a, .books .promo .text-block:hover h2 a {
+    color:#007d4e;
+}
+.botanic-library .col-title h2  {
+    float:right;
+}
+.botanic-library .col-title .more {
+    float: left;
+    margin-left: 45px;
+}
+
+.promo .text-block h2.lat {
+    font: 38px/40px 'Titillium Web', Arial, Helvetica, sans-serif;
+}
+.popup-holder .popup {
+    text-align:right;
+}
+.buttons-action {
+    /*clear:both;*/
+}
+.buttons-action {
+    max-width: 810px;
+    margin-top:40px;
+}
+.aside .book-chapters img {
+   width:98px;
+}
+.aside .lessons-widget ol {
+    line-height:16px;
+}
+.aside .lessons-widget ol li {
+    padding-right:0;
+    margin-bottom:8px;
+}
+.aside .lessons-widget ol li:before {
+    display:none;
+}
+.aside .lessons-widget ol li.active {
+    font-weight:bold;
+}
+.aside .widget h2.lat {
+    font-family:"Titillium Web", aria, helvetica, sans-serif;
+}
+.aside .widget h2 a {
+    color:#fff;
+    display:block;
+}
+.aside .widget h2:hover a {
+    color:#fff;
+    text-decoration: none;
+    background:#28b775;
+    margin:-8px -15px -6px -10px;
+    padding:8px 15px 6px 10px;
+}
+.aside .lessons-widget p {
+    display:block;
+}
+.aside .lessons-widget p a {
+    display:block;
+    text-decoration: none;
+    color:#333;
+}
+.aside .book-chapters .bookinfo:hover {
+    background: #f1e3d5;
+    cursor:pointer;
+}
+
+p.wait-msg {
+    font-size:0.8em;
+    margin-bottom:4px;
+}
+a.dl {
+    padding-right:24px;
+    display:inline-block;
+    margin-bottom:8px;
+    margin-top:4px;
+    text-decoration: none;
+    position:relative;
+    height:20px;
+}
+a.dl:before {
+    position:absolute;
+    right:0;
+    width:24px;
+    height:20px;
+    top:4px;
+    content:'';
+    background: url(../images/dl.png) no-repeat top right;
+}
+a.dl:hover:before {
+    background-position: right -20px;
+}
+a.dl:hover {
+    text-decoration: underline;
+}
+
+.credit-section {
+    padding-left:20px;
+}
+.credit-section.lat {
+    padding-left:0;
+}
+.articles td.lat {
+    /*text-align:right;*/
+}
+.articles table a:hover {
+    text-decoration: none;
+    background:#eaddd2;
+}
+.articles table th {
+    font-family:elegantiregularwebfont,arial,sans-serif;
+    font-size:1.2em;
+}
+.articles table th strong {
+    font-family:elegantimediumwebfont,arial,sans-serif;
+    font-weight:normal;
+}
+.articles .promo .image-holder.alignleft {
+    max-width:600px;
+    max-height: 360px;
+}
+.presentations .pr-row .excerpt {
+    font-size:0.9em;
+}
+.presentations .results-list li {
+    margin-bottom:35px;
+    margin-left:51px;
+    height:100%;
+    margin-right:10px;
+}
+.presentations .results-list li:hover {
+    padding:10px;
+    margin:-10px 0 25px 41px;
+    background:#f9f1e9;
+    cursor:pointer;
+}
+.presentations .results-list li .excerpt {
+    margin-top:8px;
+}
+.presentations .results-list .video {
+    min-height:240px;
+}
+.presentations .results-list .pr-row {
+    display:table-row;
+}
+.presentations .results-list .title h3 a:hover {
+    text-decoration: none;
+}
+.data-table tbody td.article-title {
+    padding:5px;
+}
+.data-table tbody td.article-title a {
+    padding:2px 0px 3px 2px;
+    display:inline-block;
+}
+.videopart .page-title {
+    position: relative;
+}
+.videopart .page-title h1 {
+    margin-right:45px;
+}
+.videopart .page-title h1:before {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 4px;
+    background: url('../images/sprite.png') no-repeat -254px -226px;
+    width: 45px;
+    height: 36px;
+}
+.botanic-library .content-type-video h2 {
+    position:relative;
+    margin-right:29px;
+
+}
+.botanic-library .content-type-video h2:before {
+    background: url('../images/sprite.png') no-repeat -379px -69px;
+    width: 22px;
+    height: 19px;
+    right: -27px;
+    content: '';
+    top: 4px;
+    position: absolute;
+
+}
+.video-map.widget img {
+    margin: 0 -15px -5px;
+    padding-top:15px;
+}
+.level1 .video-map.widget img {
+    padding-top:0;
+}
+.level1 .video-map.widget .widget-content {
+    padding-top:0;
+}
+.level2 .video-tools .presentation-block {
+    display: block;
+    margin: 0 -10px -10px -13px;
+    padding-left: 0;
+    max-width: inherit;
+    background: #ffffff;
+}
+.level2 .video-tools .holder {
+    padding-bottom:5px;
+}
+.level2 .video-tools a.more {
+    display:none;
+}
+.level2 .video-tools .presentation-block.js-slide-hidden {
+    display:block;
+    position: inherit;
+}
+.videopart .buttons-action {
+    clear:none;
+}
+
+.more-p {
+    margin-top:40px;
+}
+.videoframe {
+    width:810px;
+    height:456px;
+}
+/*
+	Side bar and mobile content holder switch places in mobile mode, adding the class .mobile-results via JS will trigger an animation.
+	Also, they replace one another with their position properties (the hidden one becomes 'absolute' the displayed one 'relative'), this
+	is done so the scrolling height is set correctly.
+	It's a little janky on mobile and I wonder if it's this positioning switch which is doing it, if so, it could be defered to JS on transition end
+*/
+.more.down:before {
+    background-position: -530px -134px;
+    height:15px;
+}
+.info-block.related, .info-block.related .news {
+    margin-right:-40px;
+    padding-right:40px;
+}
+.info-block.related a:hover {
+    background:#eaddd2;
+    text-decoration: none;
+}
+.news .box-label  {
+    position:relative;
+    margin-top: -13px;
+}
+.news .box-label:before {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 5px;
+    background: url('../images/sprite.png') no-repeat -381px -41px;
+    width: 26px;
+    height: 20px;
+}
+.info-block.related h3 {
+    position: relative;
+    padding-right:32px;
+}
+.info-block.related h3:before {
+    content: '';
+    position: absolute;
+    right: 0px;
+    top: 0;
+    background: url('../images/sprite.png') no-repeat -381px -41px;
+    width: 26px;
+    height: 20px;
+}
+.news .box.floraBookPart .box-label:before, .info-block.related  h3.floraBookPart:before {
+    background-position:-576px -25px;
+}
+.news .box.floraVideoPart .box-label:before, .info-block.related  h3.floraVideoPart:before {
+    background-position:-375px -73px;
+}
+.news .box.floraArticle .box-label:before, .info-block.related h3.floraArticle:before {
+    background-position:-336px -69px;
+}
+.info-block.related h3.floraArticle,.news .box.floraArticle .box-label {
+    padding-right:21px;
+}
+.info-block.related h3.floraBookPart, .news .box.floraBookPart .box-label {
+    padding-right:26px;
+}
+.info-block.related .rcol {
+    width:48%;
+    float:right;
+}
+.info-block.related .rcol.rcol1 {
+    margin-left:4%;
+}
+.info-block.related li {
+    margin-bottom:8px;
+}
+.video-post h1 {
+    margin: 0 0 9px;
+    color: #652b05;
+    font: 36px/38px 'elegantimediumwebfont', Arial, Helvetica, sans-serif;
+}
+
+.refs-section {
+    padding-top:80px;
+}
+.biblical {
+    font-family:david,times,serif;
+    font-size:1.1em;
+}
+.video-post ol {
+    margin-bottom:16px;
+}
+.video-post h2 .lat, .video-post h3 .lat {font-family:"Titillium Web", arial, sans-serif}
+
+.video-post ul li {
+    margin-bottom:8px;
+}
+.video-post .wp-caption.aligncenter {
+    margin: 0 auto;
+    position: relative;
+    display: block;
+
+}
+.video-post .wp-caption.alignnone {
+    clear:both;
+}
+.video-post table {
+    margin-top:12px;
+    margin-bottom:30px;
+    border-top:1px solid #ccc;
+}
+.video-post tr td {
+    vertical-align: top;
+    padding-top:6px;
+    padding-bottom:6px;
+    padding-left:16px;
+    border-bottom:1px solid #ccc;
+    position: relative;
+}
+.video-post td.star:before {
+    content:"*";
+    position:absolute;
+    right:-8px;
+    top:7px;
+}
+
+/************** bbpress ****************/
+#bbpress-forums {
+    font-size:16px;
+    clear:none;
+}
+#subscription-toggle {
+    /*margin-right:35px;*/
+}
+div.bbp-breadcrumb {
+    display:none;
+}
+#bbpress-forums div.bbp-the-content-wrapper textarea.bbp-the-content {
+    font-size:16px;
+    font-family:alef, arial, helvetica, sans-serif;
+    border: 1px solid #eee;
+}
+.type-forum .editlink {
+    display:none;
+}
+.select-area .select-opener {
+    display:none;
+}
+div.bbp-template-notice p {
+    font-size:14px;
+}
+#buddypress ul.item-list {
+    clear:none;
+}
+#bbpress-forums ul.bbp-lead-topic, #bbpress-forums ul.bbp-topics, #bbpress-forums ul.bbp-forums, #bbpress-forums ul.bbp-replies, #bbpress-forums ul.bbp-search-results {
+    font-size:16px;
+}
+.fnotice {
+    background: #ff6666;
+    color:#fff;
+    padding:5px 15px;
+}
+.entry-content .bbp-template-notice.info {
+    display:none;
+}
+.forum header.page-title {
+    margin-bottom:0;
+}
+.forum #subscription-toggle {
+    margin-bottom:10px;
+    display:block;
+    font-size:14px;
+}
+.forum .forum-desc {
+    margin-bottom:20px;
+}
+.bbp-author-name {
+    text-decoration: none;
+}
+.bbp-topic-freshness a {
+    text-decoration: none;
+}
+.bbp-new-topic-button {
+    background:#9d6241;
+    display:inline-block;
+    border-radius: 4px;
+    margin-bottom:12px;
+    cursor:pointer;
+}
+.bbp-new-topic-button:hover {
+    background:#923e06;
+}
+.bbp-new-topic-button a {
+    color:#fff;
+    text-decoration: none;
+    padding: 0 14px;
+    display:block;
+}
+.bbp-no-topic.must-login a {
+    color:#007d4e;
+    text-decoration: underline;
+}
+.bbp-submit-wrapper button {
+    color: #fff;
+    font-size: 18px;
+    background: #9d6241;
+    border-radius: 4px;
+    border: 0;
+    padding:4px 21px;
+    font-family: alef, arial, helvetica, sans-serif;
+    cursor:pointer;
+    margin-bottom: 6px;
+}
+.bbp-submit-wrapper button:hover {
+    background:#923e06;
+}
+.up-photos {
+    margin-bottom:30px;
+    margin-top:20px;
+}
+.up-photos .details {
+    display:none;
+}
+.up-photos .up-photo {
+    margin-left:40px;
+    float:right;
+}
+.up-photos .up-photo img {
+    height:150px;
+}
+.up-photos:after {
+    content:'';
+    display:block;
+    clear:both;
+    width:0;
+    height:0;
+}
+#bbpress-forums fieldset.bbp-form input[type='text'] {
+    border: 1px solid #c2c2c2;
+    display:block;
+    margin-bottom:0;
+    padding:2px 6px 2px 30px;
+}
+.up-photos label {
+    display:block;
+}
+#bbpress-forums fieldset.bbp-form input[type='text']#loc {
+    width:300px;
+}
+#bbpress-forums div.bbp-the-content-wrapper textarea.bbp-the-content {
+    height:85px;
+    border: 1px solid #c2c2c2;
+    padding:2px 6px;
+}
+.up-photos .explain {
+    font-size:12px;
+    margin-top: -5px;
+    color: #bbb;
+}
+.btn-minor {
+    display:inline-block;
+    text-decoration: none;
+    border-radius: 4px;
+    border: 1px solid #9d6241;
+    color:#9d6241;
+    padding: 0 12px;
+}
+.btn-minor:hover,.bbp-topic-form .btn-wrapper:hover a.btn-minor {
+    background:#faeee7;
+    border-color:#923e06;
+    color:#923e06;
+}
+#bbpress-forums .bbp-topic-form ul.up-photos-list {
+    margin: 12px 0 0 0;
+}
+.bbp-new-topic-hide-button {
+    display:none;
+}
+.btn-wrapper {
+    position:relative;
+    display:inline-block;
+    cursor:pointer;
+    overflow:hidden;
+}
+
+.btn-wrapper input[type='file']{
+    position: absolute;
+    top: 0;
+    margin: 0;
+    opacity: 0;
+    -ms-filter: 'alpha(opacity=0)';
+    font-size: 22px;
+    direction: ltr;
+    cursor: pointer;
+    display: block;
+}
+.up-photos .loader {
+    display:none;
+}
+.up-photos .details.loading .loader {
+    display:block;
+}
+ .up-photo {
+    padding-bottom:30px;
+    padding-left:30px;
+}
+.up-photos .up-photo.loader img{
+    height:inherit;
+}
+.bbp_topic_subscription_wrapper {
+    float:left;
+}
+#bbpress-forums div.bbp-reply-content .rep-img-container {
+    margin-left:10px;
+    margin-bottom:10px;
+    display:inline-block;
+    float:right;
+}
+#bbpress-forums div.bbp-reply-content .rep-img {
+    display:block;
+}
+.reply-photos img {
+    max-width:60px;
+}
+#bbpress-forums div.odd, #bbpress-forums ul.odd {
+    background-color: #f9f1e9;
+}
+#bbpress-forums li.bbp-header, #bbpress-forums li.bbp-footer {
+    background: #18a765;
+    color:#fff;
+    font: 23px/22px 'elegantiregularwebfont', Arial, Helvetica, sans-serif;
+}
+li.bbp-forum-freshness, li.bbp-topic-freshness {
+    text-align:right;
+}
+#bbpress-forums div.bbp-reply-content #subscription-toggle a, #bbpress-forums div.bbp-reply-content #favorite-toggle a {
+    color:#fff;
+    font-family:alef, arial, helvetica, sans-serif;
+    font-size:16px;
+}
+body.page .bbp-reply-form code, body.page .bbp-topic-form code, body.single-topic .bbp-reply-form code, body.single-forum .bbp-topic-form code, body.topic-edit .bbp-topic-form code, body.reply-edit .bbp-reply-form code {
+    width:inherit;
+
+}
+.rep-img-container .desc {
+    font-size:13px;
+}
+.plantName.tt-hint, .plantName.tt-input {
+    direction: rtl;
+}
+li.bbp-topic-voice-count {
+    display:none;
+}
+li.bbp-topic-reply-count {
+    padding-left: 20px;
+}
+li.bbp-topic-title {
+    width:65%;
+}
+#bbpress-forums p.bbp-topic-meta img.avatar, #bbpress-forums ul.bbp-reply-revision-log img.avatar, #bbpress-forums ul.bbp-topic-revision-log img.avatar, #bbpress-forums div.bbp-template-notice img.avatar, #bbpress-forums .widget_display_topics img.avatar{
+    margin-bottom:0;
+}
+#bbpress-forums .bbp-forum-info .bbp-forum-content, #bbpress-forums p.bbp-topic-meta {
+    font-size:12px;
+}
+.widget ul, .widget ul li {
+    list-style: none;
+    margin:0;
+    padding:0;
+}
+.widget.widget_display_replies ul, .textwidget {
+    padding:20px 14px 5px;
+    font-size:16px;
+    border: 1px solid #dcd4cc;
+    border-top: 0;
+    background: #f9f1e9;
+    overflow: hidden;
+}
+.widget ul li {
+    margin-bottom:10px;
+}
+.widget_display_replies .avatar {
+    margin-top:6px;
+}
+div.bbp-submit-wrapper {
+    margin-top:10px;
+}
+#bbpress-forums li.bbp-body ul.topic {
+    padding: 14px 15px 23px;
+}
+@media only screen and (max-width: 767px) {
+
+    #sidebar {
+        left: 0;
+        position: relative;
+
+        -webkit-transition: all 0.5s;
+        transition: all 0.5s;
+    }
+
+    .mobile-content-holder {
+        display: block;
+        position: absolute;
+
+        top: 0;
+        right: 100%;
+
+        -webkit-transition: all 0.5s;
+        transition: all 0.5s;
+
+        z-index: 600;
+        background: #fff;
+        min-height: 480px;
+    }
+
+    .mobile-results #sidebar {
+        position: absolute;
+        width: 100%;
+        left: 100%;
+        top: 0;
+    }
+
+    .mobile-results .mobile-content-holder {
+        position: relative;
+        right: 0;
+    }
+
+    .page-title {
+        padding: 10px 10px 11px;
+    }
+
+    .msearch {
+        display: block;
+        height: 58px;
+        background: #faf1e4;
+        position: relative;
+        padding-top: 3px;
+    }
+
+    #plant-taxonomies .search-form {
+        display: block;
+        margin-top: 0px;
+        float: none;
+        border: none;
+        position: relative;
+        width: 80%;
+        margin: 0 auto;
+
+    }
+
+    #plant-taxonomies .search-form:after {
+        content: '';
+        display: block;
+        clear: both;
+
+    }
+
+    .tt-dropdown-menu {
+        right: -17px !important;
+        width: 254px;
+        max-height: 130px;
+    }
+
+    ol.boo .column {
+        width: 100%;
+        float: none;
+    }
+
+    ol.boo li {
+        margin-bottom: 30px;
+    }
+
+    #footer .about-person p.more-container {
+        left: 0;
+    }
+
+    .text-block.volunteers {
+        overflow: hidden;
+    }
+
+    .bookpart .book-area .column, .videopart .book-area .column {
+        float: none;
+        width: 100%;
+        max-width: inherit;
+    }
+
+    .bookpart .book-area ol .column li, .videopart .book-area ol .column li {
+        margin-bottom: 20px;
+    }
+
+    .books .box {
+        padding-right: 5%;
+        padding-left: 5%;
+        width: 90%;
+        margin-left: 0;
+        padding-top: 8px;
+        padding-bottom: 4px;
+    }
+
+    .books .box img {
+        width: 100%;
+    }
+
+    .top-block .col a.more, .top-block .col.col1 a.more, .top-block .col.col2 a.more, .top-block .col.col3 a.more {
+        left: 20px;
+    }
+
+    .pdf-viewer {
+        display: none;
+    }
+
+    .videoframe {
+        width: 100%;
+        min-height: 240px;
+        height: inherit;
+    }
+
+    .info-block.related .rcol {
+        width: 100%;
+        float: none;
+    }
+
+    .info-block.related .rcol.rcol1 {
+
+        margin-left: 0;
+    }
+
+    #bbpress-forums li.bbp-header ul {
+        display: none;
+    }
+
+    #bbpress-forums li.bbp-body li.bbp-topic-reply-count {
+        display: none;
+    }
+
+    .bbp-topic-pagination a {
+        font-size: 16px;
+        line-height: 10px;
+        padding: 2px 7px;
+        border: 1px solid #ddd;
+        text-decoration: none;
+        margin-right: 6px;
+    }
+
+    .bbp-replies .bbp-header .posts-label {
+        display: none;
+    }
+
+    .bbp-replies .bbp-header .bbp-reply-author {
+        display: none;
+    }
+
+    span.bbp-reply-post-date {
+        float: right;
+    }
+
+    #bbpress-forums div.reply {
+        width: 95%;
+    }
+
+    #bbpress-forums .bbp-body div.bbp-reply-author {
+        text-align: right;
+    }
+
+    #bbpress-forums div.bbp-reply-author a.bbp-author-name {
+        margin-right: 0;
+    }
+
+    .bbp-footer .bbp-reply-author, .bbp-footer .bbp-reply-content {
+        display: none;
+    }
+
+    div.bbp-template-notice a {
+        color: #007d4e;
+        text-decoration: underline;
+    }
+
+    #liketopic {
+        display: none;
+    }
+
+    #bbpress-forums li.bbp-body li.bbp-topic-freshness {
+        position: absolute;
+        text-align: left;
+        left: 10px;
+        margin-top: 32px;
+    }
+
+    #bbpress-forums li.bbp-body li.bbp-topic-freshness .bbp-topic-freshness-author {
+        display: none;
+    }
+    .forum .forum-desc {
+        padding-right: 10px;
+        padding-left: 10px;
+    }
+    #bbpress-forums p.bbp-topic-meta img.avatar {
+        width:20px;
+    }
+    #bbpress-forums #bbp-user-body {
+        margin-right:10px;
+    }
+    #bbpress-forums li.bbp-header div.bbp-reply-content {
+        margin-left:inherit;
+    }
+}

@@ -2,6 +2,59 @@ document.addEventListener("DOMContentLoaded", function() {
   const form = document.querySelector(".form-checkout");
   const placeOrderBtn = document.getElementById("place-order-btn");
 
+  const userId = Cookies.get('userId');
+  let subtotal = 0.00;
+  let amount = 0.00;
+
+    if (!userId) {
+        // Redirect to index.html if no orderId is found
+        window.location.href = 'index.html';
+        return;
+    }
+
+    axios.get(`http://localhost:9090/api/carts/${userId}`)
+        .then(response => {
+            const order = response.data;
+            const orderTableBody = document.querySelector('.table-custom tbody');
+
+            // Clear existing rows
+            orderTableBody.innerHTML = '';
+
+            // Populate order details
+            order.items.forEach(item => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td><a class="link" href="#">${item.productName}</a></td>
+                    <td class="price price-dark">₪${item.productPrice}</td>
+                    <td class="price price-dark">${item.quantity}</td>
+                `;
+                orderTableBody.appendChild(row);
+                subtotal += item.productPrice * item.quantity;
+            });
+
+            // Add subtotal and total
+            const subtotalRow = document.createElement('tr');
+            subtotalRow.innerHTML = `
+                <td>Subtotal</td>
+                <td class="price">₪${subtotal.toFixed(2)}</td>
+                <td class="price"></td>
+            `;
+            orderTableBody.appendChild(subtotalRow);
+
+            amount = order.totalPrice;
+            const totalRow = document.createElement('tr');
+            totalRow.innerHTML = `
+                <td>Total</td>
+                <td class="price price-dark">₪${amount}</td>
+                <td class="price price-dark"></td>
+            `;
+            orderTableBody.appendChild(totalRow);
+        })
+        .catch(error => {
+            console.error("There was an error fetching the order details!", error);
+            alert("There was an error fetching your order details. Please try again.");
+        });
+
   placeOrderBtn.addEventListener("click", function(event) {
       event.preventDefault();
 
@@ -13,8 +66,8 @@ document.addEventListener("DOMContentLoaded", function() {
           country: formData.get("country"),
           city: formData.get("town"),
           street: formData.get("street"),
-          amount: 25.60, // يمكن تحديث هذا المبلغ بناءً على سلة التسوق الفعلية
-          userId: 1, // Replace with actual user ID
+          amount: amount, // يمكن تحديث هذا المبلغ بناءً على سلة التسوق الفعلية
+          userId: userId, // Replace with actual user ID
           paymentMethod: document.querySelector('input[name="input-group-radio"]:checked').value
       };
 

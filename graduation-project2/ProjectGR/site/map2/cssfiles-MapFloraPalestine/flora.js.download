@@ -1,0 +1,1849 @@
+/*jslint nomen: true, white: true, browser: true, unparam: true*/
+/*global jQuery: true, History: true, jcf: true, initLayout: true, initLightbox: true, initCustomHover: true, initSelectedRows: true, initSlider: true, initOpenClose: true, initPopups: true, initInputs: true, infinite_scroll: true */
+
+jQuery( function( $ ) {
+	
+	'use strict';
+	
+	var floraOptions = $.extend( {}, window.flora ),
+		
+		infiniteScroll = {
+			
+			getOffset: function ( page ) {
+				
+				var pagesData = $( infinite_scroll.navSelector ).data( 'pages' ),
+					pages = pagesData ? pagesData.pages : null,
+					total = pagesData ? pagesData.total : 0,
+					offset = 0;
+				
+				
+				if ( pages ) {
+					
+					if ( pages[ page ] ) {
+						offset = pages[ page ];
+					} else {
+						offset = total;
+					}
+					
+				} else {
+					
+					offset = page * floraOptions.postsPerPage;
+					
+					if ( offset > total ) {
+						offset = total;
+					}
+					
+				}
+				
+				return parseInt( offset, 10 );
+				
+			},
+			
+			getMessageText: function( page ) {
+				
+				var offset = infiniteScroll.getOffset( page ) + 1,
+					nextOffset = infiniteScroll.getOffset( page + 1 );
+				
+				if ( offset >= nextOffset ) {
+					// Probably no more page to load, but it's simpler to let infinite_scroll simply run and find out.
+					return '';
+				}
+				
+				return floraOptions.infinteScrollLoadingMessageText.replace( '%d', offset ).replace( '%d', nextOffset );
+				
+			},
+			
+			getBasePath: function ( url ) {
+				
+				/*jslint regexp: true*/
+				var match = url.match(/^(.*?page\/)\d+(.*?$)/),
+					path = match && match[ 1 ] || url
+				/*jslint regexp: false*/
+				
+				return path;
+			},
+			
+			init: function () {
+				
+				/*jslint regexp: true*/
+				var nextPagePath = $( infinite_scroll.nextSelector ).attr( 'href' ) || '',
+					nextPage = nextPagePath.replace( /^.*?page\/(\d*)\/.*?$/, '$1' );
+				/*jslint regexp: false*/
+				
+				// Adding custom 'flora' behaviour the infinite scroll widget.
+				// Height is dynamic, bottom of content needs to be recalculated each time.
+				jQuery.extend( jQuery.infinitescroll.prototype, {
+					
+					_cache: function infscr_cache(url, data) {
+						
+						var path = infiniteScroll.getBasePath( url ),
+							key, i = 0;
+						
+						if (window.sessionStorage) {
+							try {
+								sessionStorage.setItem('infscr::'+url, data);
+							} catch ( e ) {
+								
+								// Out of space, scan sessionStorage, try to remove old urls.
+								for( i = 0; i < sessionStorage.length; i += 1 ) {
+									
+									key = sessionStorage.key( i );
+									
+									if ( key.indexOf( 'infscr::' ) === 0 && infiniteScroll.getBasePath( key.replace( /^infscr::/, '' ) ) !== path ) {
+										sessionStorage.removeItem( key );
+									}
+								}
+								
+								// Done, try again
+								try {
+									sessionStorage.setItem('infscr::'+url, data);
+								} catch ( ignore ) {
+								}
+								
+							}
+						}
+					},
+
+				   _nearbottom_flora: function () {
+
+						var opts = this.options,
+						pixelsFromWindowBottomToBottom = parseInt( $(document).height() - (opts.binder.scrollTop()) - $(window).height(), 10 ),
+						pixelsFromContentToBottom = $(document).height() - ( $(opts.contentSelector).offset().top + $(opts.contentSelector).height() ) ;
+						
+						this._debug('math:', pixelsFromWindowBottomToBottom, pixelsFromContentToBottom);
+						
+						// if distance remaining in the scroll (including buffer) is less than the orignal nav to bottom....
+						return (pixelsFromWindowBottomToBottom - opts.bufferPx < pixelsFromContentToBottom);
+						
+				   },
+				   
+				   _setup_flora: function () {
+
+						this._binding('bind');
+
+						this.restore();
+
+						return false;
+
+				   },
+
+				   // Hijacking the pagination ajax routine so we can use data...
+					beginAjax: function infscr_ajax(opts) {
+						
+						var instance = this,
+							path = opts.path,
+							box, desturl, method, condition,
+							state = History.getState(),
+							data = state.data,
+							type = $.isEmptyObject( data ) ? 'get' : 'post',
+							cacheurl;
+
+						if ( type === 'get' ) {
+							data = null;
+						}
+						
+						// increment the URL bit. e.g. /page/3/
+						opts.state.currPage += 1;
+						
+						// Manually control maximum page
+						if ( opts.maxPage !== undefined && opts.state.currPage > opts.maxPage ){
+							opts.state.isBeyondMaxPage = true;
+							this.destroy();
+							return;
+						}
+						
+						// if we're dealing with a table we can't use DIVs
+						box = $(opts.contentSelector).is('table, tbody') ? $('<tbody/>') : $('<div/>');
+						
+						desturl = (typeof path === 'function') ? path(opts.state.currPage) : path.join(opts.state.currPage);
+
+						cacheurl = desturl;
+						if ( data ) {
+							cacheurl += '?' + $.param( data );
+						}
+
+						instance._debug('heading into ajax', desturl);
+						
+						method = (opts.dataType === 'html' || opts.dataType === 'json' ) ? opts.dataType : 'html+callback';
+						if (opts.appendCallback && opts.dataType === 'html') {
+							method += '+callback';
+						}
+						
+						switch (method) {
+							
+							case 'html+callback':
+								
+								instance._debug('Using HTML via .load() method');
+								box.load(desturl + ' ' + opts.itemSelector, data, function infscr_ajax_callback(responseText) {
+									instance._loadcallback(box, responseText, desturl);
+									instance._cache(cacheurl, responseText);
+								});
+								
+							break;
+							
+							case 'html':
+								instance._debug('Using ' + (method.toUpperCase()) + ' via $.ajax() method');
+								$.ajax({
+									// params
+									data: data,
+									type: type,
+									url: desturl,
+									dataType: opts.dataType,
+									complete: function infscr_ajax_callback(jqXHR, textStatus) {
+										condition = ( jqXHR.isResolved !== undefined ) ? (jqXHR.isResolved()) : (textStatus === "success" || textStatus === "notmodified");
+										if (condition) {
+											instance._loadcallback(box, jqXHR.responseText, desturl);
+											instance._cache(cacheurl, jqXHR.responseText);
+										} else {
+											instance._error('end');
+										}
+									}
+								});
+								
+							break;
+							
+							case 'json':
+								instance._debug('Using ' + (method.toUpperCase()) + ' via $.ajax() method');
+								$.ajax({
+									data: data,
+									type: type,
+									dataType: 'json',
+									url: desturl,
+									success: function (data, textStatus, jqXHR) {
+										condition = ( jqXHR.isResolved !== undefined) ? (jqXHR.isResolved()) : (textStatus === "success" || textStatus === "notmodified");
+										if (opts.appendCallback) {
+											// if appendCallback is true, you must defined template in options.
+											// note that data passed into _loadcallback is already an html (after processed in opts.template(data)).
+											if (opts.template !== undefined) {
+												var theData = opts.template(data);
+												box.append(theData);
+												if (condition) {
+													instance._loadcallback(box, theData);
+													instance._cache(cacheurl, jqXHR.responseText);
+												} else {
+													instance._error('end');
+												}
+											} else {
+												instance._debug("template must be defined.");
+												instance._error('end');
+											}
+										} else {
+											// if appendCallback is false, we will pass in the JSON object. you should handle it yourself in your callback.
+											if (condition) {
+												instance._loadcallback(box, data, desturl);
+												instance._cache(cacheurl, jqXHR.responseText);
+											} else {
+												instance._error('end');
+											}
+										}
+									},
+									error: function() {
+										instance._debug("JSON ajax request failed.");
+										instance._error('end');
+									}
+								});
+								
+							break;
+						}
+					},
+
+					// Restore from sessionStorage if present, do nothing if content is generated some other way
+					// Also requires window.JSON but any UA with sessionStorage will have it
+					restore: function infscr_restore() {
+						var opts = this.options;
+						if (!window.sessionStorage /*|| !!opts.behavior*/ || opts.state.isDestroyed) {
+							return;
+						}
+
+						// The following mimics beginAjax
+						var instance = this,
+							state = History.getState(),
+							path = opts.path,
+							box, desturl, method, data;
+
+						desturl = (typeof path === 'function') ? path(opts.state.currPage+1) : path.join(opts.state.currPage+1);
+
+						if ( state.data && ! $.isEmptyObject( state.data ) ) {
+							desturl += '?' + $.param( state.data );
+						}
+
+						data = sessionStorage.getItem('infscr::'+desturl);
+						if (!data) {
+							instance._debug('sessionStorage does not have '+desturl);
+							return;
+						}
+
+						// increment the URL bit. e.g. /page/3/
+						opts.state.currPage++;
+
+						// Manually control maximum page
+						if ( opts.maxPage != undefined && opts.state.currPage > opts.maxPage ){
+							opts.state.isBeyondMaxPage = true;
+							this.destroy();
+							return;
+						}
+
+						// if we're dealing with a table we can't use DIVs
+						box = $(opts.contentSelector).is('table, tbody') ? $('<tbody/>') : $('<div/>');
+
+						method = (opts.dataType === 'html' || opts.dataType === 'json' ) ? opts.dataType : 'html+callback';
+						if (opts.appendCallback && opts.dataType === 'html') {
+							method += '+callback';
+						}
+
+						switch (method) {
+							case 'html':
+							case 'html+callback':
+								instance._debug('Using HTML from sessionStorage ('+desturl+')');
+								box.html(!opts.itemSelector
+										? data
+										: $('<div>').append($(data)).find(opts.itemSelector));
+								this._loadcallback(box, data, desturl);
+								break;
+
+							case 'json':
+								instance._debug('Using JSON from sessionStorage ('+desturl+')');
+								if (opts.appendCallback) {
+									// if appendCallback is true, you must defined template in options.
+									// note that data passed into _loadcallback is already an html (after processed in opts.template(data)).
+									if (opts.template !== undefined) {
+										var templateData = opts.template(JSON.parse(data));
+										box.append(templateData);
+										instance._loadcallback(box, templateData, desturl);
+									}
+									else {
+										instance._debug('template must be defined.');
+										instance._error('end');
+									}
+								}
+								else {
+									// if appendCallback is false, we will pass in the JSON object. you should handle it yourself in your callback.
+									instance._loadcallback(box, JSON.parse(data), desturl);
+								}
+								break;
+						}
+
+						// Loaded content may end with navigation to more cached content. Load that too.
+						instance.restore();
+					}
+
+				});
+				
+				if ( ! nextPage ) {
+					nextPage = 2;
+				}
+				
+				infinite_scroll.behavior = 'flora';
+				infinite_scroll.state = {
+					currPage: nextPage - 1
+				};
+				
+				infinite_scroll.loading = $.extend( infinite_scroll.loading, {
+					
+					finished: function ( opts ) {
+						
+						var page;
+						
+						if ( opts ) {
+							if (!opts.state.isBeyondMaxPage) {
+								opts.loading.msg.hide();
+								
+								page = opts.state.currPage;
+								
+								opts.loading.msgText = infiniteScroll.getMessageText( page );
+								
+								opts.loading.msg.find( 'div' ).text( opts.loading.msgText );
+
+							}
+						}
+						
+					}
+					
+				} );
+				
+				infinite_scroll.pathParse = function ( path, page ) {
+					
+					/*jslint regexp: true*/
+					path = path.match(/^(.*?page\/)\d+(.*?$)/).slice(1);
+					/*jslint regexp: false*/
+					
+					return path;
+					
+					
+				};
+				
+				// Reset infinite_scroll. 
+				// This is done because the height of the page can't be properly determined until all open-closed elements are initialized and closed.
+				// Also, accessing data directly is a necessary hack, otherwise it isn't properly reset.
+				
+				$( infinite_scroll.contentSelector )
+					.infinitescroll( 'destroy' )		
+					.data( 'infinitescroll', false );
+				
+				infiniteScroll.reinit();
+			},
+			
+			reinit: function () {
+				
+				/*jslint regexp: true*/
+				var nextPagePath = $( infinite_scroll.nextSelector ).attr( 'href' ) || '',
+					nextPage = nextPagePath.replace( /^.*?page\/(\d*)\/.*?$/, '$1' );
+				/*jslint regexp: false*/
+				
+				infinite_scroll.loading = $.extend( infinite_scroll.loading, {
+					msgText: infiniteScroll.getMessageText( nextPage - 1 )
+				} );
+				
+				$( infinite_scroll.contentSelector )
+					.infinitescroll( infinite_scroll, function(newElements, data, url) { 
+						
+						var $familyTitle = $( newElements[ 0 ] ).find( 'h2' ),
+							familyClass = $familyTitle.attr( 'class' );
+						
+						if ( $( infinite_scroll.contentSelector ).find( 'h2.' + familyClass ).length > 1 ) {
+							$familyTitle.remove();
+						}
+						
+						//eval(infinite_scroll.callback); 
+						
+					})
+					// Force a scroll check.
+					.infinitescroll( 'scroll' );
+				
+				$( infinite_scroll.navSelector ).hide();
+			}
+			
+			
+			
+		},
+		
+		page = {
+			
+			init: function () {
+				
+				// page init - from jquery.main
+				// Probably not all of these are needed...
+				//initTabs();
+				jcf.customForms.replaceAll();
+				initOpenClose();
+				initLayout();
+				initLightbox();
+				initPopups();
+				initInputs();
+				//initSameHeight();
+				initCustomHover();
+				//initMultiColumns();
+				//initCarousel();
+				initSelectedRows();
+				initSlider();
+				
+			}
+			
+		},
+		
+		floraTaxonomies = {
+			
+			currentRequest: null,
+			
+			init: function () {
+				floraTaxonomies.initHistory();
+				floraTaxonomies.initForm();
+				floraTaxonomies.initAutocomplete();
+                floraTaxonomies.initLoc();
+			},
+			
+			// Refresh #main-content on (url) state change.
+			// Uses History.js
+			initHistory: function () {
+				
+				$( window ).on( 'statechange', function () {
+					
+					var state = History.getState(),
+						request = floraTaxonomies.currentRequest,
+						options = {},
+						itemsFaded = $( '.items, .results-area' ).fadeOut( 'fast' ).promise(),
+						
+						// Update the content.
+						success = function ( data ) {
+							
+							var $openClosed = $( '#sidebar .open-close' ),
+								$activeOpenClosed = $openClosed.filter( '.active' ),
+								content = data && $( data ).find( '#main-content > *' ),
+								actives = [];
+							
+							// Store active state of opened-closed.
+							$activeOpenClosed.each( function () {
+								actives.push( $openClosed.index( this ) );
+							} );
+							
+							// Uninit infinite_scroll
+							$( infinite_scroll.contentSelector ).infinitescroll( 'destroy' );
+							
+							$( '#main-content' ).html( content );
+							
+							// jQuery strips out the head element, so we need to use a reg exp on the raw.
+							if ( data ) {
+								document.title = data.match( '<title>(.*?)</title>' )[ 1 ];
+							}
+							
+							$openClosed = $( '#sidebar .open-close' );
+							
+							// Restore active state of opened-closed on new elements.
+							$.each( actives, function( i, val ) {
+								$openClosed.eq( val )
+									.addClass( 'active' )
+									.find( '.selected-item' )
+										.hide();
+							} );
+							
+							page.init();
+							floraTaxonomies.initAutocomplete();
+							
+							infiniteScroll.reinit();
+							
+						},
+						
+						fail = function ( jqXHR, textStatus, errorThrown ) {
+							
+							if ( jqXHR.readyState === 0 || jqXHR.status === 0 || errorThrown === 'abort' )  {
+								return;  // it's not really a server error
+							}
+							
+							if ( floraOptions.ajaxErrorMessage ) {
+
+								$( '#main-content #content .ajax-error, #main-content .mobile-content-holder .ajax-error' ).remove();
+
+								$( '#main-content #content, #main-content .mobile-content-holder' )
+									//.empty()
+									.append( 
+										$( '<div>', {
+											text: floraOptions.ajaxErrorMessage,
+											'class': 'ajax-error'
+										} )
+									);
+							}
+						};
+					
+					// If a current request is pending, abort it.
+					if ( request && request.state() === 'pending' ) {
+						request.abort();
+						floraTaxonomies.currentRequest = null;
+					}
+					
+					
+					if ( ! $.isEmptyObject( state.data ) ) {
+						
+						options = {
+							data: state.data,
+							type : 'post' 
+						};
+						
+					}
+					
+					if ( floraOptions.ajaxLoadingMessage ) {
+						
+						itemsFaded.done( function () {
+
+							$( '#main-content #content .ajax-loading, #main-content .mobile-content-holder .ajax-loading' ).remove();
+
+							$( '#main-content #content, #main-content .mobile-content-holder' )
+									//.empty()
+									.append( 
+										$( '<div>', {
+											text: floraOptions.ajaxLoadingMessage,
+											'class': 'ajax-loading'
+										} )
+									);
+						} );
+						
+					}
+					
+					// Start a new request.
+					request = $.ajax( state.url, options );
+					
+					$.when( request, itemsFaded )
+						
+						.then( function () {
+							request.done( success );
+						}, function () {
+							request.fail( fail );
+						} );
+					
+					
+					// Store the current request.
+					floraTaxonomies.currentRequest = request;
+					
+				} );
+				
+			},
+			
+			getTermsAjaxLoader: function () {
+				
+				var $termsAjaxLoader = $( '#terms-ajax-loader' );
+				
+				if ( ! $termsAjaxLoader.length ) {
+					$termsAjaxLoader = $( '<div />' );
+					$termsAjaxLoader.attr( 'id', 'terms-ajax-loader' );
+				}
+				
+				return $termsAjaxLoader;
+				
+			},
+			
+			// Initializes the plant taxonomy side bar.
+			initForm: function () {
+				
+				var $termsAjaxLoader = floraTaxonomies.getTermsAjaxLoader(),
+					
+					searching = false,
+					
+					suppressSubmit = false,
+					
+					submitForm = function () {
+						
+						var $form = $( '#plant-taxonomies' );
+						
+						if ( suppressSubmit ) {
+							return;
+						}
+						
+						searching = false;
+
+						$form.submit();
+						
+					},
+					
+					resetFields = function () {
+						
+						var $form = $( '#plant-taxonomies' ),
+							$checked = $form.find( 'input[type=checkbox]' ),
+							$other = $form.find( 'input.search, input.autocomplete-value, input[name="loc"]'),
+                            $location_list = $form.find('#open-close-location .selected-box');
+						
+						$checked.prop( 'checked', false );
+						$other.val( '' );
+                        $location_list.html("");
+
+                        suppressSubmit = true;
+						
+						$checked.trigger( 'change' );
+						$other.trigger( 'change' );
+						
+						suppressSubmit = false;
+						
+					};
+				
+				// Use event delegation so we don't need to reinit.
+				$( document )
+					
+					// Cheating, on clicking a sort field, we find the orderby part, then we populate the form and submit automatically.
+					.on( 'click touchstart', '.sort a', function ( event ) {
+						
+						/*jslint regexp: true*/
+						var $this = $( this ),
+							href = $this.attr( 'href' ),
+							orderby = href.match( /orderby\/([^\/]*)/ ),
+							$form = $( '#plant-taxonomies' );
+						/*jslint regexp: false*/
+						
+						event.preventDefault();
+						
+						if ( orderby && orderby[ 1 ]  ) {
+							orderby = orderby[ 1 ];
+						} else {
+							orderby = '';
+						}
+						
+						$form.find( 'input[name=orderby]' ).val( orderby );
+						
+						submitForm();
+						
+					} )
+					
+					// Select order in mobile mode
+					.on( 'change', '.sort-form select', function ( event ) {
+						
+						var $this = $( this ),
+							orderby = $this.find( 'option:selected' ).val(),
+							$form = $( '#plant-taxonomies' );
+						
+						event.preventDefault();
+						
+						$form.find( 'input[name=orderby]' ).val( orderby );
+						
+						submitForm();
+						
+					} )
+					
+					// Clicking a check box auto-'submits'
+					.on( 'change', '#plant-taxonomies input[type=checkbox]', function () {
+						
+						var $this = $( this );
+						
+						// Make room for ajax loader.
+						$this.parent().find( '.term-count' ).hide();
+						
+						$termsAjaxLoader.appendTo( $this.parent() );
+						
+						submitForm();
+					} )
+					
+					// Need to manualy reset, isn't automatic because of image replacement.
+					.on( 'click touchstart', 'button[type=reset]', function ( event ) {
+						
+						resetFields();
+						
+						submitForm();
+						
+					} )
+					
+					
+					// Submissions are intercepted and converted to a url pushstate.
+                    // delegation of events by the document, because of ajax resetting the dom + events on the actual elements
+					.on( 'submit', '#plant-taxonomies', function ( event ) {
+						
+						// Transform form data into canonical url, sort taxonomies and terms alphabetically.
+						// This saves a server side redirect and allows using the cache directly.
+						
+						var $this = $( this ),
+							$otherFields = $this.find( 'input[type=hidden], input.search' ).not( 'input.autocomplete-value' ),
+							taxonomies = floraTaxonomies.getPlantTaxonomies(),
+							url = $this.attr( 'action' ),
+							fieldNameMap = { s: 'search' },
+							currentTitle = document.title,
+							$search = $this.find( 'input.search' ),
+							searchValue = $search.val(),
+							placeHolder = $search[ 0 ].PlaceholderInst,
+							data = null,
+							query = [];
+
+						event.preventDefault(); // history will call the ajax
+						
+						
+						// The PlaceHolder plugin is a pain in the ass, and is submitting the place holder as
+						// the value.
+						if ( placeHolder && (! searchValue || searchValue === placeHolder.origValue )) {
+							placeHolder.togglePlaceholderText( false );
+						}
+						
+						// Turn into url
+						$.each( taxonomies, function( name, terms ) {	
+							url += name + '/' + terms + '/';
+						} );
+						
+						$otherFields.each( function( i ) {
+							
+							var $field = $( this ),
+								name = $field.attr( 'name' ),
+								value = $field.attr( 'value' );
+							
+							if ( name && value ) {
+								if ( fieldNameMap[ name ] ) {
+									name = fieldNameMap[ name ];
+								}
+
+								if ( $field.hasClass( 'query' ) ) {
+									query.push( [ encodeURIComponent( name ), encodeURIComponent( value ) ].join( '=' ) );
+								} else {
+								url += name + '/' + value + '/';
+							}
+							}
+
+						} );
+						
+						if ( query.length ) {
+							url += '?' + query.join( '&' );
+						}
+
+
+						if ( url.length > floraOptions.maxUrlLength ) {
+							url = $this.attr( 'action' );
+							data = $this.serializeArray();
+						}
+						
+						
+						// Looks like history.js doesn't push if the url is not changed, so no ajax event will
+						// happen and the ajax indicator will be spinning for no reason.
+						if ( searching && url !== document.location.href ) {
+							$this.find( '.search-form input[type=submit]' ).addClass( 'searching' );
+						} else {
+							
+							// Ok, we can restore the placeholde if we previously removed it.
+							if ( placeHolder && (! searchValue || searchValue === placeHolder.origValue )) {
+								placeHolder.togglePlaceholderText( true );
+							}
+							
+						}
+						
+						// this calls the AJAX
+						History.pushState( data, null, url );
+						
+						// History.js is replacing the title with null, not using the title option in the pushState since that causes an suid in html4 mode.
+						document.title = currentTitle; 
+						
+					} )
+					
+					
+					// If the url is unchanged, clicking will not trigger history.js, so I need to store a flag that the submit was
+					// clicked and use that later, clearing it up in cases of other submitions.
+					.on( 'click touchstart', '#plant-taxonomies input[type=submit]', function ( event ) {
+						
+						var $this = $( this );
+						
+						searching = $this.parents( '.search-form' ).length > 0;
+						
+					} )
+					
+					// On clicking the fancybox dialog, replace the original slide with the modal...
+					.on( 'click touchstart', '#fancybox-content .taxonomy-modal input[type=submit]', function ( event ) {
+						
+						var $this = $( this ),
+							$modal = $this.closest( '.taxonomy-modal' ),
+							id = $modal.attr( 'id' ),
+							$hidden = $modal.find( 'input[type=hidden]' );
+						
+						event.preventDefault();
+						
+						// For autocomplete, submit the form so the state is refeshed.
+						if ( $hidden.length && $hidden.val() ) {
+							
+							$( document ).one( 'fancybox-cleanup', function () {
+								
+								$modal.closest( '.open-close' ).append( $termsAjaxLoader );
+
+                                submitForm();
+								
+							} );
+							
+						}
+						
+						$.fancybox.close();
+						
+					} )
+					
+					// Cancel modal.
+					.on( 'click touchstart', '#fancybox-content .taxonomy-modal .buttons a', function ( event ) {
+						
+						event.preventDefault();
+						
+						$.fancybox.close();
+						
+					} )
+					
+					// Clear results.
+					.on( 'click touchstart', '#sidebar .buttons-set .clear-all', function ( event ) {
+						
+						event.preventDefault();
+						
+						resetFields();
+						
+					} )
+					
+					// Show results
+					.on( 'click touchstart', '#sidebar .buttons-set .show-results, #plant-taxonomies .toolbar .results, #plant-taxonomies .toolbar .next-page', function ( event ) {
+						
+						event.preventDefault();
+						
+						$( '#plant-taxonomies' ).submit();
+						$( '#main-content' ).addClass( 'mobile-results' );
+						document.location.hash = 'results';
+						
+					} )
+					
+					// Show filter
+					.on( 'click touchstart', '.mobile-content-holder .features', function ( event ) {
+						
+						event.preventDefault();
+						
+						$( '#main-content' ).removeClass( 'mobile-results' );
+						document.location.hash = document.location.hash.replace( 'results', '' );
+						
+					} );
+				
+				$( window ).on( 'anchorchange', function () {
+					if ( document.location.hash.indexOf( 'results' ) ) {
+						$( '#main-content' ).addClass( 'mobile-results' );
+					}
+				} );
+				
+				if ( document.location.hash.indexOf( 'results' ) ) {
+					$( '#main-content' ).addClass( 'mobile-results' );
+				}
+				
+
+                    var msearch = $('.msearch');
+                    if (msearch.is(":visible")) { // mobile
+                        var sform =$('.search-form.header-search');
+                        msearch.append(sform);
+                        sform.find('input').focus(function() {$('html, body').animate({
+                            scrollTop: msearch.offset().top
+                        })});
+                    }
+
+
+
+            },
+			initLoc: function () {
+                $(document).on ('click touchstart', '#save-area', function (event) {
+                    event.preventDefault();
+                    var checkboxes = $('#place-area input[type=checkbox]');
+                    var ret='';
+                    var regionsHtml='';
+                    checkboxes.each (function() {
+                        if (this.checked) {
+                            if (ret != '') {
+                                ret +=',';
+                            }
+                            ret += $(this).data('region-id');
+                            regionsHtml += '<div class="row"><label class="chk-label-active"><span class="term-name">' +
+                                $(this).siblings('label').text() + '</span></label></div>';
+                        }
+                    });
+                    var $form = $( '#plant-taxonomies' );
+                    $form.find( 'input[name=loc]' ).val( "rg" + ret);
+                    jQuery.fancybox.close();
+                    $form.submit();
+                    var $termsAjaxLoader = floraTaxonomies.getTermsAjaxLoader();
+                    $termsAjaxLoader.appendTo( $("#open-close-location .opener"));
+                    var locations = $('#open-close-location .selected-box');
+                    locations.html(regionsHtml);
+
+                });
+            },
+			initAutocomplete: function () {
+				
+				var $termsAjaxLoader = floraTaxonomies.getTermsAjaxLoader(),
+					
+					submitValue = function ( $element, value ) {
+						
+						$element
+							.prop( 'disabled', true )
+							
+							.autocomplete( 'disable' )
+							
+							.closest( '.row' )
+							
+							.find( 'input[type=hidden]' )
+								.val( value );
+						
+						if ( $element.closest( 'form' ).length ) {
+							
+							$termsAjaxLoader.appendTo( $element.parent() );
+							
+							$element.closest( 'form' ).submit();
+							
+						}
+						
+					};
+				
+				$( '.taxonomy-autocomplete' ).each( function () {
+					
+					var $this = $( this ),
+						source = $this.data( 'taxonomy-autocomplete' );
+					
+					$this
+						.autocomplete( {
+							
+							source: source,
+							delay: 0,
+							
+							focus: function( event, ui ) {
+								
+								var $field = $( this );
+								
+								$field.val( ui.item.label );
+								
+								return false;
+								
+							},
+							
+							select: function( event, ui ) {
+								
+								var $field = $( this );
+								
+								$field.val( ui.item.label );
+								
+								submitValue( $field, ui.item.value );
+								
+								return false;
+								
+							}
+							
+						} );
+					
+					$this.on( 'keydown', function ( event ) {
+						
+						var $field = $( this ),
+							value = $field.val();
+						
+						// On enter, look for value in source data, if found, manually call select
+						if ( event.keyCode === 13 ) {
+							
+							$.each( source, function( index, item ) {
+								
+								if ( value === item.label ) {
+									submitValue( $this, item.value );
+								}
+								
+							} );
+							
+						}
+						
+					} );
+					
+					$this.data( 'autocomplete' )._renderItem = function( ul, item ) {
+						
+						return $( "<li>" )
+							.data( "item.autocomplete", item ) // Support for jquery-ui 1.8
+							.append( 
+								$( "<a>" )
+									.text( item.label ) 
+									.append( 
+										$( '<span>', { 
+											text: ' (' + item.count + ')',
+											'class': 'term-count'
+										} ) 
+									)
+							)
+							.appendTo( ul );
+						
+					};
+					
+				} );
+				
+			},
+			
+			// Returns a sorted list of selected (checked) taxonomies and their terms from the plant-taxonomies form.
+			getPlantTaxonomies: function () {
+				
+				var $form = $( '#plant-taxonomies' ),
+					$checked = $form.find( 'input:checked, input.autocomplete-value' ),
+					taxonomies = [],
+					terms = {},
+					sorted = {};
+				
+				// Go over the checked boxes and store the ones that are checked.
+				// We hold the taxonomies in a seperate array so we can sort alphabetically and combine them
+				// with the terms later. This wouldn't be possible if they were keys in a map.
+				
+				$checked.each( function( ) {
+					
+					var $this = $( this ),
+						name = $this.attr( 'name' ),
+						value = $this.attr( 'value' );
+					
+					if ( ! name || ! value ) {
+						return true;
+					}
+					
+					// Remove brackets from taxonomy names ([])
+					name = name.replace( /\[\]/, '' ); 
+					
+					// First time meeting this category, initilize the maps.
+					if ( ! terms[ name ]  ) {
+						terms[ name ] = [];
+						taxonomies.push( name );
+					}
+					
+					terms[ name ].push( value );
+					
+				} );
+				
+				// Sort the taxonomies, then combine them with the sorted terms.
+				taxonomies.sort();
+				$.each( taxonomies, function( index, name ) {
+					terms[ name ].sort();
+					sorted[ name ] = terms[ name ];
+				} );
+				
+				return sorted;
+			}
+			
+		}, // floraTaxonomies
+		
+		globalAjax = {
+			
+			init: function () {
+				
+				// Global AJAX behaviour. Will add a '.progress' class to body while ajax is being loaded.
+
+                // disable favicon alteration during ajax loading (Nice idea by Ronen - doesn't look good)
+				//var originalFavicoClone = $( document.head ).find( 'link[rel~=icon]' ).clone();
+				
+				
+				$( document )
+					
+					.ajaxSend( function ( event, jqXHR, ajaxSettings ) {
+						
+						/*var original = $( document.head ).find( 'link[rel~=icon]' ),
+							link = original.clone();*/
+						
+						$( 'body' ).addClass( 'progress' );
+						
+						/*link.attr( {
+							type: 'image/gif',
+							id: 'favico-progress',
+							href: floraOptions.termFavico
+						} );
+						
+						original.remove();
+						link.appendTo( document.head );*/
+						
+					})
+					
+					.ajaxComplete( function ( event, jqXHR, ajaxSettings ) {
+						
+						$( 'body' ).removeClass( 'progress' );
+						//$( '#favico-progress' ).remove();
+						//originalFavicoClone.appendTo( document.head );
+					})
+					
+					// Does nothing right now, placeholder. Error could be moved here.
+					.ajaxError( function ( event, jqXHR, ajaxSettings, thrownError ) {
+						
+						if ( jqXHR.readyState === 0 || jqXHR.status === 0 || thrownError === 'abort' )  {
+							return;  // it's not really a server error
+						}
+						
+						/*
+						//alert( jqXHR.status + ' ' + thrownError + ' ' + jqXHR.responseText );
+						*/
+						
+					});
+			}
+			
+		},
+		
+		flora = {
+			
+			init: function () {
+				floraTaxonomies.init();
+				infiniteScroll.init();
+				globalAjax.init();
+			}
+			
+		};
+
+
+
+
+    var plantPage;
+
+	if ($('.single-flora_plant').length > 0) {
+        plantPage = {
+            init: function() {
+                var regionLinks = $(".info-block.map-block li");
+                regionLinks.hover(function() {
+                    $('.map img.region-cover, .map img.sq-cover').css("display","none");
+
+                    $('.map img[data-region=\''+$(this).data("region")+'\']').css("display", "block");
+                });
+                regionLinks.mouseleave(function() {
+                    //$('.map img[data-region=\''+$(this).data("region")+'\']').css("display", "block");
+                    $('.map img.region-cover, .map img.sq-cover').css("display","block");
+                });
+
+                // hide the green box from the photo gallery thumbnails if there aren't enough photos to scroll
+                if (navigator.appName == "Microsoft Internet Explorer") {
+                    $(window).load(function () { if ($(".gallery-box .slideset").width() < 1220) {
+                        $(".switcher-box .handler").hide();
+                    } });
+                }
+                else {
+                    window.addEventListener('load', function () { if ($(".gallery-box .slideset").width() < 1220) {
+                        $(".switcher-box .handler").hide();
+                    }  }, false);
+                }
+
+                if ( $("body").width() < 640 ) {
+                    
+                    $('.slideset .slide a, .identification a').swipebox({
+                        removeBarsOnMobile: false,
+                        hideBarsDelay: -1
+                    });
+                    
+                } else {
+                    
+                    // init lightbox for photos
+                    $('.slideset .slide a, .identification a').fancybox ({
+                        'transitionIn'    :    'fade',
+                        'transitionOut'    :    'fade',
+                        'speedIn'        :    200,
+                        'speedOut'        :    100,
+                        'changeSpeed' : 100,
+                        'showCloseButton' : true,
+                        'showNavArros' : true,
+                        'overlayShow'    :    true,
+                        'margin'        :   40,
+                        'titlePosition' : 'outside',
+                        'overlayOpacity': 0.7,
+                        'overlayColor' : '#000000',
+                        'padding' : 3,
+                        'autoScale'     : true,
+                         helpers:  {
+                            title : {
+                                type : 'outside'
+                            }
+                        }
+
+                    });
+
+                }
+
+                $('a[href^="#"]').on('click',function (e) {
+                    if ($(this).parent().parent().hasClass('tabset')) {
+                        return;
+                    }
+                    e.preventDefault();
+
+                    var target = this.hash,
+                        $target = $(target);
+
+                    if ($target && $target.offset()) {
+                        $('html, body').stop().animate({
+                            'scrollTop': $target.offset().top
+                        }, 900, 'swing', function () {
+                            window.location.hash = target;
+                        });
+                    }
+                });
+
+                var relBlock =$('.info-block.related');
+                if (relBlock) {
+                    var col=$('.info-block.related .rcol1');
+
+                    if (col && col.width() < relBlock.width()/2) { // not mobile
+                        $(window).load(function () {
+                            var maxImgHeight = 0;
+                            var maxBoxHeight = 0;
+                            var holders = $('.news .box .img-holder');
+                            holders.each (function () {
+                                maxImgHeight = Math.max($(this).height(), maxImgHeight);
+                            });
+
+                            // box height depends on image height, so we need to separate the two searches for max height
+                            holders.each (function () {
+                                $(this).height(maxImgHeight);
+                                maxBoxHeight = Math.max($(this).parent().parent().height(), maxBoxHeight);
+                            });
+
+                            holders.each (function () {
+                                $(this).parent().parent().height(maxBoxHeight).click(function () {
+                                    window.location = $(this).find("a").attr("href");
+                                });
+                            });
+
+                        });
+                    }
+                }
+            }
+        }
+        plantPage.init();
+    }
+
+    function exitUnBounce(unb, analytics, close) {
+        if (typeof close === 'undefined') {close = true;}
+        if (close) {
+            unb.stop().fadeOut();
+//            unb.children().fadeOut();
+        }
+        var date = new Date();
+        date.setTime(date.getTime()+(7*24*60*60*1000));
+        var expires = date.toGMTString();
+        document.cookie="flora_hs=1; expires=" + expires + "; path=/";
+        if (analytics) ga('send', 'event','headstart','close','',{
+            nonInteraction: false
+        });
+    }
+/*
+    var selectedDate = new Date ("22 December 2016");
+    var now = new Date();
+
+    if (selectedDate >= now) {
+        if (document.cookie.indexOf("flora_hs") == -1) {
+            var analytics = (typeof(ga) === 'function');
+            var unb = $('.magdir-promo');
+            var popup = unb.find('.magdir-inner');
+            var back = unb.find('.promo-back');
+            var dur = unb.find ('.promo-dur');
+
+            var oneDay = 24*60*60*1000;
+            var dif = Math.abs((now.getTime() - selectedDate.getTime())/(oneDay));
+            if (dif > 3) {
+                dur.html("בעוד " + Math.floor(dif) + " ימים");
+            }
+            else if (dif > 2) {
+                dur.html ("בעוד יומיים");
+            }
+            else if (dif > 1) {
+
+                dur.html ("מחר");
+            }
+            else if (dif > 0) {
+                dur.html("בעוד " + Math.ceil((selectedDate.getTime() - now.getTime())/(60*60*1000)) + " שעות");
+            }
+            else dur.html ("בקרוב");
+            jQuery("html").live("keyup", function (e) {
+                if (e.keyCode === 27 && unb.is(":visible"))
+                    exitUnBounce(unb, analytics);
+            });
+            unb.find('.btn.now a, a.promo-img-wrapper').click(function (e) {
+                if (analytics) ga('send', 'event', 'headstart', 'visit', '', {
+                    nonInteraction: false
+                });
+                exitUnBounce(unb, false, false);
+            });
+
+            unb.find('.promo-back, .close-btn').click(function (e) {
+                e.preventDefault();
+                exitUnBounce(unb, analytics);
+            });
+            unb.find('.later a').click(function (e) {
+                e.preventDefault();
+                if (analytics) ga('send', 'event', 'headstart', 'dontwant', '', {
+                    nonInteraction: false
+                });
+                exitUnBounce(unb, false);
+            });
+
+            back.hide();
+            popup.hide();
+            unb.show();
+            back.delay(2000).fadeIn(500, function () {
+                popup.slideDown(500);
+            });
+            if (analytics) ga('send', 'event', 'headstart', 'show', '', {
+                nonInteraction: true
+            });
+
+        }
+    }
+*/
+    if ($('form#plant-taxonomies').length > 0) { // this is the magdir page
+        if ( ! $( '.mobile-content-holder' ).is( ':hidden' ) ) {
+
+            // Overide infinteScroll for mobile vs. non-mobile.
+            $( infinite_scroll.contentSelector )
+                .infinitescroll( 'destroy' )
+                .data( 'infinitescroll', false );
+
+            infinite_scroll.navSelector = '.mobile-content-holder .paging-navigation';
+            infinite_scroll.nextSelector = '.mobile-content-holder .pagination .next';
+            infinite_scroll.itemSelector = '.results-area .block';
+            infinite_scroll.contentSelector = '.results-area';
+
+        }
+
+        // init the welcome message close button
+        if (document.cookie.indexOf("flora_beta")==-1) {
+            $('.welcome').slideDown();
+            $('#welcome-close').click (function(e) {e.preventDefault(); $('.welcome').slideUp(); $('#welcome-oops').css("display","block"); document.cookie="flora_beta=1; expires=Thu, 18 Dec 2099 12:00:00 GMT; path=/";});
+            $('#welcome-oops').click (function(e) {e.preventDefault(); $('.welcome').slideDown(); $(this).css("display","none");})
+        }
+
+	    flora.init();
+    }
+
+    jQuery(window).load(function () {
+        var isForum = ($('article.forum').length > 0);
+        var isTopic = ($('article.topic').length > 0);
+        var magdirWidget = $('.widget.yellow-magdir');
+        var isMagdir = (magdirWidget.length>0);
+        if (!isForum && ( isTopic || jQuery('aside.aside').length > 0) && window.location.href.indexOf('/en/') == -1) {
+            var url = window.templateRoot + '/includes/forum-widget.php';
+            url = url.replace(/https?:\/\/[^\/]+/i, "");
+            /*$.ajax( {
+                url : url,
+                data : false,
+                success : function success(data,textstatus,jqXHR) {
+                    if (data) {
+                        if (isMagdir) {
+                            magdirWidget.after(data);
+                        }
+                        else {
+                            $('aside.aside').prepend(data);
+                        }
+
+                        if (plantPage) {
+                            $("#bbp_replies_widget-299").slideDown();
+                        }
+                        else {
+                            $("#bbp_replies_widget-299").show();
+                        }
+                    }
+                },
+                datatype: "html"
+            });*/
+        }
+
+        if (isTopic || isForum)  { // this is a forum page
+            var frm= $('.bbp-topic-form form, .bbp-reply-form form');
+            if (isForum) {
+                var btn = $('.bbp-new-topic-button a');
+                var btnhide = $('.bbp-new-topic-hide-button a');
+                if (frm.find('.error').length == 0) {
+                    frm.hide();
+                }
+                btnhide.click(function (e) {
+                    e.preventDefault();
+                    frm.slideUp();
+                    btn.parent().show();
+                    btnhide.parent().hide();
+                });
+                //        $('.bbp-topics').before(frmContainer);
+                btn.click(function (e) {
+                    e.preventDefault();
+                    frm.slideDown();
+                    btn.parent().hide();
+                    btnhide.parent().show();
+
+                });
+            }
+            var photoDetails = frm.find('.up-photos .details');
+            var photosButton = frm.find('.btn-minor.add-photos');
+            photosButton.click(function(e) {
+                e.preventDefault();
+                photoDetails.slideDown();
+            });
+            var cntUploads=0;
+            var inp = $('.up-photos .btn-wrapper input');
+            var loader = $('.up-photos .loader');
+            inp.fileupload({
+                dataType: 'json',
+                done: function (e, data) {
+                    var res = data.result;
+                    var content = res.content;
+                    loader.before(content);
+                    cntUploads--;
+                    if (cntUploads <= 0) {
+                        photoDetails.removeClass("loading");
+                        cntUploads = 0;
+                    }
+                    initPhotoAutoComplete();
+                },
+                progressall: function (e, data) {
+                    var progress = parseInt(data.loaded / data.total * 100, 10);
+                    if (!photoDetails.is(':visible')) {
+                        photoDetails.slideDown();
+                        $('.bbp-submit-wrapper').appendTo('.bbp_topic_subscription_wrapper');
+                    }
+                    photoDetails.addClass("loading");
+                }
+            });
+            inp.bind ('fileuploadadd', function (e, data) {
+                cntUploads++;
+            });
+
+            var submit = $('input.bbp_topic_submit, #bbp_reply_submit');
+
+            if (submit) {
+                frm.submit(function(e){
+                    var err= false;
+                    $('.bbp-template-notice.error').remove();
+                    if (isForum) {
+                        var ttl = $('#bbp_topic_title');
+                        if (ttl.val().trim().length == 0) {
+                            bbpressShowError();
+                            err = true;
+                            $('.bbp-template-notice.error').append ('<p><strong>שגיאה</strong>: יש להזין כותרת דיון.			</p>');
+                        }
+                    }
+                    if ($('.up-photos .details').hasClass('loading')) {
+                        if (!err) {
+                            bbpressShowError();
+                            err = true;
+                        }
+                        $('.bbp-template-notice.error').append ('<p><strong>שגיאה: </strong> יש להמתין עד שכל הצילומים יסיימו לעלות.')
+                    }
+
+                    var cont=$('#bbp_topic_content, #bbp_reply_content');
+                    if (cont.val().trim().length == 0) {
+                 
+                            cont.val(" ");
+            
+                    }
+                    if (err) {
+                        e.preventDefault();
+                        return false;
+                    }
+                    return true;
+                });
+            }
+
+
+            var textarea = $('textarea.bbp-the-content');
+            var heightLimit = 550; /* Maximum height: 200px */
+
+            textarea.bind('input propertychange', function() {
+                var h= textarea.css('height').replace("px","");
+
+                if (h < textarea[0].scrollHeight) {
+                    textarea.css('height', "");
+                    /* Reset the height*/
+                    textarea.css('height', Math.min(textarea[0].scrollHeight + 10, heightLimit) + "px");
+                }
+            });
+
+        }
+
+        initSearchAutoComplete();
+
+        // this is the botanic library page
+        if ($('.botanic-library').length > 0) {
+            $('.content.book-small, .promo.promo3').each (function() {
+                $(this).click(function () {
+                    document.location = $(this).find('a').attr("href");
+                });
+            })
+        }
+
+        // this is the presentations page
+        if ($('.presentations').length > 0) {
+            $('.presentations .results-list li').each (function() {
+                $(this).click(function () {
+                    document.location = $(this).find('a').attr("href");
+                });
+            })
+        }
+
+        // this is the books archive page
+        if ($('.main-content.books').length > 0) {
+            $('.promo, .box').each (function() {
+                $(this).click(function () {
+                    document.location = $(this).find('a').attr("href");
+                });
+            })
+        }
+
+    });
+    function bbpressShowError() {
+        var er=$('.bbp-template-notice.error');
+        if (!er || er.length == 0) {
+            frm.find(".bbp-form-main").before('<div style="display:none" class="bbp-template-notice error"></div>');
+            er=$('.bbp-template-notice.error');
+            er.slideDown();
+        }
+    }
+
+    function activateGlossary(term) {
+        var tt = $('.gtooltip');
+        tt.removeClass('below');
+        tt.removeClass('leftside');
+        tt.removeClass('rightside');
+        tt.addClass('loading');
+        $('.gtooltip:after').css('display','block');
+        tt.css('opacity',0).css('display','block');
+        var leftPos = term[0].getBoundingClientRect().left + $(window)['scrollLeft']();
+        var eTop = term.offset().top;
+        var topPos   = eTop - $(window).scrollTop();
+        var newTop = topPos - 5 - tt.outerHeight();
+        var newTopBelow = newTop = topPos + term.outerHeight()+15;
+        var newLeftPos = leftPos + (term.outerWidth() / 2) - tt.outerWidth() / 2;
+
+        if (newLeftPos+tt.outerWidth() > $(window).width()) {
+            newLeftPos = $(window).width()- tt.outerWidth();
+            tt.addClass('rightside');
+        }
+        else if (newLeftPos < 0) {
+            newLeftPos = 0;
+            tt.addClass('leftside');
+        }
+
+        if (!isMobile()) {
+            tt.css('top', (newTop < 0 ? newTopBelow : newTop));
+            tt.css('left', newLeftPos);
+        }
+        tt.unbind("click");
+        tt.click(function(e) {
+            e.preventDefault();
+            window.location.href= window.siteRoot + "/?p=" + term.data('gid');
+        });
+        var call = window.templateRoot + '/includes/get_glossary.php?gid=' + term.data('gid') + '&locale=he_IL';
+        $.ajax({
+            url : call
+        }).done(function(ret) {
+            ret = JSON.parse(ret);
+            var title = ret['title'];
+            var locTitle = ret['locTitle'];
+            var content = ret['content'];
+            var imageUrls = ret['imageUrls'];
+
+            if (imageUrls && imageUrls.length > 0) {
+                content += 'לחצו כעת להגדלת האיורים';
+                if (imageUrls.length > 4) {
+                    content += ' ולצפיה ב-' + (imageUrls.length-4) + ' איורים נוספים';
+                }
+            }
+            var images = '';
+            if (imageUrls) {
+                images = '<ul>';
+                for (var i = 0; i < Math.min(imageUrls.length,4); i++) {
+                    images += '<li>';
+                    if (isMobile()) {
+                        images += '<a href="' + window.siteRoot + "/?p=" + term.data("gid") + '">';
+                    }
+                    images += '<img src="' + imageUrls[i] + '" alt="איור שממחיש ' + title + '" />';
+                    if (isMobile()) {
+                        images += '</a>';
+                    }
+                    images += '</li>';
+                }
+                images += '</ul>';
+            }
+            $('.gtooltip h2 .heb').html(title);
+            //$('.gtooltip h2 .eng').html(locTitle);
+            $('.gtooltip .gcontent').html(content);
+            $('.gtooltip .gimages').html(images);
+            if (images) {
+                //if (!isMobile()) {
+                //    newTop = topPos - 9 - tt.outerHeight() - 50;
+                //    tt.css('top', (newTop < 0 ? newTopBelow : newTop));
+                //}
+                $('.gtooltip .gimages img').on('load',function() {
+                    if (!isMobile()) {
+                        setTimeout(function () {
+                            var newTop = topPos - 9  - tt.outerHeight();
+                            if (newTop < 0) {
+                                tt.addClass('below');
+                            }
+                            tt.css('top', (newTop < 0 ? newTopBelow : newTop) ).css('opacity', 1);
+                        }, 200);
+                    }
+                    else {
+                        tt.css('opacity', 1);
+                    }
+                })
+            }
+            else {
+                if (!isMobile()) {
+                    newTop = topPos - 9 - tt.outerHeight();
+                    tt.css('top', (newTop < 0 ? newTopBelow : newTop)).css('opacity',1);
+                    if (newTop < 0) {
+                        tt.addClass('below');
+                    }
+                }
+                else {
+                    tt.css('opacity', 1);
+                }
+            }
+            tt.removeClass('loading');
+        });
+
+    }
+    function hideGlossary() {
+        $('.gtooltip').hide();
+    }
+    // glossary ---------
+    var terms = $('.glossary-t');
+    if (!isMobile()) {
+        terms.hoverIntent(
+            function () {
+                activateGlossary($(this));
+            },
+            function () {
+                hideGlossary()
+            });
+    }
+    terms.click(function() {
+        if (isMobile()) {
+            activateGlossary($(this));
+        }
+        else {
+            window.location.href= window.siteRoot + "/?p=" + $(this).data("gid");
+        }
+    });
+    // end glossary ---------
+
+    if ($('.single-flora_glossary, .post-type-archive-flora_glossary').length > 0) {
+        if ( $("body").width() < 640 ) {
+
+            $('.illustrations a').swipebox({
+                removeBarsOnMobile: false,
+                hideBarsDelay: -1
+            });
+
+        } else {
+
+            // init lightbox for photos
+            $('.illustrations a').fancybox ({
+                'transitionIn'    :    'fade',
+                'transitionOut'    :    'fade',
+                'speedIn'        :    200,
+                'speedOut'        :    100,
+                'changeSpeed' : 100,
+                'showCloseButton' : true,
+                'showNavArros' : true,
+                'overlayShow'    :    true,
+                'margin'        :   40,
+                'titlePosition' : 'outside',
+                'overlayOpacity': 0.7,
+                'overlayColor' : '#000000',
+                'padding' : 3,
+                'autoScale'     : true,
+                helpers:  {
+                    title : {
+                        type : 'inside'
+                    }
+                }
+
+            });
+
+        }
+
+    }
+
+    if (isMobile()) {
+        var submenus = $('#nav .sub-menu');
+        var topLIs = $('ul.mobile-nav>li');
+        submenus.each(function() {
+            var mnu = $(this);
+            var mnuP = mnu.parent(); // the li
+            mnuP.children('a').click(function(e) {
+                e.preventDefault();
+                topLIs.removeClass('showsub');
+                mnuP.addClass('showsub');
+
+            }).attr('href','javascript:void');
+        });
+    }
+
+
+} );
+
+function initSearchAutoComplete() {
+    var sfld = jQuery(".search-form.header-search input[type='search']");
+    if (sfld) {
+        var submitBtn = sfld.siblings("input[type='submit']");
+        submitBtn.click(function(e) {e.preventDefault();})
+
+        var hound = new Bloodhound({
+            datumTokenizer: function(d) { return Bloodhound.tokenizers.whitespace(d.value); },
+            queryTokenizer: Bloodhound.tokenizers.whitespace,
+            remote: window.templateRoot + '/includes/autocomplete.php?query=%QUERY',
+            limit: 100,
+            prefetch: window.templateRoot + '/includes/autocomplete.php',
+            name: 'flora'
+        });
+
+        hound.initialize();
+
+        sfld.typeahead(null, {
+            displayKey: 'value',
+            source: hound.ttAdapter(),
+            templates: {
+                empty: '<p class="notfound">לא נמצאו צמחים מתאימים</p>'
+            }
+        });
+
+        sfld.on("typeahead:selected typeahead:autocompleted", function(e,datum) {
+            document.location=window.siteRoot + datum.key;
+            jQuery(".search-form").addClass("loading");
+            jQuery(".search-form input").attr("readonly","readonly");
+        });
+
+    }
+}
+
+function initPhotoAutoComplete() {
+    var photoTitles = jQuery(".up-photo .plantName");
+    if (photoTitles) {
+        var submitBtn = photoTitles.siblings("input[type='submit']");
+        submitBtn.click(function(e) {e.preventDefault();})
+
+        var hound = new Bloodhound({
+            datumTokenizer: function(d) { return Bloodhound.tokenizers.whitespace(d.value); },
+            queryTokenizer: Bloodhound.tokenizers.whitespace,
+            //remote: window.templateRoot + '/includes/autocomplete.php?q=%QUERY',
+            limit: 100,
+            prefetch: window.templateRoot + '/includes/autocomplete.php',
+            name: 'flora'
+        });
+
+        hound.initialize();
+
+        photoTitles.typeahead(null, {
+            displayKey: 'value',
+            source: hound.ttAdapter(),
+            templates: {
+                empty: '<p class="notfound">לא נמצאו צמחים מתאימים</p>'
+            }
+        });
+
+        photoTitles.on("typeahead:selected typeahead:autocompleted", function(e,datum) {
+            jQuery(this).val("[" +  datum.value  + "]");
+        });
+
+    }
+}
+
+function initializeMaps() {
+    var mapOptions = {
+        center: new google.maps.LatLng(32.051525,34.910181), // central Israel
+        zoom: 10
+    };
+    var map = new google.maps.Map(document.getElementById("map-canvas"),
+        mapOptions);
+}
+
+function is_valid_email(val) {
+    var filter = /^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+){1,4}$/;
+    var result = true;
+    if (!filter.test(val)) {
+        result = false;
+    }
+    return result;
+}
+
+function register_responder_widget(email, handler, locale) {
+    if (email == "" || !is_valid_email(email)) {
+        jQuery(".widget.responder").addClass("error");
+    }
+    else {
+        jQuery(".widget.responder").removeClass("error");
+        jQuery(".widget.responder").addClass("loading");
+        jQuery(".widget.responder input[type='submit']").prop('disabled',true);
+        jQuery(".widget.responder input[type='email']").prop('readonly',true);
+        var data = {
+            action: 'register_responder_widget',
+            email: email,
+            locale: locale
+        };
+        jQuery.post(handler, data,  function(response) {
+            jQuery(".widget.responder .block1").hide();
+            jQuery(".widget.responder .intro").hide();
+            jQuery(".widget.responder .sending").show();
+            jQuery(".widget.responder").removeClass("loading");
+        });
+    }
+}
+function initWidgets(handler, locale) {
+
+    jQuery(document).ready(function(){
+        jQuery(".widget.responder input[type='submit']").click(function(e) {
+            e.preventDefault();
+            var email = jQuery(".widget.responder input[type='email']").val();
+            register_responder_widget(email, handler, locale);
+        });
+
+        jQuery(".widget.book-chapters .bookinfo").click (function(e) {
+            e.preventDefault();
+            document.location = jQuery(this).find('a').attr("href");
+        });
+    });
+}
+
+function isMobile() {
+    var amMobile = false; //initiate as false
+// device detection
+    if(/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|ipad|iris|kindle|Android|Silk|lge |maemo|midp|mmp|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows (ce|phone)|xda|xiino/i.test(navigator.userAgent)
+        || /1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(navigator.userAgent.substr(0,4))) amMobile = true;
+    return amMobile
+}
+jQuery( document ).ready(function() {
+
+jQuery(".plantName").live('change', function() {
+jQuery(".plantName").off();
+jQuery('.tt-dropdown-menu').attr("style", "display: none !important");
+
+});
+});

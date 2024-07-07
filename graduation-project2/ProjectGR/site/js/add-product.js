@@ -37,7 +37,7 @@ function addProduct() {
     const price = document.getElementById('price').value;
     const categoryId = document.getElementById('category').value;
     const quantity = document.getElementById('quantity').value;
-    const saleDiscount = document.getElementById('saleDiscount').value || 0; // الخصم الافتراضي هو 0
+    const saleDiscount = document.getElementById('saleDiscount').value || 0;
 
     const adminId = 1;
 
@@ -63,13 +63,13 @@ function addProduct() {
             } else {
                 alert('Product added successfully!');
                 document.getElementById('add-product-form').reset();
+                clearCache('products_'); // Clear product cache
             }
         })
         .catch(function (error) {
             console.error('There was an error adding the product!', error);
         });
 }
-
 
 function uploadImage(productName, imageFile) {
     const formData = new FormData();
@@ -80,8 +80,15 @@ function uploadImage(productName, imageFile) {
             console.log('Image uploaded:', response.data);
             alert('Product and image added successfully!');
             document.getElementById('add-product-form').reset();
+            clearCache('products_'); // Clear product cache
         })
         .catch(function (error) {
             console.error('There was an error uploading the image!', error);
         });
+}
+
+function clearCache(keyPrefix) {
+    Object.keys(localStorage)
+        .filter(key => key.startsWith(keyPrefix))
+        .forEach(key => localStorage.removeItem(key));
 }

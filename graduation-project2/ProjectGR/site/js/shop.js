@@ -20,6 +20,21 @@ document.addEventListener('DOMContentLoaded', function () {
     fetchCategories();
     fetchProducts();
 
+    function saveToLocalStorage(key, data) {
+        localStorage.setItem(key, JSON.stringify(data));
+    }
+
+    function loadFromLocalStorage(key) {
+        const data = localStorage.getItem(key);
+        return data ? JSON.parse(data) : null;
+    }
+
+    function clearCache(keyPrefix) {
+        Object.keys(localStorage)
+            .filter(key => key.startsWith(keyPrefix))
+            .forEach(key => localStorage.removeItem(key));
+    }
+
     function updateCartDisplay() {
         if (userId) {
             axios.get(`${apiUrl}/carts/${userId}`)
@@ -53,6 +68,7 @@ document.addEventListener('DOMContentLoaded', function () {
             alert('Product added to cart successfully!');
             updateCartDisplay();
             window.location.href = 'shopping-cart.html';
+            clearCache('products_'); // Clear product cache
         })
         .catch(error => {
             console.error('Error adding product to cart:', error);
@@ -66,6 +82,15 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function fetchProducts(categoryId = '', keywords = '', sort = 'asc', page = 0) {
+        const cacheKey = `products_${categoryId}_${keywords}_${sort}_${page}`;
+        const cachedProducts = loadFromLocalStorage(cacheKey);
+
+        if (cachedProducts) {
+            displayProducts(cachedProducts.content);
+            updatePagination(cachedProducts.totalPages, cachedProducts.number);
+            return;
+        }
+
         let url;
         if (categoryId) {
             url = `${apiUrl}/products/categories/${categoryId}/search?search=${encodeURIComponent(keywords)}&order=${sort}&page=${page}&size=${itemsPerPage}`;
@@ -76,6 +101,7 @@ document.addEventListener('DOMContentLoaded', function () {
         fetch(url)
             .then(response => response.json())
             .then(data => {
+                saveToLocalStorage(cacheKey, data);
                 displayProducts(data.content);
                 updatePagination(data.totalPages, data.number);
             })
@@ -83,7 +109,14 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function fetchCategories() {
-        const url = `${apiUrl}/categories`;
+        const cachedCategories = loadFromLocalStorage('categories');
+
+        if (cachedCategories) {
+            displayCategories(cachedCategories);
+            return;
+        }
+
+        const url = `${apiUrl}/categories/active`;
         fetch(url)
             .then(response => {
                 if (!response.ok) {
@@ -92,6 +125,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 return response.json();
             })
             .then(data => {
+                saveToLocalStorage('categories', data);
                 displayCategories(data);
             })
             .catch(handleError);
@@ -99,6 +133,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function fetchLikedProducts() {
         if (!userId) {
+            return;
+        }
+
+        const cachedLikedProducts = loadFromLocalStorage(`likedProducts_${userId}`);
+
+        if (cachedLikedProducts) {
+            likedProductIds = cachedLikedProducts.map(product => product.id);
+            fetchProducts(currentCategoryId, searchInput.value.trim(), sortSelect.value, currentPage);
             return;
         }
 
@@ -112,6 +154,7 @@ document.addEventListener('DOMContentLoaded', function () {
             })
             .then(data => {
                 likedProductIds = data.map(product => product.id);
+                saveToLocalStorage(`likedProducts_${userId}`, data);
                 fetchProducts(currentCategoryId, searchInput.value.trim(), sortSelect.value, currentPage);
             })
             .catch(handleError);
@@ -126,7 +169,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const isLiked = likedProductIds.includes(product.id) ? 'liked' : '';
     
             const originalPrice = product.price;
-            const discount = product.saleDiscount || 0; // تأكد من أن الخصم ليس undefined
+            const discount = product.saleDiscount || 0;
             const discountedPrice = originalPrice - (originalPrice * (discount / 100));
     
             let priceHtml;
@@ -165,7 +208,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 event.preventDefault();
             });
         });
-    }
+    }    
     
     function showDiscountedProducts() {
         const url = `${apiUrl}/products/discounted`;

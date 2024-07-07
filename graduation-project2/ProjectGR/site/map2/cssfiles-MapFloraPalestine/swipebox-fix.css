@@ -1,0 +1,19 @@
+#swipebox-container {
+	/* Normalize for hebrew */
+	direction: ltr;
+}
+
+body.rtl #swipebox-title {
+	/* But title text should still be in the right direction */
+	direction: rtl;
+}
+
+#swipebox-top-bar {
+	
+	/* Don't look bad when there are multiple lines */
+	line-height: inherit;
+	
+	/* Don't overlap with 'close' button */
+	width: 92%;
+	
+}

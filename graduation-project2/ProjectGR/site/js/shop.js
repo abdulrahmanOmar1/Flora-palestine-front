@@ -20,21 +20,6 @@ document.addEventListener('DOMContentLoaded', function () {
     fetchCategories();
     fetchProducts();
 
-    function saveToLocalStorage(key, data) {
-        localStorage.setItem(key, JSON.stringify(data));
-    }
-
-    function loadFromLocalStorage(key) {
-        const data = localStorage.getItem(key);
-        return data ? JSON.parse(data) : null;
-    }
-
-    function clearCache(keyPrefix) {
-        Object.keys(localStorage)
-            .filter(key => key.startsWith(keyPrefix))
-            .forEach(key => localStorage.removeItem(key));
-    }
-
     function updateCartDisplay() {
         if (userId) {
             axios.get(`${apiUrl}/carts/${userId}`)
@@ -68,7 +53,6 @@ document.addEventListener('DOMContentLoaded', function () {
             alert('Product added to cart successfully!');
             updateCartDisplay();
             window.location.href = 'shopping-cart.html';
-            clearCache('products_'); // Clear product cache
         })
         .catch(error => {
             console.error('Error adding product to cart:', error);
@@ -81,18 +65,11 @@ document.addEventListener('DOMContentLoaded', function () {
         alert('Failed to fetch products. Please try again later.');
     }
 
-    function fetchProducts(categoryId = '', keywords = '', sort = 'asc', page = 0) {
-        const cacheKey = `products_${categoryId}_${keywords}_${sort}_${page}`;
-        const cachedProducts = loadFromLocalStorage(cacheKey);
-
-        if (cachedProducts) {
-            displayProducts(cachedProducts.content);
-            updatePagination(cachedProducts.totalPages, cachedProducts.number);
-            return;
-        }
-
+    function fetchProducts(categoryId = '', keywords = '', sort = 'asc', page = 0, isDiscounted = false) {
         let url;
-        if (categoryId) {
+        if (isDiscounted) {
+            url = `${apiUrl}/products/discounted?page=${page}&size=${itemsPerPage}`;
+        } else if (categoryId) {
             url = `${apiUrl}/products/categories/${categoryId}/search?search=${encodeURIComponent(keywords)}&order=${sort}&page=${page}&size=${itemsPerPage}`;
         } else {
             url = `${apiUrl}/products/search?search=${encodeURIComponent(keywords)}&order=${sort}&page=${page}&size=${itemsPerPage}`;
@@ -101,21 +78,13 @@ document.addEventListener('DOMContentLoaded', function () {
         fetch(url)
             .then(response => response.json())
             .then(data => {
-                saveToLocalStorage(cacheKey, data);
                 displayProducts(data.content);
-                updatePagination(data.totalPages, data.number);
+                updatePagination(data.totalPages, data.number, isDiscounted);
             })
             .catch(handleError);
     }
 
     function fetchCategories() {
-        const cachedCategories = loadFromLocalStorage('categories');
-
-        if (cachedCategories) {
-            displayCategories(cachedCategories);
-            return;
-        }
-
         const url = `${apiUrl}/categories/active`;
         fetch(url)
             .then(response => {
@@ -125,7 +94,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 return response.json();
             })
             .then(data => {
-                saveToLocalStorage('categories', data);
                 displayCategories(data);
             })
             .catch(handleError);
@@ -133,14 +101,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function fetchLikedProducts() {
         if (!userId) {
-            return;
-        }
-
-        const cachedLikedProducts = loadFromLocalStorage(`likedProducts_${userId}`);
-
-        if (cachedLikedProducts) {
-            likedProductIds = cachedLikedProducts.map(product => product.id);
-            fetchProducts(currentCategoryId, searchInput.value.trim(), sortSelect.value, currentPage);
             return;
         }
 
@@ -154,7 +114,6 @@ document.addEventListener('DOMContentLoaded', function () {
             })
             .then(data => {
                 likedProductIds = data.map(product => product.id);
-                saveToLocalStorage(`likedProducts_${userId}`, data);
                 fetchProducts(currentCategoryId, searchInput.value.trim(), sortSelect.value, currentPage);
             })
             .catch(handleError);
@@ -163,22 +122,22 @@ document.addEventListener('DOMContentLoaded', function () {
     function displayProducts(products) {
         const container = document.getElementById('product-container');
         container.innerHTML = '';
-    
+
         products.forEach(product => {
-            const isOutOfStock = product.quantity == 0;
+            const isOutOfStock = product.quantity === 0;
             const isLiked = likedProductIds.includes(product.id) ? 'liked' : '';
-    
-            const originalPrice = product.price;
+
+            const originalPrice = product.price || 0; // Default to 0 if null
             const discount = product.saleDiscount || 0;
-            const discountedPrice = originalPrice - (originalPrice * (discount / 100));
-    
+            const discountedPrice = product.priceAfterDis || originalPrice; // Default to original price if null
+
             let priceHtml;
             if (discount > 0) {
                 priceHtml = `<div class="product-card-price">₪${discountedPrice.toFixed(2)} <span class="original-price">₪${originalPrice.toFixed(2)}</span></div>`;
             } else {
                 priceHtml = `<div class="product-card-price">₪${originalPrice.toFixed(2)}</div>`;
             }
-    
+
             const productHtml = `
                 <div class="col-md-4 mb-4 ${isOutOfStock ? 'out-of-stock' : ''}" data-product-id="${product.id}">
                     <div class="product-card">
@@ -201,28 +160,22 @@ document.addEventListener('DOMContentLoaded', function () {
                 </div>`;
             container.innerHTML += productHtml;
         });
-    
+
         const disabledLinks = document.querySelectorAll('.disabled-link');
         disabledLinks.forEach(link => {
             link.addEventListener('click', event => {
                 event.preventDefault();
             });
         });
-    }    
-    
-    function showDiscountedProducts() {
-        const url = `${apiUrl}/products/discounted`;
-        fetch(url)
-            .then(response => response.json())
-            .then(data => {
-                displayProducts(data);
-            })
-            .catch(handleError);
+    }
+
+    function showDiscountedProducts(page = 0) {
+        fetchProducts('', '', 'asc', page, true);
     }
 
     function displayCategories(categories) {
         const container = document.getElementById('category-list');
-        container.innerHTML = ''; 
+        container.innerHTML = '';
         container.innerHTML += `
             <a class="list-group-item list-group-item-action active" onclick="changeCategory('')">All Products</a>`;
         categories.forEach(category => {
@@ -253,28 +206,35 @@ document.addEventListener('DOMContentLoaded', function () {
                 return response.json();
             })
             .then(data => {
-                console.log(data);
                 displayProducts(data);
             })
             .catch(handleError);
     };
 
-    function updatePagination(totalPages, currentPage) {
+    function updatePagination(totalPages, currentPage, isDiscounted = false) {
         const paginationContainer = document.getElementById('pagination-container');
         paginationContainer.innerHTML = '';
 
-        for (let i = 0; i < totalPages; i++) {
-            const pageItem = document.createElement('button');
-            pageItem.classList.add('btn', 'btn-primary', 'mx-1');
-            if (i === currentPage) {
-                pageItem.classList.add('active');
+        if (isDiscounted && totalPages === 1) {
+            paginationContainer.innerHTML = '';
+        } else {
+            for (let i = 0; i < totalPages; i++) {
+                const pageItem = document.createElement('button');
+                pageItem.classList.add('btn', 'btn-primary', 'mx-1');
+                if (i === currentPage) {
+                    pageItem.classList.add('active');
+                }
+                pageItem.textContent = i + 1;
+                pageItem.addEventListener('click', () => {
+                    currentPage = i;
+                    if (isDiscounted) {
+                        showDiscountedProducts(currentPage);
+                    } else {
+                        fetchProducts(currentCategoryId, searchInput.value.trim(), sortSelect.value, currentPage);
+                    }
+                });
+                paginationContainer.appendChild(pageItem);
             }
-            pageItem.textContent = i + 1;
-            pageItem.addEventListener('click', () => {
-                currentPage = i;
-                fetchProducts(currentCategoryId, searchInput.value.trim(), sortSelect.value, currentPage);
-            });
-            paginationContainer.appendChild(pageItem);
         }
     }
 
@@ -285,7 +245,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const keywords = searchInput.value.trim();
             currentPage = 0;
             fetchProducts(currentCategoryId, keywords, sortSelect.value, currentPage);
-        }, 300); 
+        }, 300);
     });
 
     sortSelect.addEventListener('change', () => {
@@ -294,11 +254,10 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     window.navigateToProductPage = (productId) => {
-        console.log(`Navigating to product page with ID: ${productId}`);
         window.location.href = `product-page.html?id=${productId}`;
     };
 
-    window.addToCart = function(productId) {
+    window.addToCart = function (productId) {
         if (!userId) {
             alert('You must be logged in to add items to the cart.');
             return;
@@ -310,25 +269,25 @@ document.addEventListener('DOMContentLoaded', function () {
                 quantity: 1
             }
         })
-        .then(response => {
-            alert('Product added to cart successfully!');
-            updateCartDisplay();
-            window.location.href = 'shopping-cart.html';
-        })
-        .catch(error => {
-            console.error('Error adding product to cart:', error);
-            alert('The product is out of stock.');
-        });
+            .then(response => {
+                alert('Product added to cart successfully!');
+                updateCartDisplay();
+                window.location.href = 'shopping-cart.html';
+            })
+            .catch(error => {
+                console.error('Error adding product to cart:', error);
+                alert('The product is out of stock.');
+            });
     }
 
-    window.toggleLike = function(productId, button) {
+    window.toggleLike = function (productId, button) {
         if (!userId) {
             alert('You must be logged in to like products.');
             return;
         }
 
         const isLiked = button.classList.contains('liked');
-        const url = isLiked 
+        const url = isLiked
             ? `${apiUrl}/likes/remove?userId=${userId}&productId=${productId}`
             : `${apiUrl}/likes/add`;
 
@@ -346,15 +305,61 @@ document.addEventListener('DOMContentLoaded', function () {
             } else {
                 likedProductIds.push(productId);
             }
-            console.log(isLiked ? 'Like removed' : 'Like added');
         })
-        .catch(error => {
-            console.error('Error toggling like:', error);
-            alert('Failed to toggle like.');
+            .catch(error => {
+                console.error('Error toggling like:', error);
+                alert('Failed to toggle like.');
+            });
+    }
+
+    function fetchRecommendedProducts() {
+        const url = userId ? `${apiUrl}/likes/recommendations/${userId}` : `${apiUrl}/likes/recommend-top-liked-products`;
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                displayRecommendedProducts(data);
+            })
+            .catch(handleError);
+    }
+
+    function displayRecommendedProducts(products) {
+        const container = document.getElementById('recommended-products');
+        container.innerHTML = '';
+
+        products.forEach(product => {
+            const productHtml = `
+                <div class="item">
+                    <div class="product-card">
+                        <a href="product-page.html?id=${product.id}">
+                            <img src="${product.imageUrl}" alt="${product.name}">
+                        </a>
+                        <div class="product-card-body">
+                            <h5 class="product-card-title">
+                                <a href="product-page.html?id=${product.id}">${product.name}</a>
+                            </h5>
+                            <div class="product-card-price">₪${product.priceAfterDis ? product.priceAfterDis.toFixed(2) : product.price.toFixed(2)}</div>
+                        </div>
+                    </div>
+                </div>`;
+            container.innerHTML += productHtml;
+        });
+
+        // Initialize OwlCarousel after adding the products
+        $('#recommended-products').owlCarousel({
+            loop: true,
+            margin: 10,
+            nav: true,
+            navText: ['<i class="fa fa-chevron-left"></i>', '<i class="fa fa-chevron-right"></i>'],
+            items: 4,
+            autoplay: true,
+            autoplayTimeout: 2000,
+            autoplayHoverPause: true
         });
     }
 
-    fetchLikedProducts(); 
+    fetchLikedProducts();
     fetchCategories();
+    fetchRecommendedProducts();
     updateCartDisplay();
+    window.showDiscountedProducts = showDiscountedProducts;
 });

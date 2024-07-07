@@ -806,3 +806,115 @@
         padding: 5px 10px;
         border-radius: 50%;
     }
+
+    .product-card {
+        background: #fff;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        width: 100%; /* تأكد من أن العرض هو 100% من العمود */
+        margin: 0; /* تأكد من عدم وجود مسافة إضافية */
+    }
+    
+    .product-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+    
+    .product-card img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+    }
+    
+    .product-card-body {
+        padding: 15px;
+        text-align: center;
+    }
+    
+    .product-card-title {
+        font-size: 18px;
+        font-weight: bold;
+        margin: 10px 0;
+        height: 50px;
+    }
+    
+    .product-card-price {
+        font-size: 20px;
+        font-weight: bold;
+        margin: 10px 0;
+        color: #28a745;
+    }
+    
+    .product-card .button {
+        display: block;
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    
+    .product-card .button-like {
+        width: auto;
+        margin: 0 auto;
+        display: block;
+    }
+    
+    .disabled {
+        cursor: not-allowed;
+        opacity: 0.6;
+    }
+    
+    .disabled-link {
+        pointer-events: none;
+    }
+    
+    
+    /* Hide the default checkbox */
+    .productCheckbox {
+        display: none;
+    }
+    
+    /* Create a custom checkbox */
+    .productCheckbox + label {
+        position: relative;
+        padding-left: 25px;
+        cursor: pointer;
+        display: inline-block;
+        color: #fff; /* Adjust this color as needed */
+    }
+    
+    /* Create the custom checkbox indicator */
+    .productCheckbox + label::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 18px;
+        height: 18px;
+        border: 2px solid #ddd;
+        border-radius: 50%;
+        background-color: #fff; /* Default background color */
+        transition: background-color 0.3s, border-color 0.3s;
+    }
+    
+    /* Change the background color when the checkbox is checked */
+    .productCheckbox:checked + label::before {
+        background-color: #007bff; /* Change this color to your preferred selected color */
+        border-color: #007bff; /* Change the border color to match */
+    }
+    
+    /* Add a pseudo-element to represent the checkmark */
+    .productCheckbox:checked + label::after {
+        content: "";
+        position: absolute;
+        left: 5px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background-color: #fff; /* Color of the checkmark */
+    }
+    

@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const productId = getProductIdFromUrl();
     console.log(`Fetched Product ID: ${productId}`);
     fetchProductDetails(productId);
+    fetchRelatedProducts(productId);
     setupModal();
 
     function getProductIdFromUrl() {
@@ -58,38 +59,58 @@ document.addEventListener('DOMContentLoaded', function () {
             if (value > product.quantity) quantityInput.value = product.quantity;
         });
 
-        document.querySelector('.button-primary').addEventListener('click', function() {
+        const addToCartButton = document.querySelector('.button-primary');
+        addToCartButton.addEventListener('click', function() {
             const quantity = parseInt(quantityInput.value);
-            addToCart(product.id, quantity, product.quantity);
+            addToCartButton.disabled = true; // Disable the button to prevent multiple clicks
+            addToCart(product.id, quantity, product.quantity).finally(() => {
+                addToCartButton.disabled = false; // Re-enable the button
+            });
         });
     }
 
-    function addToCart(productId, quantity, availableQuantity) {
-        if (!userId) {
-            alert('You must be logged in to add items to the cart.');
-            return;
-        }
-        if (quantity > availableQuantity) {
-            alert(`Sorry, only ${availableQuantity} units of this product are available.`);
-            return;
-        }
+    function fetchRelatedProducts(productId) {
+        axios.get(`${apiUrl}/${productId}/related`)
+            .then(response => {
+                displayRelatedProducts(response.data);
+            })
+            .catch(error => {
+                console.error('Error fetching related products:', error);
+                alert('Failed to load related products. Please try again later.');
+            });
+    }
 
-        axios.post(`${cartApiUrl}/${userId}/items`, null, {
-            params: {
-                productId: productId,
-                quantity: quantity
-            }
-        })
-        .then(response => {
-            window.location.href = 'shopping-cart.html';
-        })
-        .catch(error => {
-            console.error('Error adding product to cart:', error.response ? error.response.data : error.message);
-            if (error.response && error.response.status === 500) {
-                alert('Sorry, this product is out of stock.');
-            } else {
-                alert('Failed to add product to cart. Please try again later.');
-            }
+    function displayRelatedProducts(products) {
+        const container = document.getElementById('related-products');
+        container.innerHTML = '';
+
+        products.forEach(product => {
+            const productHtml = `
+                <div class="item">
+                    <div class="product-card">
+                        <a href="product-page.html?id=${product.id}">
+                            <img src="${product.imageUrl}" alt="${product.name}">
+                        </a>
+                        <div class="product-card-body">
+                            <h5 class="product-card-title">
+                                <a href="product-page.html?id=${product.id}">${product.name}</a>
+                            </h5>
+                            <div class="product-card-price">₪${(product.priceAfterDis ?? product.price).toFixed(2)}</div>
+                        </div>
+                    </div>
+                </div>`;
+            container.innerHTML += productHtml;
+        });
+
+        $('#related-products').owlCarousel({
+            loop: true,
+            margin: 10,
+            nav: true,
+            navText: ['<i class="fa fa-chevron-left"></i>', '<i class="fa fa-chevron-right"></i>'],
+            items: 4,
+            autoplay: true,
+            autoplayTimeout: 2000,
+            autoplayHoverPause: true
         });
     }
 
@@ -119,8 +140,33 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    function navigateToProductPage(productId) {
-        console.log(`Navigating to product page with ID: ${productId}`);
-        window.location.href = `product-page.html?id=${productId}`;
-    }
+    window.addToCart = function (productId, quantity, availableQuantity) {
+        if (!userId) {
+            alert('You must be logged in to add items to the cart.');
+            return;
+        }
+        if (quantity > availableQuantity) {
+            alert(`Sorry, only ${availableQuantity} units of this product are available.`);
+            return;
+        }
+
+        axios.post(`${cartApiUrl}/${userId}/items`, null, {
+            params: {
+                productId: productId,
+                quantity: quantity
+            }
+        })
+        .then(response => {
+            alert('Product added to cart successfully!');
+            window.location.href = 'shopping-cart.html';
+        })
+        .catch(error => {
+            console.error('Error adding product to cart:', error.response ? error.response.data : error.message);
+            if (error.response && error.response.status === 500) {
+                alert('Sorry, this product is out of stock.');
+            } else {
+                alert('Failed to add product to cart. Please try again later.');
+            }
+        });
+    };
 });

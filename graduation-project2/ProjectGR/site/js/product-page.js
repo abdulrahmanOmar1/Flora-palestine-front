@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', function () {
         return urlParams.get('id');
     }
 
+    
     function fetchProductDetails(productId) {
         if (!productId) {
             console.error('No product ID found in URL');

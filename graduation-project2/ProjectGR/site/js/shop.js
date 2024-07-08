@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', function () {
     let currentPage = 0;
     const itemsPerPage = 9;
 
+    
     if (!userId) {
         const cartIconContainer = document.querySelector('.cart-icon-container');
         if (cartIconContainer) {

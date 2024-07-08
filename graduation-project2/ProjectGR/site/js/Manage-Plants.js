@@ -60,7 +60,7 @@ function populatePlantsTable(plants) {
             <td><img src="${plant.imageUrls[0]}" alt="${plant.normalName}" width="70" height="70"></td>
             <td>${plant.description}</td>
             <td>${plant.plantUsage}</td>
-            <td>${plant.city}</td>
+            <td>${plant.cities}</td>
             <td>${plant.color}</td>
             <td><button class="btn red" onclick="deletePlant(${plant.id}, this)">Delete</button></td>
             <td><button class="btn green update-btn" data-id="${plant.id}" onclick="openUpdateModal(${plant.id})">Update</button></td>
@@ -107,7 +107,20 @@ function openUpdateModal(id) {
     document.getElementById('updateFamily').value = plant.querySelector('td:nth-child(4)').textContent;
     document.getElementById('updatePlantDescription').value = plant.querySelector('td:nth-child(6)').textContent;
     document.getElementById('updatePlantUsage').value = plant.querySelector('td:nth-child(7)').textContent;
-    document.getElementById('updateCity').value = plant.querySelector('td:nth-child(8)').textContent;
+    
+    // Clear previously checked checkboxes
+    const checkboxes = document.querySelectorAll('input[name="update-areas"]');
+    checkboxes.forEach(checkbox => checkbox.checked = false);
+
+    // Check appropriate checkboxes based on cities
+    const cities = plant.querySelector('td:nth-child(8)').textContent.split(', ');
+    cities.forEach(city => {
+        const checkbox = document.querySelector(`input[name="update-areas"][value="${city}"]`);
+        if (checkbox) {
+            checkbox.checked = true;
+        }
+    });
+
     document.getElementById('updateColor').value = plant.querySelector('td:nth-child(9)').textContent;
     
     document.getElementById('update-modal').style.display = 'block';
@@ -128,8 +141,12 @@ function addPlant() {
     const family = document.getElementById('newFamily').value;
     const description = document.getElementById('newPlantDescription').value;
     const plantUsage = document.getElementById('newPlantUsage').value;
-    const city = document.getElementById('city').value;
-    const color = document.getElementById('color').value;
+    const checkboxes = document.querySelectorAll('input[name="areas"]:checked');
+    let selectedAreas = [];
+    checkboxes.forEach((checkbox) => {
+        selectedAreas.push(checkbox.value);
+    });
+    console.log(selectedAreas);    const color = document.getElementById('color').value;
     const imageFiles = document.getElementById('newPlantImages').files;
 
     if (!normalName || !scientificName || imageFiles.length === 0 || !family) {
@@ -143,7 +160,7 @@ function addPlant() {
         family,
         description,
         plantUsage,
-        city,
+        cities: selectedAreas,
         color
     };
 
@@ -184,7 +201,15 @@ function saveChanges() {
     formData.append('family', document.getElementById('updateFamily').value);
     formData.append('description', document.getElementById('updatePlantDescription').value);
     formData.append('plantUsage', document.getElementById('updatePlantUsage').value);
-    formData.append('city', document.getElementById('updateCity').value);
+
+    // Collect the checked cities
+    const checkboxes = document.querySelectorAll('input[name="update-areas"]:checked');
+    let selectedAreas = [];
+    checkboxes.forEach((checkbox) => {
+        selectedAreas.push(checkbox.value);
+    });
+
+    formData.append('cities', selectedAreas.join(', '));
     formData.append('color', document.getElementById('updateColor').value);
 
     axios.put(`http://localhost:9090/api/plants/update/${activeId}`, formData, {

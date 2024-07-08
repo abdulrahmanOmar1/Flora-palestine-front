@@ -5,13 +5,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title> Dashboard Admin shop flora palestine</title>
+    <title>Dashboard Admin shop flora palestine</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700">
     <link rel="stylesheet" href="css/fontawesome.min.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/templatemo-style.css">
+    <style>
+        /* إضافة نمط للتأكد من أن جدول الطلبات يمكن التمرير خلاله */
+        .table-container {
+            max-height: 50vh; /* يمكنك تعديل الارتفاع حسب الحاجة */
+            overflow-y: auto;
+            margin-bottom: 20px; /* إضافة مسافة أسفل الجدول */
+        }
+
+        /* إضافة نمط للرسم البياني */
+        .chart-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px; /* إضافة مسافة أسفل الرسم البياني */
+            margin-top: 20px; /* إضافة مسافة أعلى الرسم البياني */
+        }
+
+        .chart-container {
+            position: relative;
+            height: 60vh; /* تحديد ارتفاع الرسم البياني */
+            width: 100%; /* تحديد عرض الرسم البياني */
+        }
+        
+    </style>
 </head>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <body id="reportsPage">
     <div class="" id="home">
@@ -72,6 +97,7 @@
                     </ul>
 
                 </div>
+
             </div>
 
         </nav>
@@ -82,110 +108,64 @@
                     <p class="text-black mt-5 mb-5">Welcome back, <b>Admin</b></p>
                 </div>
             </div>
-            <!-- row -->
-            <div class="row tm-content-row">
-                <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 tm-block-col">
-                    <!-- Additional content here if needed -->
-                </div>
-                <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 tm-block-col">
-                    <!-- Additional content here if needed -->
-                </div>
-                <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 tm-block-col">
-                    <!-- Additional content here if needed -->
-                </div>
-                <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 tm-block-col">
-                    <!-- Additional content here if needed -->
-                </div>
-                <div class="col-12 tm-block-col">
-                    <div class="tm-bg-primary-dark tm-block tm-block-taller tm-block-scroll">
-                        <h2 class="text-white">Number Of Product</h2>
-                        <table id="productsTable" class="table">
-                            <thead>
-                                <tr>
-                                    <th scope="col">products NO</th>
-                                    <th scope="col">Plant</th>
-                                    <th scope="col">Agricultural tools</th>
-                                    <th scope="col">Organic materials & fertilizers</th>
-                                    <th scope="col">Books</th>
-                                    <th scope="col">Seeds</th>
-                                    <th scope="col">Gifts</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            </tbody>
-                        </table>
-                    </div>
+            <div class="chart-wrapper">
+                <div class="chart-container">
+                    <canvas id="ordersChart"></canvas>
                 </div>
             </div>
-
-            <div class="row tm-content-row">
-                <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 tm-block-col">
-                    <!-- Additional content here if needed -->
-                </div>
-                <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 tm-block-col">
-                    <!-- Additional content here if needed -->
-                </div>
-                <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 tm-block-col">
-                    <!-- Additional content here if needed -->
-                </div>
-                <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 tm-block-col">
-                    <!-- Additional content here if needed -->
-                </div>
-                <div class="col-12 tm-block-col">
-                    <div class="tm-bg-primary-dark tm-block tm-block-taller tm-block-scroll">
-                        <h2 class="text-white">Number Of Category</h2>
-                        <table id="categoriesTable" class="table">
-                            <thead>
-                                <tr>
-                                    <th scope="col">Category NO</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            </tbody>
-                        </table>
-                    </div>
+            <div class="col-12 tm-block-col">
+                <div class="tm-bg-primary-dark tm-block tm-block-taller tm-block-scroll table-container">
+                    <h2 class="text-white">Orders List</h2>
+                    <table id="ordersTable" class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">ORDER NO.</th>
+                                <th scope="col">STATUS</th>
+                                <th scope="col">Total Price</th>
+                                <th scope="col">User Email</th>
+                                <th scope="col">Order Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
+    </div>
 
-        <div class="container">
-            <div class="row">
-                <div class="col">
-                    <!-- Additional content here if needed -->
+    <!-- Modal for displaying order items -->
+    <div class="modal fade" id="orderItemsModal" tabindex="-1" role="dialog" aria-labelledby="orderItemsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="orderItemsModalLabel">Order Details</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
-            </div>
-            <!-- row -->
-            <div class="row tm-content-row">
-                <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 tm-block-col">
-                    <!-- Additional content here if needed -->
-                </div>
-                <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 tm-block-col">
-                    <!-- Additional content here if needed -->
-                </div>
-                <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 tm-block-col">
-                    <!-- Additional content here if needed -->
-                </div>
-                <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 tm-block-col">
-                    <!-- Additional content here if needed -->
-                </div>
-                <div class="col-12 tm-block-col">
-                    <div class="tm-bg-primary-dark tm-block tm-block-taller tm-block-scroll">
-                        <h2 class="text-white">Orders List</h2>
-                        <table id="ordersTable" class="table">
-                            <thead>
-                                <tr>
-                                    <th scope="col">ORDER NO.</th>
-                                    <th scope="col">STATUS</th>
-                                    <th scope="col">Total Price</th>
-                                    <th scope="col">Products</th>
-                                    <th scope="col">Quantity</th>
-                                    <th scope="col">Order Date</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            </tbody>
-                        </table>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5>Order Information</h5>
+                            <p><strong>Order ID:</strong> <span id="modalOrderId"></span></p>
+                            <p><strong>Status:</strong> <span id="modalOrderStatus"></span></p>
+                            <p><strong>Total Price:</strong> <span id="modalOrderTotalPrice"></span></p>
+                            <p><strong>User Email:</strong> <span id="modalOrderUserEmail"></span></p>
+                            <p><strong>Order Date:</strong> <span id="modalOrderDate"></span></p>
+                            <p><strong>Payment Method:</strong> <span id="modalPaymentMethod"></span></p>
+                            <p><strong>Address:</strong> <span id="modalOrderAddress"></span></p>
+                        </div>
+                        <div class="col-md-6">
+                            <h5>Order Items</h5>
+                            <ul id="orderItemsList" class="list-group">
+                                <!-- Order items will be dynamically added here -->
+                            </ul>
+                        </div>
                     </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
@@ -205,9 +185,5 @@
     <script src="js/bootstrap.min.js"></script>
     <script src="js/tooplate-scripts.js"></script>
     <script src="js/AdminShop.js"></script>
-
-    
 </body>
-
 </html>
-

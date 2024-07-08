@@ -6,6 +6,22 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css">
     <link rel="stylesheet" href="css/Manage-Plants.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .scrollable-container {
+            max-height: 400px;
+            overflow-y: scroll;
+            border: 1px solid #ccc;
+            padding: 10px;
+            width: 300px;
+        }
+        .area-item {
+            margin: 5px 0;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -84,7 +100,36 @@
                 </div>
                 <div class="form-group">
                     <label for="city">City</label>
-                    <input type="text" id="city" placeholder="Enter city" class="modal-input">
+                    <div class="scrollable-container">
+                        <div class="area-item"><input type="checkbox" id="mount-hermon" name="areas" value="Mount Hermon"><label for="mount-hermon"> Mount Hermon</label></div>
+                        <div class="area-item"><input type="checkbox" id="golan" name="areas" value="Golan"><label for="golan"> Golan</label></div>
+                        <div class="area-item"><input type="checkbox" id="hula-plain" name="areas" value="Hula Plain"><label for="hula-plain"> Hula Plain</label></div>
+                        <div class="area-item"><input type="checkbox" id="upper-galilee" name="areas" value="Upper Galilee"><label for="upper-galilee"> Upper Galilee</label></div>
+                        <div class="area-item"><input type="checkbox" id="lower-galilee" name="areas" value="Lower Galilee"><label for="lower-galilee"> Lower Galilee</label></div>
+                        <div class="area-item"><input type="checkbox" id="mount-carmel" name="areas" value="Mount Carmel"><label for="mount-carmel"> Mount Carmel</label></div>
+                        <div class="area-item"><input type="checkbox" id="marj-bin-amer-plain" name="areas" value="Marj bin Amer Plain"><label for="marj-bin-amer-plain"> Marj bin Amer Plain</label></div>
+                        <div class="area-item"><input type="checkbox" id="mount-gilboa" name="areas" value="Mount Gilboa"><label for="mount-gilboa"> Mount Gilboa</label></div>
+                        <div class="area-item"><input type="checkbox" id="coastal-galilee" name="areas" value="Coastal Galilee"><label for="coastal-galilee"> Coastal Galilee</label></div>
+                        <div class="area-item"><input type="checkbox" id="acre-plain" name="areas" value="Acre plain"><label for="acre-plain"> Acre plain</label></div>
+                        <div class="area-item"><input type="checkbox" id="coast-of-carmel" name="areas" value="Coast of Carmel"><label for="coast-of-carmel"> Coast of Carmel</label></div>
+                        <div class="area-item"><input type="checkbox" id="qaisariya" name="areas" value="Qaisariya"><label for="qaisariya"> Qaisariya</label></div>
+                        <div class="area-item"><input type="checkbox" id="umm-khaled" name="areas" value="Umm Khaled"><label for="umm-khaled"> Umm Khaled</label></div>
+                        <div class="area-item"><input type="checkbox" id="al-birwa" name="areas" value="Al-Birwa"><label for="al-birwa"> Al-Birwa</label></div>
+                        <div class="area-item"><input type="checkbox" id="hadera" name="areas" value="Hadera"><label for="hadera"> Hadera</label></div>
+                        <div class="area-item"><input type="checkbox" id="palestinian-coastal-plain" name="areas" value="Palestinian coastal plain"><label for="palestinian-coastal-plain"> Palestinian coastal plain</label></div>
+                        <div class="area-item"><input type="checkbox" id="northern-west-bank" name="areas" value="Northern West Bank"><label for="northern-west-bank"> Northern West Bank</label></div>
+                        <div class="area-item"><input type="checkbox" id="bisan-nazareth" name="areas" value="Bisan & Nazareth"><label for="bisan-nazareth"> Bisan & Nazareth</label></div>
+                        <div class="area-item"><input type="checkbox" id="jericho" name="areas" value="Jericho"><label for="jericho"> Jericho</label></div>
+                        <div class="area-item"><input type="checkbox" id="lod-ramla" name="areas" value="Lod & Ramla"><label for="lod-ramla"> Lod & Ramla</label></div>
+                        <div class="area-item"><input type="checkbox" id="jerusalem-ramallah" name="areas" value="Jerusalem & Ramallah"><label for="jerusalem-ramallah"> Jerusalem & Ramallah</label></div>
+                        <div class="area-item"><input type="checkbox" id="bethlehem-hebron" name="areas" value="Bethlehem & Hebron"><label for="bethlehem-hebron"> Bethlehem & Hebron</label></div>
+                        <div class="area-item"><input type="checkbox" id="dead-sea-valley" name="areas" value="Dead-Sea Valley"><label for="dead-sea-valley"> Dead-Sea Valley</label></div>
+                        <div class="area-item"><input type="checkbox" id="beersheba" name="areas" value="Beersheba"><label for="beersheba"> Beersheba</label></div>
+                        <div class="area-item"><input type="checkbox" id="negev-desert" name="areas" value="Negev desert"><label for="negev-desert"> Negev desert</label></div>
+                        <div class="area-item"><input type="checkbox" id="negev-highlands" name="areas" value="Negev Highlands"><label for="negev-highlands"> Negev Highlands</label></div>
+                        <div class="area-item"><input type="checkbox" id="southern-negev" name="areas" value="Southern Negev"><label for="southern-negev"> Southern Negev</label></div>
+                        <div class="area-item"><input type="checkbox" id="arava-valley" name="areas" value="Arava Valley"><label for="arava-valley"> Arava Valley</label></div>
+                    </div>
                 </div>
                 <div class="form-group">
                     <label for="color">Color</label>
@@ -137,8 +182,37 @@
                     <textarea id="updatePlantUsage" placeholder="Enter usage" class="modal-textarea"></textarea>
                 </div>
                 <div class="form-group">
-                    <label for="updateCity">City</label>
-                    <input type="text" id="updateCity" placeholder="Enter city" class="modal-input">
+                    <label for="updateCities">Cities</label>
+                    <div class="scrollable-container">
+                        <div class="area-item"><input type="checkbox" id="update-mount-hermon" name="update-areas" value="Mount Hermon"><label for="update-mount-hermon"> Mount Hermon</label></div>
+                        <div class="area-item"><input type="checkbox" id="update-golan" name="update-areas" value="Golan"><label for="update-golan"> Golan</label></div>
+                        <div class="area-item"><input type="checkbox" id="update-hula-plain" name="update-areas" value="Hula Plain"><label for="update-hula-plain"> Hula Plain</label></div>
+                        <div class="area-item"><input type="checkbox" id="update-upper-galilee" name="update-areas" value="Upper Galilee"><label for="update-upper-galilee"> Upper Galilee</label></div>
+                        <div class="area-item"><input type="checkbox" id="update-lower-galilee" name="update-areas" value="Lower Galilee"><label for="update-lower-galilee"> Lower Galilee</label></div>
+                        <div class="area-item"><input type="checkbox" id="update-mount-carmel" name="update-areas" value="Mount Carmel"><label for="update-mount-carmel"> Mount Carmel</label></div>
+                        <div class="area-item"><input type="checkbox" id="update-marj-bin-amer-plain" name="update-areas" value="Marj bin Amer Plain"><label for="update-marj-bin-amer-plain"> Marj bin Amer Plain</label></div>
+                        <div class="area-item"><input type="checkbox" id="update-mount-gilboa" name="update-areas" value="Mount Gilboa"><label for="update-mount-gilboa"> Mount Gilboa</label></div>
+                        <div class="area-item"><input type="checkbox" id="update-coastal-galilee" name="update-areas" value="Coastal Galilee"><label for="update-coastal-galilee"> Coastal Galilee</label></div>
+                        <div class="area-item"><input type="checkbox" id="update-acre-plain" name="update-areas" value="Acre plain"><label for="update-acre-plain"> Acre plain</label></div>
+                        <div class="area-item"><input type="checkbox" id="update-coast-of-carmel" name="update-areas" value="Coast of Carmel"><label for="update-coast-of-carmel"> Coast of Carmel</label></div>
+                        <div class="area-item"><input type="checkbox" id="update-qaisariya" name="update-areas" value="Qaisariya"><label for="update-qaisariya"> Qaisariya</label></div>
+                        <div class="area-item"><input type="checkbox" id="update-umm-khaled" name="update-areas" value="Umm Khaled"><label for="update-umm-khaled"> Umm Khaled</label></div>
+                        <div class="area-item"><input type="checkbox" id="update-al-birwa" name="update-areas" value="Al-Birwa"><label for="update-al-birwa"> Al-Birwa</label></div>
+                        <div class="area-item"><input type="checkbox" id="update-hadera" name="update-areas" value="Hadera"><label for="update-hadera"> Hadera</label></div>
+                        <div class="area-item"><input type="checkbox" id="update-palestinian-coastal-plain" name="update-areas" value="Palestinian coastal plain"><label for="update-palestinian-coastal-plain"> Palestinian coastal plain</label></div>
+                        <div class="area-item"><input type="checkbox" id="update-northern-west-bank" name="update-areas" value="Northern West Bank"><label for="update-northern-west-bank"> Northern West Bank</label></div>
+                        <div class="area-item"><input type="checkbox" id="update-bisan-nazareth" name="update-areas" value="Bisan & Nazareth"><label for="update-bisan-nazareth"> Bisan & Nazareth</label></div>
+                        <div class="area-item"><input type="checkbox" id="update-jericho" name="update-areas" value="Jericho"><label for="update-jericho"> Jericho</label></div>
+                        <div class="area-item"><input type="checkbox" id="update-lod-ramla" name="update-areas" value="Lod & Ramla"><label for="update-lod-ramla"> Lod & Ramla</label></div>
+                        <div class="area-item"><input type="checkbox" id="update-jerusalem-ramallah" name="update-areas" value="Jerusalem & Ramallah"><label for="update-jerusalem-ramallah"> Jerusalem & Ramallah</label></div>
+                        <div class="area-item"><input type="checkbox" id="update-bethlehem-hebron" name="update-areas" value="Bethlehem & Hebron"><label for="update-bethlehem-hebron"> Bethlehem & Hebron</label></div>
+                        <div class="area-item"><input type="checkbox" id="update-dead-sea-valley" name="update-areas" value="Dead-Sea Valley"><label for="update-dead-sea-valley"> Dead-Sea Valley</label></div>
+                        <div class="area-item"><input type="checkbox" id="update-beersheba" name="update-areas" value="Beersheba"><label for="update-beersheba"> Beersheba</label></div>
+                        <div class="area-item"><input type="checkbox" id="update-negev-desert" name="update-areas" value="Negev desert"><label for="update-negev-desert"> Negev desert</label></div>
+                        <div class="area-item"><input type="checkbox" id="update-negev-highlands" name="update-areas" value="Negev Highlands"><label for="update-negev-highlands"> Negev Highlands</label></div>
+                        <div class="area-item"><input type="checkbox" id="update-southern-negev" name="update-areas" value="Southern Negev"><label for="update-southern-negev"> Southern Negev</label></div>
+                        <div class="area-item"><input type="checkbox" id="update-arava-valley" name="update-areas" value="Arava Valley"><label for="update-arava-valley"> Arava Valley</label></div>
+                    </div>
                 </div>
                 <div class="form-group">
                     <label for="updateColor">Color</label>

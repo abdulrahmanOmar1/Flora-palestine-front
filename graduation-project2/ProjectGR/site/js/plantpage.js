@@ -2,7 +2,13 @@ document.addEventListener('DOMContentLoaded', function() {
     const plantId = getPlantIdFromUrl();
     fetchPlantDetails(plantId);
     fetchRelatedPlants(plantId);
+    fetchComments(plantId);
     setupModal();
+
+    const isLoggedIn = checkUserLoginStatus();
+    if (isLoggedIn) {
+        displayCommentForm(plantId);
+    }
 });
 
 function getPlantIdFromUrl() {
@@ -12,19 +18,9 @@ function getPlantIdFromUrl() {
 
 function fetchPlantDetails(plantId) {
     fetch(`http://localhost:9090/api/plants/${plantId}`)
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        return response.json();
-    })
-    .then(data => {
-        displayPlantDetails(data);
-    })
-    .catch(error => {
-        console.error('Error fetching plant details:', error);
-        displayAlert('Failed to load plant details. Please try again later.', 'error');
-    });
+    .then(response => response.json())
+    .then(data => displayPlantDetails(data))
+    .catch(error => console.error('Error fetching plant details:', error));
 }
 
 function displayPlantDetails(plant) {
@@ -112,19 +108,9 @@ function displayPlantDetails(plant) {
 
 function fetchRelatedPlants(plantId) {
     fetch(`http://localhost:9090/api/plants/similar/${plantId}`)
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        return response.json();
-    })
-    .then(data => {
-        displayRelatedPlants(data);
-    })
-    .catch(error => {
-        console.error('Error fetching related plants:', error);
-        displayAlert('Failed to load related plants. Please try again later.', 'error');
-    });
+    .then(response => response.json())
+    .then(data => displayRelatedPlants(data))
+    .catch(error => console.error('Error fetching related plants:', error));
 }
 
 function displayRelatedPlants(plants) {
@@ -150,6 +136,76 @@ function displayRelatedPlants(plants) {
         autoplayTimeout: 2000,
         autoplayHoverPause: true
     });
+}
+
+function fetchComments(plantId) {
+    fetch(`http://localhost:9090/api/comments/plant/${plantId}`)
+    .then(response => response.json())
+    .then(data => displayComments(data))
+    .catch(error => console.error('Error fetching comments:', error));
+}
+
+function displayComments(comments) {
+    const commentsSection = document.getElementById('comments-section');
+    commentsSection.innerHTML = '';
+
+    comments.forEach(comment => {
+        const commentHtml = `
+            <div class="comment">
+                <p><strong>${comment.userId}</strong> <span class="comment-date">${new Date(comment.createdAt).toLocaleString()}</span></p>
+                <p>${comment.comment}</p>
+            </div>`;
+        commentsSection.innerHTML += commentHtml;
+    });
+}
+
+function displayCommentForm(plantId) {
+    const commentFormSection = document.getElementById('comment-form-section');
+    const formHtml = `
+        <form id="comment-form">
+            <textarea id="comment-input" placeholder="Write your comment here..." required></textarea>
+            <button type="submit">Submit</button>
+        </form>`;
+    commentFormSection.innerHTML = formHtml;
+
+    document.getElementById('comment-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+        submitComment(plantId);
+    });
+}
+
+function submitComment(plantId) {
+    const commentInput = document.getElementById('comment-input');
+    const comment = commentInput.value;
+
+    fetch(`http://localhost:9090/api/comments/add`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            plantId: plantId,
+            userId: getUserId(), // افترض أن لديك دالة للحصول على معرف المستخدم الحالي
+            comment: comment,
+            createdAt: new Date().toISOString()
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        commentInput.value = '';
+        fetchComments(plantId);
+    })
+    .catch(error => console.error('Error submitting comment:', error));
+}
+
+function checkUserLoginStatus() {
+    // افترض أنك تتحقق من حالة تسجيل الدخول من خلال الكوكيز أو الجلسات أو أي آلية أخرى
+    return true; // قم بتحديث هذا وفقاً لنظام تسجيل الدخول لديك
+}
+
+function getUserId() {
+    // افترض أنك تحصل على معرف المستخدم من الجلسة أو الكوكيز أو أي آلية أخرى
+    return 1; // قم بتحديث هذا وفقاً لنظام تسجيل الدخول لديك
 }
 
 function setupModal() {

@@ -30,12 +30,57 @@
             margin-top: 20px;
             text-align: center;
         }
+
         .slick-slide-overlay img {
             width: 100%;
             height: auto;
             max-width: 117px;
             max-height: 108px;
             display: inline-block;
+        }
+
+        #comments-section {
+            margin-bottom: 30px;
+        }
+
+        .comment {
+            border-bottom: 1px solid #eaeaea;
+            padding: 10px 0;
+        }
+
+        .comment p {
+            margin: 0;
+        }
+
+        .comment-date {
+            color: #888;
+            font-size: 0.9em;
+        }
+
+        #comment-form {
+            margin-bottom: 30px;
+        }
+
+        #comment-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        #comment-form button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #5cb85c;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        #comment-form button:hover {
+            background-color: #4cae4c;
         }
     </style>
 </head>
@@ -135,9 +180,18 @@
         </section>
         <section class="section-md bg-default">
             <div class="container container-inset-owl">
+                <h3>Comments</h3>
+                <div id="comments-section">
+                </div>
+                <div id="comment-form-section">
+                </div>
+            </div>
+        </section>
+
+        <section class="section-md bg-default">
+            <div class="container container-inset-owl">
                 <h3>Related Plants</h3>
                 <div id="related-plants" class="owl-carousel owl-modern owl-products owl-nav-default" data-items="1" data-sm-items="2" data-md-items="3" data-xl-items="4" data-stage-padding="0" data-loop="true" data-margin="30" data-autoplay="true" data-owl="{&quot;dots&quot;:true,&quot;nav&quot;:true}">
-                    <!-- سيتم تحديث هذه القائمة ديناميكيا -->
                 </div>
             </div>
         </section>

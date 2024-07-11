@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Product Page - Admin HTML Template</title>
+    <title>Users Dashboard</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700" />
     <link rel="stylesheet" href="css/fontawesome.min.css" />
     <link rel="stylesheet" href="css/bootstrap.min.css" />
@@ -38,7 +38,12 @@
                                 <span class="sr-only">(current)</span>
                             </a>
                         </li>
-    
+                        <li class="nav-item">
+                            <a class="nav-link" href="usersdashbord.html">
+                                <i class="far fa-user"></i>
+                                Users
+                            </a>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link active" href="products.html">
                                 <i class="fas fa-shopping-cart"></i> Products
@@ -81,12 +86,11 @@
                             <thead>
                                 <tr>
                                     <th scope="col">&nbsp;</th>
-                                    <th scope="col">PRODUCT NAME</th>
-                                    <th scope="col">DESCRIPTION</th>
-                                    <th scope="col">PRICE</th>
-                                    <th scope="col">QUANTITY</th>
+                                    <th scope="col">User NAME</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Password</th>
+                                    <th scope="col">Status</th>
                                     <th scope="col">IMAGE</th>
-                                    <th scope="col">CATEGORY</th>
                                     <th scope="col">&nbsp;</th>
                                 </tr>
                             </thead>
@@ -96,25 +100,13 @@
                         </table>
                     </div>
                     <div class="btn-group-vertical">
-                        <a href="add-product.html" class="btn btn-primary btn-block text-uppercase mb-3">Add new product</a>
-                        <button class="btn btn-primary btn-block text-uppercase" id="deleteSelectedButton">Delete selected products</button>
-                        <a href="deleted-products.html" class="btn btn-secondary btn-block text-uppercase mt-3">View Deleted Products</a>
+                        <a href="add-product.html" class="btn btn-primary btn-block text-uppercase mb-3">Add new User</a>
+                        <button class="btn btn-primary btn-block text-uppercase" id="deleteSelectedButton">Delete selected Users</button>
+                        <a href="deleted-products.html" class="btn btn-secondary btn-block text-uppercase mt-3">View Deleted Users</a>
                     </div>
                 </div>
             </div>
-            <div class="col-sm-12 col-md-12 col-lg-4 col-xl-4 tm-block-col">
-                <div class="tm-bg-primary-dark tm-block tm-block-product-categories">
-                    <h2 class="tm-block-title">Product Categories</h2>
-                    <div class="tm-product-table-container">
-                        <table class="table tm-table-small tm-product-table">
-                            <tbody id="categoriesTableBody">
-                                <!-- Category rows will be dynamically added here -->
-                            </tbody>
-                        </table>
-                    </div>
-                    <a href="add-category.html" class="btn btn-primary btn-block text-uppercase">Add new category</a>
-                </div>
-            </div>
+            
         </div>
     </div>
     <footer class="tm-footer row tm-mt-small">
@@ -179,7 +171,6 @@
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/tooplate-scripts.js"></script>
-    <script src="js/products.js"></script>
 </body>
 
 </html>

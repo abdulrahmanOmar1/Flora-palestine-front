@@ -13,11 +13,15 @@ document.addEventListener('DOMContentLoaded', function () {
         return urlParams.get('id');
     }
 
-    
     function fetchProductDetails(productId) {
         if (!productId) {
             console.error('No product ID found in URL');
-            alert('Invalid product ID');
+            Swal.fire({
+                title: 'Error',
+                text: 'Invalid product ID',
+                icon: 'error',
+                allowOutsideClick: false // Prevent closing the alert by clicking outside
+            });
             return;
         }
 
@@ -27,7 +31,12 @@ document.addEventListener('DOMContentLoaded', function () {
             })
             .catch(error => {
                 console.error('Error fetching product details:', error);
-                alert('Failed to load product details. Please try again later.');
+                Swal.fire({
+                    title: 'Error',
+                    text: 'Failed to load product details. Please try again later.',
+                    icon: 'error',
+                    allowOutsideClick: false // Prevent closing the alert by clicking outside
+                });
             });
     }
 
@@ -77,7 +86,12 @@ document.addEventListener('DOMContentLoaded', function () {
             })
             .catch(error => {
                 console.error('Error fetching related products:', error);
-                alert('Failed to load related products. Please try again later.');
+                Swal.fire({
+                    title: 'Error',
+                    text: 'Failed to load related products. Please try again later.',
+                    icon: 'error',
+                    allowOutsideClick: false // Prevent closing the alert by clicking outside
+                });
             });
     }
 
@@ -143,11 +157,21 @@ document.addEventListener('DOMContentLoaded', function () {
 
     window.addToCart = function (productId, quantity, availableQuantity) {
         if (!userId) {
-            alert('You must be logged in to add items to the cart.');
+            Swal.fire({
+                title: 'Error',
+                text: 'You must be logged in to add items to the cart.',
+                icon: 'error',
+                allowOutsideClick: false // Prevent closing the alert by clicking outside
+            });
             return;
         }
         if (quantity > availableQuantity) {
-            alert(`Sorry, only ${availableQuantity} units of this product are available.`);
+            Swal.fire({
+                title: 'Error',
+                text: `Sorry, only ${availableQuantity} units of this product are available.`,
+                icon: 'error',
+                allowOutsideClick: false // Prevent closing the alert by clicking outside
+            });
             return;
         }
 
@@ -158,15 +182,31 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         })
         .then(response => {
-            alert('Product added to cart successfully!');
-            window.location.href = 'shopping-cart.html';
+            Swal.fire({
+                title: 'Success',
+                text: 'Product added to cart successfully!',
+                icon: 'success',
+                allowOutsideClick: false // Prevent closing the alert by clicking outside
+            }).then(() => {
+                window.location.href = 'shopping-cart.html';
+            });
         })
         .catch(error => {
             console.error('Error adding product to cart:', error.response ? error.response.data : error.message);
             if (error.response && error.response.status === 500) {
-                alert('Sorry, this product is out of stock.');
+                Swal.fire({
+                    title: 'Error',
+                    text: 'Sorry, this product is out of stock.',
+                    icon: 'error',
+                    allowOutsideClick: false // Prevent closing the alert by clicking outside
+                });
             } else {
-                alert('Failed to add product to cart. Please try again later.');
+                Swal.fire({
+                    title: 'Error',
+                    text: 'Failed to add product to cart. Please try again later.',
+                    icon: 'error',
+                    allowOutsideClick: false // Prevent closing the alert by clicking outside
+                });
             }
         });
     };

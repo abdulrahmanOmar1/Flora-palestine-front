@@ -1,11 +1,204 @@
 html, body {
     height: 100%;
   }
-  
+
   body {
     display: flex;
     flex-direction: column;
   }
+
+
+
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 100px;
+}
+
+table, th, td {
+    border: 1px solid #ccc;
+}
+
+th, td {
+    text-align: left;
+    padding: 20px;
+}
+
+th {
+    background-color: #333;
+    color: white;
+    font-weight: bold;
+}
+
+td {
+    background-color: #44616d;
+    color: white;
+}
+
+input[type="text"], input[type="number"], textarea, input[type="file"], select {
+    width: 100%;
+    padding: 10px;
+    margin: 30px 0;
+    display: block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+input[type="text"]:focus, input[type="number"]:focus, textarea:focus, select:focus {
+    border-color: #4CAF50;
+    outline: none;
+}
+
+.btn {
+    padding: 12px 24px;
+    cursor: pointer;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    margin-right: 10px;
+}
+.navbar-toggler {
+  border-color: #708da8;
+  box-shadow: rgba(255, 255, 255, 0.1) 0 1px 1px 2px;
+  border-radius: 0;
+  padding: 10px 15px;
+  transition: all 0.2s ease;
+  margin-left: auto;
+}
+
+.navbar-toggler:hover {
+  border-color: #f5a623;
+  color: #f5a623;
+}
+
+.navbar-nav a:hover,
+.navbar-nav a:hover i {
+  color: #f5a623;
+}
+
+.navbar-nav .active > .nav-link,
+.navbar-nav .nav-link.active {
+  background-color: #f5a623;
+  color: #fff;
+}
+
+.navbar {
+  height: 100px;
+  background-color: #004d40;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.navbar .container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 100%;
+}
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  margin-right: auto;
+}
+
+.collapse.navbar-collapse {
+  display: flex !important;
+  justify-content: center;
+  width: 100%;
+}
+
+.navbar-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.nav-item {
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+@media (max-width: 768px) {
+  .navbar-nav {
+      justify-content: flex-start;
+  }
+}
+
+.btn.blue {
+    background-color: #007BFF;
+    color: white;
+}
+
+.btn.green {
+    background-color: f5a623;
+    color: white;
+}
+
+.btn.red {
+    background-color: #DC3545;
+    color: white;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 60%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.close-btn {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.scrollable-container {
+    max-height: 300px;
+    overflow-y: scroll;
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+
+.area-item {
+    margin-bottom: 10px;
+}
+
+.area-item input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+
   a {
     transition: all 0.3s ease;
   }
@@ -16,10 +209,8 @@ html, body {
   button:focus {
     outline: 0;
   }
-  .navbar-brand {
-    display: flex;
-    align-items: center;
-  }
+  
+  
   .tm-site-icon {
     color: #656565;
   }
@@ -30,14 +221,11 @@ html, body {
     font-weight: 700;
     color: #fff;
   }
-  .navbar {
-    height: 100px;
-    background-color: #004d40;
-    padding: 0;
-  }
-  .navbar .container {
-    position: relative;
-  }
+  
+
+
+
+
   .tm-logout-icon {
     font-size: 1.5em;
   }
@@ -117,11 +305,7 @@ html, body {
     color: #fff;
     padding: 15px 30px;
   }
-  .navbar-nav .active > .nav-link,
-  .navbar-nav .nav-link.active {
-    background-color: #f5a623;
-    color: #fff;
-  }
+
   .navbar-nav .nav-link.active i {
     color: #fff;
   }
@@ -129,10 +313,7 @@ html, body {
   .dropdown-item:hover {
     background-color: #567086;
   }
-  .navbar-nav a:hover,
-  .navbar-nav a:hover i {
-    color: #f5a623;
-  }
+
   .nav-item {
     text-align: center;
   }
@@ -528,17 +709,7 @@ html, body {
   .tm-login-col {
     max-width: 470px;
   }
-  .navbar-toggler {
-    border-color: #708da8;
-    box-shadow: rgba(255, 255, 255, 0.1) 0 1px 1px 2px;
-    border-radius: 0;
-    padding: 10px 15px;
-    transition: all 0.2s ease;
-  }
-  .navbar-toggler:hover {
-    border-color: #f5a623;
-    color: #f5a623;
-  }
+  
   .tm-nav-icon {
     color: #fff;
   }

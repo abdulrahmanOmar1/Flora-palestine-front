@@ -61,13 +61,24 @@ function addProduct() {
             if (imageFile) {
                 uploadImage(productName, imageFile);
             } else {
-                alert('Product added successfully!');
+                Swal.fire({
+                    title: 'Success!',
+                    text: 'Product added successfully!',
+                    icon: 'success',
+                    confirmButtonText: 'OK'
+                });
                 document.getElementById('add-product-form').reset();
                 clearCache('products_'); // Clear product cache
             }
         })
         .catch(function (error) {
             console.error('There was an error adding the product!', error);
+            Swal.fire({
+                title: 'Error!',
+                text: 'There was an error adding the product!',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
         });
 }
 
@@ -78,12 +89,23 @@ function uploadImage(productName, imageFile) {
     axios.post(`http://localhost:9090/productImage/${productName}`, formData)
         .then(function (response) {
             console.log('Image uploaded:', response.data);
-            alert('Product and image added successfully!');
+            Swal.fire({
+                title: 'Success!',
+                text: 'Product and image added successfully!',
+                icon: 'success',
+                confirmButtonText: 'OK'
+            });
             document.getElementById('add-product-form').reset();
             clearCache('products_'); // Clear product cache
         })
         .catch(function (error) {
             console.error('There was an error uploading the image!', error);
+            Swal.fire({
+                title: 'Error!',
+                text: 'There was an error uploading the image!',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
         });
 }
 

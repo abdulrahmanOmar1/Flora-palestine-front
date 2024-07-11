@@ -40,7 +40,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function addToCart(product) {
         if (!userId) {
-            alert('You must be logged in to add items to the cart.');
+            Swal.fire({
+                title: 'Error',
+                text: 'You must be logged in to add items to the cart.',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
             return;
         }
 
@@ -51,19 +56,34 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         })
         .then(response => {
-            alert('Product added to cart successfully!');
+            Swal.fire({
+                title: 'Success',
+                text: 'Product added to cart successfully!',
+                icon: 'success',
+                confirmButtonText: 'OK'
+            });
             updateCartDisplay();
             window.location.href = 'shopping-cart.html';
         })
         .catch(error => {
             console.error('Error adding product to cart:', error);
-            alert('The product is out of stock.');
+            Swal.fire({
+                title: 'Error',
+                text: 'The product is out of stock.',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
         });
     }
 
     function handleError(error) {
         console.error('An error occurred:', error);
-        alert('Failed to fetch products. Please try again later.');
+        Swal.fire({
+            title: 'Error',
+            text: 'Failed to fetch products. Please try again later.',
+            icon: 'error',
+            confirmButtonText: 'OK'
+        });
     }
 
     function fetchProducts(categoryId = '', keywords = '', sort = 'asc', page = 0, isDiscounted = false) {
@@ -194,7 +214,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
     window.showFavoriteProducts = () => {
         if (!userId) {
-            alert('You must be logged in to view favorite products.');
+            Swal.fire({
+                title: 'Error',
+                text: 'You must be logged in to view favorite products.',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
             return;
         }
 
@@ -260,7 +285,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
     window.addToCart = function (productId) {
         if (!userId) {
-            alert('You must be logged in to add items to the cart.');
+            Swal.fire({
+                title: 'Error',
+                text: 'You must be logged in to add items to the cart.',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
             return;
         }
 
@@ -271,19 +301,34 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         })
             .then(response => {
-                alert('Product added to cart successfully!');
+                Swal.fire({
+                    title: 'Success',
+                    text: 'Product added to cart successfully!',
+                    icon: 'success',
+                    confirmButtonText: 'OK'
+                });
                 updateCartDisplay();
                 window.location.href = 'shopping-cart.html';
             })
             .catch(error => {
                 console.error('Error adding product to cart:', error);
-                alert('The product is out of stock.');
+                Swal.fire({
+                    title: 'Error',
+                    text: 'The product is out of stock.',
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
             });
     }
 
     window.toggleLike = function (productId, button) {
         if (!userId) {
-            alert('You must be logged in to like products.');
+            Swal.fire({
+                title: 'Error',
+                text: 'You must be logged in to like products.',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
             return;
         }
 
@@ -309,7 +354,12 @@ document.addEventListener('DOMContentLoaded', function () {
         })
             .catch(error => {
                 console.error('Error toggling like:', error);
-                alert('Failed to toggle like.');
+                Swal.fire({
+                    title: 'Error',
+                    text: 'Failed to toggle like.',
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
             });
     }
 

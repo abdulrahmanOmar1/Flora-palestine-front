@@ -33,7 +33,6 @@ $(document).ready(function () {
 });
 
 function fetchUserDataById() {
-    
     axios.get('http://localhost:9090/api/users/1') // Replace '1' with actual user ID
         .then(function (response) {
             const user = response.data;
@@ -57,6 +56,11 @@ function fetchUserDataById() {
         })
         .catch(function (error) {
             console.error('Error fetching user data:', error);
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Error fetching user data. Please try again later.',
+            });
         });
 }
 
@@ -64,8 +68,7 @@ function uploadAvatar() {
     const formData = new FormData();
     formData.append('images', $('#fileInput')[0].files[0]);
 
-    // Replace 'admin@example.com' with the actual admin email or retrieve it dynamically if necessary
-    const adminEmail = 'aboodoma27@gmail.com';
+    const adminEmail = 'odaykhallaf51@gmail.com';
 
     axios.post(`http://localhost:9090/api/user-images/${adminEmail}`, formData, {
         headers: {
@@ -76,14 +79,26 @@ function uploadAvatar() {
         if (response.data && response.data.length > 0) {
             const avatarImageUrl = "data:" + response.data[0].contentType + ";base64," + response.data[0].base64;
             $('#avatar-image').attr('src', avatarImageUrl);
-            alert('Avatar uploaded successfully!');
+            Swal.fire({
+                icon: 'success',
+                title: 'Success',
+                text: 'Avatar uploaded successfully!',
+            });
         } else {
-            alert('No image data received from the server.');
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'No image data received from the server.',
+            });
         }
     })
     .catch(function (error) {
-        console.error('Error uploading avatar:', error);
-        alert('Error uploading avatar.');
+        console.error('Error uploading Photo:', error);
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Error uploading Photo.',
+        });
     });
 }
 
@@ -97,12 +112,20 @@ function updateAccountData() {
 
     // Validate password
     if (!validatePassword(password)) {
-        alert('Password must be at least 8 characters long and contain at least one symbol, one number, one uppercase letter, and one lowercase letter.');
+        Swal.fire({
+            icon: 'warning',
+            title: 'Warning',
+            text: 'Password must be at least 8 characters long and contain at least one symbol, one number, one uppercase letter, and one lowercase letter.',
+        });
         return;
     }
     
     if (password !== confirmPassword) {
-        alert('Passwords do not match. Please re-enter matching passwords.');
+        Swal.fire({
+            icon: 'warning',
+            title: 'Warning',
+            text: 'Passwords do not match. Please re-enter matching passwords.',
+        });
         return;
     }
 
@@ -116,16 +139,16 @@ function updateAccountData() {
 
     axios.put('http://localhost:9090/api/admins/1', data)
         .then(function (response) {
-            // Display response data
-            console.log('Update Response:', response.data); // Logging the response for debugging
+            console.log('Update Response:', response.data);
 
-            // Show success message
-            alert('Account updated successfully!');
+            Swal.fire({
+                icon: 'success',
+                title: 'Success',
+                text: 'Account updated successfully!',
+            });
 
-            // Refresh user data after update
             fetchUserDataById();
 
-            // Hide the account form and show table body and edit profile button
             $('#account-form').addClass('d-none');
             $('#account-table-body').removeClass('d-none');
             $('#edit-profile').removeClass('d-none');
@@ -133,24 +156,35 @@ function updateAccountData() {
         .catch(function (error) {
             console.error('Error updating account:', error);
 
-            // Display error message to the user
-            alert('Error updating account. Please try again later.');
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Error updating account. Please try again later.',
+            });
         });
 }
 
-// Function to validate password
 function validatePassword(password) {
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
     return passwordRegex.test(password);
 }
 
 function deleteAvatar() {
-    axios.delete('URL_TO_YOUR_BACKEND_API/account/avatar')
+    axios.delete('http://localhost:9090/api/user-images/aboodoma27@gmail.com')
         .then(function (response) {
             $('#avatar-image').attr('src', 'img/avatar.png');
-            alert('Avatar deleted successfully!');
+            Swal.fire({
+                icon: 'success',
+                title: 'Success',
+                text: 'Photo deleted successfully!',
+            });
         })
         .catch(function (error) {
-            console.error('Error deleting avatar:', error);
+            console.error('Error deleting Photo:', error);
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Error deleting Photo.',
+            });
         });
 }

@@ -198,23 +198,20 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     function updateCategoriesUI(categories) {
-        var categoriesContainer = document.querySelector('.list-marked');
-        categoriesContainer.innerHTML = '<li><a href="#" data-family="all-families" id="allFamiliesLink">All Families</a></li>';
+        var categoriesContainer = document.getElementById('familyFilter');
+        categoriesContainer.innerHTML = ''; // تفريغ المحتوى السابق
         categories.forEach(function(category) {
-            var categoryElement = `<li><a href="#" data-family="${category}">${category}</a></li>`;
+            var categoryElement = `<div class="family-option" data-family="${category}">${category}</div>`;
             categoriesContainer.insertAdjacentHTML('beforeend', categoryElement);
         });
 
-        var categoryLinks = document.querySelectorAll('.list-marked a');
+        // إضافة معالجات النقر لعناصر الفئة
+        var categoryLinks = document.querySelectorAll('.family-option');
         categoryLinks.forEach(function(link) {
             link.addEventListener('click', function(event) {
                 event.preventDefault();
                 var family = this.getAttribute('data-family');
-                if (family === 'all-families') {
-                    fetchPlants();
-                } else {
-                    fetchPlantsByFamily(family, 0);
-                }
+                fetchPlantsByFamily(family, 0);
             });
         });
     }
@@ -233,6 +230,11 @@ document.addEventListener("DOMContentLoaded", function() {
             const color = this.getAttribute('data-color');
             fetchPlantsByColor(color);
         });
+    });
+
+    const familyFilterButton = document.getElementById('toggleFamilyFilterButton');
+    familyFilterButton.addEventListener('click', () => {
+        document.getElementById('familyFilter').classList.toggle('d-none');
     });
 
     // Add search functionality in the plants section

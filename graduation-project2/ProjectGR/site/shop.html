@@ -22,7 +22,13 @@
     <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
     <link href="lib/owlcarousel/assets/owl.theme.default.min.css" rel="stylesheet">
     <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Template Stylesheet -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.3.4/dist/sweetalert2.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.3.4/dist/sweetalert2.min.css">
+
 </head>
+   
 
 <body>
     <div class="text-center text-md-start page">
@@ -50,8 +56,31 @@
                     <div class="col-lg-3">
                         <div class="list-group mb-4" id="category-list">
                             <a class="list-group-item list-group-item-action active" onclick="changeCategory('')">All Products</a>
+                            <a class="list-group-item list-group-item-action" onclick="changeCategory('plants')">Plants</a>
+                            <a class="list-group-item list-group-item-action" onclick="changeCategory('fertilisers')">Fertilisers</a>
+                            <a class="list-group-item list-group-item-action" onclick="changeCategory('tools')">Agricultural tools</a>
+                            <a class="list-group-item list-group-item-action" onclick="changeCategory('accessories')">Garden accessories</a>
+                            <a class="list-group-item list-group-item-action" onclick="changeCategory('gift')">Gift</a>
+                            <a class="list-group-item list-group-item-action" onclick="changeCategory('book')">Book</a>
                         </div>
+                    
+                        <select id="sort-select" class="form-select mb-2">
+                            <option value="asc">Price: Low to High</option>
+                            <option value="desc">Price: High to Low</option>
+                        </select>
+                    
+                        <button class="btn btn-danger w-100 mb-2" id="favorite-btn" onclick="showFavoriteProducts()">
+                            <i class="fa fa-heart"></i> My Favorite
+                        </button>
+                    
+                        <button class="btn btn-success w-100 mb-2" id="discounted-btn" onclick="showDiscountedProducts()">
+                            <i class="fa fa-percent"></i> Discounted Products
+                        </button>
+                    
+                        <img src="images/logologin.png" alt="" class="img-fluid">
                     </div>
+                    
+                    
                     <div class="col-lg-9">
                         <div class="row g-4 mb-4">
                             <div class="col-12">
@@ -60,22 +89,9 @@
                                     <button class="btn btn-primary" id="search-icon-1"><i class="fa fa-search"></i></button>
                                 </div>
                             </div>
-                            <div class="col-6">
-                                <select id="sort-select" class="form-select">
-                                    <option value="asc">Price: Low to High</option>
-                                    <option value="desc">Price: High to Low</option>
-                                </select>
-                            </div>
-                            <div class="col-6 text-end">
-                                <button class="btn btn-danger" id="favorite-btn" onclick="showFavoriteProducts()">
-                                    <i class="fa fa-heart"></i> My Favorite
-                                </button>
-                            </div>
-                            <div class="col-6 text-end">
-                                <button class="btn btn-success" id="discounted-btn" onclick="showDiscountedProducts()">
-                                    <i class="fa fa-percent"></i> Discounted Products
-                                </button>
-                            </div>
+                           
+                           
+                           
                         </div>
                         
                         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4" id="product-container"></div>
@@ -136,6 +152,7 @@
             </div>
         </div>
     </div>
+    
     <div class="container-fluid copyright py-4">
         <div class="container">
             <div class="row">

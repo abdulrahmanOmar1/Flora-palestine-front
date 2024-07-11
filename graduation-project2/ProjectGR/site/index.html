@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html class="wide wow-animation" lang="en">
-  <head>
+<head>
     <!-- Site Title-->
     <title>Home-Flora Palestine</title>
     <meta name="format-detection" content="telephone=no">
@@ -14,6 +14,8 @@
     <link rel="stylesheet" href="css/fonts.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/shop.css"> 
+    <link rel="stylesheet" href="css/index.css"> 
+
     <link href="img/favicon.ico" rel="icon">
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -31,97 +33,11 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
-    <style>
-      #searchResults {
-        max-height: 200px;
-        overflow-y: auto;
-        border: 1px solid #ccc;
-        z-index: 1000;
-      }
-      .pagination {
-        display: flex;
-        justify-content: center;
-        margin-top: 20px;
-      }
-      .page-item {
-        margin: 0 5px;
-      }
-      .page-item a {
-        padding: 8px 16px;
-        border: 1px solid #ccc;
-        color: #007bff;
-        text-decoration: none;
-        border-radius: 5px;
-      }
-      .page-item.active a {
-        background-color: #007bff;
-        color: white;
-        border-color: #007bff;
-      }
-      .user-menu {
-        position: relative;
-        display: none;
-      }
-      .user-menu-button {
-        background-color: #ff6600;
-        color: white;
-        padding: 10px 15px;
-        border: none;
-        border-radius: 50%;
-        cursor: pointer;
-      }
-      .user-menu-content {
-        display: none;
-        position: absolute;
-        background-color: white;
-        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-        z-index: 1;
-        right: 0;
-      }
-      .user-menu-content a {
-        color: black;
-        padding: 12px 16px;
-        text-decoration: none;
-        display: block;
-      }
-      .user-menu-content a:hover {
-        background-color: #f1f1f1;
-      }
-      .user-menu:hover .user-menu-content {
-        display: block;
-      }
-      .color-filter {
-        margin-top: 20px;
-      }
-      .color-filter h4 {
-        cursor: pointer;
-        user-select: none;
-      }
-      .color-filter-options {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-        margin-top: 10px;
-      }
-      .color-option {
-        display: flex;
-        align-items: center;
-        cursor: pointer;
-      }
-      .d-none {
-        display: none;
-      }
-      .color-circle {
-        width: 20px;
-        height: 20px;
-        border-radius: 50%;
-        margin-right: 8px;
-      }
-    </style>
+   
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
-  </head>
-  <body>
+</head>
+<body>
     <!-- Page preloader-->
     <div class="preloader">
       <div>
@@ -220,7 +136,7 @@
                       <li>
                         <div class="input-group" style="padding-top: 10px; position: relative;">
                           <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" id="searchInput" autocomplete="off" />
-                          <button type="button" class="btn btn-outline-primary" data-mdb-ripple-init>search</button>
+                          <button type="button" class="btnt btn-outline-primary" data-mdb-ripple-init>search</button>
                           <div class="dropdown-menu" id="searchResults" style="position: absolute; top: 100%; left: 0; right: 0;"></div>
                         </div>
                       </li>
@@ -284,8 +200,7 @@
 
       <section class="section-md bg-accent">
         <div class="container">
-          <h2 class="text-primary-dark">Explore Palestinian plants through the region on the map</h2>
-          <div class="group-xs"><a class="button button-md button-primary" href="map2/map.html">Discover plants on Map<span class="icon-arrow icon-rotate-90 material-icons-keyboard_backspace"></span></a></div>
+          <h2 class="text-primary-dark">تتميز فلسطين بتنوع بيولوجي غني وفريد. من النباتات البرية النادرة إلى الأزهار الجميلة، تعرف على الأنواع النباتية التي تجعل من فلسطين موطنًا للنباتات المدهشة. استمتع بجولة افتراضية في حدائقنا الطبيعية واكتشف عجائب الطبيعة</h2>
         </div>
       </section>
 
@@ -293,12 +208,23 @@
         <div class="container">
           <div class="row row-50">
             <div class="col-lg-3 col-md-4">
-              <h3>Families</h3>
-              <ul class="list list-marked list-bold d-inline-block d-md-block">
-                <!-- سيتم تحديث العائلات ديناميكيا هنا -->
-              </ul>
+              <h3>Filters Plants</h3>
+            
+
+
+              <div class="family-filter">
+                <h4 id="toggleFamilyFilterButton" class="btn btn-info">Filter by Family   <i class="fas fa-arrow-down"></i>
+                </h4>
+                <div id="familyFilter" class="family-filter-options d-none">
+                    <!-- سيتم تحديث العائلات ديناميكيا هنا -->
+                   
+                    <!-- ... أضف المزيد من العائلات هنا ... -->
+                </div>
+            </div>
               <div class="color-filter">
-                <h4 id="toggleColorFilterButton" class="btn btn-info">Filter by Color</h4>
+                
+                <h4 id="toggleColorFilterButton" class="btn btn-info">Filter by Color   <i class="fas fa-arrow-down"></i>
+                </h4>
                 <div id="colorFilter" class="color-filter-options d-none">
                   <div class="color-option" data-color="Red">
                     <div class="color-circle" style="background-color: red;"></div>
@@ -356,9 +282,16 @@
                     <div class="color-circle" style="background-color: lightblue;"></div>
                     <span>L.Blue</span>
                   </div>
+                  
                 </div>
+                <div class="family-filter">
+                  <a href="map2/map.html" id="toggleFamilyFilterButton" class="btnn">Discover plants on Map</a>
               </div>
+              
+              </div>
+              
             </div>
+            
             <div class="col-lg-9 col-md-8">
               <div class="d-flex justify-content-between align-items-center mb-3">
                 <h3 id="plants" class="mb-0">The latest plants</h3>
@@ -377,10 +310,39 @@
               <div class="pagination">
                 <!-- سيتم تحديث التصفح ديناميكيا هنا -->
               </div> 
+
+              
             </div>
           </div>
         </div>
       </section>
+
+      <div class="container-fluid recommended-products-container py-5">
+        <div class="container">
+            <h2 class="mb-4">Recommended Plants</h2>
+            <div id="recommended-products" class="owl-carousel owl-theme"></div>
+        </div>
+    </div>
+    <section class="section-md bg-default">
+      <div class="container">
+        <div class="row row-50 justify-content-center">
+          <div class="col-xl-5 col-lg-6 col-md-8">
+            <h2>eCommerce ready</h2>
+            <p class="big text-width-smaller">We have included all you may need to build an Amazing eCommerce Website from scratch. Create your successful business now!</p>
+            <ul class="list list-index list-big list-primary d-inline-block d-md-block">
+              <li class="wow fadeInLeft" data-wow-delay=".1s"><span class="list-index-counter"></span><a href="shop.html">Shop</a></li>
+              <li class="wow fadeInLeft" data-wow-delay=".15s"><span class="list-index-counter"></span><a href="shop.html">Categories</a></li>
+              <li class="wow fadeInLeft" data-wow-delay=".2s"><span class="list-index-counter"></span><a href="">Product page</a></li>
+              <li class="wow fadeInLeft" data-wow-delay=".25s"><span class="list-index-counter"></span><a href="shopping-cart.html">Cart</a></li>
+              <li class="wow fadeInLeft" data-wow-delay=".3s"><span class="list-index-counter"></span><a href="checkout.html">Checkout</a></li>
+            </ul>
+            <div class="button-wrap"><a class="button button-primary" href="#">Get a template<span class="icon-arrow icon-rotate-90 material-icons-keyboard_backspace"></span></a></div>
+          </div>
+          <div class="col-xl-7 col-lg-6 col-md-8 section-relative wrap-img-pages wrap-img-pages-1"><a class="img-position-3 wow fadeInDown" href="checkout.html" data-wow-delay=".1s"><img class="box-shadow-var-1" src="images/page-shop-3-470x327.jpg" alt="" width="470" height="327" loading="lazy"/></a><a class="img-position-2 wow fadeInUp" href="shop.html" data-wow-delay=".2s"><img class="box-shadow-var-1" src="images/page-shop-1-470x327.jpg" alt="" width="470" height="327" loading="lazy"/></a><a class="img-position-1 wow fadeInRight" href="shopping-cart.html" data-wow-delay=".3s"><img class="box-shadow-var-1" src="images/page-shop-2-470x327.jpg" alt="" width="470" height="327" loading="lazy"/></a></div>
+        </div>
+      </div>
+    </section>
+
       <!-- Footer Start -->
       <div class="container-fluid bg-dark text-light footer mt-5 py-5 wow fadeIn" data-wow-delay="0.1s">
         <div class="container py-5">
@@ -413,15 +375,7 @@
                     <a class="btn btn-link" href="">Terms & Condition</a>
                     <a class="btn btn-link" href="">Support</a>
                 </div>
-                <div class="col-lg-3 col-md-6">
-                  <h4 class="text-white mb-4">Newsletter</h4>
-                  <form class="newsletter-form">
-                      <div class="position-relative w-100">
-                          <input class="form-control bg-light border-light w-100 py-3 ps-4 pe-5" type="text" placeholder="Your email">
-                          <button type="submit" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">SignUp</button>
-                      </div>
-                  </form>
-              </div>
+                
             </div>
         </div>
       </div>

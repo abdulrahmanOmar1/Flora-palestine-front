@@ -1,15 +1,4 @@
 document.addEventListener('DOMContentLoaded', function() {
-
-    const userId = Cookies.get('userId');
-    const userEmail = Cookies.get('userEmail');
-    const userRole = Cookies.get('role');
-
-    if (!userId || !userEmail || !userRole) {
-        alert('You must be logged in to access this page.');
-        window.location.href = 'login.html'; // Redirect to login page
-        return;
-    }
-
     fetchFamilies();
 
     document.getElementById('addFamilyBtn').addEventListener('click', function() {
@@ -51,8 +40,8 @@ function deleteFamily(name, button) {
     if (confirm('Are you sure you want to delete this family?')) {
         axios.delete(`http://localhost:9090/api/families/${name}`)
             .then(response => {
-                console.log('Delete response:', response.data);
-                fetchFamilies(); // Refresh the family list
+                const row = button.parentNode.parentNode;
+                row.parentNode.removeChild(row); 
             })
             .catch(error => console.error('Error deleting family:', error));
     }
@@ -88,7 +77,7 @@ function addFamily() {
     axios.post('http://localhost:9090/api/families', familyDto)
         .then(response => {
             console.log('Add response:', response.data); 
-            fetchFamilies(); // Refresh the family list
+            fetchFamilies(); 
             closeModal();    
         })
         .catch(error => {
@@ -114,7 +103,7 @@ function saveChanges() {
     axios.put(`http://localhost:9090/api/families/${activeName}`, familyDto)
         .then(response => {
             console.log('Update response:', response.data); 
-            fetchFamilies(); // Refresh the family list
+            fetchFamilies(); 
             closeUpdateModal(); 
         })
         .catch(error => {

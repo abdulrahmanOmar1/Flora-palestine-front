@@ -119,9 +119,15 @@ function displayRelatedPlants(plants) {
 
     plants.forEach(plant => {
         const plantHtml = `
-            <div class="box-product">
-                <div class="box-product-img"><a href="plantpage.html?id=${plant.id}"><img src="${plant.imageUrls[0]}" alt="${plant.normalName}" width="270" height="264" loading="lazy"/></a></div>
-                <p><a href="plantpage.html?id=${plant.id}">${plant.normalName}</a></p>
+            <div class="item">
+                <div class="box-product-img">
+                    <a href="plantpage.html?id=${plant.id}">
+                        <img src="${plant.imageUrls[0]}" alt="${plant.normalName}" width="270" height="264" loading="lazy"/>
+                    </a>
+                </div>
+                <p>
+                    <a href="plantpage.html?id=${plant.id}">${plant.normalName}</a>
+                </p>
             </div>`;
         container.innerHTML += plantHtml;
     });

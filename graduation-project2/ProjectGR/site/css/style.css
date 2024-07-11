@@ -1,26 +1,5 @@
 @charset "UTF-8";
-/**
- * [Table of contents]
- *   1 Base
- *     1.1 Reset Styles
- *   2 Main
- *     2.1 Main
- *   3 Components
- *   4 Helpers
- *   5 Modules
- *   6 Plugins
- *     6.1 Owl Carousel
- *     6.2 Material Parallax
- *     6.3 Google Map
- *     6.4 Lightgallery
- *     6.5 Countdown
- *     6.6 Progress Circle
- */
-/** @group Base */
-/** @section Reset Styles*/
 
-
-/* Styles for modal window */
 
 #submit-btn:hover {
     background-color: rgb(11, 67, 188);

@@ -3,12 +3,17 @@ document.addEventListener('DOMContentLoaded', function() {
     const emailInput = document.getElementById('form3Example3');
     const passwordInput = document.getElementById('form3Example4');
 
-    loginButton.addEventListener('click', function() {
+    // Function to handle login
+    function handleLogin() {
         const email = emailInput.value.trim();
         const password = passwordInput.value.trim();
 
         if (!email || !password) {
-            alert('Please enter both an email and a password.');
+            Swal.fire({
+                icon: 'warning',
+                title: 'Warning',
+                text: 'Please enter both an email and a password.'
+            });
             return;
         }
 
@@ -30,7 +35,27 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .catch(error => {
             console.error('Error:', error);
-            alert('An error occurred. Please try again later.');
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'An error occurred. Please try again later.'
+            });
         });
+    }
+
+    // Event listener for the login button click
+    loginButton.addEventListener('click', handleLogin);
+
+    // Event listener for pressing Enter in the input fields
+    emailInput.addEventListener('keydown', function(event) {
+        if (event.key === 'Enter') {
+            handleLogin();
+        }
+    });
+
+    passwordInput.addEventListener('keydown', function(event) {
+        if (event.key === 'Enter') {
+            handleLogin();
+        }
     });
 });

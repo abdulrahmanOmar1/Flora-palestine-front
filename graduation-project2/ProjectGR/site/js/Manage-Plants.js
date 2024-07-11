@@ -5,8 +5,13 @@ document.addEventListener('DOMContentLoaded', function() {
     const userRole = Cookies.get('role');
 
     if (!userId || !userEmail || !userRole) {
-        alert('You must be logged in to access this page.');
-        window.location.href = 'login.html'; // Redirect to login page
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'You must be logged in to access this page.',
+        }).then(() => {
+            window.location.href = 'login.html'; // Redirect to login page
+        });
         return;
     }
 
@@ -89,15 +94,33 @@ function populateFamilyDropdowns(families) {
 }
 
 function deletePlant(id, button) {
-    if (confirm('Are you sure you want to delete this plant?')) {
-        axios.delete(`http://localhost:9090/api/plants/delete/${id}`)
-            .then(response => {
-                const row = button.parentNode.parentNode;
-                row.parentNode.removeChild(row);
-                fetchAllPlants(); // Refresh the plant list
-            })
-            .catch(error => console.error('Error deleting plant:', error));
-    }
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            axios.delete(`http://localhost:9090/api/plants/delete/${id}`)
+                .then(response => {
+                    const row = button.parentNode.parentNode;
+                    row.parentNode.removeChild(row);
+                    fetchAllPlants(); // Refresh the plant list
+                    Swal.fire(
+                        'Deleted!',
+                        'Your file has been deleted.',
+                        'success'
+                    );
+                })
+                .catch(error => {
+                    console.error('Error deleting plant:', error);
+                    Swal.fire('Error!', 'Failed to delete the plant.', 'error');
+                });
+        }
+    });
 }
 
 function openUpdateModal(id) {
@@ -146,11 +169,15 @@ function addPlant() {
     checkboxes.forEach((checkbox) => {
         selectedAreas.push(checkbox.value);
     });
-    console.log(selectedAreas);    const color = document.getElementById('color').value;
+    const color = document.getElementById('color').value;
     const imageFiles = document.getElementById('newPlantImages').files;
 
     if (!normalName || !scientificName || imageFiles.length === 0 || !family) {
-        alert('Please fill in all required fields (Plant Name, Scientific Name, Family, and select at least one image).');
+        Swal.fire({
+            icon: 'warning',
+            title: 'Missing Information',
+            text: 'Please fill in all required fields (Plant Name, Scientific Name, Family, and select at least one image).',
+        });
         return;
     }
 
@@ -171,7 +198,10 @@ function addPlant() {
             uploadImages(scientificName, imageFiles);
             closeModal();
         })
-        .catch(error => console.error('Error adding plant:', error));
+        .catch(error => {
+            console.error('Error adding plant:', error);
+            Swal.fire('Error!', 'Failed to add the plant.', 'error');
+        });
 }
 
 function uploadImages(scientificName, imageFiles) {
@@ -221,8 +251,12 @@ function saveChanges() {
         console.log('Plant updated successfully:', response.data);
         fetchAllPlants(); // Refresh the plant list
         closeUpdateModal();
+        Swal.fire('Success!', 'Plant updated successfully.', 'success');
     })
-    .catch(error => console.error('Error updating plant:', error));
+    .catch(error => {
+        console.error('Error updating plant:', error);
+        Swal.fire('Error!', 'Failed to update the plant.', 'error');
+    });
 }
 
 function filterPlants() {

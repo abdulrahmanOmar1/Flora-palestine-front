@@ -1,0 +1,45 @@
+/* Styles for the Related Plants section */
+#related-plants .item {
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    overflow: hidden;
+    margin: 10px;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: calc(25% - 20px); 
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#related-plants .item:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+#related-plants .item img {
+    width: 100%;
+    height: auto;
+    display: block;
+    max-height: 200px;
+}
+
+#related-plants .item p {
+    font-size: 1em;
+    margin: 15px;
+}
+
+/* Owl Carousel General Styles */
+.owl-carousel.owl-products {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.owl-carousel.owl-products .item {
+    flex: 0 0 auto;
+    width: calc(25% - 20px); 
+    margin: 10px;
+}

@@ -35,6 +35,8 @@
     <script type="text/javascript" src="./cssfiles-MapFloraPalestine/jquery.history.js.download"></script>
     <script type="text/javascript" src="./cssfiles-MapFloraPalestine/jquery.swipebox.min.js.download"></script>
     <script type="text/javascript" src="./cssfiles-MapFloraPalestine/flora.js.download"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
     <script>
         document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
     </script>
@@ -93,6 +95,31 @@
             height: auto;
         }
     </style>
+
+<style>
+    .popup {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: #fff;
+        padding: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        z-index: 10001;
+    }
+
+    .popup-content {
+        position: relative;
+    }
+
+    .close-popup {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        cursor: pointer;
+    }
+</style>
+
 </head>
 
 <body>
@@ -340,14 +367,13 @@
                         <legend>search form</legend>
                         <div class="row">
                             <input type="submit" value="search" title="Search enter">
-                            <input type="search" class="search" title="הקלד מיקום" placeholder="הקלד מיקום">
                         </div>
                     </fieldset>
                 </form>
                 <div class="big-map">
                     <div class="btn-set">
-                        <a href="https://flora.org.il/en/plants/#" class="btn1">המיקום הנוכחי</a>
-                        <a href="https://flora.org.il/en/plants/#" class="btn2">בחר איזור בארץ</a>
+                        <a href="https://flora.org.il/en/plants/#" class="btn1"></a>
+                        <a href="https://flora.org.il/en/plants/#" class="btn2"></a>
                     </div>
                     <script type="text/javascript" src="./cssfiles-MapFloraPalestine/js(1)">
                     </script>
@@ -359,19 +385,18 @@
                         <div id="map-hider">This feature is not available yet<br><br>Please try again soon!</div>
                     </div>
                     <div class="map-description">
-                        <span>טווח לחיפוש מהמיקום הנבחר:</span>
-                        <a href="https://flora.org.il/en/plants/#" class="link">ביטול</a>
-                        <a href="https://flora.org.il/en/plants/#" id="save-coord" class="button">חפש</a>
+                        <a href="https://flora.org.il/en/plants/#" class="link"></a>
+                        <a href="https://flora.org.il/en/plants/#" id="save-coord" class="button"></a>
                         <div class="data-line ui-slider ui-slider-horizontal ui-slider-rtl ui-widget ui-widget-content ui-corner-all">
                             <div class="slider-line">
                                 <input type="hidden" class="min" value="5">
                                 <input type="hidden" class="max" value="50">
                                 <input type="hidden" class="cur-val" value="5">
-                                <a href="https://flora.org.il/en/plants/#" class="ui-slider-handle ui-state-default ui-corner-all" style="left: 100%;"><span class="point point-center"><em>5</em> <span>ק”מ</span></span></a>
+                                <a href="https://flora.org.il/en/plants/#" class="ui-slider-handle ui-state-default ui-corner-all" style="left: 100%;"><span class="point point-center"><em>5</em> <span></span></span></a>
                             </div>
-                            <span class="point point1">50<span>ק”מ</span></span>
-                            <span class="point point3">5 <span>ק”מ</span></span>
-                            <span class="point point-center">15 <span>ק”מ</span></span>
+                            <span class="point point1">50<span></span></span>
+                            <span class="point point3">5 <span></span></span>
+                            <span class="point point-center">15 <span></span></span>
                             <div class="ui-slider-range ui-slider-range-max ui-widget-header" style="width: 100%;"></div>
                         </div>
                     </div>

@@ -208,3 +208,102 @@
     width: 100%; /* التأكد من العرض الكامل */
     box-sizing: border-box; /* تأكد من تضمين الحواف ضمن العرض */
 }
+/* Ensure that each plant item is displayed correctly */
+
+
+
+
+
+.plants-container .box-product p {
+  font-size: 1.25rem; /* Adjust font size for clarity */
+  font-weight: bold;
+  margin: 10px 0 0 0; /* Adjust margins for better spacing */
+  color: #333; /* Change color as needed */
+}
+/* Apply bold font to the family filter options */
+.family-filter .family-filter-options div {
+    font-weight: bold;
+    font-size: 20px;
+    color: black;
+  }
+  
+
+
+
+ /* Container for the plants */
+.plants-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+/* Style for each plant card */
+.box-product {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin: 10px;
+    padding: 15px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: auto; /* Automatically adjust height */
+}
+
+/* Style for the image inside the card */
+.box-product-img {
+    margin-bottom: 15px;
+    width: 100%;
+    overflow: hidden; /* Hide overflow to keep the aspect ratio */
+}
+
+.box-product-img img {
+    width: 100%;
+    height: 200px; /* Set a fixed height for the images */
+    object-fit: cover; /* Cover the area while maintaining the aspect ratio */
+    border-radius: 4px;
+}
+
+/* Style for the plant name */
+.box-product p {
+    font-size: 1rem; /* Adjust font size for clarity */
+    font-weight: bold;
+    margin: 10px 0 0 0; /* Adjust margins for better spacing */
+    color: #333; /* Change color as needed */
+}
+
+/* Style for the button */
+.box-product a.button {
+    margin-top: 10px; /* Add margin to separate the button from the title */
+}
+
+/* Hover effect for the card */
+.box-product:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+.animated-text {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 1s ease-out, transform 1s ease-out;
+  }
+  
+  .animated-text {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .section-md {
+    padding: 2rem 0;
+  }
+  
+  .bg-accent {
+    background-color: #f0f0f0;
+  }
+  
+  .text-primary-dark {
+    color: #333;
+    font-size: 1.5rem;
+    text-align: center;
+  }
+  

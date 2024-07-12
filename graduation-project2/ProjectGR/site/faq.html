@@ -2,7 +2,7 @@
 <html class="wide wow-animation" lang="en">
   <head>
     <!-- Site Title-->
-    <title>Home-Flora Palestine</title>
+    <title>FAQ - Flora Palestine</title>
     <meta name="format-detection" content="telephone=no">
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/shop.css">
     <link href="img/favicon.ico" rel="icon">
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@2.2.1/src/js.cookie.min.js"></script>
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -37,6 +38,58 @@
 
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
+    <style>
+      .user-menu {
+          position: relative;
+          display: inline-block;
+      }
+
+      .user-menu-button {
+          background-color: orange;
+          color: white;
+          border: none;
+          border-radius: 50%;
+          width: 40px;
+          height: 40px;
+          font-size: 18px;
+          text-align: center;
+          line-height: 40px;
+          cursor: pointer;
+          transition: background-color 0.3s;
+      }
+
+      .user-menu-button:hover {
+          background-color: darkorange;
+      }
+
+      .user-menu-content {
+          display: none;
+          position: absolute;
+          right: 0;
+          background-color: white;
+          min-width: 120px;
+          box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+          z-index: 1;
+          border-radius: 5px;
+          overflow: hidden;
+      }
+
+      .user-menu-content a {
+          color: black;
+          padding: 12px 16px;
+          text-decoration: none;
+          display: block;
+          transition: background-color 0.3s;
+      }
+
+      .user-menu-content a:hover {
+          background-color: #f1f1f1;
+      }
+
+      .user-menu:hover .user-menu-content {
+          display: block;
+      }
+    </style>
   </head>
   <body>
     <!-- Page preloader-->
@@ -55,150 +108,54 @@
         <div class="rd-navbar-wrap">
           <nav class="rd-navbar" data-layout="rd-navbar-fixed" data-md-device-layout="rd-navbar-fixed" data-lg-device-layout="rd-navbar-fullwidth" data-xl-device-layout="rd-navbar-fullwidth" data-xxl-device-layout="rd-navbar-fullwidth" data-sm-layout="rd-navbar-fixed" data-md-layout="rd-navbar-fixed" data-lg-layout="rd-navbar-fullwidth" data-xl-layout="rd-navbar-fullwidth" data-xxl-layout="rd-navbar-fullwidth" data-md-stick-up-offset="73px" data-lg-stick-up-offset="93px" data-stick-up="true" data-sm-stick-up="true" data-md-stick-up="true" data-lg-stick-up="true" data-xl-stick-up="true" data-xxl-stick-up="true">
             <div class="rd-navbar-collapse-toggle" data-rd-navbar-toggle=".rd-navbar-collapse"><span></span></div>
-            <div class="">
-              <div class="rd-navbar-panel">
-                <!-- RD Navbar Toggle-->
-                <button class="rd-navbar-toggle" data-rd-navbar-toggle=".rd-navbar-nav-wrap"><span></span></button>
-                <!-- RD Navbar Brand-->
-              </div>
-              <div class="rd-navbar-aside rd-navbar-collapse">
-                <address class="contact-info">
-                  <ul class="list-address">
-                    <li>
-                    <!-- Contact Info -->
-                    </li>
-                  </ul>
-                  <ul class="list-inline mobile-element">
-                    <li><a class="fa fa-facebook text-white" href="#"></a></li>
-                    <li><a class="fa fa-google-plus text-white" href="#"></a></li>
-                    <li><a class="fa fa-linkedin text-white" href="#"></a></li>
-                    <li><a class="fa fa-twitter text-white" href="#"></a></li>
-                  </ul>
-                </address>
-              </div>
-            </div>
             <div class="rd-navbar-inner">
               <!-- RD Navbar Panel-->
               <div class="rd-navbar-aside-wrap">
                 <div class="logo" >
                   <a href="index.html" style="font-family: 'Cambria', 'Cochin', 'Georgia', 'Times', 'Times New Roman', serif; color: white; text-decoration: none;">
                     <h3 style="color: white;">Flora Palestine</h3>
-                </a>
+                  </a>
                 </div>
                 <div class="rd-navbar-nav-wrap">
                   <ul class="rd-navbar-nav">
-                    <li class="rd-nav-item active"><a class="rd-nav-link" href="index.html">Home
-                        <svg class="button-santos" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges">
-                          <rect class="shape" width="100%" height="100%" x="0" y="0"></rect>
-                        </svg></a>
-                    </li>
-                    <li class="rd-nav-item"><a class="rd-nav-link" href="#">About us
-                        <svg class="button-santos" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges">
-                          <rect class="shape" width="100%" height="100%" x="0" y="0"></rect>
-                        </svg></a>
+                    <li class="rd-nav-item active"><a class="rd-nav-link" href="index.html">Home</a></li>
+                    <li class="rd-nav-item"><a class="rd-nav-link" href="#">About us</a>
                       <ul class="rd-menu rd-navbar-dropdown">
-                        <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="about-us.html">About us</a>
-                        </li>
-                        <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="careers.html">Careers</a>
-                        </li>
-                        <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="faq.html">FAQ</a>
-                          <li class="rd-dropdown-item active"><a class="rd-dropdown-link" href="Our vision.html">Our vision</a>
-                        </li>
+                        <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="about-us.html">About us</a></li>
+                        <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="careers.html">Careers</a></li>
+                        <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="faq.html">FAQ</a></li>
+                        <li class="rd-dropdown-item active"><a class="rd-dropdown-link" href="Our vision.html">Our vision</a></li>
                       </ul>
                     </li>
-                    <li class="rd-nav-item"><a class="rd-nav-link" href="services.html">Services
-                        <svg class="button-santos" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges">
-                          <rect class="shape" width="100%" height="100%" x="0" y="0"></rect>
-                        </svg></a>
-                    </li>
-                    <li class="rd-nav-item"><a class="rd-nav-link" href="booking.html">Booking
-                        <svg class="button-santos" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges">
-                          <rect class="shape" width="100%" height="100%" x="0" y="0"></rect>
-                        </svg></a>
-                    </li>
-                    <li class="rd-nav-item"><a class="rd-nav-link" href="#">Blog
-                        <svg class="button-santos" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges">
-                          <rect class="shape" width="100%" height="100%" x="0" y="0"></rect>
-                        </svg></a>
+                    <li class="rd-nav-item"><a class="rd-nav-link" href="services.html">Services</a></li>
+                    <li class="rd-nav-item"><a class="rd-nav-link" href="#">Scientific articles</a>
                       <ul class="rd-menu rd-navbar-dropdown">
-                        <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="">Blog</a>
-                        </li>
-                        <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="">Single post</a>
-                        </li>
+                        <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="blog.html">Scientific articles</a></li>
+                        <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="single-post.html">Single scientific articles</a></li>
                       </ul>
                     </li>
-                    <li class="rd-nav-item"><a class="rd-nav-link" href="#">Shop
-                        <svg class="button-santos" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges">
-                          <rect class="shape" width="100%" height="100%" x="0" y="0"></rect>
-                        </svg></a>
+                    <li class="rd-nav-item"><a class="rd-nav-link" href="#">Shop</a>
                       <ul class="rd-menu rd-navbar-dropdown">
-                        <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="shop.html">Shop</a>
-                        </li>
-                        <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="category.html">Category</a>
-                        </li>
-                        <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="product-page.html">Product page</a>
-                        </li>
-                        <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="shopping-cart.html">Shopping cart</a>
-                        </li>
-                        <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="checkout.html">Checkout</a>
-                        </li>
+                        <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="shop.html">Shop</a></li>
                       </ul>
                     </li>
-                    <li class="rd-nav-item"><a class="rd-nav-link" href="contacts.html">Contacts
-                        <svg class="button-santos" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges">
-                          <rect class="shape" width="100%" height="100%" x="0" y="0"></rect>
-                        </svg></a>
-                    </li>
-                    <svg class="button-santos" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges">
-                      <rect class="shape" width="100%" height="100%" x="0" y="0"></rect>
-                    </svg>
-                      <ul class="rd-menu rd-navbar-megamenu">
-                        <li class="rd-megamenu-item">
-                          <p class="rd-megamenu-header">Layouts</p>
-                          <ul class="rd-megamenu-list">
-                            <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="home-classic.html">Home classic</a></li>
-                            <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="home-modern.html">Home modern</a></li>
-                            <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="home-creative.html">Home creative</a></li>
-                          </ul>
-                        </li>
-                        <li class="rd-megamenu-item">
-                          <p class="rd-megamenu-header">Gallery</p>
-                          <ul class="rd-megamenu-list">
-                            <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="gallery.html">Gallery</a></li>
-                            <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="fullwidth-gallery.html">Fullwidth gallery</a></li>
-                            <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="gallery-2-column.html">Gallery 2 column</a></li>
-                          </ul>
-                        </li>
-                        <li class="rd-megamenu-item">
-                          <p class="rd-megamenu-header">Pages</p>
-                          <ul class="rd-megamenu-list">
-                            <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="404.html">404</a></li>
-                            <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="503.html">503</a></li>
-                            <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="coming-soon.html">Coming Soon</a></li>
-                            <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="maintenance.html">Maintenance</a></li>
-                            <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="site-map.html">Site map</a></li>
-                            <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="search-results.html">Search results</a></li>
-                            <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="privacy-policy.html">Privacy policy</a></li>
-                          </ul>
-                        </li>
-                        <li class="rd-megamenu-item">
-                          <p class="rd-megamenu-header">Elements</p>
-                          <ul class="rd-megamenu-list">
-                            <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="buttons.html">Buttons</a></li>
-                            <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="forms.html">Forms</a></li>
-                            <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="grid.html">Grid</a></li>
-                            <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="progress-bars.html">Progress bars</a></li>
-                            <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="tables.html">Tables</a></li>
-                            <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="tabs-&amp;-accordions.html">Tabs &amp; accordions</a></li>
-                            <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="typography.html">Typography</a></li>
-                          </ul>
-                        </li>
-                      </ul>
+                    <li class="rd-nav-item"><a class="rd-nav-link" href="contacts.html">Contacts</a></li>
+                    <li class="rd-nav-item">
+                      <svg class="button-santos" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges">
+                        <rect class="shape" width="100%" height="100%" x="0" y="0"></rect>
+                      </svg>
                     </li>
                   </ul>
                 </div>
-                <ul class="list-inline desktop-element" >
-                  <li><a class="fa fa-user text-white" href="Login.html" style="font-size: 24px;"></a></li>
+                <ul class="list-inline desktop-element">
+                  <li class="login-link"><a class="fa fa-user text-white" href="Login.html" style="font-size: 24px;"></a></li>
+                  <li class="user-menu" style="display: none;">
+                    <button class="user-menu-button">HA</button>
+                    <div class="user-menu-content">
+                      <a href="user-account.html" id="myAccountButton">My Account</a>
+                      <a href="#" id="logoutButton">Log out</a>
+                    </div>
+                  </li>
                 </ul>
               </div>
             </div>
@@ -303,162 +260,169 @@
                     </div>
                   </div>
                 </div>
-
-                <div class="card card-custom card-custom-default">
-                  <div class="card-custom-heading card-header" role="tab">
-                    <p class="card-custom-title"><a class="collapsed" id="" role="button" data-bs-toggle="collapse" data-bs-parent="#accordion1" href="#accordion1Collapse6" aria-controls="accordion1Collapse6" aria-expanded="false">Why do you charge more to cut my grass when it is overgrown?</a></p>
-                  </div>
-                  <div class="card-custom-collapse collapse" id="accordion1Collapse6" data-bs-parent="#accordion1" role="tabpanel" aria-labelledby="accordion1Heading6">
-                    <div class="card-custom-body">
-                      <p>We charge more to cut grass that is overgrown because it puts substantially more wear on our equipment and we sometimes have to double cut which takes more time. To avoid this additional cost, we recommend that you get your lawn serviced every 10-14 days. This will prevent overgrowth and keep your turf healthy during the summer months.</p>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="card card-custom card-custom-default">
-                  <div class="card-custom-heading card-header" role="tab">
-                    <p class="card-custom-title"><a class="collapsed" id="accordion1Heading7" role="button" data-bs-toggle="collapse" data-bs-parent="#accordion1" href="#accordion1Collapse7" aria-controls="accordion1Collapse7" aria-expanded="false">Why do you charge more to cut my grass when it is overgrown?</a></p>
-                  </div>
-                  <div class="card-custom-collapse collapse" id="accordion1Collapse7" data-bs-parent="#accordion1" role="tabpanel" aria-labelledby="accordion1Heading7">
-                    <div class="card-custom-body">
-                      <p>We charge more to cut grass that is overgrown because it puts substantially more wear on our equipment and we sometimes have to double cut which takes more time. To avoid this additional cost, we recommend that you get your lawn serviced every 10-14 days. This will prevent overgrowth and keep your turf healthy during the summer months.</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="card card-custom card-custom-default">
-                  <div class="card-custom-heading card-header" role="tab">
-                    <p class="card-custom-title"><a class="collapsed" id="accordion1Heading8" role="button" data-bs-toggle="collapse" data-bs-parent="#accordion1" href="#accordion1Collapse8" aria-controls="accordion1Collapse8" aria-expanded="false">Why do you charge more to cut my grass when it is overgrown?</a></p>
-                  </div>
-                  <div class="card-custom-collapse collapse" id="accordion1Collapse8" data-bs-parent="#accordion1" role="tabpanel" aria-labelledby="accordion1Heading8">
-                    <div class="card-custom-body">
-                      <p>We charge more to cut grass that is overgrown because it puts substantially more wear on our equipment and we sometimes have to double cut which takes more time. To avoid this additional cost, we recommend that you get your lawn serviced every 10-14 days. This will prevent overgrowth and keep your turf healthy during the summer months.</p>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="card card-custom card-custom-default">
-                  <div class="card-custom-heading card-header" role="tab">
-                    <p class="card-custom-title"><a class="collapsed" id="accordion1Heading9" role="button" data-bs-toggle="collapse" data-bs-parent="#accordion1" href="#accordion1Collapse9" aria-controls="accordion1Collapse9" aria-expanded="false">Why do you charge more to cut my grass when it is overgrown?</a></p>
-                  </div>
-                  <div class="card-custom-collapse collapse" id="accordion1Collapse9" data-bs-parent="#accordion1" role="tabpanel" aria-labelledby="accordion1Heading9">
-                    <div class="card-custom-body">
-                      <p>We charge more to cut grass that is overgrown because it puts substantially more wear on our equipment and we sometimes have to double cut which takes more time. To avoid this additional cost, we recommend that you get your lawn serviced every 10-14 days. This will prevent overgrowth and keep your turf healthy during the summer months.</p>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="card card-custom card-custom-default">
-                  <div class="card-custom-heading card-header" role="tab">
-                    <p class="card-custom-title"><a class="collapsed" id="accordion1Heading10" role="button" data-bs-toggle="collapse" data-bs-parent="#accordion1" href="#accordion1Collapse10" aria-controls="accordion1Collapse10" aria-expanded="false">Why do you charge more to cut my grass when it is overgrown?</a></p>
-                  </div>
-                  <div class="card-custom-collapse collapse" id="accordion1Collapse10" data-bs-parent="#accordion1" role="tabpanel" aria-labelledby="accordion1Heading10">
-                    <div class="card-custom-body">
-                      <p>We charge more to cut grass that is overgrown because it puts substantially more wear on our equipment and we sometimes have to double cut which takes more time. To avoid this additional cost, we recommend that you get your lawn serviced every 10-14 days. This will prevent overgrowth and keep your turf healthy during the summer months.</p>
-                    </div>
-                  </div>
-                </div>
-
-
+                <!-- More FAQ Items -->
               </div>
             </div>
           </div>
         </div>
       </section>
        <!-- Footer Start -->
-       <div class="container-fluid bg-dark text-light footer mt-5 py-5 wow fadeIn" data-wow-delay="0.1s">
-        <div class="container py-5">
-            <div class="row g-5">
-                <div class="col-lg-3 col-md-6">
-                    <h4 class="text-white mb-4">Our Office</h4>
-                    <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>palestine</p>
-                    <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+9725900000</p>
-                    <p class="mb-2"><i class="fa fa-envelope me-3"></i>FloraPalestine@example.com</p>
-                    <div class="d-flex pt-2">
-                        <a class="btn btn-square btn-outline-light rounded-circle me-2" href=""><i class="fab fa-twitter"></i></a>
-                        <a class="btn btn-square btn-outline-light rounded-circle me-2" href=""><i class="fab fa-facebook-f"></i></a>
-                        <a class="btn btn-square btn-outline-light rounded-circle me-2" href=""><i class="fab fa-youtube"></i></a>
-                        <a class="btn btn-square btn-outline-light rounded-circle me-2" href=""><i class="fab fa-linkedin-in"></i></a>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <h4 class="text-white mb-4">Services</h4>
-                    <a class="btn btn-link" href="">Landscaping</a>
-                    <a class="btn btn-link" href="">Pruning plants</a>
-                    <a class="btn btn-link" href="">plants</a>
-                    <a class="btn btn-link" href="">Pruning plants</a>
-                    <a class="btn btn-link" href="">Pruning plants</a>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <h4 class="text-white mb-4">Quick Links</h4>
-                    <a class="btn btn-link" href="">About Us</a>
-                    <a class="btn btn-link" href="">Contact Us</a>
-                    <a class="btn btn-link" href="">Our Services</a>
-                    <a class="btn btn-link" href="">Terms & Condition</a>
-                    <a class="btn btn-link" href="">Support</a>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <h4 class="text-white mb-4">Newsletter</h4>
-                    <div class="position-relative w-100">
-                        <input class="form-control bg-light border-light w-100 py-3 ps-4 pe-5 newsletter-input" type="email" placeholder="Your email">
-                        <button type="button" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2 newsletter-submit">SignUp</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Footer End -->
-  
-  
-    <!-- Copyright Start -->
-    <div class="container-fluid copyright py-4">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                    &copy; <a class="border-bottom" href="#">FloraPalestine</a>, All Right Reserved 2024.
-                </div>
-                
-            </div>
-        </div>
-    </div>
-    <!-- Copyright End -->
-  
-      <!-- Global Mailform Output-->
-      <div class="snackbars" id="form-output-global"></div>
-      <!-- Javascript-->
-      <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-      <script src="js/core.min.js"></script>
-      <script src="js/script.js"></script>
-      <script>
-        document.addEventListener('DOMContentLoaded', function() {
-          window.onload = function() {
-            document.querySelector('.preloader').style.display = 'none';
-          };
-  
-          const newsletterSubmitButton = document.querySelector('.newsletter-submit');
-          if (newsletterSubmitButton) {
-            newsletterSubmitButton.addEventListener('click', function(event) {
-              const emailInput = document.querySelector('.newsletter-input');
-              const email = emailInput.value;
-  
-              if (email) {
-                axios.post('/subscribe', { email: email })
-                  .then(function(response) {
-                    if (response.data.success) {
-                      alert('Thank you for subscribing!');
-                    } else {
-                      alert('There was an error. Please try again.');
-                    }
-                  })
-                  .catch(function(error) {
+    <div class="container-fluid bg-dark text-light footer mt-5 py-5 wow fadeIn" data-wow-delay="0.1s">
+      <div class="container py-5">
+          <div class="row g-5">
+              <div class="col-lg-3 col-md-6">
+                  <h4 class="text-white mb-4">Our Office</h4>
+                  <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>Palestine</p>
+                  <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+9725900000</p>
+                  <p class="mb-2"><i class="fa fa-envelope me-3"></i>FloraPalestine@example.com</p>
+                  <div class="d-flex pt-2">
+                      <a class="btn btn-square btn-outline-light rounded-circle me-2" href=""><i class="fab fa-twitter"></i></a>
+                      <a class="btn btn-square btn-outline-light rounded-circle me-2" href=""><i class="fab fa-facebook-f"></i></a>
+                      <a class="btn btn-square btn-outline-light rounded-circle me-2" href=""><i class="fab fa-youtube"></i></a>
+                      <a class="btn btn-square btn-outline-light rounded-circle me-2" href=""><i class="fab fa-linkedin-in"></i></a>
+                  </div>
+              </div>
+              <div class="col-lg-3 col-md-6">
+                  <h4 class="text-white mb-4">Services</h4>
+                  <a class="btn btn-link" href="">Landscaping</a>
+                  <a class="btn btn-link" href="">Pruning plants</a>
+                  <a class="btn btn-link" href="">plants</a>
+                  <a class="btn btn-link" href="">Pruning plants</a>
+                  <a class="btn btn-link" href="">Pruning plants</a>
+              </div>
+              <div class="col-lg-3 col-md-6">
+                  <h4 class="text-white mb-4">Quick Links</h4>
+                  <a class="btn btn-link" href="">About Us</a>
+                  <a class="btn btn-link" href="">Contact Us</a>
+                  <a class="btn btn-link" href="">Our Services</a>
+                  <a class="btn btn-link" href="">Terms & Condition</a>
+                  <a class="btn btn-link" href="">Support</a>
+              </div>
+              <div class="col-lg-3 col-md-6">
+                  <h4 class="text-white mb-4">Newsletter</h4>
+                  <div class="position-relative w-100">
+                      <input class="form-control bg-light border-light w-100 py-3 ps-4 pe-5 newsletter-input" type="email" placeholder="Your email">
+                      <button type="button" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2 newsletter-submit">SignUp</button>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+  <!-- Footer End -->
+
+  <!-- Copyright Start -->
+  <div class="container-fluid copyright py-4">
+      <div class="container">
+          <div class="row">
+              <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                  &copy; <a class="border-bottom" href="#">FloraPalestine</a>, All Right Reserved 2024.
+              </div>
+              
+          </div>
+      </div>
+  </div>
+  <!-- Copyright End -->
+
+    <!-- Global Mailform Output-->
+    <div class="snackbars" id="form-output-global"></div>
+    <!-- Javascript-->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="js/core.min.js"></script>
+    <script src="js/script.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        window.onload = function() {
+          document.querySelector('.preloader').style.display = 'none';
+        };
+
+        const teamCarousel = document.querySelector('.owl-carousel.owl-classic');
+        if (teamCarousel) {
+          $(teamCarousel).owlCarousel({
+            items: 1,
+            loop: false,
+            margin: 30,
+            dots: true,
+            nav: true,
+            responsive: {
+              0: { items: 1 },
+              768: { items: 2 },
+              1024: { items: 3 }
+            }
+          });
+        }
+
+        const newsletterSubmitButton = document.querySelector('.newsletter-submit');
+        if (newsletterSubmitButton) {
+          newsletterSubmitButton.addEventListener('click', function(event) {
+            const emailInput = document.querySelector('.newsletter-input');
+            const email = emailInput.value;
+
+            if (email) {
+              axios.post('/subscribe', { email: email })
+                .then(function(response) {
+                  if (response.data.success) {
+                    alert('Thank you for subscribing!');
+                  } else {
                     alert('There was an error. Please try again.');
-                    console.error('Error:', error);
-                  });
-              } else {
-                alert('Please enter a valid email address.');
-              }
+                  }
+                })
+                .catch(function(error) {
+                  alert('There was an error. Please try again.');
+                  console.error('Error:', error);
+                });
+            } else {
+              alert('Please enter a valid email address.');
+            }
+          });
+        }
+
+        // التحقق من تسجيل الدخول وعرض معلومات المستخدم
+        if (Cookies.get('userId')) {
+          sessionStorage.setItem('isLoggedIn', true);
+          sessionStorage.setItem('userId', Cookies.get('userId'));
+          sessionStorage.setItem('userEmail', Cookies.get('userEmail'));
+          sessionStorage.setItem('role', Cookies.get('role'));
+
+          console.log("User ID:", sessionStorage.getItem('userId'));
+          console.log("User Email:", sessionStorage.getItem('userEmail'));
+
+          const userMenu = document.querySelector('.user-menu');
+          const loginLink = document.querySelector('.login-link');
+          const userMenuButton = document.querySelector('.user-menu-button');
+          const userId = sessionStorage.getItem('userId');
+          const userRole = sessionStorage.getItem('role');
+
+          userMenu.style.display = 'inline-block';
+          loginLink.style.display = 'none';
+
+          axios.get(`http://localhost:9090/api/users/${userId}`)
+            .then(response => {
+              const user = response.data;
+              const firstName = user.firstName;
+              const lastName = user.lastName;
+              userMenuButton.textContent = `${firstName.charAt(0)}${lastName.charAt(0)}`;
+            })
+            .catch(error => {
+              console.log("Error:", error);
             });
-          }
-        });
-      </script>
-    </body>
-  </html>
+
+          const logoutButton = document.getElementById('logoutButton');
+          logoutButton.addEventListener('click', function() {
+            sessionStorage.clear();
+            Cookies.remove('userId');
+            Cookies.remove('userEmail');
+            Cookies.remove('role');
+            window.location.replace('login.html');
+          });
+        } else {
+          console.log("No user information found in cookies.");
+          const userMenu = document.querySelector('.user-menu');
+          userMenu.style.display = 'none';
+
+          const loginLink = document.querySelector('.login-link');
+          loginLink.style.display = 'inline-block';
+        }
+      });
+    </script>
+  </body>
+</html>

@@ -274,4 +274,11 @@ document.addEventListener("DOMContentLoaded", function() {
     toggleSearchButton.addEventListener('click', function() {
         searchContainer.classList.toggle('d-none');
     });
+
+    // Add click event listener for "All Plants" button
+    const allPlantsButton = document.getElementById('allPlantsButton');
+    allPlantsButton.addEventListener('click', function(event) {
+        event.preventDefault();
+        fetchPlants(0);
+    });
 });

@@ -79,3 +79,48 @@ body, button, input {
 #reply-content{
     background-color: black;
 }
+/* Add your specific styles here */
+#main-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+#header {
+    margin-bottom: 20px;
+}
+
+#reply-content {
+    width: 100%;
+    max-width: 600px;
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+#main-content {
+    display: flex;
+    width: 100%;
+    max-width: 600px;
+}
+
+#word-input {
+    flex-grow: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px 0 0 5px;
+}
+
+#submit-btn {
+    padding: 10px 20px;
+    border: 1px solid #ccc;
+    border-left: none;
+    border-radius: 0 5px 5px 0;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+}

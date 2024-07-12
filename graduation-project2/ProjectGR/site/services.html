@@ -13,14 +13,9 @@
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/fonts.css">
     <link rel="stylesheet" href="css/style.css">
-    <link rel="icon" href="images/palestine.png" type="image/x-icon">
-    <!-- Stylesheets-->
-    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Montserrat:400,700%7CLato:400,400i,700">
-    <link rel="stylesheet" href="css/bootstrap.css">
-    <link rel="stylesheet" href="css/fonts.css">
-    <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/shop.css">
     <link rel="stylesheet" href="css/service.css">
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@2.2.1/src/js.cookie.min.js"></script>
 
     <link href="img/favicon.ico" rel="icon">
 
@@ -45,6 +40,58 @@
 
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
+    <style>
+      .user-menu {
+          position: relative;
+          display: inline-block;
+      }
+
+      .user-menu-button {
+          background-color: orange;
+          color: white;
+          border: none;
+          border-radius: 50%;
+          width: 40px;
+          height: 40px;
+          font-size: 18px;
+          text-align: center;
+          line-height: 40px;
+          cursor: pointer;
+          transition: background-color 0.3s;
+      }
+
+      .user-menu-button:hover {
+          background-color: darkorange;
+      }
+
+      .user-menu-content {
+          display: none;
+          position: absolute;
+          right: 0;
+          background-color: white;
+          min-width: 120px;
+          box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+          z-index: 1;
+          border-radius: 5px;
+          overflow: hidden;
+      }
+
+      .user-menu-content a {
+          color: black;
+          padding: 12px 16px;
+          text-decoration: none;
+          display: block;
+          transition: background-color 0.3s;
+      }
+
+      .user-menu-content a:hover {
+          background-color: #f1f1f1;
+      }
+
+      .user-menu:hover .user-menu-content {
+          display: block;
+      }
+    </style>
   </head>
   <body>
     <!-- Page preloader-->
@@ -63,28 +110,6 @@
         <div class="rd-navbar-wrap">
           <nav class="rd-navbar" data-layout="rd-navbar-fixed" data-md-device-layout="rd-navbar-fixed" data-lg-device-layout="rd-navbar-fullwidth" data-xl-device-layout="rd-navbar-fullwidth" data-xxl-device-layout="rd-navbar-fullwidth" data-sm-layout="rd-navbar-fixed" data-md-layout="rd-navbar-fixed" data-lg-layout="rd-navbar-fullwidth" data-xl-layout="rd-navbar-fullwidth" data-xxl-layout="rd-navbar-fullwidth" data-md-stick-up-offset="73px" data-lg-stick-up-offset="93px" data-stick-up="true" data-sm-stick-up="true" data-md-stick-up="true" data-lg-stick-up="true" data-xl-stick-up="true" data-xxl-stick-up="true">
             <div class="rd-navbar-collapse-toggle" data-rd-navbar-toggle=".rd-navbar-collapse"><span></span></div>
-            <div class="">
-              <div class="rd-navbar-panel">
-                <!-- RD Navbar Toggle-->
-                <button class="rd-navbar-toggle" data-rd-navbar-toggle=".rd-navbar-nav-wrap"><span></span></button>
-                <!-- RD Navbar Brand-->
-              </div>
-              <div class="rd-navbar-aside rd-navbar-collapse">
-                <address class="contact-info">
-                  <ul class="list-address">
-                    <li>
-                    <!-- Contact Info -->
-                    </li>
-                  </ul>
-                  <ul class="list-inline mobile-element">
-                    <li><a class="fa fa-facebook text-white" href="#"></a></li>
-                    <li><a class="fa fa-google-plus text-white" href="#"></a></li>
-                    <li><a class="fa fa-linkedin text-white" href="#"></a></li>
-                    <li><a class="fa fa-twitter text-white" href="#"></a></li>
-                  </ul>
-                </address>
-              </div>
-            </div>
             <div class="rd-navbar-inner">
               <!-- RD Navbar Panel-->
               <div class="rd-navbar-aside-wrap">
@@ -95,118 +120,44 @@
                 </div>
                 <div class="rd-navbar-nav-wrap">
                   <ul class="rd-navbar-nav">
-                    <li class="rd-nav-item active"><a class="rd-nav-link" href="index.html">Home
-                        <svg class="button-santos" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges">
-                          <rect class="shape" width="100%" height="100%" x="0" y="0"></rect>
-                        </svg></a>
-                    </li>
-                    <li class="rd-nav-item"><a class="rd-nav-link" href="#">About us
-                        <svg class="button-santos" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges">
-                          <rect class="shape" width="100%" height="100%" x="0" y="0"></rect>
-                        </svg></a>
+                    <li class="rd-nav-item active"><a class="rd-nav-link" href="index.html">Home</a></li>
+                    <li class="rd-nav-item"><a class="rd-nav-link" href="#">About us</a>
                       <ul class="rd-menu rd-navbar-dropdown">
-                        <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="about-us.html">About us</a>
-                        </li>
-                        <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="careers.html">Careers</a>
-                        </li>
-                        <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="faq.html">FAQ</a>
-                          <li class="rd-dropdown-item active"><a class="rd-dropdown-link" href="Our vision.html">Our vision</a>
-                        </li>
+                        <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="about-us.html">About us</a></li>
+                        <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="careers.html">Careers</a></li>
+                        <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="faq.html">FAQ</a></li>
+                        <li class="rd-dropdown-item active"><a class="rd-dropdown-link" href="Our vision.html">Our vision</a></li>
                       </ul>
                     </li>
-                    <li class="rd-nav-item"><a class="rd-nav-link" href="services.html">Services
-                        <svg class="button-santos" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges">
-                          <rect class="shape" width="100%" height="100%" x="0" y="0"></rect>
-                        </svg></a>
-                    </li>
-                    <li class="rd-nav-item"><a class="rd-nav-link" href="booking.html">Booking
-                        <svg class="button-santos" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges">
-                          <rect class="shape" width="100%" height="100%" x="0" y="0"></rect>
-                        </svg></a>
-                    </li>
-                    <li class="rd-nav-item"><a class="rd-nav-link" href="#">Blog
-                        <svg class="button-santos" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges">
-                          <rect class="shape" width="100%" height="100%" x="0" y="0"></rect>
-                        </svg></a>
+                    <li class="rd-nav-item"><a class="rd-nav-link" href="services.html">Services</a></li>
+                    <li class="rd-nav-item"><a class="rd-nav-link" href="#">Scientific articles</a>
                       <ul class="rd-menu rd-navbar-dropdown">
-                        <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="">Blog</a>
-                        </li>
-                        <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="">Single post</a>
-                        </li>
+                        <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="blog.html">Scientific articles</a></li>
+                        <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="single-post.html">Single scientific articles</a></li>
                       </ul>
                     </li>
-                    <li class="rd-nav-item"><a class="rd-nav-link" href="#">Shop
-                        <svg class="button-santos" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges">
-                          <rect class="shape" width="100%" height="100%" x="0" y="0"></rect>
-                        </svg></a>
+                    <li class="rd-nav-item"><a class="rd-nav-link" href="#">Shop</a>
                       <ul class="rd-menu rd-navbar-dropdown">
-                        <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="shop.html">Shop</a>
-                        </li>
-                        <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="category.html">Category</a>
-                        </li>
-                        <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="product-page.html">Product page</a>
-                        </li>
-                        <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="shopping-cart.html">Shopping cart</a>
-                        </li>
-                        <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="checkout.html">Checkout</a>
-                        </li>
+                        <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="shop.html">Shop</a></li>
                       </ul>
                     </li>
-                    <li class="rd-nav-item"><a class="rd-nav-link" href="contacts.html">Contacts
-                        <svg class="button-santos" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges">
-                          <rect class="shape" width="100%" height="100%" x="0" y="0"></rect>
-                        </svg></a>
-                    </li>
-                    <svg class="button-santos" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges">
-                      <rect class="shape" width="100%" height="100%" x="0" y="0"></rect>
-                    </svg>
-                      <ul class="rd-menu rd-navbar-megamenu">
-                        <li class="rd-megamenu-item">
-                          <p class="rd-megamenu-header">Layouts</p>
-                          <ul class="rd-megamenu-list">
-                            <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="home-classic.html">Home classic</a></li>
-                            <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="home-modern.html">Home modern</a></li>
-                            <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="home-creative.html">Home creative</a></li>
-                          </ul>
-                        </li>
-                        <li class="rd-megamenu-item">
-                          <p class="rd-megamenu-header">Gallery</p>
-                          <ul class="rd-megamenu-list">
-                            <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="gallery.html">Gallery</a></li>
-                            <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="fullwidth-gallery.html">Fullwidth gallery</a></li>
-                            <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="gallery-2-column.html">Gallery 2 column</a></li>
-                          </ul>
-                        </li>
-                        <li class="rd-megamenu-item">
-                          <p class="rd-megamenu-header">Pages</p>
-                          <ul class="rd-megamenu-list">
-                            <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="404.html">404</a></li>
-                            <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="503.html">503</a></li>
-                            <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="coming-soon.html">Coming Soon</a></li>
-                            <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="maintenance.html">Maintenance</a></li>
-                            <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="site-map.html">Site map</a></li>
-                            <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="search-results.html">Search results</a></li>
-                            <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="privacy-policy.html">Privacy policy</a></li>
-                          </ul>
-                        </li>
-                        <li class="rd-megamenu-item">
-                          <p class="rd-megamenu-header">Elements</p>
-                          <ul class="rd-megamenu-list">
-                            <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="buttons.html">Buttons</a></li>
-                            <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="forms.html">Forms</a></li>
-                            <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="grid.html">Grid</a></li>
-                            <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="progress-bars.html">Progress bars</a></li>
-                            <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="tables.html">Tables</a></li>
-                            <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="tabs-&amp;-accordions.html">Tabs &amp; accordions</a></li>
-                            <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="typography.html">Typography</a></li>
-                          </ul>
-                        </li>
-                      </ul>
+                    <li class="rd-nav-item"><a class="rd-nav-link" href="contacts.html">Contacts</a></li>
+                    <li class="rd-nav-item">
+                      <svg class="button-santos" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges">
+                        <rect class="shape" width="100%" height="100%" x="0" y="0"></rect>
+                      </svg>
                     </li>
                   </ul>
                 </div>
-                <ul class="list-inline desktop-element" >
-                  <li><a class="fa fa-user text-white" href="Login.html" style="font-size: 24px;"></a></li>
+                <ul class="list-inline desktop-element">
+                  <li class="login-link"><a class="fa fa-user text-white" href="Login.html" style="font-size: 24px;"></a></li>
+                  <li class="user-menu" style="display: none;">
+                    <button class="user-menu-button">HA</button>
+                    <div class="user-menu-content">
+                      <a href="user-account.html" id="myAccountButton">My Account</a>
+                      <a href="#" id="logoutButton">Log out</a>
+                    </div>
+                  </li>
                 </ul>
               </div>
             </div>
@@ -282,6 +233,7 @@
                         <input class="form-control bg-light border-light w-100 py-3 ps-4 pe-5" type="text" placeholder="Your email">
                         <button type="submit" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">SignUp</button>
                     </div>
+                    <div class="newsletter-message" style="display:none;"></div>
                 </form>
             </div>
             
@@ -308,8 +260,6 @@
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script src="js/core.min.js"></script>
   <script src="js/script.js"></script>
-  <script src="js/index.js"></script>
   <script src="js/services.js"></script>
-
 </body>
 </html>

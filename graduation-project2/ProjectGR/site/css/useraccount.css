@@ -1,33 +1,32 @@
-/* Styling for the card */
 .card {
     margin-top: 50px;
     border-radius: 15px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+
 .card-title a {
-    color: #4CAF50; /* اللون الرئيسي للرابط */
-    text-decoration: none; /* إزالة التسطير الافتراضي */
-    font-weight: bold; /* جعل النص عريض */
-    font-size: 1.25rem; /* حجم الخط */
-    transition: color 0.3s ease, text-decoration 0.3s ease; /* تأثير التدرج عند التمرير */
+    color: #4CAF50;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.25rem;
+    transition: color 0.3s ease, text-decoration 0.3s ease;
     margin: 3px;
     padding: 10px;
 }
 
 .card-title a:hover {
-    color: #45a049; /* تغيير اللون عند التمرير */
-    text-decoration: underline; /* إضافة تسطير عند التمرير */
+    color: #45a049;
+    text-decoration: underline;
 }
 
 .card-title a:active {
-    color: #8b6739; /* تغيير اللون عند النقر */
+    color: #8b6739;
 }
 
 .card-title a:visited {
-    color: #4CAF50; /* تغيير اللون عند زيارة الرابط */
+    color: #4CAF50;
 }
 
-/* Styling for the card header */
 .card-header {
     background-color: #4CAF50;
     color: white;
@@ -35,24 +34,53 @@
     border-top-right-radius: 15px;
 }
 
-/* Styling for the rounded image */
 .rounded-img {
     display: block;
     margin: 0 auto 15px;
     border-radius: 50%;
     border: 3px solid #4CAF50;
-    width: 150px; /* Increase the size of the image */
-    height: 150px; /* Maintain the aspect ratio */
-    object-fit: cover; /* Ensure the image covers the container */
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    position: relative;
 }
 
-/* Styling for disabled form controls */
+.profile-image-container {
+    position: relative;
+    display: inline-block;
+}
+
+.image-overlay {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 50%;
+}
+
+.profile-image-container:hover .image-overlay {
+    opacity: 1;
+}
+
+.image-overlay button {
+    border: none;
+    background: none;
+    color: white;
+    font-size: 1.5rem;
+}
+
 .form-control:disabled {
     background-color: #f9f9f9;
     color: #6c757d;
 }
 
-/* Styling for the edit button */
 .btn-edit {
     background-color: #4CAF50;
     color: white;
@@ -63,7 +91,6 @@
     background-color: #45a049;
 }
 
-/* Modal styling */
 .modal-content {
     border-radius: 15px;
 }
@@ -83,4 +110,8 @@
 .modal-footer .btn-primary:hover {
     background-color: #45a049;
     border-color: #45a049;
+}
+
+.text-start {
+    text-align: left !important;
 }

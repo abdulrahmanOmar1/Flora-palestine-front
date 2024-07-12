@@ -1,21 +1,33 @@
 document.addEventListener("DOMContentLoaded", function() {
     const form = document.querySelector(".form-checkout");
     const placeOrderBtn = document.getElementById("place-order-btn");
+    const userInfo = document.getElementById("user-info");
 
     const userId = Cookies.get('userId');
     let subtotal = 0.00;
     let amount = 0.00;
 
     if (!userId) {
-        // Redirect to index.html if no orderId is found
+        // Redirect to index.html if no userId is found
         window.location.href = 'index.html';
         return;
     }
 
+    // Fetch user info and display in navbar
+    axios.get(`http://localhost:9090/api/users/${userId}`)
+        .then(response => {
+            const user = response.data;
+            userInfo.textContent = `${user.firstName} ${user.lastName}`;
+            userInfo.href = "user-account.html"; // Redirect to user account page
+        })
+        .catch(error => {
+            console.error("There was an error fetching the user details!", error);
+        });
+
     axios.get(`http://localhost:9090/api/carts/${userId}`)
         .then(response => {
             const order = response.data;
-            const orderTableBody = document.querySelector('.table-custom tbody');
+            const orderTableBody = document.querySelector('#order-summary');
 
             // Clear existing rows
             orderTableBody.innerHTML = '';
@@ -27,6 +39,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     <td><a class="link" href="#">${item.productName}</a></td>
                     <td class="price price-dark">₪${item.productPrice}</td>
                     <td class="price price-dark">${item.quantity}</td>
+                    <td class="price price-dark">₪${(item.productPrice * item.quantity).toFixed(2)}</td>
                 `;
                 orderTableBody.appendChild(row);
                 subtotal += item.productPrice * item.quantity;
@@ -45,7 +58,7 @@ document.addEventListener("DOMContentLoaded", function() {
             const totalRow = document.createElement('tr');
             totalRow.innerHTML = `
                 <td>Total</td>
-                <td class="price price-dark">₪${amount}</td>
+                <td class="price price-dark">₪${amount.toFixed(2)}</td>
                 <td class="price price-dark"></td>
             `;
             orderTableBody.appendChild(totalRow);
@@ -83,7 +96,7 @@ document.addEventListener("DOMContentLoaded", function() {
         document.cookie = `billingDetails=${JSON.stringify(data)};path=/;`;
 
         // Send data to the server
-        axios.post('http://localhost:9090/createOrder', null, { params: data })
+        axios.post('http://localhost:9090/createOrder', data)
             .then(response => {
                 if (response.data.href) {
                     Swal.fire({

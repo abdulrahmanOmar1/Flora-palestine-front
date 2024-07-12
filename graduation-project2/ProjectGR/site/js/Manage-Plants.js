@@ -197,6 +197,7 @@ function addPlant() {
             console.log(response.data);
             uploadImages(scientificName, imageFiles);
             closeModal();
+            Swal.fire('Success!', 'Plant added successfully.', 'success'); // إضافة رسالة نجاح هنا
         })
         .catch(error => {
             console.error('Error adding plant:', error);

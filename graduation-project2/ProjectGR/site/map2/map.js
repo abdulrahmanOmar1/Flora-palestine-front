@@ -1,62 +1,75 @@
-document.getElementById('area-form').addEventListener('submit', function(event) {
-    event.preventDefault(); // Prevent form submission
+document.addEventListener('DOMContentLoaded', () => {
+    const checkboxes = document.querySelectorAll('.jcf-hidden');
+    const selectedAreasLabel = document.getElementById('selected-areas');
+    const findButton = document.getElementById('save-area');
 
-    const selectedAreas = [];
-    const selectedAreaNames = [];
-    const checkboxes = document.querySelectorAll('.jcf-hidden:checked');
+    console.log('Checkboxes:', checkboxes);
+    console.log('Selected Areas Label:', selectedAreasLabel);
+    console.log('Find Button:', findButton);
 
     checkboxes.forEach(checkbox => {
-        selectedAreas.push(checkbox.getAttribute('data-region-id'));
-        selectedAreaNames.push(checkbox.previousElementSibling.textContent.trim());
+        checkbox.addEventListener('change', updateSelectedAreas);
     });
 
-    // Display selected areas in the "Selected Areas" section
-    const selectedAreasContainer = document.getElementById('selected-areas');
-    selectedAreasContainer.innerHTML = ''; // Clear previous selections
+    findButton.addEventListener('click', fetchPlants);
 
-    selectedAreaNames.forEach(areaName => {
-        const span = document.createElement('span');
-        span.textContent = areaName;
-        selectedAreasContainer.appendChild(span);
-        selectedAreasContainer.appendChild(document.createTextNode(', ')); // Add comma separator
-    });
+    function updateSelectedAreas() {
+        const selectedAreas = Array.from(checkboxes)
+            .filter(checkbox => checkbox.checked)
+            .map(checkbox => checkbox.previousElementSibling.innerText);
 
-    // Remove the last comma
-    if (selectedAreasContainer.lastChild) {
-        selectedAreasContainer.removeChild(selectedAreasContainer.lastChild);
+        selectedAreasLabel.innerText = selectedAreas.join(', ');
+
+        console.log('Selected Areas:', selectedAreas);
     }
 
-    // Make an axios POST request to fetch plants based on selected areas
-    axios.post('https://your-backend-api-url.com/get-plants', {
-        regions: selectedAreas
-    })
-    .then(function (response) {
-        const plants = response.data.plants; // Adjust based on your API response structure
-        displayPlants(plants);
-    })
-    .catch(function (error) {
-        console.error('Error fetching plants:', error);
-    });
-});
+    async function fetchPlants(event) {
+        event.preventDefault();
 
-function displayPlants(plants) {
-    const plantContainer = document.getElementById('plants');
-    plantContainer.innerHTML = ''; // Clear previous results
+        const selectedCities = Array.from(checkboxes)
+            .filter(checkbox => checkbox.checked)
+            .map(checkbox => checkbox.getAttribute('data-region-id'));
 
-    plants.forEach(plant => {
-        const plantElement = document.createElement('div');
-        plantElement.classList.add('col-lg-4', 'col-sm-6');
-        plantElement.innerHTML = `
-            <div class="box-product">
-                <div class="box-product-img">
-                    <a href="#"><img src="${plant.image}" alt="${plant.name}" width="270" height="264" loading="lazy"/></a>
-                </div>
-                <p><a href="#">${plant.name}</a></p>
-                <p>${plant.description}</p>
-                <div class="group-sm"><span class="box-product-price">${plant.price}</span></div>
-                <a class="button button-xs button-primary" href="plantpage.html">Show details</a>
+        console.log('Selected Cities:', selectedCities);
+
+        try {
+            const response = await axios.get('http://127.0.0.1:5500/api/plants/by-cities', {
+                params: {
+                    cities: selectedCities
+                }
+            });
+
+            console.log('Response Data:', response.data);
+
+            showPlantsPopup(response.data);
+        } catch (error) {
+            console.error('Error fetching plants:', error);
+            if (error.response) {
+                console.error('Error Response:', error.response.data);
+            } else {
+                console.error('Error:', error.message);
+            }
+        }
+    }
+
+    function showPlantsPopup(plants) {
+        const popup = document.createElement('div');
+        popup.classList.add('popup');
+        popup.innerHTML = `
+            <div class="popup-content">
+                <span class="close-popup">&times;</span>
+                <h2>Plants in Selected Areas</h2>
+                <ul>
+                    ${plants.map(plant => `<li>${plant.normalName} (${plant.scientificName})</li>`).join('')}
+                </ul>
             </div>
         `;
-        plantContainer.appendChild(plantElement);
-    });
-}
+        document.body.appendChild(popup);
+
+        document.querySelector('.close-popup').addEventListener('click', () => {
+            popup.remove();
+        });
+
+        console.log('Popup displayed with plants:', plants);
+    }
+});

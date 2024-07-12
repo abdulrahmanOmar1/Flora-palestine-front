@@ -2,7 +2,7 @@
 <html class="wide wow-animation" lang="en">
   <head>
     <!-- Site Title-->
-    <title>scientific articles-Flora Palestine</title>
+    <title>Scientific Articles - Flora Palestine</title>
     <meta name="format-detection" content="telephone=no">
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -15,28 +15,76 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/shop.css">
     <link href="img/favicon.ico" rel="icon">
-
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500;600;700&family=Open+Sans:wght@400;500&display=swap" rel="stylesheet">  
-
     <!-- Icon Font Stylesheet -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
-
     <!-- Libraries Stylesheet -->
     <link href="lib/animate/animate.min.css" rel="stylesheet">
     <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
     <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">
     <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@2.2.1/src/js.cookie.min.js"></script>
     <!-- Customized Bootstrap Stylesheet -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
-
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
+    <style>
+      .user-menu {
+          position: relative;
+          display: inline-block;
+      }
+
+      .user-menu-button {
+          background-color: orange;
+          color: white;
+          border: none;
+          border-radius: 50%;
+          width: 40px;
+          height: 40px;
+          font-size: 18px;
+          text-align: center;
+          line-height: 40px;
+          cursor: pointer;
+          transition: background-color 0.3s;
+      }
+
+      .user-menu-button:hover {
+          background-color: darkorange;
+      }
+
+      .user-menu-content {
+          display: none;
+          position: absolute;
+          right: 0;
+          background-color: white;
+          min-width: 120px;
+          box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+          z-index: 1;
+          border-radius: 5px;
+          overflow: hidden;
+      }
+
+      .user-menu-content a {
+          color: black;
+          padding: 12px 16px;
+          text-decoration: none;
+          display: block;
+          transition: background-color 0.3s;
+      }
+
+      .user-menu-content a:hover {
+          background-color: #f1f1f1;
+      }
+
+      .user-menu:hover .user-menu-content {
+          display: block;
+      }
+    </style>
   </head>
   <body>
     <!-- Page preloader-->
@@ -55,143 +103,54 @@
         <div class="rd-navbar-wrap">
           <nav class="rd-navbar" data-layout="rd-navbar-fixed" data-md-device-layout="rd-navbar-fixed" data-lg-device-layout="rd-navbar-fullwidth" data-xl-device-layout="rd-navbar-fullwidth" data-xxl-device-layout="rd-navbar-fullwidth" data-sm-layout="rd-navbar-fixed" data-md-layout="rd-navbar-fixed" data-lg-layout="rd-navbar-fullwidth" data-xl-layout="rd-navbar-fullwidth" data-xxl-layout="rd-navbar-fullwidth" data-md-stick-up-offset="73px" data-lg-stick-up-offset="93px" data-stick-up="true" data-sm-stick-up="true" data-md-stick-up="true" data-lg-stick-up="true" data-xl-stick-up="true" data-xxl-stick-up="true">
             <div class="rd-navbar-collapse-toggle" data-rd-navbar-toggle=".rd-navbar-collapse"><span></span></div>
-            <div class="">
-              <div class="rd-navbar-panel">
-                <!-- RD Navbar Toggle-->
-                <button class="rd-navbar-toggle" data-rd-navbar-toggle=".rd-navbar-nav-wrap"><span></span></button>
-                <!-- RD Navbar Brand-->
-              </div>
-              <div class="rd-navbar-aside rd-navbar-collapse">
-                <address class="contact-info">
-                  <ul class="list-address">
-                    <li>
-                    <!-- Contact Info -->
-                    </li>
-                  </ul>
-                  <ul class="list-inline mobile-element">
-                    <li><a class="fa fa-facebook text-white" href="#"></a></li>
-                    <li><a class="fa fa-google-plus text-white" href="#"></a></li>
-                    <li><a class="fa fa-linkedin text-white" href="#"></a></li>
-                    <li><a class="fa fa-twitter text-white" href="#"></a></li>
-                  </ul>
-                </address>
-              </div>
-            </div>
             <div class="rd-navbar-inner">
               <!-- RD Navbar Panel-->
               <div class="rd-navbar-aside-wrap">
-                <div class="logo" >
+                <div class="logo">
                   <a href="index.html" style="font-family: 'Cambria', 'Cochin', 'Georgia', 'Times', 'Times New Roman', serif; color: white; text-decoration: none;">
                     <h3 style="color: white;">Flora Palestine</h3>
-                </a>
+                  </a>
                 </div>
                 <div class="rd-navbar-nav-wrap">
                   <ul class="rd-navbar-nav">
-                    <li class="rd-nav-item active"><a class="rd-nav-link" href="index.html">Home
-                        <svg class="button-santos" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges">
-                          <rect class="shape" width="100%" height="100%" x="0" y="0"></rect>
-                        </svg></a>
-                    </li>
-                    <li class="rd-nav-item"><a class="rd-nav-link" href="#">About us
-                        <svg class="button-santos" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges">
-                          <rect class="shape" width="100%" height="100%" x="0" y="0"></rect>
-                        </svg></a>
+                    <li class="rd-nav-item active"><a class="rd-nav-link" href="index.html">Home</a></li>
+                    <li class="rd-nav-item"><a class="rd-nav-link" href="#">About us</a>
                       <ul class="rd-menu rd-navbar-dropdown">
-                        <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="about-us.html">About us</a>
-                        </li>
-                        <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="careers.html">Careers</a>
-                        </li>
-                        <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="faq.html">FAQ</a>
-                          <li class="rd-dropdown-item active"><a class="rd-dropdown-link" href="Our vision.html">Our vision</a>
-                        </li>
+                        <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="about-us.html">About us</a></li>
+                        <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="careers.html">Careers</a></li>
+                        <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="faq.html">FAQ</a></li>
+                        <li class="rd-dropdown-item active"><a class="rd-dropdown-link" href="Our vision.html">Our vision</a></li>
                       </ul>
                     </li>
-                    <li class="rd-nav-item"><a class="rd-nav-link" href="services.html">Services
-                        <svg class="button-santos" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges">
-                          <rect class="shape" width="100%" height="100%" x="0" y="0"></rect>
-                        </svg></a>
-                    </li>
-                    <li class="rd-nav-item"><a class="rd-nav-link" href="booking.html">Booking
-                        <svg class="button-santos" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges">
-                          <rect class="shape" width="100%" height="100%" x="0" y="0"></rect>
-                        </svg></a>
-                    </li>
-                    <li class="rd-nav-item"><a class="rd-nav-link" href="#">Blog
-                        <svg class="button-santos" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges">
-                          <rect class="shape" width="100%" height="100%" x="0" y="0"></rect>
-                        </svg></a>
+                    <li class="rd-nav-item"><a class="rd-nav-link" href="services.html">Services</a></li>
+                    <li class="rd-nav-item"><a class="rd-nav-link" href="#">Scientific articles</a>
                       <ul class="rd-menu rd-navbar-dropdown">
-                        <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="">Blog</a>
-                        </li>
-                        <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="">Single post</a>
-                        </li>
+                        <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="blog.html">Scientific articles</a></li>
+                        <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="single-post.html">Single scientific articles</a></li>
                       </ul>
                     </li>
-                    <li class="rd-nav-item"><a class="rd-nav-link" href="#">Shop
-                        <svg class="button-santos" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges">
-                          <rect class="shape" width="100%" height="100%" x="0" y="0"></rect>
-                        </svg></a>
+                    <li class="rd-nav-item"><a class="rd-nav-link" href="#">Shop</a>
                       <ul class="rd-menu rd-navbar-dropdown">
-                        <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="http://localhost:9090/">Shop</a>
-                        </li>
-                       
+                        <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="shop.html">Shop</a></li>
                       </ul>
                     </li>
-                    <li class="rd-nav-item"><a class="rd-nav-link" href="contacts.html">Contacts
-                        <svg class="button-santos" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges">
-                          <rect class="shape" width="100%" height="100%" x="0" y="0"></rect>
-                        </svg></a>
-                    </li>
-                    <svg class="button-santos" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges">
-                      <rect class="shape" width="100%" height="100%" x="0" y="0"></rect>
-                    </svg>
-                      <ul class="rd-menu rd-navbar-megamenu">
-                        <li class="rd-megamenu-item">
-                          <p class="rd-megamenu-header">Layouts</p>
-                          <ul class="rd-megamenu-list">
-                            <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="home-classic.html">Home classic</a></li>
-                            <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="home-modern.html">Home modern</a></li>
-                            <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="home-creative.html">Home creative</a></li>
-                          </ul>
-                        </li>
-                        <li class="rd-megamenu-item">
-                          <p class="rd-megamenu-header">Gallery</p>
-                          <ul class="rd-megamenu-list">
-                            <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="gallery.html">Gallery</a></li>
-                            <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="fullwidth-gallery.html">Fullwidth gallery</a></li>
-                            <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="gallery-2-column.html">Gallery 2 column</a></li>
-                          </ul>
-                        </li>
-                        <li class="rd-megamenu-item">
-                          <p class="rd-megamenu-header">Pages</p>
-                          <ul class="rd-megamenu-list">
-                            <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="404.html">404</a></li>
-                            <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="503.html">503</a></li>
-                            <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="coming-soon.html">Coming Soon</a></li>
-                            <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="maintenance.html">Maintenance</a></li>
-                            <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="site-map.html">Site map</a></li>
-                            <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="search-results.html">Search results</a></li>
-                            <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="privacy-policy.html">Privacy policy</a></li>
-                          </ul>
-                        </li>
-                        <li class="rd-megamenu-item">
-                          <p class="rd-megamenu-header">Elements</p>
-                          <ul class="rd-megamenu-list">
-                            <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="buttons.html">Buttons</a></li>
-                            <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="forms.html">Forms</a></li>
-                            <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="grid.html">Grid</a></li>
-                            <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="progress-bars.html">Progress bars</a></li>
-                            <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="tables.html">Tables</a></li>
-                            <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="tabs-&amp;-accordions.html">Tabs &amp; accordions</a></li>
-                            <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="typography.html">Typography</a></li>
-                          </ul>
-                        </li>
-                      </ul>
+                    <li class="rd-nav-item"><a class="rd-nav-link" href="contacts.html">Contacts</a></li>
+                    <li class="rd-nav-item">
+                      <svg class="button-santos" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges">
+                        <rect class="shape" width="100%" height="100%" x="0" y="0"></rect>
+                      </svg>
                     </li>
                   </ul>
                 </div>
-                <ul class="list-inline desktop-element" >
-                  <li><a class="fa fa-user text-white" href="http://127.0.0.1:9090/registration" style="font-size: 24px;"></a></li>
+                <ul class="list-inline desktop-element">
+                  <li class="login-link"><a class="fa fa-user text-white" href="Login.html" style="font-size: 24px;"></a></li>
+                  <li class="user-menu" style="display: none;">
+                    <button class="user-menu-button">HA</button>
+                    <div class="user-menu-content">
+                      <a href="user-account.html" id="myAccountButton">My Account</a>
+                      <a href="#" id="logoutButton">Log out</a>
+                    </div>
+                  </li>
                 </ul>
               </div>
             </div>
@@ -201,10 +160,10 @@
       <section class="breadcrumbs-custom text-start" style="background-image: url(images/breadcrumbs-team-1920x974.jpg);">
         <div class="container">
           <!-- Breadcrumbs-->
-          <h2 class="breadcrumbs-custom__title">scientific articles</h2>
+          <h2 class="breadcrumbs-custom__title">Scientific Articles</h2>
           <ul class="breadcrumbs-custom__path">
             <li><a href="index.html">Home</a></li>
-            <li class="active">scientific articles</li>
+            <li class="active">Scientific Articles</li>
           </ul>
         </div>
       </section>
@@ -212,7 +171,7 @@
         <div class="container">
           <div class="row row-30 justify-content-center">
             <div class="col-xl-6">
-              <h2>scientific articles</h2>
+              <h2>Scientific Articles</h2>
             </div>
           </div>
           <div class="row row-50 justify-content-center justify-content-md-start">
@@ -228,89 +187,45 @@
                   </div>
                 </form>
               </div>
-             
-             
             </div>
             <div class="col-xl-6 col-lg-7 col-md-8 col-sm-12">
               <div class="post post-classic-sec">
-                <div class="post-img"><a href="single-post.html"><img src="images/blog-1-570x391.jpg" alt="" width="570" height="391" loading="lazy"/></a></div>
+                <div class="post-img"><a href="single-post.html"><img src="images/rose.jpg" alt="" width="570" height="391" loading="lazy"/></a></div>
                 <div class="post-classic-body">
                   <div class="unit flex-column flex-md-row align-items-center align-items-md-start">
-                    <div class="unit-left text-start text-md-center">
-                   
-                    </div>
+                    <div class="unit-left text-start text-md-center"></div>
                     <div class="unit-body">
                       <h6><a href="single-post.html">Do you love to make people smile?</a></h6>
                       <p>If you call the Beautiful Lawn office you will be  greeted with a cheerful voice and a person  who asks how they can make you smile today. That is our number one goal, and right now...<a class="link-posts" href="single-post.html">Read more<span class="icon-arrow icon-rotate-180 material-icons-keyboard_backspace"></span></a></p>
-                     
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="post post-classic-sec">
-                <div class="post-img"><a href="single-post.html"><img src="images/blog-2-570x391.jpg" alt="" width="570" height="391" loading="lazy"/></a></div>
-                <div class="post-classic-body">
-                  <div class="unit flex-column flex-md-row align-items-center align-items-md-start">
-                    <div class="unit-left text-start text-md-center">
-                      
-                    </div>
-                    <div class="unit-body">
-                      <h6><a href="single-post.html">How to mow your lawn</a></h6>
-                      <p>Mowing the lawn is the one of the most fundamental steps for taking care of the lawn. If you are mowing the lawn yourself, and if you have the standard size of lawn, using a small  push...<a class="link-posts" href="single-post.html">Read more<span class="icon-arrow icon-rotate-180 material-icons-keyboard_backspace"></span></a></p>
-                      
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="post post-classic-sec">
-                <div class="post-img"><a href="single-post.html"><img src="images/blog-3-570x391.jpg" alt="" width="570" height="391" loading="lazy"/></a></div>
-                <div class="post-classic-body">
-                  <div class="unit flex-column flex-md-row align-items-center align-items-md-start">
-                    <div class="unit-left text-start text-md-center">
-                      
-                    </div>
-                    <div class="unit-body">
-                      <h6><a href="single-post.html">Fertilizing</a></h6>
-                      <p>Once the season has started, one of the first steps that should be done towards getting a healthy lawn is to fertilize. The nutrients will act as an alarm clock for the roots, waking...<a class="link-posts" href="single-post.html">Read more<span class="icon-arrow icon-rotate-180 material-icons-keyboard_backspace"></span></a></p>
-                     
-                    </div>
-                  </div>
-                </div>
-              </div>
+              
+             
               <div class="pagination-wrap text-center">
                 <!-- Bootstrap Pagination-->
                 <nav>
                   <ul class="pagination-custom">
-                    <li class="disabled"><span aria-label="Previous"><span class="arrow-left" aria-hidden="true">
-                          <!--Created by ragnar on 8/22/2018.
-                          --><span class="icon-arrow material-icons-keyboard_backspace"></span></span></span></li>
+                    <li class="disabled"><span aria-label="Previous"><span class="arrow-left" aria-hidden="true"><span class="icon-arrow material-icons-keyboard_backspace"></span></span></span></li>
                     <li class="active"><span>/</span></li>
                     <li><span>/</span></li>
                     <li><span>/</span></li>
-                    <li><a href="#" aria-label="Next"><span class="arrow-right" aria-hidden="true">
-                          <!--Created by ragnar on 8/22/2018.
-                          --><span class="icon-arrow material-icons-keyboard_backspace"></span></span></a></li>
+                    <li><a href="#" aria-label="Next"><span class="arrow-right" aria-hidden="true"><span class="icon-arrow material-icons-keyboard_backspace"></span></span></a></li>
                   </ul>
                 </nav>
               </div>
             </div>
-            <div class="col-xl-3 col-md-4 col-sm-10">
-             
-             
-             
-              
-            </div>
           </div>
         </div>
       </section>
-       
       <!-- Footer Start -->
       <div class="container-fluid bg-dark text-light footer mt-5 py-5 wow fadeIn" data-wow-delay="0.1s">
         <div class="container py-5">
             <div class="row g-5">
                 <div class="col-lg-3 col-md-6">
                     <h4 class="text-white mb-4">Our Office</h4>
-                    <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>palestine</p>
+                    <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>Palestine</p>
                     <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+9725900000</p>
                     <p class="mb-2"><i class="fa fa-envelope me-3"></i>FloraPalestine@example.com</p>
                     <div class="d-flex pt-2">
@@ -324,7 +239,7 @@
                     <h4 class="text-white mb-4">Services</h4>
                     <a class="btn btn-link" href="">Landscaping</a>
                     <a class="btn btn-link" href="">Pruning plants</a>
-                    <a class="btn btn-link" href="">plants</a>
+                    <a class="btn btn-link" href="">Plants</a>
                     <a class="btn btn-link" href="">Pruning plants</a>
                     <a class="btn btn-link" href="">Pruning plants</a>
                 </div>
@@ -342,10 +257,10 @@
                       <div class="position-relative w-100">
                           <input class="form-control bg-light border-light w-100 py-3 ps-4 pe-5" type="text" placeholder="Your email">
                           <button type="submit" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">SignUp</button>
+                          <div class="newsletter-message" style="display:none;"></div>
                       </div>
                   </form>
               </div>
-              
             </div>
         </div>
       </div>
@@ -369,6 +284,110 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="js/core.min.js"></script>
     <script src="js/script.js"></script>
-    <script src="js/index.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        window.onload = function() {
+          document.querySelector('.preloader').style.display = 'none';
+        };
+
+        const teamCarousel = document.querySelector('.owl-carousel.owl-classic');
+        if (teamCarousel) {
+          $(teamCarousel).owlCarousel({
+            items: 1,
+            loop: false,
+            margin: 30,
+            dots: true,
+            nav: true,
+            responsive: {
+              0: { items: 1 },
+              768: { items: 2 },
+              1024: { items: 3 }
+            }
+          });
+        }
+
+        const newsletterSubmitButton = document.querySelector('.newsletter-form button[type="submit"]');
+        if (newsletterSubmitButton) {
+          newsletterSubmitButton.addEventListener('click', function(event) {
+            event.preventDefault();
+            const emailInput = document.querySelector('.newsletter-form input[type="text"]');
+            const email = emailInput.value;
+            const messageDiv = document.querySelector('.newsletter-message');
+
+            if (email) {
+              axios.post('/subscribe', { email: email })
+                .then(function(response) {
+                  if (response.data.success) {
+                    messageDiv.style.display = 'block';
+                    messageDiv.style.color = 'green';
+                    messageDiv.textContent = 'Thank you for subscribing!';
+                  } else {
+                    messageDiv.style.display = 'block';
+                    messageDiv.style.color = 'red';
+                    messageDiv.textContent = 'There was an error. Please try again.';
+                  }
+                })
+                .catch(function(error) {
+                  messageDiv.style.display = 'block';
+                  messageDiv.style.color = 'red';
+                  messageDiv.textContent = 'There was an error. Please try again.';
+                  console.error('Error:', error);
+                });
+            } else {
+              messageDiv.style.display = 'block';
+              messageDiv.style.color = 'red';
+              messageDiv.textContent = 'Please enter a valid email address.';
+            }
+          });
+        }
+
+        // التحقق من تسجيل الدخول وعرض معلومات المستخدم
+        if (Cookies.get('userId')) {
+          sessionStorage.setItem('isLoggedIn', true);
+          sessionStorage.setItem('userId', Cookies.get('userId'));
+          sessionStorage.setItem('userEmail', Cookies.get('userEmail'));
+          sessionStorage.setItem('role', Cookies.get('role'));
+
+          console.log("User ID:", sessionStorage.getItem('userId'));
+          console.log("User Email:", sessionStorage.getItem('userEmail'));
+
+          const userMenu = document.querySelector('.user-menu');
+          const loginLink = document.querySelector('.login-link');
+          const userMenuButton = document.querySelector('.user-menu-button');
+          const userId = sessionStorage.getItem('userId');
+          const userRole = sessionStorage.getItem('role');
+
+          userMenu.style.display = 'inline-block';
+          loginLink.style.display = 'none';
+
+          axios.get(`http://localhost:9090/api/users/${userId}`)
+            .then(response => {
+              const user = response.data;
+              const firstName = user.firstName;
+              const lastName = user.lastName;
+              userMenuButton.textContent = `${firstName.charAt(0)}${lastName.charAt(0)}`;
+            })
+            .catch(error => {
+              console.log("Error:", error);
+            });
+
+          const logoutButton = document.getElementById('logoutButton');
+          logoutButton.addEventListener('click', function() {
+            sessionStorage.clear();
+            Cookies.remove('userId');
+            Cookies.remove('userEmail');
+            Cookies.remove('role');
+            window.location.replace('login.html');
+          });
+        } else {
+          console.log("No user information found in cookies.");
+          const userMenu = document.querySelector('.user-menu');
+          userMenu.style.display = 'none';
+
+          const loginLink = document.querySelector('.login-link');
+          loginLink.style.display = 'inline-block';
+        }
+      });
+    </script>
   </body>
 </html>

@@ -29,6 +29,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
             })
             .catch(error => {
+                Swal.fire('Error', 'There was an error fetching the user data!', 'error');
                 console.error('There was an error fetching the user data!', error);
             });
     }
@@ -69,22 +70,34 @@ document.addEventListener('DOMContentLoaded', function() {
                 $('#editUserModal').modal('show');
             })
             .catch(error => {
+                Swal.fire('Error', 'There was an error fetching the user data for editing!', 'error');
                 console.error('There was an error fetching the user data for editing!', error);
             });
     }
 
     // Function to handle delete user
     function deleteUser(userId) {
-        if (confirm('Are you sure you want to delete this user?')) {
-            axios.delete(`http://localhost:9090/api/users/${userId}`)
-                .then(response => {
-                    alert('User deleted successfully!');
-                    fetchUsers(); // Refresh the table
-                })
-                .catch(error => {
-                    console.error('There was an error deleting the user!', error);
-                });
-        }
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "Do you really want to delete this user?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axios.delete(`http://localhost:9090/api/users/${userId}`)
+                    .then(response => {
+                        Swal.fire('Deleted!', 'User deleted successfully!', 'success');
+                        fetchUsers(); // Refresh the table
+                    })
+                    .catch(error => {
+                        Swal.fire('Error', 'There was an error deleting the user!', 'error');
+                        console.error('There was an error deleting the user!', error);
+                    });
+            }
+        });
     }
 
     // Handle form submission for edit user
@@ -107,44 +120,44 @@ document.addEventListener('DOMContentLoaded', function() {
         const phoneRegex = /^(056|059)\d{7}$/;
 
         if (!firstName) {
-            alert('First name is required.');
+            Swal.fire('Validation Error', 'First name is required.', 'error');
             return;
         }
         if (!nameRegex.test(firstName)) {
-            alert('First name must not contain any numbers or special characters.');
+            Swal.fire('Validation Error', 'First name must not contain any numbers or special characters.', 'error');
             return;
         }
 
         if (!lastName) {
-            alert('Last name is required.');
+            Swal.fire('Validation Error', 'Last name is required.', 'error');
             return;
         }
         if (!nameRegex.test(lastName)) {
-            alert('Last name must not contain any numbers or special characters.');
+            Swal.fire('Validation Error', 'Last name must not contain any numbers or special characters.', 'error');
             return;
         }
 
         if (!phone) {
-            alert('Phone number is required.');
+            Swal.fire('Validation Error', 'Phone number is required.', 'error');
             return;
         }
         if (!phoneRegex.test(phone)) {
-            alert('Phone number must start with 056 or 059 and be 10 digits long.');
+            Swal.fire('Validation Error', 'Phone number must start with 056 or 059 and be 10 digits long.', 'error');
             return;
         }
 
         if (!address) {
-            alert('Address is required.');
+            Swal.fire('Validation Error', 'Address is required.', 'error');
             return;
         }
 
         if (!dob) {
-            alert('Birthdate is required.');
+            Swal.fire('Validation Error', 'Birthdate is required.', 'error');
             return;
         }
 
         if (!gender) {
-            alert('Gender is required.');
+            Swal.fire('Validation Error', 'Gender is required.', 'error');
             return;
         }
 
@@ -161,11 +174,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
         axios.put(`http://localhost:9090/api/users/update/${userId}`, updatedUser)
             .then(response => {
-                alert('User updated successfully!');
+                Swal.fire('Success', 'User updated successfully!', 'success');
                 $('#editUserModal').modal('hide');
                 fetchUsers(); // Refresh the table
             })
             .catch(error => {
+                Swal.fire('Error', 'There was an error updating the user!', 'error');
                 console.error('There was an error updating the user!', error);
             });
     });

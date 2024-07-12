@@ -2,82 +2,105 @@ html, body {
     height: 100%;
     margin: 0;
     font-family: 'Roboto', sans-serif;
+    overflow: auto; /* لضمان سكرول بالصفحة */
 }
 
 body {
     display: flex;
     flex-direction: column;
+    background-color: #f5f5f5; /* خلفية صفحة خفيفة */
+}
+
+.table-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-top: 20px;
+    overflow: auto; /* لإضافة سكرول إذا كان المحتوى كبير */
 }
 
 table.simple-table {
-    width: 100%;
+    width: 70%; /* تعديل العرض ليكون مناسباً للمساحة المتاحة */
     border-collapse: collapse;
-    margin-top: 20px;
-    table-layout: auto; /* Allow the table to fit the content */
+    table-layout: auto;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    border-radius: 8px; /* حواف مستديرة للجدول */
+    overflow: hidden; /* لإخفاء الحواف الزائدة */
 }
 
 table.simple-table, th, td {
-    border: 1px solid #ccc;
+    border: 1px solid #ddd;
 }
 
 th, td {
     text-align: left;
-    padding: 10px;
+    padding: 12px;
 }
 
 th {
-    background-color: #333;
+    background-color: #343a40;
     color: white;
     font-weight: bold;
+    text-transform: uppercase;
 }
 
 td {
-    background-color: #f4f4f4;
+    background-color: #f9f9f9;
     color: #333;
-    word-wrap: break-word; /* Ensure long content wraps within the cell */
+    word-wrap: break-word;
 }
 
-input[type="text"], input[type="number"], textarea, input[type="file"], select {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    display: block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-    font-size: 16px;
+td img {
+    max-width: 50px;
+    border-radius: 50%;
 }
 
-input[type="text"]:focus, input[type="number"]:focus, textarea:focus, select:focus {
-    border-color: #4CAF50;
-    outline: none;
-}
-
-.btn {
-    padding: 10px 20px;
+td .btn {
+    padding: 5px 10px; /* تعديل حجم الأزرار */
     cursor: pointer;
     text-transform: uppercase;
     border: none;
     border-radius: 4px;
-    font-size: 16px;
-    margin-right: 10px;
+    font-size: 14px; /* تصغير حجم الخط للأزرار */
     color: white;
+    display: block;
+    width: 100%;
+    text-align: center;
+    margin: 5px 0; /* مسافة بين الأزرار */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* تأثير عند التمرير */
+}
+
+.btn:hover {
+    transform: scale(1.05); /* تكبير الزر قليلاً عند التمرير */
 }
 
 .btn-primary {
     background-color: #007BFF;
 }
 
+.btn-primary:hover {
+    background-color: #0056b3; /* لون أغمق عند التمرير */
+}
+
 .btn-danger {
     background-color: #DC3545;
+}
+
+.btn-danger:hover {
+    background-color: #a71d2a; /* لون أغمق عند التمرير */
 }
 
 .btn-secondary {
     background-color: #6C757D;
 }
 
+.btn-secondary:hover {
+    background-color: #565e64; /* لون أغمق عند التمرير */
+}
+
 .navbar {
-    height: 60px;
+    height: 90px;
     background-color: #004d40;
     display: flex;
     justify-content: center;
@@ -148,7 +171,7 @@ input[type="text"]:focus, input[type="number"]:focus, textarea:focus, select:foc
 .tm-block {
     padding: 20px;
     box-shadow: 1px 1px 5px 0 #455c71;
-    background-color: transparent; /* Remove background color */
+    background-color: transparent;
     color: #333;
 }
 
@@ -205,4 +228,52 @@ input[type="text"]:focus, input[type="number"]:focus, textarea:focus, select:foc
 
 .modal-footer {
     border-top: 1px solid #dee2e6;
+}
+
+.btn-group-vertical {
+    width: 20%; /* عرض مناسب للأزرار بجانب الجدول */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-left: 50px;
+    border-radius: 2px;
+    margin-top: 0; /* إزالة المسافة العلوية */
+}
+
+.btn-group-vertical .btn {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.btn-group-vertical .btn:first-child {
+    margin-top: 100px; /* إضافة مسافة 100 بكسل فوق الزر الأول */
+}
+
+.checkbox-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.checkbox-container input[type="checkbox"] {
+    display: none;
+}
+
+.checkbox-container input[type="checkbox"] + label {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-color: #6c2626;
+    border-radius: 50%;
+    cursor: pointer;
+    position: relative;
+}
+
+.checkbox-container input[type="checkbox"]:checked + label::after {
+    content: "\2714";
+    font-size: 14px;
+    color: rgb(126, 10, 10);
+    position: absolute;
+    top: 2px;
+    left: 4px;
 }

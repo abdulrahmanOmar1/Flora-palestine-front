@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const checkboxes = document.querySelectorAll('.jcf-hidden');
     const selectedAreasLabel = document.getElementById('selected-areas');
     const findButton = document.getElementById('save-area');
+    const plantsList = document.getElementById('plantsList');
 
     console.log('Checkboxes:', checkboxes);
     console.log('Selected Areas Label:', selectedAreasLabel);
@@ -26,22 +27,25 @@ document.addEventListener('DOMContentLoaded', () => {
     async function fetchPlants(event) {
         event.preventDefault();
 
-        const selectedCities = Array.from(checkboxes)
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        const selectedRegions = Array.from(checkboxes)
             .filter(checkbox => checkbox.checked)
-            .map(checkbox => checkbox.getAttribute('data-region-id'));
+            .map(checkbox => checkbox.getAttribute('data-region'));
 
-        console.log('Selected Cities:', selectedCities);
+        console.log('Selected Regions:', selectedRegions);
 
         try {
-            const response = await axios.get('http://127.0.0.1:5500/api/plants/by-cities', {
+            const response = await axios.get('http://127.0.0.1:9090/api/plants/by-cities', {
                 params: {
-                    cities: selectedCities
+                    cities: selectedRegions // This will let axios handle the array correctly
+                },
+                paramsSerializer: params => {
+                    return selectedRegions.map(city => `cities=${encodeURIComponent(city)}`).join('&');
                 }
             });
 
             console.log('Response Data:', response.data);
-
-            showPlantsPopup(response.data);
+            displayPlants(response.data);
         } catch (error) {
             console.error('Error fetching plants:', error);
             if (error.response) {
@@ -52,24 +56,14 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    function showPlantsPopup(plants) {
-        const popup = document.createElement('div');
-        popup.classList.add('popup');
-        popup.innerHTML = `
-            <div class="popup-content">
-                <span class="close-popup">&times;</span>
-                <h2>Plants in Selected Areas</h2>
-                <ul>
-                    ${plants.map(plant => `<li>${plant.normalName} (${plant.scientificName})</li>`).join('')}
-                </ul>
+    function displayPlants(plants) {
+        plantsList.innerHTML = plants.map(plant => `
+            <div class="plant-card">
+                <img src="${plant.imageUrls[0]}" alt="${plant.normalName}">
+                <h4>${plant.normalName}</h4>
+                <p>${plant.scientificName}</p>
+                <button>Show Details</button>
             </div>
-        `;
-        document.body.appendChild(popup);
-
-        document.querySelector('.close-popup').addEventListener('click', () => {
-            popup.remove();
-        });
-
-        console.log('Popup displayed with plants:', plants);
+        `).join('');
     }
 });

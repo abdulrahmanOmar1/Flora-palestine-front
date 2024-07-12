@@ -94,32 +94,57 @@
             max-width: 100%;
             height: auto;
         }
+
+        .plants-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+.plant-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 200px; /* Adjust width as needed */
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.plant-card img {
+    width: 150px; /* Fixed width */
+    height: 150px; /* Fixed height */
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.plant-card h4 {
+    margin: 10px 0;
+    font-size: 1.1em;
+}
+
+.plant-card p {
+    font-size: 0.9em;
+    color: #555;
+}
+
+.plant-card button {
+    margin-top: auto;
+    padding: 5px 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.plant-card button:hover {
+    background-color: #45a049;
+}
     </style>
-
-<style>
-    .popup {
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        background: #fff;
-        padding: 20px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        z-index: 10001;
-    }
-
-    .popup-content {
-        position: relative;
-    }
-
-    .close-popup {
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        cursor: pointer;
-    }
-</style>
-
 </head>
 
 <body>
@@ -133,8 +158,8 @@
         </header>
         <div class="modal-content" id="place-area">
             <div class="map">
-                <img height="616" width="236" alt="מפת ישראל Map of Israel" data-src="https://flora.org.il/wp-content/themes/flora/images/basemap_lb.png" class=" lazyloaded" src="./cssfiles-MapFloraPalestine/basemap_lb.png">
-                <noscript><img src="https://flora.org.il/wp-content/themes/flora/images/basemap_lb.png" height="616" width="236" alt="מפת ישראל Map of Israel"></noscript>
+                <img height="616" width="236" alt="Palestine map" data-src="https://flora.org.il/wp-content/themes/flora/images/basemap_lb.png" class=" lazyloaded" src="./cssfiles-MapFloraPalestine/basemap_lb.png">
+                <noscript><img src="https://flora.org.il/wp-content/themes/flora/images/basemap_lb.png" height="616" width="236" alt="map of palestine"></noscript>
                 <img data-src="https://flora.org.il/wp-content/themes/flora/images/regions/26.png" class="region-cover region-cover26 lazyloaded" src="./cssfiles-MapFloraPalestine/26.png" style="display: none; opacity: 1;">
                 <noscript><img class="region-cover region-cover26" src="https://flora.org.il/wp-content/themes/flora/images/regions/26.png" /></noscript>
                 <img data-src="https://flora.org.il/wp-content/themes/flora/images/regions/27.png" class="region-cover region-cover27 lazyloaded" src="./cssfiles-MapFloraPalestine/27.png" style="display: none; opacity: 1;">
@@ -210,42 +235,42 @@
                                         <div class="row-check">
                                             <label for="check26" data-region="26" class="chk-label-active">Mount Hermon</label>
                                             <div class="chk-area chk-checked"><span></span></div>
-                                            <input type="checkbox" id="check26" data-region-id="26" class="jcf-hidden" checked="checked">
+                                            <input type="checkbox" id="check26" data-region-id="26" data-region="Mount Hermon" class="jcf-hidden" checked="checked">
                                         </div>
                                         <div class="row-check">
                                             <label for="check27" data-region="27" class="chk-label-active">Golan</label>
                                             <div class="chk-area chk-checked"><span></span></div>
-                                            <input type="checkbox" id="check27" data-region-id="27" class="jcf-hidden" checked="checked">
+                                            <input type="checkbox" id="check27" data-region-id="27" data-region="Golan" class="jcf-hidden" checked="checked">
                                         </div>
                                         <div class="row-check">
                                             <label for="check17" data-region="17" class="chk-label-active">Hula Plain</label>
                                             <div class="chk-area chk-checked"><span></span></div>
-                                            <input type="checkbox" id="check17" data-region-id="17" class="jcf-hidden" checked="checked">
+                                            <input type="checkbox" id="check17" data-region-id="17" data-region="Hula Plai" class="jcf-hidden" checked="checked">
                                         </div>
                                         <div class="row-check">
                                             <label for="check6" data-region="6" class="chk-label-active">Upper Galilee</label>
                                             <div class="chk-area chk-checked"><span></span></div>
-                                            <input type="checkbox" id="check6" data-region-id="6" class="jcf-hidden" checked="checked">
+                                            <input type="checkbox" id="check6" data-region-id="6" data-region="Upper Galilee" class="jcf-hidden" checked="checked">
                                         </div>
                                         <div class="row-check">
                                             <label for="check7" data-region="7" class="chk-label-active">Lower Galilee</label>
                                             <div class="chk-area chk-checked"><span></span></div>
-                                            <input type="checkbox" id="check7" data-region-id="7" class="jcf-hidden" checked="checked">
+                                            <input type="checkbox" id="check7" data-region-id="7" data-region="Lower Galilee" class="jcf-hidden" checked="checked">
                                         </div>
                                         <div class="row-check">
                                             <label for="check8" data-region="8" class="chk-label-active">Mount Carmel</label>
                                             <div class="chk-area chk-checked"><span></span></div>
-                                            <input type="checkbox" id="check8" data-region-id="8" class="jcf-hidden" checked="checked">
+                                            <input type="checkbox" id="check8" data-region-id="8" data-region="Mount Carmel" class="jcf-hidden" checked="checked">
                                         </div>
                                         <div class="row-check">
                                             <label for="check9" data-region="9" class="chk-label-active">Marj bin Amer Plain</label>
                                             <div class="chk-area chk-checked"><span></span></div>
-                                            <input type="checkbox" id="check9" data-region-id="9" class="jcf-hidden" checked="checked">
+                                            <input type="checkbox" id="check9" data-region-id="9" data-region="Marj bin Amer Plain" class="jcf-hidden" checked="checked">
                                         </div>
                                         <div class="row-check">
                                             <label for="check20" data-region="20" class="chk-label-active">Mount Gilboa</label>
                                             <div class="chk-area chk-checked"><span></span></div>
-                                            <input type="checkbox" id="check20" data-region-id="20" class="jcf-hidden" checked="checked">
+                                            <input type="checkbox" id="check20" data-region-id="20" data-region="Mount Gilboa" class="jcf-hidden" checked="checked">
                                         </div>
                                     </div>
                                     <div class="col col2">
@@ -253,27 +278,27 @@
                                         <div class="row-check">
                                             <label for="check1" data-region="1" class="chk-label-active">Coastal Galilee</label>
                                             <div class="chk-area chk-checked"><span></span></div>
-                                            <input type="checkbox" id="check1" data-region-id="1" class="jcf-hidden" checked="checked">
+                                            <input type="checkbox" id="check1" data-region-id="1" data-region="Coastal Galilee" class="jcf-hidden" checked="checked">
                                         </div>
                                         <div class="row-check">
                                             <label for="check2" data-region="2" class="chk-label-active">Acre plain</label>
                                             <div class="chk-area chk-checked"><span></span></div>
-                                            <input type="checkbox" id="check2" data-region-id="2" class="jcf-hidden" checked="checked">
+                                            <input type="checkbox" id="check2" data-region-id="2" data-region="Acre plain" class="jcf-hidden" checked="checked">
                                         </div>
                                         <div class="row-check">
                                             <label for="check3" data-region="3" class="chk-label-active">Coast of Carmel</label>
                                             <div class="chk-area chk-checked"><span></span></div>
-                                            <input type="checkbox" id="check3" data-region-id="3" class="jcf-hidden" checked="checked">
+                                            <input type="checkbox" id="check3" data-region-id="3" data-region="Coast of Carmel" class="jcf-hidden" checked="checked">
                                         </div>
                                         <div class="row-check">
                                             <label for="check4" data-region="4" class="chk-label-active">Qaisariya, Umm Khaled, Al-Birwa ,Hadera</label>
                                             <div class="chk-area chk-checked"><span></span></div>
-                                            <input type="checkbox" id="check4" data-region-id="4" class="jcf-hidden" checked="checked">
+                                            <input type="checkbox" id="check4" data-region-id="4" data-region="Qaisariya, Umm Khaled, Al-Birwa ,Hadera" class="jcf-hidden" checked="checked">
                                         </div>
                                         <div class="row-check">
                                             <label for="check5" data-region="5" class="chk-label-active">Palestinian coastal plain</label>
                                             <div class="chk-area chk-checked"><span></span></div>
-                                            <input type="checkbox" id="check5" data-region-id="5" class="jcf-hidden" checked="checked">
+                                            <input type="checkbox" id="check5" data-region-id="5" data-region="Palestinian coastal plain" class="jcf-hidden" checked="checked">
                                         </div>
                                     </div>
                                 </div>
@@ -283,37 +308,37 @@
                                         <div class="row-check">
                                             <label for="check10" data-region="10" class="chk-label-active">Northern West Bank</label>
                                             <div class="chk-area chk-checked"><span></span></div>
-                                            <input type="checkbox" id="check10" data-region-id="10" class="jcf-hidden" checked="checked">
+                                            <input type="checkbox" id="check10" data-region-id="10" data-region="Northern West Bank" class="jcf-hidden" checked="checked">
                                         </div>
                                         <div class="row-check">
                                             <label for="check21" data-region="21" class="chk-label-active">Bisan & Nazareth</label>
                                             <div class="chk-area chk-checked"><span></span></div>
-                                            <input type="checkbox" id="check21" data-region-id="21" class="jcf-hidden" checked="checked">
+                                            <input type="checkbox" id="check21" data-region-id="21" data-region="Bisan and Nazareth" class="jcf-hidden" checked="checked">
                                         </div>
                                         <div class="row-check">
                                             <label for="check23" data-region="23" class="chk-label-active">Jericho</label>
                                             <div class="chk-area chk-checked"><span></span></div>
-                                            <input type="checkbox" id="check23" data-region-id="23" class="jcf-hidden" checked="checked">
+                                            <input type="checkbox" id="check23" data-region-id="23" data-region="Jericho" class="jcf-hidden" checked="checked">
                                         </div>
                                         <div class="row-check">
                                             <label for="check11" data-region="11" class="chk-label-active">Lod & Ramla</label>
                                             <div class="chk-area chk-checked"><span></span></div>
-                                            <input type="checkbox" id="check11" data-region-id="11" class="jcf-hidden" checked="checked">
+                                            <input type="checkbox" id="check11" data-region-id="11" data-region="Lod and Ramla" class="jcf-hidden" checked="checked">
                                         </div>
                                         <div class="row-check">
                                             <label for="check12" data-region="12" class="chk-label-active">Jerusalem & Ramallah</label>
                                             <div class="chk-area chk-checked"><span></span></div>
-                                            <input type="checkbox" id="check12" data-region-id="12" class="jcf-hidden" checked="checked">
+                                            <input type="checkbox" id="check12" data-region-id="12" data-region="Jerusalem and Ramallah" class="jcf-hidden" checked="checked">
                                         </div>
                                         <div class="row-check">
                                             <label for="check22" data-region="22" class="chk-label-active">Bethlehem & Hebron</label>
                                             <div class="chk-area chk-checked"><span></span></div>
-                                            <input type="checkbox" id="check22" data-region-id="22" class="jcf-hidden" checked="checked">
+                                            <input type="checkbox" id="check22" data-region-id="22" data-region="Bethlehem and Hebron" class="jcf-hidden" checked="checked">
                                         </div>
                                         <div class="row-check">
                                             <label for="check24" data-region="24" class="chk-label-active">Dead-Sea Valley</label>
                                             <div class="chk-area chk-checked"><span></span></div>
-                                            <input type="checkbox" id="check24" data-region-id="24" class="jcf-hidden" checked="checked">
+                                            <input type="checkbox" id="check24" data-region-id="24" data-region="Dead-Sea Valley" class="jcf-hidden" checked="checked">
                                         </div>
                                     </div>
                                     <div class="col col4">
@@ -321,27 +346,27 @@
                                         <div class="row-check">
                                             <label for="check13" data-region="13" class="chk-label-active">Beersheba</label>
                                             <div class="chk-area chk-checked"><span></span></div>
-                                            <input type="checkbox" id="check13" data-region-id="13" class="jcf-hidden" checked="checked">
+                                            <input type="checkbox" id="check13" data-region-id="13" data-region="Beersheba" class="jcf-hidden" checked="checked">
                                         </div>
                                         <div class="row-check">
                                             <label for="check14" data-region="14" class="chk-label-active">Negev desert</label>
                                             <div class="chk-area chk-checked"><span></span></div>
-                                            <input type="checkbox" id="check14" data-region-id="14" class="jcf-hidden" checked="checked">
+                                            <input type="checkbox" id="check14" data-region-id="14" data-region="Negev desert" class="jcf-hidden" checked="checked">
                                         </div>
                                         <div class="row-check">
                                             <label for="check15" data-region="15" class="chk-label-active">Negev Highlands</label>
                                             <div class="chk-area chk-checked"><span></span></div>
-                                            <input type="checkbox" id="check15" data-region-id="15" class="jcf-hidden" checked="checked">
+                                            <input type="checkbox" id="check15" data-region-id="15" data-region="Negev Highlands" class="jcf-hidden" checked="checked">
                                         </div>
                                         <div class="row-check">
                                             <label for="check16" data-region="16" class="chk-label-active">Southern Negev</label>
                                             <div class="chk-area chk-checked"><span></span></div>
-                                            <input type="checkbox" id="check16" data-region-id="16" class="jcf-hidden" checked="checked">
+                                            <input type="checkbox" id="check16" data-region-id="16" data-region="Southern Negev" class="jcf-hidden" checked="checked">
                                         </div>
                                         <div class="row-check">
                                             <label for="check25" data-region="25" class="chk-label-active">Arava Valley</label>
                                             <div class="chk-area chk-checked"><span></span></div>
-                                            <input type="checkbox" id="check25" data-region-id="25" class="jcf-hidden" checked="checked">
+                                            <input type="checkbox" id="check25" data-region-id="25" data-region="Arava Valley" class="jcf-hidden" checked="checked">
                                         </div>
                                     </div>
 
@@ -359,6 +384,10 @@
                             </div>
                         </fieldset>
                     </form>
+                </div>
+                <div class="plants-container" id="plantsContainer">
+                    <h3>Plants</h3>
+                    <div id="plantsList" class="plants-container"></div>
                 </div>
             </div>
             <div class="modal-content" id="place-coord" style="display: none;">

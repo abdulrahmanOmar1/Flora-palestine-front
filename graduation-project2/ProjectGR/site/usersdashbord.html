@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700" />
     <link rel="stylesheet" href="css/fontawesome.min.css" />
     <link rel="stylesheet" href="css/bootstrap.min.css" />
-    <link rel="stylesheet" href="css/templatemo-style.css" />
+    <link rel="stylesheet" href="css/userdashboard.css" />
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 
@@ -82,27 +82,27 @@
             <div class="col-sm-12 col-md-12 col-lg-8 col-xl-8 tm-block-col">
                 <div class="tm-bg-primary-dark tm-block tm-block-products">
                     <div class="tm-product-table-container">
-                        <table class="table table-hover tm-table-small tm-product-table">
+                        <table class="simple-table">
                             <thead>
                                 <tr>
-                                    <th scope="col">&nbsp;</th>
-                                    <th scope="col">User NAME</th>
-                                    <th scope="col">Email</th>
-                                    <th scope="col">Password</th>
-                                    <th scope="col">Status</th>
-                                    <th scope="col">IMAGE</th>
-                                    <th scope="col">&nbsp;</th>
+                                    <th>&nbsp;</th>
+                                    <th>User NAME</th>
+                                    <th>Email</th>
+                                    <th>Password</th>
+                                    <th>Status</th>
+                                    <th>IMAGE</th>
+                                    <th>&nbsp;</th>
                                 </tr>
                             </thead>
-                            <tbody id="productsTableBody">
-                                <!-- Product rows will be dynamically added here -->
+                            <tbody id="usersTableBody">
+                                <!-- Users rows will be dynamically added here -->
                             </tbody>
                         </table>
                     </div>
                     <div class="btn-group-vertical">
-                        <a href="add-product.html" class="btn btn-primary btn-block text-uppercase mb-3">Add new User</a>
+                        <a href="add-customer.html" class="btn btn-primary btn-block text-uppercase mb-3">Add new Customer</a>
                         <button class="btn btn-primary btn-block text-uppercase" id="deleteSelectedButton">Delete selected Users</button>
-                        <a href="deleted-products.html" class="btn btn-secondary btn-block text-uppercase mt-3">View Deleted Users</a>
+                        <a href="" class="btn btn-secondary btn-block text-uppercase mt-3">View Deleted Users</a>
                     </div>
                 </div>
             </div>
@@ -119,58 +119,70 @@
         </div>
     </footer>
 
-    <!-- Modal for Editing Product -->
-    <div class="modal fade" id="editProductModal" tabindex="-1" role="dialog" aria-labelledby="editProductModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="editProductModalLabel">Edit Product</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form id="editProductForm">
-                        <input type="hidden" id="editProductId" name="editProductId" value="">
-                        <div class="form-group">
-                            <label for="editProductName">Product Name</label>
-                            <input type="text" class="form-control" id="editProductName" name="editProductName" readonly>
-                        </div>
-                        <div class="form-group">
-                            <label for="editProductDescription">Description</label>
-                            <textarea class="form-control" id="editProductDescription" name="editProductDescription" rows="3"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="editProductPrice">Price</label>
-                            <input type="text" class="form-control" id="editProductPrice" name="editProductPrice">
-                        </div>
-                        <div class="form-group">
-                            <label for="editProductQuantity">Quantity</label>
-                            <input type="text" class="form-control" id="editProductQuantity" name="editProductQuantity">
-                        </div>
-                        <div class="form-group">
-                            <label for="editProductImageUrl">Image URL</label>
-                            <input type="file" id="editProductImages" multiple>
-                        </div>
-                        <div class="form-group">
-                            <label for="editProductCategoryId">Category ID</label>
-                            <input type="text" class="form-control" id="editProductCategoryId" name="editProductCategoryId" readonly>
-                        </div>
-                        <div class="form-group">
-                            <label for="editSaleDiscount">Sale Discount (%)</label>
-                            <input type="number" class="form-control" id="editSaleDiscount" name="editSaleDiscount" step="0.01">
-                        </div>
-                        
-                        <button type="submit" class="btn btn-primary">Save Changes</button>
-                    </form>
-                </div>
+    <!-- Modal for Editing User -->
+<div class="modal fade" id="editUserModal" tabindex="-1" role="dialog" aria-labelledby="editUserModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editUserModalLabel">Edit User</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="editUserForm">
+                    <input type="hidden" id="editUserId" name="editUserId" value="">
+                    <div class="form-group">
+                        <label for="editUserFirstName">First Name</label>
+                        <input type="text" class="form-control" id="editUserFirstName" name="editUserFirstName">
+                    </div>
+                    <div class="form-group">
+                        <label for="editUserLastName">Last Name</label>
+                        <input type="text" class="form-control" id="editUserLastName" name="editUserLastName">
+                    </div>
+                    <div class="form-group">
+                        <label for="editUserAddress">Address</label>
+                        <input type="text" class="form-control" id="editUserAddress" name="editUserAddress">
+                    </div>
+                    <div class="form-group">
+                        <label for="editUserPhone">Phone</label>
+                        <input type="text" class="form-control" id="editUserPhone" name="editUserPhone">
+                    </div>
+                    <div class="form-group">
+                        <label for="editUserDob">Date of Birth</label>
+                        <input type="date" class="form-control" id="editUserDob" name="editUserDob">
+                    </div>
+                    <div class="form-group">
+                        <label for="editUserGender">Gender</label>
+                        <select class="form-control" id="editUserGender" name="editUserGender">
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="editUserRole">Role</label>
+                        <select class="form-control" id="editUserRole" name="editUserRole">
+                            <option value="ADMIN">Admin</option>
+                            <option value="CUSTOMER">Customer</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="editUserEnabled">Enabled</label>
+                        <select class="form-control" id="editUserEnabled" name="editUserEnabled">
+                            <option value="true">True</option>
+                            <option value="false">False</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                </form>
             </div>
         </div>
     </div>
+</div>
 
-    <script src="js/jquery-3.3.1.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/tooplate-scripts.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="js/userdashbord.js"></script>
 </body>
-
 </html>

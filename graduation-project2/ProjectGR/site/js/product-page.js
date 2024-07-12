@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', function () {
         console.log('Product Details:', product);
         document.getElementById('product-name').textContent = product.name;
         document.getElementById('product-description').textContent = product.description;
-        
+
         const originalPrice = product.price;
         const discountedPrice = product.priceAfterDis;
 
@@ -61,17 +61,37 @@ document.addEventListener('DOMContentLoaded', function () {
         const quantityInput = document.querySelector('.form-input');
         quantityInput.min = 1;
         quantityInput.value = 1;
-        quantityInput.max = product.quantity; 
+        quantityInput.max = product.quantity;
 
-        quantityInput.addEventListener('input', function() {
-            let value = parseInt(quantityInput.value);
-            if (value < 1) quantityInput.value = 1;
-            if (value > product.quantity) quantityInput.value = product.quantity;
+        // Adding buttons for increment and decrement
+        const quantityContainer = document.querySelector('.product-number');
+        quantityContainer.innerHTML = `
+            <button class="quantity-btn" id="decrement-btn">-</button>
+            <input class="form-input" type="number" value="1" min="1" max="${product.quantity}">
+            <button class="quantity-btn" id="increment-btn">+</button>
+        `;
+
+        const decrementBtn = document.getElementById('decrement-btn');
+        const incrementBtn = document.getElementById('increment-btn');
+        const quantityField = quantityContainer.querySelector('input');
+
+        decrementBtn.addEventListener('click', () => {
+            let value = parseInt(quantityField.value);
+            if (value > 1) {
+                quantityField.value = value - 1;
+            }
+        });
+
+        incrementBtn.addEventListener('click', () => {
+            let value = parseInt(quantityField.value);
+            if (value < product.quantity) {
+                quantityField.value = value + 1;
+            }
         });
 
         const addToCartButton = document.querySelector('.button-primary');
         addToCartButton.addEventListener('click', function() {
-            const quantity = parseInt(quantityInput.value);
+            const quantity = parseInt(quantityField.value);
             addToCartButton.disabled = true; // Disable the button to prevent multiple clicks
             addToCart(product.id, quantity, product.quantity).finally(() => {
                 addToCartButton.disabled = false; // Re-enable the button

@@ -32,17 +32,19 @@ document.addEventListener("DOMContentLoaded", function() {
         })
         .catch(function(error) {
             console.error('Error fetching deleted products:', error);
+            Swal.fire('Error', 'Error fetching deleted products!', 'error');
         });
 });
 
 function activateProduct(productId) {
     axios.post(`http://localhost:9090/api/products/activate-product/${productId}`)
         .then(function(response) {
-            alert('Product activated successfully!');
-            location.reload(); // Reload the page to update the product list
+            Swal.fire('Success', 'Product activated successfully!', 'success').then(() => {
+                location.reload(); // Reload the page to update the product list
+            });
         })
         .catch(function(error) {
             console.error('Error activating product:', error);
-            alert('Failed to activate product.');
+            Swal.fire('Error', 'Failed to activate product.', 'error');
         });
 }

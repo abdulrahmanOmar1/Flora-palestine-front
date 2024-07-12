@@ -95,54 +95,151 @@
             height: auto;
         }
 
-        .plants-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
+    .plants-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        margin-top: 20px;
+    }
+
+    .plant-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 200px; /* Adjust width as needed */
+        margin: 10px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .plant-card img {
+        width: 150px; /* Fixed width */
+        height: 150px; /* Fixed height */
+        object-fit: cover;
+        border-radius: 5px;
+    }
+
+    .plant-card h4 {
+        margin: 10px 0;
+        font-size: 1.1em;
+    }
+
+    .plant-card p {
+        font-size: 0.9em;
+        color: #555;
+    }
+
+    .plant-card button {
+        margin-top: auto;
+        padding: 5px 10px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+    }
+
+    .plant-card button:hover {
+        background-color: #45a049;
+    }
+    .plant-details {
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    .plant-details img {
+        width: 150px;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 5px;
+    }
+
+    .plant-details h4 {
+        margin: 10px 0;
+        font-size: 1.5em;
+    }
+
+    .plant-details p {
+        font-size: 1em;
+        color: #555;
+    }
+
+    .back-button {
+        margin-top: 20px;
+        padding: 5px 10px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+    }
+
+    .back-button:hover {
+        background-color: #45a049;
+    }
+    .plant-details table {
+    width: 100%;
+    border-collapse: collapse;
     margin-top: 20px;
 }
 
-.plant-card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 200px; /* Adjust width as needed */
-    margin: 10px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+.plant-details th, .plant-details td {
+    text-align: left;
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
 }
 
-.plant-card img {
-    width: 150px; /* Fixed width */
-    height: 150px; /* Fixed height */
-    object-fit: cover;
-    border-radius: 5px;
+.plant-details th {
+    font-weight: bold;
 }
 
-.plant-card h4 {
-    margin: 10px 0;
-    font-size: 1.1em;
+.plant-details tr:hover {
+    background-color: #f1f1f1;
+}
+.plant-details {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.plant-card p {
-    font-size: 0.9em;
-    color: #555;
+.plant-details table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
 }
 
-.plant-card button {
-    margin-top: auto;
-    padding: 5px 10px;
-    background-color: #4CAF50;
+.plant-details th, .plant-details td {
+    text-align: left;
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+}
+
+.plant-details th {
+    font-weight: bold;
+}
+
+.plant-details tr:hover {
+    background-color: #e8f5e9; /* Light green background on hover */
+}
+
+.plant-details .back-button {
+    background-color: #4caf50; /* Green background */
     color: white;
     border: none;
-    border-radius: 3px;
+    padding: 10px 20px;
+    margin-bottom: 20px;
     cursor: pointer;
+    border-radius: 4px;
 }
 
-.plant-card button:hover {
-    background-color: #45a049;
+.plant-details .back-button:hover {
+    background-color: #45a049; /* Darker green on hover */
 }
     </style>
 </head>

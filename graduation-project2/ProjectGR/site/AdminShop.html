@@ -11,139 +11,120 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/templatemo-style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-
     <style>
-        /* إضافة نمط للتأكد من أن جدول الطلبات يمكن التمرير خلاله */
         .table-container {
-            max-height: 50vh; /* يمكنك تعديل الارتفاع حسب الحاجة */
+            max-height: 50vh;
             overflow-y: auto;
-            margin-bottom: 20px; /* إضافة مسافة أسفل الجدول */
+            margin-bottom: 20px;
         }
-
-        /* إضافة نمط للرسم البياني */
         .chart-wrapper {
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-bottom: 20px; /* إضافة مسافة أسفل الرسم البياني */
-            margin-top: 20px; /* إضافة مسافة أعلى الرسم البياني */
+            margin-bottom: 20px;
+            margin-top: 20px;
         }
-
         .chart-container {
             position: relative;
-            height: 60vh; /* تحديد ارتفاع الرسم البياني */
-            width: 100%; /* تحديد عرض الرسم البياني */
+            height: 60vh;
+            width: 100%;
         }
         .chart-wrapper {
-    width: 100%;
-    padding: 10px;
-    box-sizing: border-box;
-}
-
-.chart-container {
-    position: relative;
-    width: 100%;
-    height: 0;
-    padding-bottom: 56.25%; /* نسبة 16:9 */
-}
-
-.chart-container canvas {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-}
-
-/* لضمان التوافق مع أحجام الشاشات المختلفة */
-@media (max-width: 768px) {
-    .chart-container {
-        padding-bottom: 75%; /* نسبة 4:3 للأجهزة الصغيرة */
-    }
-}
-
-@media (max-width: 480px) {
-    .chart-container {
-        padding-bottom: 100%; /* نسبة 1:1 للأجهزة الصغيرة جداً */
-    }
-}
-.modal {
-    display: none; /* Ensure the modal is hidden by default */
-    z-index: 1050; /* Ensure the modal is on top of other elements */
-    overflow-y: auto; /* Enable scrolling for the modal */
-}
-
-.modal-dialog {
-    max-width: 100%; /* Ensure the modal fits within the screen */
-    margin: 1.75rem auto; /* Center the modal on the screen */
-}
-
-.modal-content {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    background-color: #fff;
-    background-clip: padding-box;
-    border: 1px solid rgba(0, 0, 0, 0.2);
-    border-radius: 0.3rem;
-    outline: 0;
-}
-
-.modal-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1rem 1rem;
-    border-bottom: 1px solid #e9ecef;
-    border-top-left-radius: 0.3rem;
-    border-top-right-radius: 0.3rem;
-}
-
-.modal-footer {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    padding: 1rem;
-    border-top: 1px solid #e9ecef;
-    border-bottom-right-radius: 0.3rem;
-    border-bottom-left-radius: 0.3rem;
-}
-
-.modal-body {
-    position: relative;
-    flex: 1 1 auto;
-    padding: 1rem;
-}
-
-button.close {
-    padding: 1rem;
-    margin: -1rem -1rem -1rem auto;
-    border: 0;
-    background: transparent;
-    font-size: 1.5rem;
-    line-height: 1;
-    color: #000;
-    text-shadow: 0 1px 0 #fff;
-    opacity: 0.5;
-}
-
-button.close:hover {
-    color: #000;
-    text-decoration: none;
-}
-
-button.close:focus {
-    outline: none;
-}
-
-.modal-backdrop {
-    z-index: 1040;
-}
-
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            height: 0;
+            padding-bottom: 56.25%;
+        }
+        .chart-container canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        @media (max-width: 768px) {
+            .chart-container {
+                padding-bottom: 75%;
+            }
+        }
+        @media (max-width: 480px) {
+            .chart-container {
+                padding-bottom: 100%;
+            }
+        }
+        .modal {
+            display: none;
+            z-index: 1050;
+            overflow-y: auto;
+        }
+        .modal-dialog {
+            max-width: 100%;
+            margin: 1.75rem auto;
+        }
+        .modal-content {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            background-color: #fff;
+            background-clip: padding-box;
+            border: 1px solid rgba(0, 0, 0, 0.2);
+            border-radius: 0.3rem;
+            outline: 0;
+        }
+        .modal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 1rem;
+            border-bottom: 1px solid #e9ecef;
+            border-top-left-radius: 0.3rem;
+            border-top-right-radius: 0.3rem;
+        }
+        .modal-footer {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding: 1rem;
+            border-top: 1px solid #e9ecef;
+            border-bottom-right-radius: 0.3rem;
+            border-bottom-left-radius: 0.3rem;
+        }
+        .modal-body {
+            position: relative;
+            flex: 1 1 auto;
+            padding: 1rem;
+        }
+        button.close {
+            padding: 1rem;
+            margin: -1rem -1rem -1rem auto;
+            border: 0;
+            background: transparent;
+            font-size: 1.5rem;
+            line-height: 1;
+            color: #000;
+            text-shadow: 0 1px 0 #fff;
+            opacity: 0.5;
+        }
+        button.close:hover {
+            color: #000;
+            text-decoration: none;
+        }
+        button.close:focus {
+            outline: none;
+        }
+        .modal-backdrop {
+            z-index: 1040;
+        }
     </style>
 </head>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/js-cookie/dist/js.cookie.min.js"></script>
 
 <body id="reportsPage">
     <div class="" id="home">
@@ -159,14 +140,12 @@ button.close:focus {
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mx-auto h-100">
-                    
                         <li class="nav-item">
                             <a class="nav-link " href="index.html">
                                 <i class="fas fa-home"></i>
                                 Home Page
                             </a>
                         </li>
-                        
                         <li class="nav-item">
                             <a class="nav-link active" href="dashbord.html">
                                 <i class="fas fa-tachometer-alt"></i>
@@ -174,7 +153,6 @@ button.close:focus {
                                 <span class="sr-only">(current)</span>
                             </a>
                         </li>
-
                         <li class="nav-item">
                             <a class="nav-link " href="AdminShop.html">
                                 <i class="fas fa-house-user"></i>
@@ -188,16 +166,13 @@ button.close:focus {
                                 Users
                             </a>
                         </li>
-                        <li class="nav-item dropdown">
-
-                        </li>
+                        <li class="nav-item dropdown"></li>
                         <li class="nav-item">
                             <a class="nav-link" href="products.html">
                                 <i class="fas fa-shopping-cart"></i>
                                 Products
                             </a>
                         </li>
-
                         <li class="nav-item">
                             <a class="nav-link" href="accounts.html">
                                 <i class="far fa-user"></i>
@@ -208,27 +183,21 @@ button.close:focus {
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                                 aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-cog"></i>
-                                <span>
-                                    Settings <i class="fas fa-angle-down"></i>
-                                </span>
+                                <span>Settings <i class="fas fa-angle-down"></i></span>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <ul class="navbar-nav">
-                                  <li class="nav-item">
-                                    <a class="nav-link d-block" href="login.html">
-                                       <b>Logout</b>
-                                    </a>
-                                  </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link d-block" id="logoutButton" href="login.html">
+                                            <b>Logout</b>
+                                        </a>
+                                    </li>
                                 </ul>
-                             
-                              </div>
+                            </div>
                         </li>
                     </ul>
-
                 </div>
-
             </div>
-
         </nav>
 
         <div class="container">
@@ -255,8 +224,7 @@ button.close:focus {
                                 <th scope="col">Order Date</th>
                             </tr>
                         </thead>
-                        <tbody>
-                        </tbody>
+                        <tbody></tbody>
                     </table>
                 </div>
             </div>
@@ -302,9 +270,7 @@ button.close:focus {
 
     <footer class="tm-footer row tm-mt-small">
         <div class="col-12 font-weight-light">
-            <p class="text-center text-white mb-0 px-4 small">
-                Copyright &copy; <b>2024</b> Flora Palestine
-            </p>
+            <p class="text-center text-white mb-0 px-4 small">Copyright &copy; <b>2024</b> Flora Palestine</p>
         </div>
     </footer>
 
@@ -315,4 +281,5 @@ button.close:focus {
     <script src="js/tooplate-scripts.js"></script>
     <script src="js/AdminShop.js"></script>
 </body>
+
 </html>

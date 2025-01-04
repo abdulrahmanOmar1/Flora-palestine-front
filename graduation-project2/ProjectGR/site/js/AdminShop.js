@@ -1,9 +1,41 @@
 document.addEventListener('DOMContentLoaded', function () {
-    fetchOrdersData();
-    fetchChartData();
+    checkUserAuthentication();
 });
 
 axios.defaults.withCredentials = true;
+
+function checkUserAuthentication() {
+    const userId = Cookies.get('userId');
+    const userEmail = Cookies.get('userEmail');
+    const role = Cookies.get('role');
+
+    if (userId && userEmail && role) {
+        console.log(`User authenticated: ${userEmail}, Role: ${role}`);
+        const userMenu = document.querySelector('.user-menu');
+        if (userMenu) userMenu.style.display = 'block';
+
+        const loginLink = document.querySelector('.login-link');
+        if (loginLink) loginLink.style.display = 'none';
+
+        const logoutButton = document.getElementById('logoutButton');
+        if (logoutButton) {
+            logoutButton.addEventListener('click', function () {
+                sessionStorage.clear();
+                Cookies.remove('userId');
+                Cookies.remove('userEmail');
+                Cookies.remove('role');
+                window.location.replace('login.html');
+            });
+        }
+
+        // Load data after authentication check
+        fetchOrdersData();
+        fetchChartData();
+    } else {
+        console.log("No user information found in cookies.");
+        window.location.replace('login.html');
+    }
+}
 
 function fetchOrdersData() {
     console.log('Fetching orders data from backend');
@@ -104,51 +136,82 @@ function fetchChartData() {
 function drawOrdersChart(data) {
     console.log('Original Data:', data);
 
-    const labels = data.map(item => new Date(item.date)); // Convert string dates to Date objects
-    const values = data.map(item => item.totalAmount);
+    const labels = data.map(item => moment(item.date).format('YYYY-MM-DD')); // Format dates as strings
+    const totalValues = data.map(item => item.totalAmount);
+    const meanValues = data.map(item => item.mean);
+    const stdDevValues = data.map(item => item.stdDev);
 
     console.log('Labels:', labels);
-    console.log('Values:', values);
+    console.log('Total Values:', totalValues);
+    console.log('Mean Values:', meanValues);
+    console.log('StdDev Values:', stdDevValues);
 
     const ctx = document.getElementById('ordersChart').getContext('2d');
     new Chart(ctx, {
         type: 'line',
         data: {
             labels: labels,
-            datasets: [{
-                label: 'Total Amount of Completed Orders Over Time',
-                data: values,
-                borderColor: 'rgba(75, 192, 192, 1)',
-                backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                borderWidth: 1
-            }]
+            datasets: [
+                {
+                    label: 'Total Amount of Completed Orders',
+                    data: totalValues,
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderWidth: 1
+                },
+                {
+                    label: 'Mean Order Value',
+                    data: meanValues,
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    borderWidth: 1
+                },
+                {
+                    label: 'Standard Deviation',
+                    data: stdDevValues,
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderWidth: 1
+                }
+            ]
         },
         options: {
             scales: {
-                xAxes: [{
+                x: {
                     type: 'time',
                     time: {
-                        parser: 'YYYY-MM-DDTHH:mm:ss.SSSZ', // Specify the parser if necessary
-                        tooltipFormat: 'll HH:mm',
                         unit: 'day',
+                        tooltipFormat: 'YYYY-MM-DD',
                         displayFormats: {
                             day: 'YYYY-MM-DD'
                         }
                     },
-                    distribution: 'linear',
                     ticks: {
-                        source: 'data'
+                        source: 'data',
+                        callback: function (value) {
+                            return value; // Date is already formatted
+                        }
                     }
-                }],
-                yAxes: [{
-                    ticks: {
-                        beginAtZero: true
-                    }
-                }]
+                },
+                y: {
+                    beginAtZero: true
+                }
             },
-            tooltips: {
-                mode: 'index',
-                intersect: false
+            plugins: {
+                tooltip: {
+                    mode: 'index',
+                    intersect: false,
+                    callbacks: {
+                        title: function (tooltipItems) {
+                            return tooltipItems[0].label; // Date is already formatted
+                        },
+                        label: function (context) {
+                            const label = context.dataset.label || '';
+                            const value = context.raw;
+                            return `${label}: ${value}`;
+                        }
+                    }
+                }
             }
         }
     });
